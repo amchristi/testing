@@ -1,0 +1,80 @@
+diff -r 1293/src/config/CVS/Tag 1294/src/config/CVS/Tag
+1c1
+< D2006.10.09.22.27.11
+---
+> D2006.10.10.05.47.24
+diff -r 1293/src/CVS/Entries 1294/src/CVS/Entries
+69a70
+> /jsapi.c/3.284/Mon Nov 17 03:06:29 2014//D2006.10.10.05.47.24
+95a97
+> /jsobj.c/3.295/Result of merge//D2006.10.10.05.47.24
+96a99
+> /jsopcode.c/3.193/Mon Nov 17 03:06:30 2014//D2006.10.10.05.47.24
+115,117d117
+< /jsapi.c/3.283/Mon Nov 17 03:06:34 2014//D2006.10.09.22.27.11
+< /jsobj.c/3.294/Result of merge//D2006.10.09.22.27.11
+< /jsopcode.c/3.192/Mon Nov 17 03:06:34 2014//D2006.10.09.22.27.11
+diff -r 1293/src/CVS/Tag 1294/src/CVS/Tag
+1c1
+< D2006.10.09.22.27.11
+---
+> D2006.10.10.05.47.24
+diff -r 1293/src/editline/CVS/Tag 1294/src/editline/CVS/Tag
+1c1
+< D2006.10.09.22.27.11
+---
+> D2006.10.10.05.47.24
+diff -r 1293/src/fdlibm/CVS/Tag 1294/src/fdlibm/CVS/Tag
+1c1
+< D2006.10.09.22.27.11
+---
+> D2006.10.10.05.47.24
+diff -r 1293/src/jsapi.c 1294/src/jsapi.c
+609c609
+<                        ? (clasp == &js_RegExpClass || clasp == &js_ScriptClass)
+---
+>                        ? clasp == &js_ScriptClass
+diff -r 1293/src/jsobj.c 1294/src/jsobj.c
+936,937c936,938
+<             if (gsop[j]) {
+<                 int n = strlen(js_function_str) + 2;
+---
+>             if (gsop[j] && VALUE_IS_FUNCTION(cx, val[j])) {
+>                 size_t n = strlen(js_function_str) + 2;
+>                 JS_ASSERT(vlength > n);
+Only in 1293/src: .#jsobj.c.3.295
+diff -r 1293/src/jsopcode.c 1294/src/jsopcode.c
+3863,3873c3863,3883
+<                     LOCAL_ASSERT(strncmp(rval, js_function_str, 8) == 0 &&
+<                                  rval[8] == ' ');
+<                     rval += 8 + 1;
+<                     LOCAL_ASSERT(rval[strlen(rval)-1] == '}');
+<                     todo = Sprint(&ss->sprinter, "%s%s%s %s%s",
+<                                   lval,
+<                                   (lval[1] != '\0') ? ", " : "",
+<                                   (lastop == JSOP_GETTER)
+<                                   ? js_get_str : js_set_str,
+<                                   xval,
+<                                   rval);
+---
+>                     if (strncmp(rval, js_function_str, 8) || rval[8] != ' ') {
+>                         todo = Sprint(&ss->sprinter, "%s%s%s%s%s:%s", lval,
+>                                       (lval[1] != '\0') ? ", " : "", xval,
+>                                       (lastop == JSOP_GETTER ||
+>                                        lastop == JSOP_SETTER)
+>                                         ? " " : "",
+>                                       (lastop == JSOP_GETTER) ? js_getter_str :
+>                                       (lastop == JSOP_SETTER) ? js_setter_str :
+>                                       "",
+>                                       rval);
+>                     } else {
+>                         rval += 8 + 1;
+>                         LOCAL_ASSERT(rval[strlen(rval)-1] == '}');
+>                         todo = Sprint(&ss->sprinter, "%s%s%s %s%s",
+>                                       lval,
+>                                       (lval[1] != '\0') ? ", " : "",
+>                                       (lastop == JSOP_GETTER)
+>                                       ? js_get_str : js_set_str,
+>                                       xval,
+>                                       rval);
+>                     }

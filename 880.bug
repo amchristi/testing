@@ -1,0 +1,272 @@
+diff -r 879/src/config/CVS/Tag 880/src/config/CVS/Tag
+1c1
+< D2006.08.21.09.24.38
+---
+> D2006.08.22.01.19.15
+diff -r 879/src/CVS/Entries 880/src/CVS/Entries
+86a87,88
+> /jsemit.c/3.183/Mon Nov 17 04:24:18 2014//D2006.08.22.01.19.15
+> /jsemit.h/3.57/Mon Nov 17 04:24:18 2014//D2006.08.22.01.19.15
+98a101
+> /jsopcode.c/3.141/Mon Nov 17 04:24:18 2014//D2006.08.22.01.19.15
+99a103,104
+> /jsopcode.tbl/3.62/Mon Nov 17 04:24:18 2014//D2006.08.22.01.19.15
+> /jsparse.c/3.203/Mon Nov 17 04:24:18 2014//D2006.08.22.01.19.15
+112,116d116
+< /jsemit.c/3.179/Mon Nov 17 04:24:19 2014//D2006.08.21.09.24.38
+< /jsemit.h/3.56/Mon Nov 17 04:24:19 2014//D2006.08.21.09.24.38
+< /jsopcode.c/3.138/Mon Nov 17 04:24:19 2014//D2006.08.21.09.24.38
+< /jsopcode.tbl/3.61/Mon Nov 17 04:24:19 2014//D2006.08.21.09.24.38
+< /jsparse.c/3.202/Mon Nov 17 04:24:19 2014//D2006.08.21.09.24.38
+diff -r 879/src/CVS/Tag 880/src/CVS/Tag
+1c1
+< D2006.08.21.09.24.38
+---
+> D2006.08.22.01.19.15
+diff -r 879/src/editline/CVS/Tag 880/src/editline/CVS/Tag
+1c1
+< D2006.08.21.09.24.38
+---
+> D2006.08.22.01.19.15
+diff -r 879/src/fdlibm/CVS/Tag 880/src/fdlibm/CVS/Tag
+1c1
+< D2006.08.21.09.24.38
+---
+> D2006.08.22.01.19.15
+diff -r 879/src/jsemit.c 880/src/jsemit.c
+1514,1525c1514,1515
+< /*
+<  * Find a lexically scoped variable (one declared by let, catch, or an array
+<  * comprehension) named by atom, looking in tc's compile-time scopes.
+<  *
+<  * If a WITH statement is reached along the scope stack, return its statement
+<  * info record, so callers can tell that atom is ambiguous.  If atom is found,
+<  * set *slotp to its stack slot, and return the statement info record in which
+<  * it was found directly.  Otherwise (atom was not found and no WITH statement
+<  * was reached) return null.
+<  */
+< static JSStmtInfo *
+< LexicalLookup(JSTreeContext *tc, JSAtom *atom, jsint *slotp)
+---
+> JSStmtInfo *
+> js_LexicalLookup(JSTreeContext *tc, JSAtom *atom, jsint *slotp)
+1533d1522
+<     *slotp = -1;
+1536c1525
+<             return stmt;
+---
+>             break;
+1546,1552c1535,1543
+<             /*
+<              * Use LOCKED_OBJ_GET_SLOT since we know obj is single-threaded
+<              * and owned by this compiler activation.
+<              */
+<             v = LOCKED_OBJ_GET_SLOT(obj, JSSLOT_BLOCK_DEPTH);
+<             JS_ASSERT(JSVAL_IS_INT(v) && JSVAL_TO_INT(v) >= 0);
+<             *slotp = JSVAL_TO_INT(v) + sprop->shortid;
+---
+>             if (slotp) {
+>                 /*
+>                  * Use LOCKED_OBJ_GET_SLOT since we know obj is single-
+>                  * threaded and owned by this compiler activation.
+>                  */
+>                 v = LOCKED_OBJ_GET_SLOT(obj, JSSLOT_BLOCK_DEPTH);
+>                 JS_ASSERT(JSVAL_IS_INT(v) && JSVAL_TO_INT(v) >= 0);
+>                 *slotp = JSVAL_TO_INT(v) + sprop->shortid;
+>             }
+1557c1548,1550
+<     return NULL;
+---
+>     if (slotp)
+>         *slotp = -1;
+>     return stmt;
+1589c1582
+<             stmt = LexicalLookup(&cg->treeContext, atom, &slot);
+---
+>             stmt = js_LexicalLookup(&cg->treeContext, atom, &slot);
+1881c1874
+<     stmt = LexicalLookup(tc, atom, &slot);
+---
+>     stmt = js_LexicalLookup(tc, atom, &slot);
+2154a2148,2150
+>              *
+>              * The only exception is assignment of a useless value to a const
+>              * declared in the function currently being compiled.
+2156c2152,2164
+<             *answer = JS_TRUE;
+---
+>             pn2 = pn->pn_left;
+>             if (pn2->pn_type != TOK_NAME) {
+>                 *answer = JS_TRUE;
+>             } else {
+>                 if (!BindNameToSlot(cx, tc, pn2))
+>                     return JS_FALSE;
+>                 if (!CheckSideEffects(cx, tc, pn->pn_right, answer))
+>                     return JS_FALSE;
+>                 if (!*answer &&
+>                     (pn2->pn_slot < 0 || !(pn2->pn_attrs & JSPROP_READONLY))) {
+>                     *answer = JS_TRUE;
+>                 }
+>             }
+4796c4804,4814
+<             if (!useful) {
+---
+> 
+>             /*
+>              * Don't eliminate apparently useless expressions if they are
+>              * labeled expression statements.  The tc->topStmt->update test
+>              * catches the case where we are nesting in js_EmitTree for a
+>              * labeled compound statement.
+>              */
+>             if (!useful &&
+>                 (!cg->treeContext.topStmt ||
+>                  cg->treeContext.topStmt->type != STMT_LABEL ||
+>                  cg->treeContext.topStmt->update < CG_OFFSET(cg))) {
+4999,5001c5017,5027
+<             if (js_NewSrcNote(cx, cg, SRC_ASSIGNOP) < 0 ||
+<                 js_Emit1(cx, cg, op) < 0) {
+<                 return JS_FALSE;
+---
+>             /*
+>              * Take care to avoid SRC_ASSIGNOP if the left-hand side is a
+>              * const declared in a function (i.e., with non-negative pn_slot
+>              * and JSPROP_READONLY in pn_attrs), as in this case (just a bit
+>              * further below) we will avoid emitting the assignment op.
+>              */
+>             if (pn2->pn_type != TOK_NAME ||
+>                 pn2->pn_slot < 0 ||
+>                 !(pn2->pn_attrs & JSPROP_READONLY)) {
+>                 if (js_NewSrcNote(cx, cg, SRC_ASSIGNOP) < 0)
+>                     return JS_FALSE;
+5002a5029,5030
+>             if (js_Emit1(cx, cg, op) < 0)
+>                 return JS_FALSE;
+5065,5069d5092
+<         if (!js_EmitTree(cx, cg, pn->pn_kid3))
+<             return JS_FALSE;
+<         CHECK_AND_SET_JUMP_OFFSET_AT(cx, cg, jmp);
+<         if (!js_SetSrcNoteOffset(cx, cg, noteIndex, 0, jmp - beq))
+<             return JS_FALSE;
+5073,5077c5096,5102
+<          * analysis ignores branches, we now have two values accounted for in
+<          * cg->stackDepth.  Execution will follow only one path, so we must
+<          * decrement cg->stackDepth here.  Failing to do this will foil code,
+<          * such as the try/catch/finally exception handling code generator,
+<          * that samples cg->stackDepth for use at runtime (JSOP_SETSP).
+---
+>          * analysis ignores branches, we now have to adjust cg->stackDepth to
+>          * ignore the value pushed by the first branch.  Execution will follow
+>          * only one path, so we must decrement cg->stackDepth.  Failing to do
+>          * this will foil code, such as the try/catch/finally exception
+>          * handling code generator, that samples cg->stackDepth for use at
+>          * runtime (JSOP_SETSP) or let expressions and statements, which must
+>          * use the stack depth to find locals correctly.
+5079c5104
+<         JS_ASSERT(cg->stackDepth > 1);
+---
+>         JS_ASSERT(cg->stackDepth > 0);
+5080a5106,5110
+>         if (!js_EmitTree(cx, cg, pn->pn_kid3))
+>             return JS_FALSE;
+>         CHECK_AND_SET_JUMP_OFFSET_AT(cx, cg, jmp);
+>         if (!js_SetSrcNoteOffset(cx, cg, noteIndex, 0, jmp - beq))
+>             return JS_FALSE;
+diff -r 879/src/jsemit.h 880/src/jsemit.h
+427a428,444
+>  * Find a lexically scoped variable (one declared by let, catch, or an array
+>  * comprehension) named by atom, looking in tc's compile-time scopes.
+>  *
+>  * If a WITH statement is reached along the scope stack, return its statement
+>  * info record, so callers can tell that atom is ambiguous.  If slotp is not
+>  * null, then if atom is found, set *slotp to its stack slot, otherwise to -1. 
+>  * This means that if slotp is not null, all the block objects on the lexical
+>  * scope chain must have had their depth slots computed by the code generator,
+>  * so the caller must be under js_EmitTree.
+>  *
+>  * In any event, directly return the statement info record in which atom was
+>  * found.  Otherwise return null.
+>  */
+> extern JSStmtInfo *
+> js_LexicalLookup(JSTreeContext *tc, JSAtom *atom, jsint *slotp);
+> 
+> /*
+diff -r 879/src/jsopcode.c 880/src/jsopcode.c
+1453c1453
+<                     str = ATOM_TO_STRING(atomv[i]);
+---
+>                     str = ATOM_TO_STRING(atomv[i - OBJ_BLOCK_DEPTH(cx, obj)]);
+2036a2037,2038
+>                 if (saveop == JSOP_NEW)
+>                     op = saveop;
+2037a2040
+>                 op = JSOP_NOP;
+2707c2710
+<                 js_printf(jp, "\texport *\n");
+---
+>                 js_printf(jp, "\texport *;\n");
+2716c2719
+<                 js_printf(jp, "\texport %s\n", rval);
+---
+>                 js_printf(jp, "\texport %s;\n", rval);
+2722c2725
+<                 js_printf(jp, "\timport %s.*\n", lval);
+---
+>                 js_printf(jp, "\timport %s.*;\n", lval);
+2728c2731,2732
+<                 GET_ATOM_QUOTE_AND_FMT("\timport %s[%s]\n", "\timport %s.%s\n",
+---
+>                 GET_ATOM_QUOTE_AND_FMT("\timport %s[%s];\n",
+>                                        "\timport %s.%s;\n",
+2741c2745
+<                 js_printf(jp, "\timport %s[%s]\n", lval, xval);
+---
+>                 js_printf(jp, "\timport %s[%s];\n", lval, xval);
+diff -r 879/src/jsopcode.tbl 880/src/jsopcode.tbl
+442c442,446
+< OPDEF(JSOP_LEAVEBLOCKEXPR,215,"leaveblockexpr",NULL,  3,  0,  0,  0,  JOF_UINT16)
+---
+> /*
+>  * LEAVEBLOCKEXPR's precedence is 1 to help the decompiler with new let (...)
+>  * expressions. See bug 349499.
+>  */
+> OPDEF(JSOP_LEAVEBLOCKEXPR,215,"leaveblockexpr",NULL,  3,  0,  0,  1,  JOF_UINT16)
+diff -r 879/src/jsparse.c 880/src/jsparse.c
+1620a1621
+>     JSAtomListElement *ale;
+1625c1626,1627
+<     if (sprop) {
+---
+>     ATOM_LIST_SEARCH(ale, &tc->decls, atom);
+>     if (sprop || (ale && ALE_JSOP(ale) == JSOP_DEFCONST)) {
+1628,1630c1630,1634
+<         JS_ASSERT(sprop->flags & SPROP_HAS_SHORTID);
+<         JS_ASSERT((uint16)sprop->shortid < data->u.let.index);
+<         OBJ_DROP_PROPERTY(cx, blockObj, (JSProperty *) sprop);
+---
+>         if (sprop) {
+>             JS_ASSERT(sprop->flags & SPROP_HAS_SHORTID);
+>             JS_ASSERT((uint16)sprop->shortid < data->u.let.index);
+>             OBJ_DROP_PROPERTY(cx, blockObj, (JSProperty *) sprop);
+>         }
+1637c1641,1644
+<                                         JSMSG_REDECLARED_VAR, "variable",
+---
+>                                         JSMSG_REDECLARED_VAR,
+>                                         (ale && ALE_JSOP(ale) == JSOP_DEFCONST)
+>                                         ? js_const_str
+>                                         : "variable",
+1663a1671
+>     JSStmtInfo *stmt;
+1673a1682
+>     stmt = js_LexicalLookup(tc, atom, NULL);
+1676,1677c1685,1686
+<     if (ale) {
+<         prevop = ALE_JSOP(ale);
+---
+>     if ((stmt && stmt->type != STMT_WITH) || ale) {
+>         prevop = ale ? ALE_JSOP(ale) : JSOP_DEFVAR;
+1703c1712,1713
+<     } else {
+---
+>     }
+>     if (!ale) {

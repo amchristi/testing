@@ -1,0 +1,214 @@
+diff -r 1171/src/config/CVS/Tag 1172/src/config/CVS/Tag
+1c1
+< D2006.09.14.01.37.37
+---
+> D2006.09.14.01.58.05
+diff -r 1171/src/CVS/Entries 1172/src/CVS/Entries
+90a91
+> /jsopcode.c/3.183/Mon Nov 17 07:23:50 2014//D2006.09.14.01.58.05
+117d117
+< /jsopcode.c/3.181/Mon Nov 17 07:24:04 2014//D2006.09.14.01.37.37
+diff -r 1171/src/CVS/Tag 1172/src/CVS/Tag
+1c1
+< D2006.09.14.01.37.37
+---
+> D2006.09.14.01.58.05
+diff -r 1171/src/editline/CVS/Tag 1172/src/editline/CVS/Tag
+1c1
+< D2006.09.14.01.37.37
+---
+> D2006.09.14.01.58.05
+diff -r 1171/src/fdlibm/CVS/Tag 1172/src/fdlibm/CVS/Tag
+1c1
+< D2006.09.14.01.37.37
+---
+> D2006.09.14.01.58.05
+diff -r 1171/src/jsopcode.c 1172/src/jsopcode.c
+572a573
+>     JSPackedBool    dvgflag;        /* js_DecompileValueGenerator magic flag */
+601a603
+>     jp->dvgflag = JS_FALSE;
+773,774c775,776
+<  * JSOP_SETPROP, and JSOP_SETELEM, respectively.  See the first assertion in
+<  * PushOff.
+---
+>  * JSOP_SETPROP, and JSOP_SETELEM, respectively.  They are never stored in
+>  * bytecode, so they don't preempt valid opcodes.
+776,777c778,779
+< #define JSOP_GETPROP2   254
+< #define JSOP_GETELEM2   255
+---
+> #define JSOP_GETPROP2   256
+> #define JSOP_GETELEM2   257
+784,786d785
+< #if JSOP_LIMIT > JSOP_GETPROP2
+< #error JSOP_LIMIT must be <= JSOP_GETPROP2
+< #endif
+1137,1147d1135
+<         if (op >= JSOP_LIMIT) {
+<             switch (op) {
+<               case JSOP_GETPROP2:
+<                 saveop = JSOP_GETPROP;
+<                 break;
+<               case JSOP_GETELEM2:
+<                 saveop = JSOP_GETELEM;
+<                 break;
+<               default:;
+<             }
+<         }
+1150a1139,1211
+>         if (jp->dvgflag && pc + oplen == endpc) {
+>             uint32 format, mode, type;
+> 
+>             format = cs->format;
+>             if (format & (JOF_SET|JOF_DEL|JOF_INCDEC|JOF_IMPORT|JOF_FOR)) {
+>                 mode = (format & JOF_MODEMASK);
+>                 if (mode == JOF_NAME) {
+>                     /*
+>                      * JOF_NAME does not imply JOF_CONST, so we must check for
+>                      * the QARG and QVAR format types, and translate those to
+>                      * JSOP_GETARG or JSOP_GETVAR appropriately, instead of to
+>                      * JSOP_NAME.
+>                      */
+>                     type = format & JOF_TYPEMASK;
+>                     op = (type == JOF_QARG)
+>                          ? JSOP_GETARG
+>                          : (type == JOF_QVAR)
+>                          ? JSOP_GETVAR
+>                          : (type == JOF_LOCAL)
+>                          ? JSOP_GETLOCAL
+>                          : JSOP_NAME;
+>                 } else {
+>                     /*
+>                      * We must replace the faulting pc's bytecode with a
+>                      * corresponding JSOP_GET* code.  For JSOP_SET{PROP,ELEM},
+>                      * we must use the "2nd" form of JSOP_GET{PROP,ELEM}, to
+>                      * throw away the assignment op's right-hand operand and
+>                      * decompile it as if it were a GET of its left-hand
+>                      * operand.
+>                      */
+>                     if (mode == JOF_PROP) {
+>                         op = (format & JOF_SET) ? JSOP_GETPROP2 : JSOP_GETPROP;
+>                     } else if (mode == JOF_ELEM) {
+>                         op = (format & JOF_SET) ? JSOP_GETELEM2 : JSOP_GETELEM;
+>                     } else {
+>                         /*
+>                          * Zero mode means precisely that op is uncategorized
+>                          * for our purposes, so we must write per-op special
+>                          * case code here.
+>                          */
+>                         switch (op) {
+>                           case JSOP_ENUMELEM:
+>                             op = JSOP_GETELEM;
+>                             break;
+> #if JS_HAS_LVALUE_RETURN
+>                           case JSOP_SETCALL:
+>                             op = JSOP_CALL;
+>                             break;
+> #endif
+>                           default:
+>                             JS_ASSERT(0);
+>                         }
+>                     }
+>                 }
+>             }
+> 
+>             saveop = op;
+>             if (op >= JSOP_LIMIT) {
+>                 switch (op) {
+>                   case JSOP_GETPROP2:
+>                     saveop = JSOP_GETPROP;
+>                     break;
+>                   case JSOP_GETELEM2:
+>                     saveop = JSOP_GETELEM;
+>                     break;
+>                   default:;
+>                 }
+>             }
+>             JS_ASSERT(js_CodeSpec[saveop].length == oplen);
+> 
+>             jp->dvgflag = JS_FALSE;
+>         }
+> 
+3570c3631
+<     jsbytecode *pc, *begin, *end, *tmp;
+---
+>     jsbytecode *pc, *begin, *end;
+3575d3635
+<     uint32 format, mode, type;
+3578c3638
+<     uintN len, off;
+---
+>     uintN len;
+3691,3694d3750
+<     cs = &js_CodeSpec[op];
+<     format = cs->format;
+<     mode = (format & JOF_MODEMASK);
+< 
+3696c3752,3753
+<     if (mode == JOF_NAME) {
+---
+>     cs = &js_CodeSpec[op];
+>     if ((cs->format & JOF_MODEMASK) == JOF_NAME) {
+3710,3765d3766
+<     if (format & (JOF_SET | JOF_DEL | JOF_INCDEC | JOF_IMPORT | JOF_FOR)) {
+<         tmp = (jsbytecode *) JS_malloc(cx, len * sizeof(jsbytecode));
+<         if (!tmp)
+<             return NULL;
+<         memcpy(tmp, begin, len * sizeof(jsbytecode));
+<         if (mode == JOF_NAME) {
+<             /*
+<              * JOF_NAME does not imply JOF_CONST, so we must check for the
+<              * QARG and QVAR format types and translate those to JSOP_GETARG
+<              * or JSOP_GETVAR appropriately, instead of JSOP_NAME.
+<              */
+<             type = format & JOF_TYPEMASK;
+<             tmp[0] = (type == JOF_QARG)
+<                      ? JSOP_GETARG
+<                      : (type == JOF_QVAR)
+<                      ? JSOP_GETVAR
+<                      : JSOP_NAME;
+<         } else {
+<             /*
+<              * We must replace the faulting pc's bytecode with a corresponding
+<              * JSOP_GET* code.  For JSOP_SET{PROP,ELEM}, we must use the "2nd"
+<              * form of JSOP_GET{PROP,ELEM}, to throw away the assignment op's
+<              * right-hand operand and decompile it as if it were a GET of its
+<              * left-hand operand.
+<              */
+<             off = len - cs->length;
+<             JS_ASSERT(off == (uintN) PTRDIFF(pc, begin, jsbytecode));
+<             if (mode == JOF_PROP) {
+<                 tmp[off] = (format & JOF_SET) ? JSOP_GETPROP2 : JSOP_GETPROP;
+<             } else if (mode == JOF_ELEM) {
+<                 tmp[off] = (format & JOF_SET) ? JSOP_GETELEM2 : JSOP_GETELEM;
+<             } else {
+<                 /*
+<                  * A zero mode means precisely that op is uncategorized for our
+<                  * purposes, so we must write per-op special case code here.
+<                  */
+<                 switch (op) {
+<                   case JSOP_ENUMELEM:
+<                     tmp[off] = JSOP_GETELEM;
+<                     break;
+< #if JS_HAS_LVALUE_RETURN
+<                   case JSOP_SETCALL:
+<                     tmp[off] = JSOP_CALL;
+<                     break;
+< #endif
+<                   default:
+<                     JS_ASSERT(0);
+<                 }
+<             }
+<         }
+<         begin = tmp;
+<     } else {
+<         /* No need to revise script bytecode. */
+<         tmp = NULL;
+<     }
+< 
+3772a3774
+>         jp->dvgflag = JS_TRUE;
+3777,3778d3778
+<     if (tmp)
+<         JS_free(cx, tmp);

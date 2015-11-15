@@ -1,0 +1,255 @@
+diff -r 1221/src/config/CVS/Tag 1222/src/config/CVS/Tag
+1c1
+< D2006.09.30.13.46.56
+---
+> D2006.10.01.02.37.10
+diff -r 1221/src/CVS/Entries 1222/src/CVS/Entries
+96a97,99
+> /jsinterp.c/3.294/Mon Nov 17 04:29:14 2014//D2006.10.01.02.37.10
+> /jsiter.c/3.45/Mon Nov 17 04:29:14 2014//D2006.10.01.02.37.10
+> /jsiter.h/3.15/Mon Nov 17 04:29:14 2014//D2006.10.01.02.37.10
+98a102
+> /jsobj.c/3.290/Result of merge//D2006.10.01.02.37.10
+101a106
+> /jsparse.c/3.250/Mon Nov 17 04:29:14 2014//D2006.10.01.02.37.10
+110a116
+> /jsxml.c/3.128/Mon Nov 17 04:29:14 2014//D2006.10.01.02.37.10
+112,117d117
+< /jsinterp.c/3.293/Mon Nov 17 04:29:16 2014//D2006.09.30.13.46.56
+< /jsiter.c/3.42/Mon Nov 17 04:29:16 2014//D2006.09.30.13.46.56
+< /jsiter.h/3.14/Mon Nov 17 04:29:16 2014//D2006.09.30.13.46.56
+< /jsobj.c/3.289/Result of merge//D2006.09.30.13.46.56
+< /jsparse.c/3.249/Mon Nov 17 04:29:16 2014//D2006.09.30.13.46.56
+< /jsxml.c/3.127/Mon Nov 17 04:29:16 2014//D2006.09.30.13.46.56
+diff -r 1221/src/CVS/Tag 1222/src/CVS/Tag
+1c1
+< D2006.09.30.13.46.56
+---
+> D2006.10.01.02.37.10
+diff -r 1221/src/editline/CVS/Tag 1222/src/editline/CVS/Tag
+1c1
+< D2006.09.30.13.46.56
+---
+> D2006.10.01.02.37.10
+diff -r 1221/src/fdlibm/CVS/Tag 1222/src/fdlibm/CVS/Tag
+1c1
+< D2006.09.30.13.46.56
+---
+> D2006.10.01.02.37.10
+diff -r 1221/src/jsinterp.c 1222/src/jsinterp.c
+1733c1733,1735
+<                                      attrs & ~JSPROP_EXPORTED,
+---
+>                                      attrs & ~(JSPROP_EXPORTED |
+>                                                JSPROP_GETTER |
+>                                                JSPROP_SETTER),
+diff -r 1221/src/jsiter.c 1222/src/jsiter.c
+125c125
+< Iterator(JSContext *cx, JSObject *obj, uintN argc, jsval *argv, jsval *rval)
+---
+> InitNativeIterator(JSContext *cx, JSObject *iterobj, JSObject *obj, uintN flags)
+126a127,160
+>     jsval state;
+>     JSBool ok;
+> 
+>     JS_ASSERT(JSVAL_TO_PRIVATE(iterobj->slots[JSSLOT_CLASS]) ==
+>               &js_IteratorClass);
+> 
+>     /* Initialize iterobj in case of enumerate hook failure. */
+>     iterobj->slots[JSSLOT_PARENT] = OBJECT_TO_JSVAL(obj);
+>     iterobj->slots[JSSLOT_ITER_STATE] = JSVAL_NULL;
+>     iterobj->slots[JSSLOT_ITER_FLAGS] = INT_TO_JSVAL(flags);
+>     if (!js_RegisterCloseableIterator(cx, iterobj))
+>         return JS_FALSE;
+> 
+>     ok =
+> #if JS_HAS_XML_SUPPORT
+>          ((flags & JSITER_FOREACH) && OBJECT_IS_XML(cx, obj))
+>          ? ((JSXMLObjectOps *) obj->map->ops)->
+>                enumerateValues(cx, obj, JSENUMERATE_INIT, &state, NULL, NULL)
+>          :
+> #endif
+>            OBJ_ENUMERATE(cx, obj, JSENUMERATE_INIT, &state, NULL);
+>     if (!ok)
+>         return JS_FALSE;
+> 
+>     iterobj->slots[JSSLOT_ITER_STATE] = state;
+>     return JS_TRUE;
+> }
+> 
+> static JSBool
+> Iterator(JSContext *cx, JSObject *iterobj, uintN argc, jsval *argv, jsval *rval)
+> {
+>     JSObject *obj;
+>     JSBool keyonly;
+>     jsid id;
+128d161
+<     const jsid id = ATOM_TO_JSID(cx->runtime->atomState.iteratorAtom);
+136a170,177
+>         argv[0] = OBJECT_TO_JSVAL(obj);
+>     }
+> 
+>     if (cx->fp->flags & JSFRAME_CONSTRUCTING) {
+>         keyonly = JS_FALSE;
+>         return js_ValueToBoolean(cx, argv[1], &keyonly) &&
+>                InitNativeIterator(cx, iterobj, obj,
+>                                   keyonly ? 0 : JSITER_FOREACH);
+138a180
+>     id = ATOM_TO_JSID(cx->runtime->atomState.iteratorAtom);
+281,282c323,324
+<     {js_iterator_str, iterator_self, 0,0,0},
+<     {js_next_str,     iterator_next, 0,0,0},
+---
+>     {js_iterator_str, iterator_self, 0,JSPROP_READONLY|JSPROP_PERMANENT,0},
+>     {js_next_str,     iterator_next, 0,JSPROP_READONLY|JSPROP_PERMANENT,0},
+290,291d331
+<     jsval state;
+<     JSBool ok;
+305,324c345
+<     /* Initialize iterobj in case of enumerate hook failure. */
+<     iterobj->slots[JSSLOT_PARENT] = OBJECT_TO_JSVAL(obj);
+<     iterobj->slots[JSSLOT_ITER_STATE] = JSVAL_NULL;
+<     iterobj->slots[JSSLOT_ITER_FLAGS] = INT_TO_JSVAL(flags);
+<     if (!js_RegisterCloseableIterator(cx, iterobj))
+<         return JS_FALSE;
+< 
+<     ok =
+< #if JS_HAS_XML_SUPPORT
+<          ((flags & JSITER_FOREACH) && OBJECT_IS_XML(cx, obj))
+<          ? ((JSXMLObjectOps *) obj->map->ops)->
+<                enumerateValues(cx, obj, JSENUMERATE_INIT, &state, NULL, NULL)
+<          :
+< #endif
+<            OBJ_ENUMERATE(cx, obj, JSENUMERATE_INIT, &state, NULL);
+<     if (!ok)
+<         return JS_FALSE;
+< 
+<     iterobj->slots[JSSLOT_ITER_STATE] = state;
+<     return JS_TRUE;
+---
+>     return InitNativeIterator(cx, iterobj, obj, flags);
+366,382d386
+< JSBool
+< js_DefaultIterator(JSContext *cx, JSObject *obj, uintN argc, jsval *argv,
+<                    jsval *rval)
+< {
+<     JSBool keyonly;
+< 
+<     if (OBJ_GET_CLASS(cx, obj) == &js_IteratorClass) {
+<         *rval = OBJECT_TO_JSVAL(obj);
+<         return JS_TRUE;
+<     }
+< 
+<     keyonly = JS_FALSE;
+<     if (argc != 0 && !js_ValueToBoolean(cx, argv[0], &keyonly))
+<         return JS_FALSE;
+<     return js_NewNativeIterator(cx, obj, keyonly ? 0 : JSITER_FOREACH, rval);
+< }
+< 
+394d397
+<     JSFunction *fun;
+406,407d408
+<     arg = BOOLEAN_TO_JSVAL((flags & JSITER_FOREACH) == 0);
+< 
+412,413c413,422
+<         /* Fail over to the default native iterator, called directly. */
+<         if (!js_DefaultIterator(cx, obj, 1, &arg, &rval))
+---
+>         /* Fail over to the default enumerating native iterator. */
+>         if (!js_NewNativeIterator(cx, obj,
+>                                   (flags & JSITER_FOREACH) | JSITER_ENUMERATE,
+>                                   &rval)) {
+>             goto bad;
+>         }
+>     } else {
+>         arg = BOOLEAN_TO_JSVAL((flags & JSITER_FOREACH) == 0);
+>         if (!js_InternalInvoke(cx, obj, fval, JSINVOKE_ITERATOR, 1, &arg,
+>                                &rval)) {
+414a424
+>         }
+417,420d426
+<         iterobj = JSVAL_TO_OBJECT(rval);
+<         JS_ASSERT(OBJ_GET_CLASS(cx, iterobj) == &js_IteratorClass);
+<         iterobj->slots[JSSLOT_ITER_FLAGS] |= INT_TO_JSVAL(JSITER_ENUMERATE);
+<         goto out;
+423,428d428
+<     if (!js_InternalInvoke(cx, obj, fval, JSINVOKE_ITERATOR, 1, &arg, &rval))
+<         goto bad;
+< 
+<     if (JSVAL_IS_PRIMITIVE(rval))
+<         goto bad_iterator;
+< 
+431,444d430
+<     /*
+<      * If __iterator__ is the default native method, the native iterator it
+<      * returns can be flagged as hidden from script access.  This flagging is
+<      * predicated on js_ValueToIterator being called only by the for-in loop
+<      * code -- the js_CloseNativeIterator early-finalization optimization
+<      * based on it will break badly if script can reach iterobj.
+<      */
+<     if (OBJ_GET_CLASS(cx, iterobj) == &js_IteratorClass &&
+<         VALUE_IS_FUNCTION(cx, fval)) {
+<         fun = (JSFunction *) JS_GetPrivate(cx, JSVAL_TO_OBJECT(fval));
+<         if (!FUN_INTERPRETED(fun) && fun->u.n.native == js_DefaultIterator)
+<             iterobj->slots[JSSLOT_ITER_FLAGS] |= INT_TO_JSVAL(JSITER_ENUMERATE);
+<     }
+< 
+477c463
+<     if (iterobj == cx->cachedIterObj) {
+---
+>     if (flags & JSITER_ENUMERATE) {
+479d464
+<         JS_ASSERT(flags & JSITER_ENUMERATE);
+482d466
+<             cx->cachedIterObj = NULL;
+523,524d506
+<                 if (flags & JSITER_ENUMERATE)
+<                     cx->cachedIterObj = iterobj;
+936,939c918,921
+<     {js_iterator_str, iterator_self,     0,0,0},
+<     {js_next_str,     generator_next,    0,0,0},
+<     {js_send_str,     generator_send,    1,0,0},
+<     {js_throw_str,    generator_throw,   1,0,0},
+---
+>     {js_iterator_str, iterator_self,     0,JSPROP_READONLY|JSPROP_PERMANENT,0},
+>     {js_next_str,     generator_next,    0,JSPROP_READONLY|JSPROP_PERMANENT,0},
+>     {js_send_str,     generator_send,    1,JSPROP_READONLY|JSPROP_PERMANENT,0},
+>     {js_throw_str,    generator_throw,   1,JSPROP_READONLY|JSPROP_PERMANENT,0},
+diff -r 1221/src/jsiter.h 1222/src/jsiter.h
+64,67d63
+< extern JSBool
+< js_DefaultIterator(JSContext *cx, JSObject *obj, uintN argc, jsval *argv,
+<                    jsval *rval);
+< 
+diff -r 1221/src/jsobj.c 1222/src/jsobj.c
+1717,1719d1716
+< #if JS_HAS_GENERATORS
+<     {js_iterator_str,             js_DefaultIterator, 0,0,0},
+< #endif
+Only in 1221/src: .#jsobj.c.3.290
+diff -r 1221/src/jsparse.c 1222/src/jsparse.c
+2807,2812c2807,2813
+<                    || pn1->pn_head->pn_type == TOK_RC
+<                    || (pn1->pn_head->pn_type == TOK_RB &&
+<                        pn1->pn_head->pn_count != 2)
+<                    || (pn1->pn_head->pn_type == TOK_ASSIGN &&
+<                        (pn1->pn_head->pn_left->pn_type != TOK_RB ||
+<                         pn1->pn_head->pn_left->pn_count != 2))
+---
+>                    || (pn->pn_op == JSOP_FORIN &&
+>                        (pn1->pn_head->pn_type == TOK_RC ||
+>                         (pn1->pn_head->pn_type == TOK_RB &&
+>                          pn1->pn_head->pn_count != 2) ||
+>                         (pn1->pn_head->pn_type == TOK_ASSIGN &&
+>                          (pn1->pn_head->pn_left->pn_type != TOK_RB ||
+>                           pn1->pn_head->pn_left->pn_count != 2))))
+2818c2819,2820
+<                    (pn1->pn_type != TOK_RB || pn1->pn_count != 2) &&
+---
+>                    (pn->pn_op == JSOP_FORIN &&
+>                     (pn1->pn_type != TOK_RB || pn1->pn_count != 2)) &&
+diff -r 1221/src/jsxml.c 1222/src/jsxml.c
+8099c8099
+<     fp->flags = flags;
+---
+>     fp->flags = flags | (fp->flags & JSFRAME_POP_BLOCKS);

@@ -1,0 +1,20 @@
+diff -r 2677/src/config/CVS/Tag 2678/src/config/CVS/Tag
+1c1
+< D2011.09.13.03.06.27
+---
+> D2011.09.13.03.07.25
+diff -r 2677/src/CVS/Tag 2678/src/CVS/Tag
+1c1
+< D2011.09.13.03.06.27
+---
+> D2011.09.13.03.07.25
+diff -r 2677/src/editline/CVS/Tag 2678/src/editline/CVS/Tag
+1c1
+< D2011.09.13.03.06.27
+---
+> D2011.09.13.03.07.25
+diff -r 2677/src/fdlibm/CVS/Tag 2678/src/fdlibm/CVS/Tag
+1c1
+< D2011.09.13.03.06.27
+---
+> D2011.09.13.03.07.25

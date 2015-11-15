@@ -1,0 +1,53 @@
+diff -r 296/src/config/CVS/Tag 297/src/config/CVS/Tag
+1c1
+< D2006.03.14.01.00.18
+---
+> D2006.03.15.17.23.36
+diff -r 296/src/CVS/Entries 297/src/CVS/Entries
+88a89
+> /jsopcode.c/3.114/Mon Nov 17 05:05:21 2014//D2006.03.15.17.23.36
+109a111
+> /jsxml.c/3.92/Mon Nov 17 05:05:21 2014//D2006.03.15.17.23.36
+112,113d113
+< /jsopcode.c/3.113/Mon Nov 17 05:05:27 2014//D2006.03.14.01.00.18
+< /jsxml.c/3.91/Mon Nov 17 05:05:27 2014//D2006.03.14.01.00.18
+diff -r 296/src/CVS/Tag 297/src/CVS/Tag
+1c1
+< D2006.03.14.01.00.18
+---
+> D2006.03.15.17.23.36
+diff -r 296/src/editline/CVS/Tag 297/src/editline/CVS/Tag
+1c1
+< D2006.03.14.01.00.18
+---
+> D2006.03.15.17.23.36
+diff -r 296/src/fdlibm/CVS/Tag 297/src/fdlibm/CVS/Tag
+1c1
+< D2006.03.14.01.00.18
+---
+> D2006.03.15.17.23.36
+diff -r 296/src/jsopcode.c 297/src/jsopcode.c
+2987a2988,2991
+>          *
+>          * We search from limit to base to find the most recently calculated
+>          * value matching v under assumption that it is it that caused
+>          * exception, see bug 328664.
+2989c2993,2994
+<         for (sp = base; sp < limit; sp++) {
+---
+>         for (sp = limit; sp > base; ) {
+>             --sp;
+diff -r 296/src/jsxml.c 297/src/jsxml.c
+1761c1761
+<                 return PN2X_SKIP_CHILD;
+---
+>                 goto skip_child;
+1774c1774
+<                 return PN2X_SKIP_CHILD;
+---
+>                 goto skip_child;
+1806a1807,1810
+> skip_child:
+>     js_LeaveLocalRootScope(cx);
+>     return PN2X_SKIP_CHILD;
+> 

@@ -1,0 +1,115 @@
+diff -r 59/src/config/CVS/Tag 60/src/config/CVS/Tag
+1c1
+< D2006.01.12.15.57.29
+---
+> D2006.01.14.06.20.30
+diff -r 59/src/CVS/Entries 60/src/CVS/Entries
+38a39
+> /js.msg/3.51/Mon Nov 17 05:08:56 2014//D2006.01.14.06.20.30
+65a67
+> /jsgc.c/3.111/Mon Nov 17 05:08:56 2014//D2006.01.14.06.20.30
+104a107
+> /jsxml.c/3.77/Mon Nov 17 05:08:56 2014//D2006.01.14.06.20.30
+109,111d111
+< /js.msg/3.50/Mon Nov 17 05:08:57 2014//D2006.01.12.15.57.29
+< /jsgc.c/3.110/Mon Nov 17 05:08:57 2014//D2006.01.12.15.57.29
+< /jsxml.c/3.76/Mon Nov 17 05:08:58 2014//D2006.01.12.15.57.29
+diff -r 59/src/CVS/Tag 60/src/CVS/Tag
+1c1
+< D2006.01.12.15.57.29
+---
+> D2006.01.14.06.20.30
+diff -r 59/src/editline/CVS/Tag 60/src/editline/CVS/Tag
+1c1
+< D2006.01.12.15.57.29
+---
+> D2006.01.14.06.20.30
+diff -r 59/src/fdlibm/CVS/Tag 60/src/fdlibm/CVS/Tag
+1c1
+< D2006.01.12.15.57.29
+---
+> D2006.01.14.06.20.30
+diff -r 59/src/jsgc.c 60/src/jsgc.c
+1823d1822
+<     js_SweepScriptFilenames(rt);
+1867a1867,1874
+>      * Sweep script filenames after sweeping functions in the generic loop
+>      * above. In this way when scripted function's finalizer destroys script
+>      * triggering a call to rt->destroyScriptHook, the hook can still access
+>      * script's filename. See bug 323267.
+>      */
+>     js_SweepScriptFilenames(rt);
+> 
+>     /*
+diff -r 59/src/js.msg 60/src/js.msg
+85,89c85,89
+< MSG_DEF(JSMSG_MORE_ARGS_NEEDED,         3, 3, JSEXN_NONE, "{0} requires more than {1} argument{2}")
+< MSG_DEF(JSMSG_BAD_CHAR,                 4, 1, JSEXN_NONE, "invalid format character {0}")
+< MSG_DEF(JSMSG_BAD_TYPE,                 5, 1, JSEXN_NONE, "unknown type {0}")
+< MSG_DEF(JSMSG_CANT_LOCK,                6, 0, JSEXN_NONE, "can't lock memory")
+< MSG_DEF(JSMSG_CANT_UNLOCK,              7, 0, JSEXN_NONE, "can't unlock memory")
+---
+> MSG_DEF(JSMSG_MORE_ARGS_NEEDED,         3, 3, JSEXN_TYPEERR, "{0} requires more than {1} argument{2}")
+> MSG_DEF(JSMSG_BAD_CHAR,                 4, 1, JSEXN_INTERNALERR, "invalid format character {0}")
+> MSG_DEF(JSMSG_BAD_TYPE,                 5, 1, JSEXN_TYPEERR, "unknown type {0}")
+> MSG_DEF(JSMSG_CANT_LOCK,                6, 0, JSEXN_INTERNALERR, "can't lock memory")
+> MSG_DEF(JSMSG_CANT_UNLOCK,              7, 0, JSEXN_INTERNALERR, "can't unlock memory")
+91,92c91,92
+< MSG_DEF(JSMSG_NO_CONSTRUCTOR,           9, 1, JSEXN_NONE, "{0} has no constructor")
+< MSG_DEF(JSMSG_CANT_ALIAS,              10, 3, JSEXN_NONE, "can't alias {0} to {1} in class {2}")
+---
+> MSG_DEF(JSMSG_NO_CONSTRUCTOR,           9, 1, JSEXN_TYPEERR, "{0} has no constructor")
+> MSG_DEF(JSMSG_CANT_ALIAS,              10, 3, JSEXN_TYPEERR, "can't alias {0} to {1} in class {2}")
+97c97
+< MSG_DEF(JSMSG_CANT_WATCH,              15, 1, JSEXN_NONE, "can't watch non-native objects of class {0}")
+---
+> MSG_DEF(JSMSG_CANT_WATCH,              15, 1, JSEXN_TYPEERR, "can't watch non-native objects of class {0}")
+103c103
+< MSG_DEF(JSMSG_SAME_FORMAL,             21, 1, JSEXN_NONE, "duplicate formal argument {0}")
+---
+> MSG_DEF(JSMSG_SAME_FORMAL,             21, 1, JSEXN_SYNTAXERR, "duplicate formal argument {0}")
+107c107
+< MSG_DEF(JSMSG_NOT_EXPORTED,            25, 1, JSEXN_NONE, "{0} is not exported")
+---
+> MSG_DEF(JSMSG_NOT_EXPORTED,            25, 1, JSEXN_TYPEERR, "{0} is not exported")
+110c110
+< MSG_DEF(JSMSG_BAD_NEW_RESULT,          28, 1, JSEXN_NONE, "invalid new expression result {0}")
+---
+> MSG_DEF(JSMSG_BAD_NEW_RESULT,          28, 1, JSEXN_TYPEERR, "invalid new expression result {0}")
+122,123c122,123
+< MSG_DEF(JSMSG_CANT_FIND_CLASS,         40, 1, JSEXN_NONE, "can't find class id {0}")
+< MSG_DEF(JSMSG_CANT_XDR_CLASS,          41, 1, JSEXN_NONE, "can't XDR class {0}")
+---
+> MSG_DEF(JSMSG_CANT_FIND_CLASS,         40, 1, JSEXN_TYPEERR, "can't find class id {0}")
+> MSG_DEF(JSMSG_CANT_XDR_CLASS,          41, 1, JSEXN_TYPEERR, "can't XDR class {0}")
+145,150c145,150
+< MSG_DEF(JSMSG_END_OF_DATA,             63, 0, JSEXN_NONE, "unexpected end of data")
+< MSG_DEF(JSMSG_SEEK_BEYOND_START,       64, 0, JSEXN_NONE, "illegal seek beyond start")
+< MSG_DEF(JSMSG_SEEK_BEYOND_END,         65, 0, JSEXN_NONE, "illegal seek beyond end")
+< MSG_DEF(JSMSG_END_SEEK,                66, 0, JSEXN_NONE, "illegal end-based seek")
+< MSG_DEF(JSMSG_WHITHER_WHENCE,          67, 1, JSEXN_NONE, "unknown seek whence: {0}")
+< MSG_DEF(JSMSG_BAD_SCRIPT_MAGIC,        68, 0, JSEXN_NONE, "bad script XDR magic number")
+---
+> MSG_DEF(JSMSG_END_OF_DATA,             63, 0, JSEXN_INTERNALERR, "unexpected end of data")
+> MSG_DEF(JSMSG_SEEK_BEYOND_START,       64, 0, JSEXN_INTERNALERR, "illegal seek beyond start")
+> MSG_DEF(JSMSG_SEEK_BEYOND_END,         65, 0, JSEXN_INTERNALERR, "illegal seek beyond end")
+> MSG_DEF(JSMSG_END_SEEK,                66, 0, JSEXN_INTERNALERR, "illegal end-based seek")
+> MSG_DEF(JSMSG_WHITHER_WHENCE,          67, 1, JSEXN_INTERNALERR, "unknown seek whence: {0}")
+> MSG_DEF(JSMSG_BAD_SCRIPT_MAGIC,        68, 0, JSEXN_INTERNALERR, "bad script XDR magic number")
+194c194
+< MSG_DEF(JSMSG_EQUAL_AS_ASSIGN,        112, 1, JSEXN_NONE, "test for equality (==) mistyped as assignment (=)?{0}")
+---
+> MSG_DEF(JSMSG_EQUAL_AS_ASSIGN,        112, 1, JSEXN_SYNTAXERR, "test for equality (==) mistyped as assignment (=)?{0}")
+229c229
+< MSG_DEF(JSMSG_UNCAUGHT_EXCEPTION,     147, 1, JSEXN_NONE, "uncaught exception: {0}")
+---
+> MSG_DEF(JSMSG_UNCAUGHT_EXCEPTION,     147, 1, JSEXN_INTERNALERR, "uncaught exception: {0}")
+235c235
+< MSG_DEF(JSMSG_CANT_DESCRIBE_PROPS,    153, 1, JSEXN_NONE, "can't describe non-native properties of class {0}")
+---
+> MSG_DEF(JSMSG_CANT_DESCRIBE_PROPS,    153, 1, JSEXN_TYPEERR, "can't describe non-native properties of class {0}")
+diff -r 59/src/jsxml.c 60/src/jsxml.c
+3059c3059
+<     if (atom &&
+---
+>     if (qn->uri && atom &&

@@ -1,0 +1,33 @@
+diff -r 413/src/config/CVS/Tag 414/src/config/CVS/Tag
+1c1
+< D2006.04.23.14.49.51
+---
+> D2006.04.23.21.45.10
+diff -r 413/src/CVS/Entries 414/src/CVS/Entries
+48a49
+> /js.c/3.110/Wed Dec 17 07:26:14 2014//D2006.04.23.21.45.10
+114d114
+< /js.c/3.109/Wed Dec 17 07:26:17 2014//D2006.04.23.14.49.51
+diff -r 413/src/CVS/Tag 414/src/CVS/Tag
+1c1
+< D2006.04.23.14.49.51
+---
+> D2006.04.23.21.45.10
+diff -r 413/src/editline/CVS/Tag 414/src/editline/CVS/Tag
+1c1
+< D2006.04.23.14.49.51
+---
+> D2006.04.23.21.45.10
+diff -r 413/src/fdlibm/CVS/Tag 414/src/fdlibm/CVS/Tag
+1c1
+< D2006.04.23.14.49.51
+---
+> D2006.04.23.21.45.10
+diff -r 413/src/js.c 414/src/js.c
+99c99,102
+< static size_t gMaxStackSize = 0;
+---
+> 
+> /* Assume that we can not use more than 5e5 bytes of C stack by default. */
+> static size_t gMaxStackSize = 500000;
+> 

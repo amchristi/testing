@@ -1,0 +1,65 @@
+diff -r 897/src/config/CVS/Tag 898/src/config/CVS/Tag
+1c1
+< D2006.08.23.14.09.03
+---
+> D2006.08.24.02.15.41
+diff -r 897/src/CVS/Entries 898/src/CVS/Entries
+98a99
+> /Makefile.ref/3.43/Mon Nov 17 07:11:17 2014//D2006.08.24.02.15.41
+103a105
+> /jsfile.c/3.46/Mon Nov 17 07:11:17 2014//D2006.08.24.02.15.41
+109a112
+> /jsopcode.c/3.144/Mon Nov 17 07:11:18 2014//D2006.08.24.02.15.41
+111a115
+> /jsparse.c/3.208/Mon Nov 17 07:11:18 2014//D2006.08.24.02.15.41
+113,116d116
+< /Makefile.ref/3.42/Mon Nov 17 07:11:23 2014//D2006.08.23.14.09.03
+< /jsfile.c/3.45/Mon Nov 17 07:11:23 2014//D2006.08.23.14.09.03
+< /jsopcode.c/3.143/Mon Nov 17 07:11:23 2014//D2006.08.23.14.09.03
+< /jsparse.c/3.207/Mon Nov 17 07:11:23 2014//D2006.08.23.14.09.03
+diff -r 897/src/CVS/Tag 898/src/CVS/Tag
+1c1
+< D2006.08.23.14.09.03
+---
+> D2006.08.24.02.15.41
+diff -r 897/src/editline/CVS/Tag 898/src/editline/CVS/Tag
+1c1
+< D2006.08.23.14.09.03
+---
+> D2006.08.24.02.15.41
+diff -r 897/src/fdlibm/CVS/Tag 898/src/fdlibm/CVS/Tag
+1c1
+< D2006.08.23.14.09.03
+---
+> D2006.08.24.02.15.41
+diff -r 897/src/jsfile.c 898/src/jsfile.c
+2c2
+<  * vim: set ts=8 sw=4 et tw=80:
+---
+>  * vim: set ts=8 sw=4 et tw=78:
+190c190
+<                              JSFILEMSG_FILE_MUST_BE_CLOSED, op);              \
+---
+>                              JSFILEMSG_FILE_MUST_BE_OPEN, op);                \
+197c197
+<             JSFILEMSG_FILE_MUST_BE_OPEN, op);                                 \
+---
+>                              JSFILEMSG_FILE_MUST_BE_CLOSED, op);              \
+diff -r 897/src/jsopcode.c 898/src/jsopcode.c
+2964a2965
+>                 op = JSOP_NOP;           /* turn off parens */
+diff -r 897/src/jsparse.c 898/src/jsparse.c
+1617d1616
+<     JSScope *scope;
+1622,1623c1621
+<     scope = OBJ_SCOPE(blockObj);
+<     sprop = SCOPE_GET_PROPERTY(scope, ATOM_TO_JSID(atom));
+---
+>     sprop = SCOPE_GET_PROPERTY(OBJ_SCOPE(blockObj), ATOM_TO_JSID(atom));
+1631d1628
+<             OBJ_DROP_PROPERTY(cx, blockObj, (JSProperty *) sprop);
+diff -r 897/src/Makefile.ref 898/src/Makefile.ref
+356c356
+< 	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(OBJDIR)/jscpucfg.o
+---
+> 	$(CC) -o $@ $(OBJDIR)/jscpucfg.o

@@ -1,0 +1,754 @@
+diff -r 845/src/config/CVS/Tag 846/src/config/CVS/Tag
+1c1
+< D2006.08.16.02.41.46
+---
+> D2006.08.16.06.56.08
+diff -r 845/src/CVS/Entries 846/src/CVS/Entries
+108,116c108,116
+< /js.msg/3.64/Mon Nov 17 07:10:20 2014//D2006.08.16.02.41.46
+< /jsemit.c/3.176/Mon Nov 17 07:10:20 2014//D2006.08.16.02.41.46
+< /jsemit.h/3.55/Mon Nov 17 07:10:20 2014//D2006.08.16.02.41.46
+< /jsinterp.c/3.266/Mon Nov 17 07:10:20 2014//D2006.08.16.02.41.46
+< /jsopcode.c/3.135/Mon Nov 17 07:10:20 2014//D2006.08.16.02.41.46
+< /jsopcode.h/3.35/Mon Nov 17 07:10:20 2014//D2006.08.16.02.41.46
+< /jsopcode.tbl/3.58/Mon Nov 17 07:10:20 2014//D2006.08.16.02.41.46
+< /jsparse.c/3.196/Mon Nov 17 07:10:20 2014//D2006.08.16.02.41.46
+< /jsparse.h/3.34/Mon Nov 17 07:10:20 2014//D2006.08.16.02.41.46
+---
+> /js.msg/3.65/Mon Nov 17 07:10:18 2014//D2006.08.16.06.56.08
+> /jsemit.c/3.177/Mon Nov 17 07:10:18 2014//D2006.08.16.06.56.08
+> /jsemit.h/3.56/Mon Nov 17 07:10:18 2014//D2006.08.16.06.56.08
+> /jsinterp.c/3.267/Mon Nov 17 07:10:18 2014//D2006.08.16.06.56.08
+> /jsopcode.c/3.136/Mon Nov 17 07:10:18 2014//D2006.08.16.06.56.08
+> /jsopcode.h/3.36/Mon Nov 17 07:10:18 2014//D2006.08.16.06.56.08
+> /jsopcode.tbl/3.59/Mon Nov 17 07:10:18 2014//D2006.08.16.06.56.08
+> /jsparse.c/3.197/Mon Nov 17 07:10:18 2014//D2006.08.16.06.56.08
+> /jsparse.h/3.35/Mon Nov 17 07:10:18 2014//D2006.08.16.06.56.08
+diff -r 845/src/CVS/Tag 846/src/CVS/Tag
+1c1
+< D2006.08.16.02.41.46
+---
+> D2006.08.16.06.56.08
+diff -r 845/src/editline/CVS/Tag 846/src/editline/CVS/Tag
+1c1
+< D2006.08.16.02.41.46
+---
+> D2006.08.16.06.56.08
+diff -r 845/src/fdlibm/CVS/Tag 846/src/fdlibm/CVS/Tag
+1c1
+< D2006.08.16.02.41.46
+---
+> D2006.08.16.06.56.08
+diff -r 845/src/jsemit.c 846/src/jsemit.c
+1211c1211
+< js_InCatchBlock(JSTreeContext *tc, JSAtom *atom)
+---
+> js_IsGlobalReference(JSTreeContext *tc, JSAtom *atom, JSBool *loopyp)
+1213a1214,1215
+>     JSObject *obj;
+>     JSScope *scope;
+1214a1217
+>     *loopyp = JS_FALSE;
+1216,1217c1219,1231
+<         if (stmt->type == STMT_CATCH && stmt->atom == atom)
+<             return JS_TRUE;
+---
+>         if (stmt->type == STMT_WITH)
+>             return JS_FALSE;
+>         if (STMT_IS_LOOP(stmt)) {
+>             *loopyp = JS_TRUE;
+>             continue;
+>         }
+>         if (stmt->flags & SIF_SCOPE) {
+>             obj = ATOM_TO_OBJECT(stmt->atom);
+>             JS_ASSERT(LOCKED_OBJ_GET_CLASS(obj) == &js_BlockClass);
+>             scope = OBJ_SCOPE(obj);
+>             if (SCOPE_GET_PROPERTY(scope, ATOM_TO_JSID(atom)))
+>                 return JS_FALSE;
+>         }
+1219c1233
+<     return JS_FALSE;
+---
+>     return JS_TRUE;
+1347d1360
+<           case STMT_CATCH:
+1505,1507c1518,1522
+<  * Return null on error.  If atom is found, return the statement info record
+<  * in which it was found directly, and set *slotp to its stack slot (if any).
+<  * If atom is not found, return &LL_NOT_FOUND.
+---
+>  * If a WITH statement is reached along the scope stack, return its statement
+>  * info record, so callers can tell that atom is ambiguous.  If atom is found,
+>  * set *slotp to its stack slot, and return the statement info record in which
+>  * it was found directly.  Otherwise (atom was not found and no WITH statement
+>  * was reached) return null.
+1509,1510d1523
+< static JSStmtInfo LL_NOT_FOUND;
+< 
+1512c1525
+< LexicalLookup(JSContext *cx, JSTreeContext *tc, JSAtom *atom, jsint *slotp)
+---
+> LexicalLookup(JSTreeContext *tc, JSAtom *atom, jsint *slotp)
+1515,1516c1528,1529
+<     JSObject *obj, *pobj;
+<     JSProperty *prop;
+---
+>     JSObject *obj;
+>     JSScope *scope;
+1517a1531
+>     jsval v;
+1523,1527d1536
+<         if (stmt->type == STMT_CATCH) {
+<             if (stmt->atom == atom)
+<                 return stmt;
+<             continue;
+<         }
+1531,1541c1540,1552
+<         if (!js_LookupProperty(cx, obj, ATOM_TO_JSID(atom), &pobj, &prop))
+<             return NULL;
+<         if (prop) {
+<             if (pobj != obj) {
+<                 stmt = &LL_NOT_FOUND;
+<             } else {
+<                 sprop = (JSScopeProperty *) prop;
+<                 JS_ASSERT(sprop->flags & SPROP_HAS_SHORTID);
+<                 *slotp = OBJ_BLOCK_DEPTH(cx, obj) + sprop->shortid;
+<             }
+<             OBJ_DROP_PROPERTY(cx, pobj, prop);
+---
+>         JS_ASSERT(LOCKED_OBJ_GET_CLASS(obj) == &js_BlockClass);
+>         scope = OBJ_SCOPE(obj);
+>         sprop = SCOPE_GET_PROPERTY(scope, ATOM_TO_JSID(atom));
+>         if (sprop) {
+>             JS_ASSERT(sprop->flags & SPROP_HAS_SHORTID);
+> 
+>             /*
+>              * Use LOCKED_OBJ_GET_SLOT since we know obj is single-threaded
+>              * and owned by this compiler activation.
+>              */
+>             v = LOCKED_OBJ_GET_SLOT(obj, JSSLOT_BLOCK_DEPTH);
+>             JS_ASSERT(JSVAL_IS_INT(v) && JSVAL_TO_INT(v) >= 0);
+>             *slotp = JSVAL_TO_INT(v) + sprop->shortid;
+1546c1557
+<     return &LL_NOT_FOUND;
+---
+>     return NULL;
+1578,1584c1589,1591
+<             stmt = LexicalLookup(cx, &cg->treeContext, atom, &slot);
+<             if (!stmt)
+<                 return JS_FALSE;
+<             if (stmt != &LL_NOT_FOUND) {
+<                 fp = fp->down;
+<                 continue;
+<             }
+---
+>             stmt = LexicalLookup(&cg->treeContext, atom, &slot);
+>             if (stmt)
+>                 return JS_TRUE;
+1874,1878c1881,1882
+<     stmt = LexicalLookup(cx, tc, atom, &slot);
+<     if (!stmt)
+<         return JS_FALSE;
+< 
+<     if (stmt != &LL_NOT_FOUND) {
+---
+>     stmt = LexicalLookup(tc, atom, &slot);
+>     if (stmt) {
+1881,1884d1884
+<         if (stmt->type == STMT_CATCH) {
+<             JS_ASSERT(stmt->atom == atom);
+<             return JS_TRUE;
+<         }
+4317,4318c4317
+<         ptrdiff_t start, end, catchStart, guardJump, finallyCatch;
+<         JSParseNode *lastCatch;
+---
+>         ptrdiff_t start, end, catchJump, catchStart, finallyCatch;
+4319a4319
+>         JSParseNode *lastCatch;
+4321,4322c4321
+<         /* Quell GCC overwarnings. */
+<         end = catchStart = guardJump = finallyCatch = -1;
+---
+>         catchJump = catchStart = finallyCatch = -1;
+4328c4327
+<          * When a finally block is `active' (STMT_FINALLY on the treeContext),
+---
+>          * When a finally block is 'active' (STMT_FINALLY on the treeContext),
+4342c4341
+<          * To fix this, we compute the `balanced' stack depth upon try entry,
+---
+>          * To fix this, we compute the 'balanced' stack depth upon try entry,
+4364a4364,4366
+> 
+>             /* JSOP_RETSUB pops the return pc-index, balancing the stack. */
+>             cg->stackDepth = depth;
+4370c4372
+<         jmp = EmitBackPatchOp(cx, cg, JSOP_BACKPATCH, &CATCHJUMPS(stmtInfo));
+---
+>         jmp = EmitBackPatchOp(cx, cg, JSOP_BACKPATCH, &catchJump);
+4379a4382,4383
+>             jsint count = 0;    /* previous catch block's population */
+> 
+4405,4410c4409
+<                 JSStmtInfo stmtInfo2;
+<                 JSParseNode *catchHead;
+<                 ptrdiff_t catchNote;
+< 
+<                 if (!UpdateLineNumberNotes(cx, cg, pn3))
+<                     return JS_FALSE;
+---
+>                 ptrdiff_t guardJump, catchNote;
+4412c4411,4416
+<                 if (guardJump != -1) {
+---
+>                 guardJump = GUARDJUMP(stmtInfo);
+>                 if (guardJump == -1) {
+>                     /* Set stack to original depth (see SETSP comment above). */
+>                     EMIT_UINT16_IMM_OP(JSOP_SETSP, (jsatomid)depth);
+>                     cg->stackDepth = depth;
+>                 } else {
+4418,4423c4422,4426
+<                     /* Compensate for the [leavewith]. */
+<                     cg->stackDepth++;
+<                     JS_ASSERT((uintN) cg->stackDepth <= cg->maxStackDepth);
+< 
+<                     if (js_NewSrcNote(cx, cg, SRC_HIDDEN) < 0 ||
+<                         js_Emit1(cx, cg, JSOP_LEAVEWITH) < 0) {
+---
+>                     /*
+>                      * Emit an unbalanced [leaveblock] for the previous catch,
+>                      * whose block object count is saved below.
+>                      */
+>                     if (js_NewSrcNote(cx, cg, SRC_HIDDEN) < 0)
+4425,4429c4428,4429
+<                     }
+<                 } else {
+<                     /* Set stack to original depth (see SETSP comment above). */
+<                     EMIT_UINT16_IMM_OP(JSOP_SETSP, (jsatomid)depth);
+<                     cg->stackDepth = depth;
+---
+>                     JS_ASSERT(count > 0);
+>                     EMIT_UINT16_IMM_OP(JSOP_LEAVEBLOCK, count);
+4432c4432,4438
+<                 /* Non-negative catchNote offset is length of catchguard. */
+---
+>                 /*
+>                  * Annotate the JSOP_ENTERBLOCK that's about to be generated
+>                  * by the call to js_EmitTree immediately below.  Save this
+>                  * source note's index in stmtInfo for use by the TOK_CATCH:
+>                  * case, where the length of the catch guard is set as the
+>                  * note's offset.
+>                  */
+4434,4484c4440
+<                 if (catchNote < 0 ||
+<                     js_Emit1(cx, cg, JSOP_NOP) < 0) {
+<                     return JS_FALSE;
+<                 }
+< 
+<                 /* Construct the scope holder and push it on. */
+<                 ale = js_IndexAtom(cx, CLASS_ATOM(cx, Object), &cg->atomList);
+<                 if (!ale)
+<                     return JS_FALSE;
+<                 EMIT_ATOM_INDEX_OP(JSOP_NAME, ALE_INDEX(ale));
+< 
+<                 if (js_Emit1(cx, cg, JSOP_PUSHOBJ) < 0 ||
+<                     js_Emit1(cx, cg, JSOP_NEWINIT) < 0 ||
+<                     js_Emit1(cx, cg, JSOP_EXCEPTION) < 0) {
+<                     return JS_FALSE;
+<                 }
+< 
+<                 /* initcatchvar <atomIndex> */
+<                 catchHead = pn3->pn_kid1;
+<                 ale = js_IndexAtom(cx, catchHead->pn_atom, &cg->atomList);
+<                 if (!ale)
+<                     return JS_FALSE;
+< 
+<                 EMIT_ATOM_INDEX_OP(JSOP_INITCATCHVAR, ALE_INDEX(ale));
+<                 if (js_NewSrcNote(cx, cg, SRC_HIDDEN) < 0 ||
+<                     js_Emit1(cx, cg, JSOP_ENTERWITH) < 0) {
+<                     return JS_FALSE;
+<                 }
+< 
+<                 /* boolean_expr */
+<                 if (pn3->pn_kid2) {
+<                     ptrdiff_t guardStart = CG_OFFSET(cg);
+<                     if (!js_EmitTree(cx, cg, pn3->pn_kid2))
+<                         return JS_FALSE;
+<                     if (!js_SetSrcNoteOffset(cx, cg, catchNote, 0,
+<                                              CG_OFFSET(cg) - guardStart)) {
+<                         return JS_FALSE;
+<                     }
+<                     /* ifeq <next block> */
+<                     guardJump = EmitJump(cx, cg, JSOP_IFEQ, 0);
+<                     if (guardJump < 0)
+<                         return JS_FALSE;
+<                 }
+< 
+<                 /* Emit catch block. */
+<                 js_PushStatement(&cg->treeContext, &stmtInfo2, STMT_CATCH,
+<                                  CG_OFFSET(cg));
+<                 stmtInfo2.atom = catchHead->pn_atom;
+<                 if (!js_EmitTree(cx, cg, pn3->pn_kid3))
+<                     return JS_FALSE;
+<                 if (!js_PopStatementCG(cx, cg))
+---
+>                 if (catchNote < 0)
+4485a4442
+>                 CATCHNOTE(stmtInfo) = catchNote;
+4488,4489c4445,4447
+<                  * Jump over the remaining catch blocks.
+<                  * This counts as a non-local jump, so do the finally thing.
+---
+>                  * Emit the lexical scope and catch body.  Save the catch's
+>                  * block object population via count, for use when targeting
+>                  * guardJump at the next catch (the guard mismatch case).
+4491,4495c4449,4451
+< 
+<                 /* leavewith, annotated so the decompiler knows to pop  */
+<                 off = cg->stackDepth - 1;
+<                 if (js_NewSrcNote2(cx, cg, SRC_CATCH, off) < 0 ||
+<                     js_Emit1(cx, cg, JSOP_LEAVEWITH) < 0) {
+---
+>                 JS_ASSERT(pn3->pn_type == TOK_LEXICALSCOPE);
+>                 count = OBJ_BLOCK_COUNT(cx, ATOM_TO_OBJECT(pn3->pn_atom));
+>                 if (!js_EmitTree(cx, cg, pn3))
+4497d4452
+<                 }
+4509c4464,4467
+<                 /* This will get fixed up to jump to after catch/finally. */
+---
+>                 /*
+>                  * Jump over the remaining catch blocks.  This will get fixed
+>                  * up to jump to after catch/finally.
+>                  */
+4512,4513c4470
+<                 jmp = EmitBackPatchOp(cx, cg, JSOP_BACKPATCH,
+<                                       &CATCHJUMPS(stmtInfo));
+---
+>                 jmp = EmitBackPatchOp(cx, cg, JSOP_BACKPATCH, &catchJump);
+4517c4474,4478
+<                 lastCatch = pn3;    /* save pointer to last catch */
+---
+>                 /*
+>                  * Save a pointer to the last catch node to handle try-finally
+>                  * and try-catch(guard)-finally special cases.
+>                  */
+>                 lastCatch = pn3->pn_expr;
+4549c4510
+<                 CHECK_AND_SET_JUMP_OFFSET_AT(cx, cg, guardJump);
+---
+>                 CHECK_AND_SET_JUMP_OFFSET_AT(cx, cg, GUARDJUMP(stmtInfo));
+4643c4604
+<         if (!BackPatch(cx, cg, CATCHJUMPS(stmtInfo), CG_NEXT(cg), JSOP_GOTO))
+---
+>         if (!BackPatch(cx, cg, catchJump, CG_NEXT(cg), JSOP_GOTO))
+4668a4630,4674
+>       case TOK_CATCH:
+>       {
+>         ptrdiff_t guardJump;
+> 
+>         stmt = cg->treeContext.topStmt;
+>         JS_ASSERT(stmt->type == STMT_BLOCK);
+>         stmt->type = STMT_CATCH;
+>         stmt = stmt->down;
+>         JS_ASSERT(stmt->type == STMT_TRY || stmt->type == STMT_FINALLY);
+> 
+>         /* Pick up the pending exception and bind it to the catch variable. */
+>         if (js_Emit1(cx, cg, JSOP_EXCEPTION) < 0)
+>             return JS_FALSE;
+>         EMIT_UINT16_IMM_OP(JSOP_INITCATCHVAR, pn->pn_kid1->pn_slot);
+> 
+>         /* Emit the guard expression, if there is one. */
+>         if (pn->pn_kid2) {
+>             ptrdiff_t guardStart = CG_OFFSET(cg);
+>             if (!js_EmitTree(cx, cg, pn->pn_kid2))
+>                 return JS_FALSE;
+>             if (!js_SetSrcNoteOffset(cx, cg, CATCHNOTE(*stmt), 0,
+>                                      CG_OFFSET(cg) - guardStart)) {
+>                 return JS_FALSE;
+>             }
+>             /* ifeq <next block> */
+>             guardJump = EmitJump(cx, cg, JSOP_IFEQ, 0);
+>             if (guardJump < 0)
+>                 return JS_FALSE;
+>             GUARDJUMP(*stmt) = guardJump;
+>         }
+> 
+>         /* Emit the catch body. */
+>         if (!js_EmitTree(cx, cg, pn->pn_kid3))
+>             return JS_FALSE;
+> 
+>         /*
+>          * Annotate the JSOP_LEAVEBLOCK that will be emitted as we unwind via
+>          * our TOK_LEXICALSCOPE parent, so the decompiler knows to pop.
+>          */
+>         off = cg->stackDepth;
+>         if (js_NewSrcNote2(cx, cg, SRC_CATCH, off) < 0)
+>             return JS_FALSE;
+>         break;
+>       }
+> 
+diff -r 845/src/jsemit.h 846/src/jsemit.h
+106c106
+<     JSAtom          *atom;          /* name of LABEL or CATCH var */
+---
+>     JSAtom          *atom;          /* name of LABEL, or block scope object */
+111,112c111,112
+< #define SIF_BODY_BLOCK  0x0001      /* STMT_BLOCK type is a function body */
+< #define SIF_SCOPE       0x0002      /* This statement contains a scope. */
+---
+> #define SIF_SCOPE        0x0002     /* statement has its own lexical scope */
+> #define SIF_BODY_BLOCK   0x0001     /* STMT_BLOCK type is a function body */
+117c117,120
+<  * use cases, the macro argument is a struct, not a struct pointer.
+---
+>  * use cases, the macro argument is a struct, not a struct pointer.  Only a
+>  * loop, switch, or label statement info record can have breaks and continues,
+>  * and only a for loop has an update backpatch chain, so it's safe to overlay
+>  * these for the "trying" JSStmtTypes.
+118a122
+> #define CATCHNOTE(stmt)  ((stmt).update)
+120c124
+< #define CATCHJUMPS(stmt) ((stmt).continues)
+---
+> #define GUARDJUMP(stmt)  ((stmt).continues)
+364c368,372
+< /* Test whether we're in a catch block with exception named by atom. */
+---
+> /*
+>  * Test whether atom refers to a global variable (or is a reference error).
+>  * Return true in *loopyp if any loops enclose the lexical reference, false
+>  * otherwise.
+>  */
+366c374
+< js_InCatchBlock(JSTreeContext *tc, JSAtom *atom);
+---
+> js_IsGlobalReference(JSTreeContext *tc, JSAtom *atom, JSBool *loopyp);
+diff -r 845/src/jsinterp.c 846/src/jsinterp.c
+1984,1991d1983
+< typedef enum JSOpLength {
+< #define OPDEF(op,val,name,token,length,nuses,ndefs,prec,format) \
+<     op##_LENGTH = length,
+< #include "jsopcode.tbl"
+< #undef OPDEF
+<     JSOP_LIMIT_LENGTH
+< } JSOpLength;
+< 
+4259d4250
+<               case JSOP_INITCATCHVAR: goto do_JSOP_INITCATCHVAR;
+5500,5514c5491
+<           BEGIN_LITOPX_CASE(JSOP_INITCATCHVAR, 0)
+<             /* Load the value into rval, while keeping it live on stack. */
+<             JS_ASSERT(sp - fp->spbase >= 2);
+<             rval = FETCH_OPND(-1);
+< 
+<             /* Get the immediate catch variable name into id. */
+<             id   = ATOM_TO_JSID(atom);
+< 
+<             /* Find the object being initialized at top of stack. */
+<             lval = FETCH_OPND(-2);
+<             JS_ASSERT(JSVAL_IS_OBJECT(lval));
+<             obj = JSVAL_TO_OBJECT(lval);
+< 
+<             SAVE_SP_AND_PC(fp);
+< 
+---
+>           BEGIN_CASE(JSOP_INITCATCHVAR)
+5516,5518c5493,5494
+<              * It's possible for an evil script to substitute a random object
+<              * for the new object. Check to make sure that we don't override a
+<              * readonly property with the below OBJ_DEFINE_PROPERTY.
+---
+>              * The stack must have a block with at least one local slot below
+>              * the exception object.
+5520,5534c5496,5500
+<             ok = OBJ_GET_ATTRIBUTES(cx, obj, id, NULL, &attrs);
+<             if (!ok)
+<                 goto out;
+<             if (!(attrs & (JSPROP_READONLY | JSPROP_PERMANENT |
+<                            JSPROP_GETTER | JSPROP_SETTER))) {
+<                 /* Define obj[id] to contain rval and to be permanent. */
+<                 ok = OBJ_DEFINE_PROPERTY(cx, obj, id, rval, NULL, NULL,
+<                                          JSPROP_PERMANENT, NULL);
+<                 if (!ok)
+<                     goto out;
+<             }
+< 
+<             /* Now that we're done with rval, pop it. */
+<             sp--;
+<           END_LITOPX_CASE(JSOP_INITCATCHVAR)
+---
+>             JS_ASSERT(sp - fp->spbase >= 2);
+>             slot = GET_UINT16(pc);
+>             JS_ASSERT(slot + 1 < (uintN)depth);
+>             fp->spbase[slot] = POP_OPND();
+>           END_CASE(JSOP_INITCATCHVAR)
+5996a5963
+> 
+5997a5965,5967
+>             JS_ASSERT(chainp != &fp->blockChain ||
+>                       !*chainp ||
+>                       OBJ_GET_CLASS(cx, *chainp) == &js_BlockClass);
+diff -r 845/src/js.msg 846/src/js.msg
+251c251
+< MSG_DEF(JSMSG_UNUSED169,              169, 0, JSEXN_NONE, "")
+---
+> MSG_DEF(JSMSG_TOO_MANY_CATCH_VARS,    169, 0, JSEXN_SYNTAXERR, "too many catch variables")
+diff -r 845/src/jsopcode.c 846/src/jsopcode.c
+796,798c796
+<         caseExprOff = isCondSwitch
+<                       ? (ptrdiff_t) js_CodeSpec[JSOP_CONDSWITCH].length
+<                       : 0;
+---
+>         caseExprOff = isCondSwitch ? JSOP_CONDSWITCH_LENGTH : 0;
+943d940
+<     static const char catch_cookie[]     = "/*CATCH*/";
+1159,1207d1155
+<                   case SRC_CATCH:
+<                     jp->indent -= 4;
+<                     sn = js_GetSrcNote(jp->script, pc);
+<                     pc += oplen;
+<                     js_printf(jp, "\t} catch (");
+< 
+<                     LOCAL_ASSERT(*pc == JSOP_NAME);
+<                     pc += js_CodeSpec[JSOP_NAME].length;
+<                     LOCAL_ASSERT(*pc == JSOP_PUSHOBJ);
+<                     pc += js_CodeSpec[JSOP_PUSHOBJ].length;
+<                     LOCAL_ASSERT(*pc == JSOP_NEWINIT);
+<                     pc += js_CodeSpec[JSOP_NEWINIT].length;
+<                     LOCAL_ASSERT(*pc == JSOP_EXCEPTION);
+<                     pc += js_CodeSpec[JSOP_EXCEPTION].length;
+<                     if (*pc == JSOP_LITOPX) {
+<                         atomIndex = GET_LITERAL_INDEX(pc);
+<                         pc += 1 + LITERAL_INDEX_LEN;
+<                         LOCAL_ASSERT(*pc == JSOP_INITCATCHVAR);
+<                         ++pc;
+<                     } else {
+<                         LOCAL_ASSERT(*pc == JSOP_INITCATCHVAR);
+<                         atomIndex = GET_ATOM_INDEX(pc);
+<                         pc += js_CodeSpec[JSOP_INITCATCHVAR].length;
+<                     }
+<                     atom = js_GetAtom(cx, &jp->script->atomMap, atomIndex);
+<                     rval = QuoteString(&ss->sprinter, ATOM_TO_STRING(atom), 0);
+<                     if (!rval)
+<                         return JS_FALSE;
+<                     RETRACT(&ss->sprinter, rval);
+<                     js_printf(jp, "%s", rval);
+<                     LOCAL_ASSERT(*pc == JSOP_ENTERWITH);
+<                     pc += js_CodeSpec[JSOP_ENTERWITH].length;
+< 
+<                     len = js_GetSrcNoteOffset(sn, 0);
+<                     if (len) {
+<                         js_printf(jp, " if ");
+<                         DECOMPILE_CODE(pc, len);
+<                         js_printf(jp, "%s", POP_STR());
+<                         pc += len;
+<                         LOCAL_ASSERT(*pc == JSOP_IFEQ || *pc == JSOP_IFEQX);
+<                         pc += js_CodeSpec[*pc].length;
+<                     }
+< 
+<                     js_printf(jp, ") {\n");
+<                     jp->indent += 4;
+<                     todo = Sprint(&ss->sprinter, catch_cookie);
+<                     len = 0;
+<                     break;
+< 
+1330,1332c1278,1280
+<                  * sequence that follows a SRC_CATCH-annotated JSOP_NOP or
+<                  * precedes a SRC_HIDDEN-annotated JSOP_POP emitted when
+<                  * returning from within a finally clause.
+---
+>                  * sequence that follows a SRC_CATCH-annotated JSOP_ENTERBLOCK
+>                  * or that precedes a SRC_HIDDEN-annotated JSOP_POP emitted
+>                  * when returning from within a finally clause.
+1447,1451d1394
+<                 if (sn && SN_TYPE(sn) == SRC_CATCH) {
+<                     LOCAL_ASSERT(strcmp(rval, catch_cookie) == 0);
+<                     LOCAL_ASSERT((uintN) js_GetSrcNoteOffset(sn, 0) == ss->top);
+<                     break;
+<                 }
+1473a1417
+>                 /* From here on, control must flow through enterblock_out. */
+1488c1432
+<                         break;
+---
+>                         goto enterblock_out;
+1491a1436,1475
+>                 sn = js_GetSrcNote(jp->script, pc);
+>                 if (sn && SN_TYPE(sn) == SRC_CATCH) {
+>                     jp->indent -= 4;
+>                     js_printf(jp, "\t} catch (");
+> 
+>                     pc += oplen;
+>                     LOCAL_ASSERT(*pc == JSOP_EXCEPTION);
+>                     pc += JSOP_EXCEPTION_LENGTH;
+>                     LOCAL_ASSERT(*pc == JSOP_INITCATCHVAR);
+>                     i = GET_UINT16(pc);
+>                     pc += JSOP_INITCATCHVAR_LENGTH;
+>                     str = ATOM_TO_STRING(atomv[i]);
+>                     rval = QuoteString(&ss->sprinter, str, 0);
+>                     if (!rval) {
+>                         ok = JS_FALSE;
+>                         goto enterblock_out;
+>                     }
+>                     RETRACT(&ss->sprinter, rval);
+>                     js_printf(jp, "%s", rval);
+> 
+>                     len = js_GetSrcNoteOffset(sn, 0);
+>                     if (len) {
+>                         js_printf(jp, " if ");
+>                         ok = Decompile(ss, pc, len);
+>                         if (!ok)
+>                             goto enterblock_out;
+>                         js_printf(jp, "%s", POP_STR());
+>                         pc += len;
+>                         LOCAL_ASSERT(*pc == JSOP_IFEQ || *pc == JSOP_IFEQX);
+>                         pc += js_CodeSpec[*pc].length;
+>                     }
+> 
+>                     js_printf(jp, ") {\n");
+>                     jp->indent += 4;
+>                     len = 0;
+>                 }
+> 
+>                 todo = -2;
+> 
+>               enterblock_out:
+1496d1479
+<                 todo = -2;
+1507c1490
+<                 if (sn && SN_TYPE(sn) == SRC_HIDDEN) {
+---
+>                 if (sn) {
+1509c1492,1495
+<                     break;
+---
+>                     if (SN_TYPE(sn) == SRC_HIDDEN)
+>                         break;
+>                     LOCAL_ASSERT(SN_TYPE(sn) == SRC_CATCH);
+>                     LOCAL_ASSERT((uintN)js_GetSrcNoteOffset(sn, 0) == ss->top);
+diff -r 845/src/jsopcode.h 846/src/jsopcode.h
+62a63,70
+> typedef enum JSOpLength {
+> #define OPDEF(op,val,name,token,length,nuses,ndefs,prec,format) \
+>     op##_LENGTH = length,
+> #include "jsopcode.tbl"
+> #undef OPDEF
+>     JSOP_LIMIT_LENGTH
+> } JSOpLength;
+> 
+diff -r 845/src/jsopcode.tbl 846/src/jsopcode.tbl
+277,278c277,278
+<  * Like JSOP_INITPROP, but specialized to make a DontDelete property for ECMA
+<  * Edition 3 catch variables.
+---
+>  * Like JSOP_SETLOCAL, but specialized to avoid requiring JSOP_POP immediately
+>  * after to throw away the exception value.
+280c280
+< OPDEF(JSOP_INITCATCHVAR,130, "initcatchvar",NULL,     3,  1,  0,  0,  JOF_CONST)
+---
+> OPDEF(JSOP_INITCATCHVAR,130, "initcatchvar",NULL,     3,  1,  0,  0,  JOF_LOCAL|JOF_NAME|JOF_SET)
+419c419
+< OPDEF(JSOP_SETLOCAL,      202,"setlocal",    NULL,    3,  1,  1,  1,  JOF_LOCAL|JOF_NAME|JOF_SET|JOF_ASSIGNING|JOF_DETECTING)
+---
+> OPDEF(JSOP_SETLOCAL,      202,"setlocal",    NULL,    3,  1,  1,  1,  JOF_LOCAL|JOF_NAME|JOF_SET)
+diff -r 845/src/jsparse.c 846/src/jsparse.c
+2924a2925,2927
+>                 JSParseNode *pnblock;
+>                 BindData data;
+> 
+2933a2937,2945
+>                  * Create a lexical scope node around the whole catch clause,
+>                  * including the head.
+>                  */
+>                 pnblock = PushLexicalScope(cx, ts, tc, &stmtInfo);
+>                 if (!pnblock)
+>                     return NULL;
+>                 stmtInfo.type = STMT_CATCH;
+> 
+>                 /*
+2942a2955
+>                 pnblock->pn_expr = pn2;
+2946a2960,2962
+>                  * Contrary to ECMA Ed. 3, the catch variable is lexically
+>                  * scoped, not a property of a new Object instance.  This is
+>                  * an intentional change that anticipates ECMA Ed. 4.
+2949a2966,2977
+>                 label = CURRENT_TOKEN(ts).t_atom;
+> 
+>                 data.pn = NULL;
+>                 data.ts = ts;
+>                 data.obj = ATOM_TO_OBJECT(pnblock->pn_atom);
+>                 data.op = JSOP_NOP;
+>                 data.binder = BindLet;
+>                 data.u.let.index = 0;
+>                 data.u.let.overflow = JSMSG_TOO_MANY_CATCH_VARS;
+>                 if (!data.binder(cx, &data, label, tc))
+>                     return NULL;
+> 
+2953,2954c2981
+< 
+<                 pn3->pn_atom = CURRENT_TOKEN(ts).t_atom;
+---
+>                 pn3->pn_atom = label;
+2955a2983
+>                 pn3->pn_slot = 0;
+2957a2986
+> 
+2970d2998
+< 
+2974,2975d3001
+<                 js_PushStatement(tc, &stmtInfo, STMT_CATCH, -1);
+<                 stmtInfo.atom = pn3->pn_atom;
+2982c3008
+<                 PN_APPEND(catchList, pn2);
+---
+>                 PN_APPEND(catchList, pnblock);
+3189,3195c3215,3222
+<                  * XXX This is a hard case that requires more work. In
+<                  * particular, in many cases, we're trying to emit code as
+<                  * we go. However, this means that we haven't necessarily
+<                  * finished processing all let declarations in the
+<                  * implicit top-level block when we emit a reference to
+<                  * one of them.  For now, punt on this and pretend this is
+<                  * a var declaration.
+---
+>                  * FIXME: https://bugzilla.mozilla.org/show_bug.cgi?id=346749
+>                  *
+>                  * This is a hard case that requires more work. In particular,
+>                  * in many cases, we're trying to emit code as we go. However,
+>                  * this means that we haven't necessarily finished processing
+>                  * all let declarations in the implicit top-level block when
+>                  * we emit a reference to one of them.  For now, punt on this
+>                  * and pretend this is a var declaration.
+5458c5485
+<                 JSStmtInfo *stmt;
+---
+>                 JSBool loopy;
+5465,5466c5492
+<                     !js_InWithStatement(tc) &&
+<                     !js_InCatchBlock(tc, pn->pn_atom)) {
+---
+>                     js_IsGlobalReference(tc, pn->pn_atom, &loopy)) {
+5468,5473c5494,5495
+<                     for (stmt = tc->topStmt; stmt; stmt = stmt->down) {
+<                         if (STMT_IS_LOOP(stmt)) {
+<                             tc->loopyGlobalUses++;
+<                             break;
+<                         }
+<                     }
+---
+>                     if (loopy)
+>                         tc->loopyGlobalUses++;
+diff -r 845/src/jsparse.h 846/src/jsparse.h
+105c105,107
+<  *                          pn_kid2: null or TOK_RESERVED list of catch blocks
+---
+>  *                          pn_kid2: null or TOK_RESERVED list of
+>  *                          TOK_LEXICALSCOPE nodes, each with pn_expr pointing
+>  *                          to a TOK_CATCH node
+107c109
+<  * TOK_CATCH    ternary     pn_kid1: TOK_NAME, TOK_LB, or TOK_LC cath var node
+---
+>  * TOK_CATCH    ternary     pn_kid1: TOK_NAME, TOK_LB, or TOK_LC catch var node

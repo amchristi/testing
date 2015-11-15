@@ -1,0 +1,621 @@
+diff -r 1022/src/config/CVS/Tag 1023/src/config/CVS/Tag
+1c1
+< D2006.09.06.06.22.36
+---
+> D2006.09.06.11.18.24
+diff -r 1022/src/CVS/Entries 1023/src/CVS/Entries
+71a72
+> /jsinterp.c/3.280/Mon Nov 17 05:11:50 2014//D2006.09.06.11.18.24
+85a87
+> /jsopcode.c/3.156/Mon Nov 17 05:11:50 2014//D2006.09.06.11.18.24
+86a89
+> /jsopcode.tbl/3.66/Mon Nov 17 05:11:50 2014//D2006.09.06.11.18.24
+87a91
+> /jsparse.c/3.223/Mon Nov 17 05:11:50 2014//D2006.09.06.11.18.24
+114,117d117
+< /jsinterp.c/3.279/Mon Nov 17 05:11:52 2014//D2006.09.06.06.22.36
+< /jsopcode.c/3.155/Mon Nov 17 05:11:52 2014//D2006.09.06.06.22.36
+< /jsopcode.tbl/3.65/Mon Nov 17 05:11:52 2014//D2006.09.06.06.22.36
+< /jsparse.c/3.222/Mon Nov 17 05:11:52 2014//D2006.09.06.06.22.36
+diff -r 1022/src/CVS/Tag 1023/src/CVS/Tag
+1c1
+< D2006.09.06.06.22.36
+---
+> D2006.09.06.11.18.24
+diff -r 1022/src/editline/CVS/Tag 1023/src/editline/CVS/Tag
+1c1
+< D2006.09.06.06.22.36
+---
+> D2006.09.06.11.18.24
+diff -r 1022/src/fdlibm/CVS/Tag 1023/src/fdlibm/CVS/Tag
+1c1
+< D2006.09.06.06.22.36
+---
+> D2006.09.06.11.18.24
+diff -r 1022/src/jsinterp.c 1023/src/jsinterp.c
+466,489d465
+< /*
+<  * Recursive helper to convert a compile-time block chain to a runtime block
+<  * scope chain prefix.  Each cloned block object is safe from GC by virtue of
+<  * the object newborn root.  This root cannot be displaced by arbitrary code
+<  * called from within js_NewObject, because we pass non-null proto and parent
+<  * arguments (so js_NewObject won't call js_GetClassPrototype).
+<  */
+< static JSObject *
+< CloneBlockChain(JSContext *cx, JSStackFrame *fp, JSObject *obj)
+< {
+<     JSObject *parent;
+< 
+<     parent = OBJ_GET_PARENT(cx, obj);
+<     if (!parent) {
+<         parent = fp->scopeChain;
+<     } else {
+<         parent = CloneBlockChain(cx, fp, parent);
+<         if (!parent)
+<             return NULL;
+<         fp->scopeChain = parent;
+<     }
+<     return js_CloneBlockObject(cx, obj, parent, fp);
+< }
+< 
+493c469,470
+<     JSObject *obj;
+---
+>     JSObject *obj, *cursor, *clonedChild, *parent;
+>     JSTempValueRooter tvr;
+496,498c473,498
+<     if (obj) {
+<         obj = CloneBlockChain(cx, fp, obj);
+<         if (!obj)
+---
+>     if (!obj) {
+>         JS_ASSERT(fp->scopeChain);
+>         return fp->scopeChain;
+>     }
+> 
+>     /*
+>      * Clone the block chain. To avoid recursive cloning we set the parent of
+>      * the cloned child after we clone the parent. In the following loop when
+>      * clonedChild is null it indicates the first iteration when no special GC
+>      * rooting is necessary. On the second and the following iterations we
+>      * have to protect clonedChild against the GC during cloning of the parent.
+>      */
+>     cursor = obj;
+>     clonedChild = NULL;
+>     for (;;) {
+>         parent = OBJ_GET_PARENT(cx, cursor);
+> 
+>         /*
+>          * We pass fp->scopeChain and not null even if we override the parent
+>          * slot later as null triggers useless calculations of slot's value in
+>          * js_NewObject that js_CloneBlockObject calls.
+>          */
+>         cursor = js_CloneBlockObject(cx, cursor, fp->scopeChain, fp);
+>         if (!cursor) {
+>             if (clonedChild)
+>                 JS_POP_TEMP_ROOT(cx, &tvr);
+500,503c500,521
+<         fp->flags |= JSFRAME_POP_BLOCKS;
+<         fp->scopeChain = obj;
+<         fp->blockChain = NULL;
+<         return obj;
+---
+>         }
+>         if (!parent) {
+>             if (!clonedChild)
+>                 obj = cursor;
+>             else
+>                 JS_POP_TEMP_ROOT(cx, &tvr);
+>             break;
+>         }
+>         if (!clonedChild) {
+>             obj = cursor;
+>             JS_PUSH_SINGLE_TEMP_ROOT(cx, cursor, &tvr);
+>         } else {
+>             /*
+>              * Avoid OBJ_SET_PARENT overhead as clonedChild cannot escape to
+>              * other threads.
+>              */
+>             clonedChild->slots[JSSLOT_PARENT] = OBJECT_TO_JSVAL(cursor);
+>             JS_ASSERT(tvr.u.value == OBJECT_TO_JSVAL(clonedChild));
+>             tvr.u.value = OBJECT_TO_JSVAL(cursor);
+>         }
+>         clonedChild = cursor;
+>         cursor = parent;
+505,506c523,526
+<     JS_ASSERT(fp->scopeChain);
+<     return fp->scopeChain;
+---
+>     fp->flags |= JSFRAME_POP_BLOCKS;
+>     fp->scopeChain = obj;
+>     fp->blockChain = NULL;
+>     return obj;
+diff -r 1022/src/jsopcode.c 1023/src/jsopcode.c
+933c933
+<     const JSCodeSpec *cs, *topcs;
+---
+>     const JSCodeSpec *cs;
+1022c1022
+<     op = JSOP_NOP;
+---
+>     saveop = JSOP_NOP;
+1030c1030,1037
+<         lastop = op;
+---
+>         /*
+>          * Move saveop to lastop so prefixed bytecodes can take special action
+>          * while sharing maximal code.  Set op and saveop to the new bytecode,
+>          * use op in POP_STR to trigger automatic parenthesization, but push
+>          * saveop at the bottom of the loop if this op pushes.  Thus op may be
+>          * set to nop or otherwise mutated to suppress auto-parens.
+>          */
+>         lastop = saveop;
+1049,1050d1055
+<                 rval = POP_STR();
+<                 lval = POP_STR();
+1052a1058,1068
+>                     /*
+>                      * Avoid over-parenthesizing y in x op= y based on its
+>                      * expansion: x = x op y (replace y by z = w to see the
+>                      * problem).
+>                      */
+>                     op = pc[1];
+>                     JS_ASSERT(op != saveop);
+>                 }
+>                 rval = POP_STR();
+>                 lval = POP_STR();
+>                 if (op != saveop) {
+1054a1071
+>                     op = saveop;
+1208,1217c1225,1231
+<                 /* Use last real op so PopOff adds parens if needed. */
+<                 todo = PopOff(ss, lastop);
+< 
+<                 /* Now add user-supplied parens only if PopOff did not. */
+<                 cs    = &js_CodeSpec[lastop];
+<                 topcs = &js_CodeSpec[ss->opcodes[ss->top]];
+<                 if (topcs->prec >= cs->prec) {
+<                     todo = Sprint(&ss->sprinter, "(%s)",
+<                                   OFF2STR(&ss->sprinter, todo));
+<                 }
+---
+>                 /*
+>                  * Don't explicitly parenthesize -- just fix the top opcode so
+>                  * that the auto-parens magic in PopOff can do its thing.
+>                  */
+>                 LOCAL_ASSERT(ss->top != 0);
+>                 ss->opcodes[ss->top-1] = lastop;
+>                 todo = -2;
+1310a1325,1333
+>                 /*
+>                  * By default, do not automatically parenthesize when popping
+>                  * a stacked expression decompilation.  We auto-parenthesize
+>                  * only when JSOP_POP is annotated with SRC_PCDELTA, meaning
+>                  * comma operator.
+>                  */
+>                 op = JSOP_POPV;
+>                 /* FALL THROUGH */
+> 
+1322a1346,1348
+>                     /* Comma operator: use JSOP_POP for correct precedence. */
+>                     op = JSOP_POP;
+> 
+1609,1610d1634
+<                 op = JSOP_RETURN;
+<                 /* FALL THROUGH */
+2017c2041
+<                 op = ss->opcodes[ss->top-1];
+---
+>                 saveop = ss->opcodes[ss->top-1];
+2065d2088
+<                 saveop = op;
+2087,2088c2110
+<                 if (saveop == JSOP_NEW)
+<                     op = saveop;
+---
+>                 op = saveop;
+2090d2111
+<                 op = JSOP_NOP;
+2095c2116,2118
+<                 if (saveop == JSOP_NEW) {
+---
+>                 if (op == JSOP_NEW) {
+>                     if (argc == 0)
+>                         lval = rval = "";
+2123d2145
+<                 op = saveop;
+2364c2386
+<                 op = JSOP_GETELEM;
+---
+>                 op = saveop;
+2381c2403
+<                 op = JSOP_SETELEM;
+---
+>                 op = saveop;
+2458c2480
+<                 op = *pc2;
+---
+>                 op = saveop = *pc2;
+2806a2829
+>                 saveop = op;
+2839d2861
+<                 op = JSOP_NEWINIT;      /* mark the stack with this op */
+2952a2975
+>                     saveop = JSOP_TOATTRNAME;
+3108c3131
+<             if (!PushOff(ss, todo, op))
+---
+>             if (!PushOff(ss, todo, saveop))
+diff -r 1022/src/jsopcode.tbl 1023/src/jsopcode.tbl
+65a66,89
+>  * Precedence   Operators               Opcodes
+>  *  1           let (x = y) z, w        JSOP_LEAVEBLOCKEXPR
+>  *  2           ,                       JSOP_POP with SRC_PCDELTA note
+>  *  3           =, +=, etc.             JSOP_SETNAME, etc. (all JOF_ASSIGNING)
+>  *  4           ?:                      JSOP_IFEQ, JSOP_IFEQX
+>  *  5           ||                      JSOP_OR, JSOP_ORX
+>  *  6           &&                      JSOP_AND, JSOP_ANDX
+>  *  7           |                       JSOP_BITOR
+>  *  8           ^                       JSOP_BITXOR
+>  *  9           &                       JSOP_BITAND
+>  * 10           ==, !=, etc.            JSOP_EQ, JSOP_NE, etc.
+>  * 11           <, in, etc.             JSOP_LT, JSOP_IN, etc.
+>  * 12           <<, >>, >>>             JSOP_LSH, JSOP_RSH, JSOP_URSH
+>  * 13           +, -, etc.              JSOP_ADD, JSOP_SUB, etc.
+>  * 14           *, /, %                 JSOP_MUL, JSOP_DIV, JSOP_MOD
+>  * 15           !, ~, etc.              JSOP_NOT, JSOP_BITNOT, etc.
+>  * 16           0, 3.14, etc.           JSOP_ZERO, JSOP_NUMBER, etc.
+>  * 17           x.y, f(), etc.          JSOP_GETPROP, JSOP_CALL, etc.
+>  * 18           x, null, etc.           JSOP_NAME, JSOP_NULL, etc.
+>  *
+>  * The push-numeric-constant operators, JSOP_ZERO, JSOP_NUMBER, etc., have
+>  * lower precedence than the member operators emitted for the . operator, to
+>  * cause the decompiler to parenthesize the . left operand, e.g. (0).foo.
+>  *
+80c104
+< OPDEF(JSOP_IFEQ,      7,  "ifeq",       NULL,         3,  1,  0,  0,  JOF_JUMP|JOF_DETECTING)
+---
+> OPDEF(JSOP_IFEQ,      7,  "ifeq",       NULL,         3,  1,  0,  4,  JOF_JUMP|JOF_DETECTING)
+84c108
+< OPDEF(JSOP_ARGUMENTS, 9, js_arguments_str, js_arguments_str, 1, 0, 1, 12, JOF_BYTE)
+---
+> OPDEF(JSOP_ARGUMENTS, 9, js_arguments_str, js_arguments_str, 1, 0, 1, 18, JOF_BYTE)
+93,135c117,159
+< OPDEF(JSOP_SETCONST,  14, "setconst",   NULL,         3,  1,  1,  1,  JOF_CONST|JOF_NAME|JOF_SET|JOF_ASSIGNING)
+< OPDEF(JSOP_BITOR,     15, "bitor",      "|",          1,  2,  1,  2,  JOF_BYTE|JOF_LEFTASSOC)
+< OPDEF(JSOP_BITXOR,    16, "bitxor",     "^",          1,  2,  1,  3,  JOF_BYTE|JOF_LEFTASSOC)
+< OPDEF(JSOP_BITAND,    17, "bitand",     "&",          1,  2,  1,  4,  JOF_BYTE|JOF_LEFTASSOC)
+< OPDEF(JSOP_EQ,        18, "eq",         "==",         1,  2,  1,  5,  JOF_BYTE|JOF_LEFTASSOC|JOF_DETECTING)
+< OPDEF(JSOP_NE,        19, "ne",         "!=",         1,  2,  1,  5,  JOF_BYTE|JOF_LEFTASSOC|JOF_DETECTING)
+< OPDEF(JSOP_LT,        20, "lt",         "<",          1,  2,  1,  6,  JOF_BYTE|JOF_LEFTASSOC)
+< OPDEF(JSOP_LE,        21, "le",         "<=",         1,  2,  1,  6,  JOF_BYTE|JOF_LEFTASSOC)
+< OPDEF(JSOP_GT,        22, "gt",         ">",          1,  2,  1,  6,  JOF_BYTE|JOF_LEFTASSOC)
+< OPDEF(JSOP_GE,        23, "ge",         ">=",         1,  2,  1,  6,  JOF_BYTE|JOF_LEFTASSOC)
+< OPDEF(JSOP_LSH,       24, "lsh",        "<<",         1,  2,  1,  7,  JOF_BYTE|JOF_LEFTASSOC)
+< OPDEF(JSOP_RSH,       25, "rsh",        ">>",         1,  2,  1,  7,  JOF_BYTE|JOF_LEFTASSOC)
+< OPDEF(JSOP_URSH,      26, "ursh",       ">>>",        1,  2,  1,  7,  JOF_BYTE|JOF_LEFTASSOC)
+< OPDEF(JSOP_ADD,       27, "add",        "+",          1,  2,  1,  8,  JOF_BYTE|JOF_LEFTASSOC)
+< OPDEF(JSOP_SUB,       28, "sub",        "-",          1,  2,  1,  8,  JOF_BYTE|JOF_LEFTASSOC)
+< OPDEF(JSOP_MUL,       29, "mul",        "*",          1,  2,  1,  9,  JOF_BYTE|JOF_LEFTASSOC)
+< OPDEF(JSOP_DIV,       30, "div",        "/",          1,  2,  1,  9,  JOF_BYTE|JOF_LEFTASSOC)
+< OPDEF(JSOP_MOD,       31, "mod",        "%",          1,  2,  1,  9,  JOF_BYTE|JOF_LEFTASSOC)
+< OPDEF(JSOP_NOT,       32, "not",        "!",          1,  1,  1, 10,  JOF_BYTE|JOF_DETECTING)
+< OPDEF(JSOP_BITNOT,    33, "bitnot",     "~",          1,  1,  1, 10,  JOF_BYTE)
+< OPDEF(JSOP_NEG,       34, "neg",        "- ",         1,  1,  1, 10,  JOF_BYTE)
+< OPDEF(JSOP_NEW,       35, js_new_str,   NULL,         3, -1,  1, 10,  JOF_UINT16)
+< OPDEF(JSOP_DELNAME,   36, "delname",    NULL,         3,  0,  1, 10,  JOF_CONST|JOF_NAME|JOF_DEL)
+< OPDEF(JSOP_DELPROP,   37, "delprop",    NULL,         3,  1,  1, 12,  JOF_CONST|JOF_PROP|JOF_DEL)
+< OPDEF(JSOP_DELELEM,   38, "delelem",    NULL,         1,  2,  1, 12,  JOF_BYTE |JOF_ELEM|JOF_DEL)
+< OPDEF(JSOP_TYPEOF,    39, js_typeof_str,NULL,         1,  1,  1, 10,  JOF_BYTE|JOF_DETECTING)
+< OPDEF(JSOP_VOID,      40, js_void_str,  NULL,         1,  1,  1, 10,  JOF_BYTE)
+< OPDEF(JSOP_INCNAME,   41, "incname",    NULL,         3,  0,  1, 10,  JOF_CONST|JOF_NAME|JOF_INC)
+< OPDEF(JSOP_INCPROP,   42, "incprop",    NULL,         3,  1,  1, 10,  JOF_CONST|JOF_PROP|JOF_INC)
+< OPDEF(JSOP_INCELEM,   43, "incelem",    NULL,         1,  2,  1, 10,  JOF_BYTE |JOF_ELEM|JOF_INC)
+< OPDEF(JSOP_DECNAME,   44, "decname",    NULL,         3,  0,  1, 10,  JOF_CONST|JOF_NAME|JOF_DEC)
+< OPDEF(JSOP_DECPROP,   45, "decprop",    NULL,         3,  1,  1, 10,  JOF_CONST|JOF_PROP|JOF_DEC)
+< OPDEF(JSOP_DECELEM,   46, "decelem",    NULL,         1,  2,  1, 10,  JOF_BYTE |JOF_ELEM|JOF_DEC)
+< OPDEF(JSOP_NAMEINC,   47, "nameinc",    NULL,         3,  0,  1, 10,  JOF_CONST|JOF_NAME|JOF_INC|JOF_POST)
+< OPDEF(JSOP_PROPINC,   48, "propinc",    NULL,         3,  1,  1, 10,  JOF_CONST|JOF_PROP|JOF_INC|JOF_POST)
+< OPDEF(JSOP_ELEMINC,   49, "eleminc",    NULL,         1,  2,  1, 10,  JOF_BYTE |JOF_ELEM|JOF_INC|JOF_POST)
+< OPDEF(JSOP_NAMEDEC,   50, "namedec",    NULL,         3,  0,  1, 10,  JOF_CONST|JOF_NAME|JOF_DEC|JOF_POST)
+< OPDEF(JSOP_PROPDEC,   51, "propdec",    NULL,         3,  1,  1, 10,  JOF_CONST|JOF_PROP|JOF_DEC|JOF_POST)
+< OPDEF(JSOP_ELEMDEC,   52, "elemdec",    NULL,         1,  2,  1, 10,  JOF_BYTE |JOF_ELEM|JOF_DEC|JOF_POST)
+< OPDEF(JSOP_GETPROP,   53, "getprop",    NULL,         3,  1,  1, 12,  JOF_CONST|JOF_PROP)
+< OPDEF(JSOP_SETPROP,   54, "setprop",    NULL,         3,  2,  1,  1,  JOF_CONST|JOF_PROP|JOF_SET|JOF_ASSIGNING|JOF_DETECTING)
+< OPDEF(JSOP_GETELEM,   55, "getelem",    NULL,         1,  2,  1, 12,  JOF_BYTE |JOF_ELEM|JOF_LEFTASSOC)
+< OPDEF(JSOP_SETELEM,   56, "setelem",    NULL,         1,  3,  1,  1,  JOF_BYTE |JOF_ELEM|JOF_SET|JOF_ASSIGNING|JOF_DETECTING)
+---
+> OPDEF(JSOP_SETCONST,  14, "setconst",   NULL,         3,  1,  1,  3,  JOF_CONST|JOF_NAME|JOF_SET|JOF_ASSIGNING)
+> OPDEF(JSOP_BITOR,     15, "bitor",      "|",          1,  2,  1,  7,  JOF_BYTE|JOF_LEFTASSOC)
+> OPDEF(JSOP_BITXOR,    16, "bitxor",     "^",          1,  2,  1,  8,  JOF_BYTE|JOF_LEFTASSOC)
+> OPDEF(JSOP_BITAND,    17, "bitand",     "&",          1,  2,  1,  9,  JOF_BYTE|JOF_LEFTASSOC)
+> OPDEF(JSOP_EQ,        18, "eq",         "==",         1,  2,  1,  10,  JOF_BYTE|JOF_LEFTASSOC|JOF_DETECTING)
+> OPDEF(JSOP_NE,        19, "ne",         "!=",         1,  2,  1,  10,  JOF_BYTE|JOF_LEFTASSOC|JOF_DETECTING)
+> OPDEF(JSOP_LT,        20, "lt",         "<",          1,  2,  1, 11,  JOF_BYTE|JOF_LEFTASSOC)
+> OPDEF(JSOP_LE,        21, "le",         "<=",         1,  2,  1, 11,  JOF_BYTE|JOF_LEFTASSOC)
+> OPDEF(JSOP_GT,        22, "gt",         ">",          1,  2,  1, 11,  JOF_BYTE|JOF_LEFTASSOC)
+> OPDEF(JSOP_GE,        23, "ge",         ">=",         1,  2,  1, 11,  JOF_BYTE|JOF_LEFTASSOC)
+> OPDEF(JSOP_LSH,       24, "lsh",        "<<",         1,  2,  1, 12,  JOF_BYTE|JOF_LEFTASSOC)
+> OPDEF(JSOP_RSH,       25, "rsh",        ">>",         1,  2,  1, 12,  JOF_BYTE|JOF_LEFTASSOC)
+> OPDEF(JSOP_URSH,      26, "ursh",       ">>>",        1,  2,  1, 12,  JOF_BYTE|JOF_LEFTASSOC)
+> OPDEF(JSOP_ADD,       27, "add",        "+",          1,  2,  1, 13,  JOF_BYTE|JOF_LEFTASSOC)
+> OPDEF(JSOP_SUB,       28, "sub",        "-",          1,  2,  1, 13,  JOF_BYTE|JOF_LEFTASSOC)
+> OPDEF(JSOP_MUL,       29, "mul",        "*",          1,  2,  1, 14,  JOF_BYTE|JOF_LEFTASSOC)
+> OPDEF(JSOP_DIV,       30, "div",        "/",          1,  2,  1, 14,  JOF_BYTE|JOF_LEFTASSOC)
+> OPDEF(JSOP_MOD,       31, "mod",        "%",          1,  2,  1, 14,  JOF_BYTE|JOF_LEFTASSOC)
+> OPDEF(JSOP_NOT,       32, "not",        "!",          1,  1,  1, 15,  JOF_BYTE|JOF_DETECTING)
+> OPDEF(JSOP_BITNOT,    33, "bitnot",     "~",          1,  1,  1, 15,  JOF_BYTE)
+> OPDEF(JSOP_NEG,       34, "neg",        "- ",         1,  1,  1, 15,  JOF_BYTE)
+> OPDEF(JSOP_NEW,       35, js_new_str,   NULL,         3, -1,  1, 15,  JOF_UINT16)
+> OPDEF(JSOP_DELNAME,   36, "delname",    NULL,         3,  0,  1, 15,  JOF_CONST|JOF_NAME|JOF_DEL)
+> OPDEF(JSOP_DELPROP,   37, "delprop",    NULL,         3,  1,  1, 17,  JOF_CONST|JOF_PROP|JOF_DEL)
+> OPDEF(JSOP_DELELEM,   38, "delelem",    NULL,         1,  2,  1, 17,  JOF_BYTE |JOF_ELEM|JOF_DEL)
+> OPDEF(JSOP_TYPEOF,    39, js_typeof_str,NULL,         1,  1,  1, 15,  JOF_BYTE|JOF_DETECTING)
+> OPDEF(JSOP_VOID,      40, js_void_str,  NULL,         1,  1,  1, 15,  JOF_BYTE)
+> OPDEF(JSOP_INCNAME,   41, "incname",    NULL,         3,  0,  1, 15,  JOF_CONST|JOF_NAME|JOF_INC)
+> OPDEF(JSOP_INCPROP,   42, "incprop",    NULL,         3,  1,  1, 15,  JOF_CONST|JOF_PROP|JOF_INC)
+> OPDEF(JSOP_INCELEM,   43, "incelem",    NULL,         1,  2,  1, 15,  JOF_BYTE |JOF_ELEM|JOF_INC)
+> OPDEF(JSOP_DECNAME,   44, "decname",    NULL,         3,  0,  1, 15,  JOF_CONST|JOF_NAME|JOF_DEC)
+> OPDEF(JSOP_DECPROP,   45, "decprop",    NULL,         3,  1,  1, 15,  JOF_CONST|JOF_PROP|JOF_DEC)
+> OPDEF(JSOP_DECELEM,   46, "decelem",    NULL,         1,  2,  1, 15,  JOF_BYTE |JOF_ELEM|JOF_DEC)
+> OPDEF(JSOP_NAMEINC,   47, "nameinc",    NULL,         3,  0,  1, 15,  JOF_CONST|JOF_NAME|JOF_INC|JOF_POST)
+> OPDEF(JSOP_PROPINC,   48, "propinc",    NULL,         3,  1,  1, 15,  JOF_CONST|JOF_PROP|JOF_INC|JOF_POST)
+> OPDEF(JSOP_ELEMINC,   49, "eleminc",    NULL,         1,  2,  1, 15,  JOF_BYTE |JOF_ELEM|JOF_INC|JOF_POST)
+> OPDEF(JSOP_NAMEDEC,   50, "namedec",    NULL,         3,  0,  1, 15,  JOF_CONST|JOF_NAME|JOF_DEC|JOF_POST)
+> OPDEF(JSOP_PROPDEC,   51, "propdec",    NULL,         3,  1,  1, 15,  JOF_CONST|JOF_PROP|JOF_DEC|JOF_POST)
+> OPDEF(JSOP_ELEMDEC,   52, "elemdec",    NULL,         1,  2,  1, 15,  JOF_BYTE |JOF_ELEM|JOF_DEC|JOF_POST)
+> OPDEF(JSOP_GETPROP,   53, "getprop",    NULL,         3,  1,  1, 17,  JOF_CONST|JOF_PROP)
+> OPDEF(JSOP_SETPROP,   54, "setprop",    NULL,         3,  2,  1,  3,  JOF_CONST|JOF_PROP|JOF_SET|JOF_ASSIGNING|JOF_DETECTING)
+> OPDEF(JSOP_GETELEM,   55, "getelem",    NULL,         1,  2,  1, 17,  JOF_BYTE |JOF_ELEM|JOF_LEFTASSOC)
+> OPDEF(JSOP_SETELEM,   56, "setelem",    NULL,         1,  3,  1,  3,  JOF_BYTE |JOF_ELEM|JOF_SET|JOF_ASSIGNING|JOF_DETECTING)
+137,148c161,172
+< OPDEF(JSOP_CALL,      58, "call",       NULL,         3, -1,  1, 12,  JOF_UINT16)
+< OPDEF(JSOP_NAME,      59, "name",       NULL,         3,  0,  1, 13,  JOF_CONST|JOF_NAME)
+< OPDEF(JSOP_NUMBER,    60, "number",     NULL,         3,  0,  1, 11,  JOF_CONST)
+< OPDEF(JSOP_STRING,    61, "string",     NULL,         3,  0,  1, 13,  JOF_CONST)
+< OPDEF(JSOP_ZERO,      62, "zero",       "0",          1,  0,  1, 11,  JOF_BYTE)
+< OPDEF(JSOP_ONE,       63, "one",        "1",          1,  0,  1, 11,  JOF_BYTE)
+< OPDEF(JSOP_NULL,      64, js_null_str,  js_null_str,  1,  0,  1, 13,  JOF_BYTE)
+< OPDEF(JSOP_THIS,      65, js_this_str,  js_this_str,  1,  0,  1, 13,  JOF_BYTE)
+< OPDEF(JSOP_FALSE,     66, js_false_str, js_false_str, 1,  0,  1, 13,  JOF_BYTE)
+< OPDEF(JSOP_TRUE,      67, js_true_str,  js_true_str,  1,  0,  1, 13,  JOF_BYTE)
+< OPDEF(JSOP_OR,        68, "or",         NULL,         3,  1,  0,  0,  JOF_JUMP|JOF_DETECTING)
+< OPDEF(JSOP_AND,       69, "and",        NULL,         3,  1,  0,  0,  JOF_JUMP|JOF_DETECTING)
+---
+> OPDEF(JSOP_CALL,      58, "call",       NULL,         3, -1,  1, 17,  JOF_UINT16)
+> OPDEF(JSOP_NAME,      59, "name",       NULL,         3,  0,  1, 18,  JOF_CONST|JOF_NAME)
+> OPDEF(JSOP_NUMBER,    60, "number",     NULL,         3,  0,  1, 16,  JOF_CONST)
+> OPDEF(JSOP_STRING,    61, "string",     NULL,         3,  0,  1, 18,  JOF_CONST)
+> OPDEF(JSOP_ZERO,      62, "zero",       "0",          1,  0,  1, 16,  JOF_BYTE)
+> OPDEF(JSOP_ONE,       63, "one",        "1",          1,  0,  1, 16,  JOF_BYTE)
+> OPDEF(JSOP_NULL,      64, js_null_str,  js_null_str,  1,  0,  1, 18,  JOF_BYTE)
+> OPDEF(JSOP_THIS,      65, js_this_str,  js_this_str,  1,  0,  1, 18,  JOF_BYTE)
+> OPDEF(JSOP_FALSE,     66, js_false_str, js_false_str, 1,  0,  1, 18,  JOF_BYTE)
+> OPDEF(JSOP_TRUE,      67, js_true_str,  js_true_str,  1,  0,  1, 18,  JOF_BYTE)
+> OPDEF(JSOP_OR,        68, "or",         NULL,         3,  1,  0,  5,  JOF_JUMP|JOF_DETECTING)
+> OPDEF(JSOP_AND,       69, "and",        NULL,         3,  1,  0,  6,  JOF_JUMP|JOF_DETECTING)
+155,156c179,180
+< OPDEF(JSOP_NEW_EQ,    72, "eq",         NULL,         1,  2,  1,  5,  JOF_BYTE|JOF_DETECTING)
+< OPDEF(JSOP_NEW_NE,    73, "ne",         NULL,         1,  2,  1,  5,  JOF_BYTE|JOF_DETECTING)
+---
+> OPDEF(JSOP_NEW_EQ,    72, "eq",         NULL,         1,  2,  1,  10,  JOF_BYTE|JOF_DETECTING)
+> OPDEF(JSOP_NEW_NE,    73, "ne",         NULL,         1,  2,  1,  10,  JOF_BYTE|JOF_DETECTING)
+169c193
+< OPDEF(JSOP_OBJECT,    80, "object",     NULL,         3,  0,  1, 13,  JOF_CONST)
+---
+> OPDEF(JSOP_OBJECT,    80, "object",     NULL,         3,  0,  1, 18,  JOF_CONST)
+172c196
+< OPDEF(JSOP_POP,       81, "pop",        NULL,         1,  1,  0,  0,  JOF_BYTE)
+---
+> OPDEF(JSOP_POP,       81, "pop",        NULL,         1,  1,  0,  2,  JOF_BYTE)
+175c199
+< OPDEF(JSOP_POS,       82, "pos",        "+ ",         1,  1,  1, 10,  JOF_BYTE)
+---
+> OPDEF(JSOP_POS,       82, "pos",        "+ ",         1,  1,  1, 15,  JOF_BYTE)
+181,184c205,208
+< OPDEF(JSOP_GETARG,    84, "getarg",     NULL,         3,  0,  1, 13,  JOF_QARG |JOF_NAME)
+< OPDEF(JSOP_SETARG,    85, "setarg",     NULL,         3,  1,  1,  1,  JOF_QARG |JOF_NAME|JOF_SET|JOF_ASSIGNING)
+< OPDEF(JSOP_GETVAR,    86, "getvar",     NULL,         3,  0,  1, 13,  JOF_QVAR |JOF_NAME)
+< OPDEF(JSOP_SETVAR,    87, "setvar",     NULL,         3,  1,  1,  1,  JOF_QVAR |JOF_NAME|JOF_SET|JOF_ASSIGNING|JOF_DETECTING)
+---
+> OPDEF(JSOP_GETARG,    84, "getarg",     NULL,         3,  0,  1, 18,  JOF_QARG |JOF_NAME)
+> OPDEF(JSOP_SETARG,    85, "setarg",     NULL,         3,  1,  1,  3,  JOF_QARG |JOF_NAME|JOF_SET|JOF_ASSIGNING)
+> OPDEF(JSOP_GETVAR,    86, "getvar",     NULL,         3,  0,  1, 18,  JOF_QVAR |JOF_NAME)
+> OPDEF(JSOP_SETVAR,    87, "setvar",     NULL,         3,  1,  1,  3,  JOF_QVAR |JOF_NAME|JOF_SET|JOF_ASSIGNING|JOF_DETECTING)
+187c211
+< OPDEF(JSOP_UINT16,    88, "uint16",     NULL,         3,  0,  1, 11,  JOF_UINT16)
+---
+> OPDEF(JSOP_UINT16,    88, "uint16",     NULL,         3,  0,  1, 16,  JOF_UINT16)
+190c214
+< OPDEF(JSOP_NEWINIT,   89, "newinit",    NULL,         1,  2,  1, 10,  JOF_BYTE)
+---
+> OPDEF(JSOP_NEWINIT,   89, "newinit",    NULL,         1,  2,  1, 15,  JOF_BYTE)
+198,205c222,229
+< OPDEF(JSOP_INCARG,    95, "incarg",     NULL,         3,  0,  1, 10,  JOF_QARG |JOF_NAME|JOF_INC)
+< OPDEF(JSOP_INCVAR,    96, "incvar",     NULL,         3,  0,  1, 10,  JOF_QVAR |JOF_NAME|JOF_INC)
+< OPDEF(JSOP_DECARG,    97, "decarg",     NULL,         3,  0,  1, 10,  JOF_QARG |JOF_NAME|JOF_DEC)
+< OPDEF(JSOP_DECVAR,    98, "decvar",     NULL,         3,  0,  1, 10,  JOF_QVAR |JOF_NAME|JOF_DEC)
+< OPDEF(JSOP_ARGINC,    99, "arginc",     NULL,         3,  0,  1, 10,  JOF_QARG |JOF_NAME|JOF_INC|JOF_POST)
+< OPDEF(JSOP_VARINC,    100,"varinc",     NULL,         3,  0,  1, 10,  JOF_QVAR |JOF_NAME|JOF_INC|JOF_POST)
+< OPDEF(JSOP_ARGDEC,    101,"argdec",     NULL,         3,  0,  1, 10,  JOF_QARG |JOF_NAME|JOF_DEC|JOF_POST)
+< OPDEF(JSOP_VARDEC,    102,"vardec",     NULL,         3,  0,  1, 10,  JOF_QVAR |JOF_NAME|JOF_DEC|JOF_POST)
+---
+> OPDEF(JSOP_INCARG,    95, "incarg",     NULL,         3,  0,  1, 15,  JOF_QARG |JOF_NAME|JOF_INC)
+> OPDEF(JSOP_INCVAR,    96, "incvar",     NULL,         3,  0,  1, 15,  JOF_QVAR |JOF_NAME|JOF_INC)
+> OPDEF(JSOP_DECARG,    97, "decarg",     NULL,         3,  0,  1, 15,  JOF_QARG |JOF_NAME|JOF_DEC)
+> OPDEF(JSOP_DECVAR,    98, "decvar",     NULL,         3,  0,  1, 15,  JOF_QVAR |JOF_NAME|JOF_DEC)
+> OPDEF(JSOP_ARGINC,    99, "arginc",     NULL,         3,  0,  1, 15,  JOF_QARG |JOF_NAME|JOF_INC|JOF_POST)
+> OPDEF(JSOP_VARINC,    100,"varinc",     NULL,         3,  0,  1, 15,  JOF_QVAR |JOF_NAME|JOF_INC|JOF_POST)
+> OPDEF(JSOP_ARGDEC,    101,"argdec",     NULL,         3,  0,  1, 15,  JOF_QARG |JOF_NAME|JOF_DEC|JOF_POST)
+> OPDEF(JSOP_VARDEC,    102,"vardec",     NULL,         3,  0,  1, 15,  JOF_QVAR |JOF_NAME|JOF_DEC|JOF_POST)
+216c240
+< OPDEF(JSOP_SETNAME,   109,"setname",    NULL,         3,  2,  1,  1,  JOF_CONST|JOF_NAME|JOF_SET|JOF_ASSIGNING|JOF_DETECTING)
+---
+> OPDEF(JSOP_SETNAME,   109,"setname",    NULL,         3,  2,  1,  3,  JOF_CONST|JOF_NAME|JOF_SET|JOF_ASSIGNING|JOF_DETECTING)
+222,223c246,247
+< OPDEF(JSOP_IN,        111,js_in_str,    js_in_str,    1,  2,  1,  6,  JOF_BYTE|JOF_LEFTASSOC)
+< OPDEF(JSOP_INSTANCEOF,112,js_instanceof_str,js_instanceof_str,1,2,1,6,JOF_BYTE|JOF_LEFTASSOC)
+---
+> OPDEF(JSOP_IN,        111,js_in_str,    js_in_str,    1,  2,  1, 11,  JOF_BYTE|JOF_LEFTASSOC)
+> OPDEF(JSOP_INSTANCEOF,112,js_instanceof_str,js_instanceof_str,1,2,1,11,JOF_BYTE|JOF_LEFTASSOC)
+248c272
+< OPDEF(JSOP_EVAL,      121,"eval",       NULL,         3, -1,  1, 12,  JOF_UINT16)
+---
+> OPDEF(JSOP_EVAL,      121,"eval",       NULL,         3, -1,  1, 17,  JOF_UINT16)
+253c277
+< OPDEF(JSOP_ENUMELEM,  122,"enumelem",   NULL,         1,  3,  0,  1,  JOF_BYTE |JOF_SET|JOF_ASSIGNING)
+---
+> OPDEF(JSOP_ENUMELEM,  122,"enumelem",   NULL,         1,  3,  0,  3,  JOF_BYTE |JOF_SET|JOF_ASSIGNING)
+271c295
+< OPDEF(JSOP_ANONFUNOBJ,  128, "anonfunobj",  NULL,     3,  0,  1, 13,  JOF_CONST)
+---
+> OPDEF(JSOP_ANONFUNOBJ,  128, "anonfunobj",  NULL,     3,  0,  1, 18,  JOF_CONST)
+274c298
+< OPDEF(JSOP_NAMEDFUNOBJ, 129, "namedfunobj", NULL,     3,  0,  1, 13,  JOF_CONST)
+---
+> OPDEF(JSOP_NAMEDFUNOBJ, 129, "namedfunobj", NULL,     3,  0,  1, 18,  JOF_CONST)
+280c304
+< OPDEF(JSOP_SETLOCALPOP, 130, "setlocalpop", NULL,     3,  1,  0,  0,  JOF_LOCAL|JOF_NAME|JOF_SET)
+---
+> OPDEF(JSOP_SETLOCALPOP, 130, "setlocalpop", NULL,     3,  1,  0,  3,  JOF_LOCAL|JOF_NAME|JOF_SET)
+286c310
+< OPDEF(JSOP_SETCALL,     132, "setcall",     NULL,     3, -1,  2, 12,  JOF_UINT16|JOF_SET|JOF_ASSIGNING)
+---
+> OPDEF(JSOP_SETCALL,     132, "setcall",     NULL,     3, -1,  2, 17,  JOF_UINT16|JOF_SET|JOF_ASSIGNING)
+306,307c330,331
+< OPDEF(JSOP_ARGSUB,      136,"argsub",     NULL,       3,  0,  1, 13,  JOF_QARG |JOF_NAME)
+< OPDEF(JSOP_ARGCNT,      137,"argcnt",     NULL,       1,  0,  1, 13,  JOF_BYTE)
+---
+> OPDEF(JSOP_ARGSUB,      136,"argsub",     NULL,       3,  0,  1, 17,  JOF_QARG |JOF_NAME)
+> OPDEF(JSOP_ARGCNT,      137,"argcnt",     NULL,       1,  0,  1, 17,  JOF_BYTE)
+318c342
+< OPDEF(JSOP_IFEQX,         140,"ifeqx",    NULL,       5,  1,  0,  0,  JOF_JUMPX|JOF_DETECTING)
+---
+> OPDEF(JSOP_IFEQX,         140,"ifeqx",    NULL,       5,  1,  0,  3,  JOF_JUMPX|JOF_DETECTING)
+320,321c344,345
+< OPDEF(JSOP_ORX,           142,"orx",      NULL,       5,  1,  0,  0,  JOF_JUMPX|JOF_DETECTING)
+< OPDEF(JSOP_ANDX,          143,"andx",     NULL,       5,  1,  0,  0,  JOF_JUMPX|JOF_DETECTING)
+---
+> OPDEF(JSOP_ORX,           142,"orx",      NULL,       5,  1,  0,  5,  JOF_JUMPX|JOF_DETECTING)
+> OPDEF(JSOP_ANDX,          143,"andx",     NULL,       5,  1,  0,  6,  JOF_JUMPX|JOF_DETECTING)
+340,345c364,369
+< OPDEF(JSOP_GETGVAR,       154,"getgvar",  NULL,       3,  0,  1, 13,  JOF_CONST|JOF_NAME)
+< OPDEF(JSOP_SETGVAR,       155,"setgvar",  NULL,       3,  1,  1,  1,  JOF_CONST|JOF_NAME|JOF_SET|JOF_ASSIGNING|JOF_DETECTING)
+< OPDEF(JSOP_INCGVAR,       156,"incgvar",  NULL,       3,  0,  1, 10,  JOF_CONST|JOF_NAME|JOF_INC)
+< OPDEF(JSOP_DECGVAR,       157,"decgvar",  NULL,       3,  0,  1, 10,  JOF_CONST|JOF_NAME|JOF_DEC)
+< OPDEF(JSOP_GVARINC,       158,"gvarinc",  NULL,       3,  0,  1, 10,  JOF_CONST|JOF_NAME|JOF_INC|JOF_POST)
+< OPDEF(JSOP_GVARDEC,       159,"gvardec",  NULL,       3,  0,  1, 10,  JOF_CONST|JOF_NAME|JOF_DEC|JOF_POST)
+---
+> OPDEF(JSOP_GETGVAR,       154,"getgvar",  NULL,       3,  0,  1, 18,  JOF_CONST|JOF_NAME)
+> OPDEF(JSOP_SETGVAR,       155,"setgvar",  NULL,       3,  1,  1,  3,  JOF_CONST|JOF_NAME|JOF_SET|JOF_ASSIGNING|JOF_DETECTING)
+> OPDEF(JSOP_INCGVAR,       156,"incgvar",  NULL,       3,  0,  1, 15,  JOF_CONST|JOF_NAME|JOF_INC)
+> OPDEF(JSOP_DECGVAR,       157,"decgvar",  NULL,       3,  0,  1, 15,  JOF_CONST|JOF_NAME|JOF_DEC)
+> OPDEF(JSOP_GVARINC,       158,"gvarinc",  NULL,       3,  0,  1, 15,  JOF_CONST|JOF_NAME|JOF_INC|JOF_POST)
+> OPDEF(JSOP_GVARDEC,       159,"gvardec",  NULL,       3,  0,  1, 15,  JOF_CONST|JOF_NAME|JOF_DEC|JOF_POST)
+348c372
+< OPDEF(JSOP_REGEXP,        160,"regexp",   NULL,       3,  0,  1, 13,  JOF_CONST)
+---
+> OPDEF(JSOP_REGEXP,        160,"regexp",   NULL,       3,  0,  1, 18,  JOF_CONST)
+352,354c376,378
+< OPDEF(JSOP_ANYNAME,       162,"anyname",    NULL,     1,  0,  1, 13,  JOF_BYTE|JOF_XMLNAME)
+< OPDEF(JSOP_QNAMEPART,     163,"qnamepart",  NULL,     3,  0,  1, 13,  JOF_CONST|JOF_XMLNAME)
+< OPDEF(JSOP_QNAMECONST,    164,"qnameconst", NULL,     3,  1,  1, 13,  JOF_CONST|JOF_XMLNAME)
+---
+> OPDEF(JSOP_ANYNAME,       162,"anyname",    NULL,     1,  0,  1, 18,  JOF_BYTE|JOF_XMLNAME)
+> OPDEF(JSOP_QNAMEPART,     163,"qnamepart",  NULL,     3,  0,  1, 18,  JOF_CONST|JOF_XMLNAME)
+> OPDEF(JSOP_QNAMECONST,    164,"qnameconst", NULL,     3,  1,  1, 18,  JOF_CONST|JOF_XMLNAME)
+356,359c380,383
+< OPDEF(JSOP_TOATTRNAME,    166,"toattrname", NULL,     1,  1,  1, 13,  JOF_BYTE|JOF_XMLNAME)
+< OPDEF(JSOP_TOATTRVAL,     167,"toattrval",  NULL,     1,  1,  1, 13,  JOF_BYTE)
+< OPDEF(JSOP_ADDATTRNAME,   168,"addattrname",NULL,     1,  2,  1,  8,  JOF_BYTE)
+< OPDEF(JSOP_ADDATTRVAL,    169,"addattrval", NULL,     1,  2,  1,  8,  JOF_BYTE)
+---
+> OPDEF(JSOP_TOATTRNAME,    166,"toattrname", NULL,     1,  1,  1, 18,  JOF_BYTE|JOF_XMLNAME)
+> OPDEF(JSOP_TOATTRVAL,     167,"toattrval",  NULL,     1,  1,  1, 18,  JOF_BYTE)
+> OPDEF(JSOP_ADDATTRNAME,   168,"addattrname",NULL,     1,  2,  1, 13,  JOF_BYTE)
+> OPDEF(JSOP_ADDATTRVAL,    169,"addattrval", NULL,     1,  2,  1, 13,  JOF_BYTE)
+361,363c385,387
+< OPDEF(JSOP_SETXMLNAME,    171,"setxmlname", NULL,     1,  3,  1,  1,  JOF_BYTE|JOF_XMLNAME|JOF_SET|JOF_ASSIGNING|JOF_DETECTING)
+< OPDEF(JSOP_XMLNAME,       172,"xmlname",    NULL,     1,  1,  1, 13,  JOF_BYTE|JOF_XMLNAME)
+< OPDEF(JSOP_DESCENDANTS,   173,"descendants",NULL,     1,  2,  1, 12,  JOF_BYTE)
+---
+> OPDEF(JSOP_SETXMLNAME,    171,"setxmlname", NULL,     1,  3,  1,  3,  JOF_BYTE|JOF_XMLNAME|JOF_SET|JOF_ASSIGNING|JOF_DETECTING)
+> OPDEF(JSOP_XMLNAME,       172,"xmlname",    NULL,     1,  1,  1, 18,  JOF_BYTE|JOF_XMLNAME)
+> OPDEF(JSOP_DESCENDANTS,   173,"descendants",NULL,     1,  2,  1, 17,  JOF_BYTE)
+365,367c389,391
+< OPDEF(JSOP_ENDFILTER,     175,"endfilter",  NULL,     1,  1,  0, 12,  JOF_BYTE)
+< OPDEF(JSOP_TOXML,         176,"toxml",      NULL,     1,  1,  1, 13,  JOF_BYTE)
+< OPDEF(JSOP_TOXMLLIST,     177,"toxmllist",  NULL,     1,  1,  1, 13,  JOF_BYTE)
+---
+> OPDEF(JSOP_ENDFILTER,     175,"endfilter",  NULL,     1,  1,  0, 17,  JOF_BYTE)
+> OPDEF(JSOP_TOXML,         176,"toxml",      NULL,     1,  1,  1, 18,  JOF_BYTE)
+> OPDEF(JSOP_TOXMLLIST,     177,"toxmllist",  NULL,     1,  1,  1, 18,  JOF_BYTE)
+370,375c394,399
+< OPDEF(JSOP_XMLOBJECT,     180,"xmlobject",  NULL,     3,  0,  1, 13,  JOF_CONST)
+< OPDEF(JSOP_XMLCDATA,      181,"xmlcdata",   NULL,     3,  0,  1, 13,  JOF_CONST)
+< OPDEF(JSOP_XMLCOMMENT,    182,"xmlcomment", NULL,     3,  0,  1, 13,  JOF_CONST)
+< OPDEF(JSOP_XMLPI,         183,"xmlpi",      NULL,     3,  1,  1, 13,  JOF_CONST)
+< OPDEF(JSOP_GETMETHOD,     184,"getmethod",  NULL,     3,  1,  1, 12,  JOF_CONST|JOF_PROP)
+< OPDEF(JSOP_GETFUNNS,      185,"getfunns",   NULL,     1,  0,  1, 13,  JOF_BYTE)
+---
+> OPDEF(JSOP_XMLOBJECT,     180,"xmlobject",  NULL,     3,  0,  1, 18,  JOF_CONST)
+> OPDEF(JSOP_XMLCDATA,      181,"xmlcdata",   NULL,     3,  0,  1, 18,  JOF_CONST)
+> OPDEF(JSOP_XMLCOMMENT,    182,"xmlcomment", NULL,     3,  0,  1, 18,  JOF_CONST)
+> OPDEF(JSOP_XMLPI,         183,"xmlpi",      NULL,     3,  1,  1, 18,  JOF_CONST)
+> OPDEF(JSOP_GETMETHOD,     184,"getmethod",  NULL,     3,  1,  1, 17,  JOF_CONST|JOF_PROP)
+> OPDEF(JSOP_GETFUNNS,      185,"getfunns",   NULL,     1,  0,  1, 18,  JOF_BYTE)
+377c401
+< OPDEF(JSOP_DELDESC,       187,"deldesc",    NULL,     1,  2,  1, 12,  JOF_BYTE |JOF_ELEM|JOF_DEL)
+---
+> OPDEF(JSOP_DELDESC,       187,"deldesc",    NULL,     1,  2,  1, 17,  JOF_BYTE |JOF_ELEM|JOF_DEL)
+385,386c409,410
+< OPDEF(JSOP_UINT24,        188,"uint24",     NULL,     4,  0,  1, 11,  JOF_UINT24)
+< OPDEF(JSOP_LITERAL,       189,"literal",    NULL,     4,  0,  1, 13,  JOF_UINT24)
+---
+> OPDEF(JSOP_UINT24,        188,"uint24",     NULL,     4,  0,  1, 16,  JOF_UINT24)
+> OPDEF(JSOP_LITERAL,       189,"literal",    NULL,     4,  0,  1, 18,  JOF_UINT24)
+388c412
+< OPDEF(JSOP_LITOPX,        191,"litopx",     NULL,     5,  0,  0, 13,  JOF_LITOPX)
+---
+> OPDEF(JSOP_LITOPX,        191,"litopx",     NULL,     5,  0,  0,  0,  JOF_LITOPX)
+395c419
+< OPDEF(JSOP_SETMETHOD,     194,"setmethod",   NULL,    3,  2,  1,  1,  JOF_CONST|JOF_PROP)
+---
+> OPDEF(JSOP_SETMETHOD,     194,"setmethod",   NULL,    3,  2,  1,  3,  JOF_CONST|JOF_PROP|JOF_SET|JOF_ASSIGNING|JOF_DETECTING)
+407,408c431,432
+< OPDEF(JSOP_GETXPROP,      196,"getxprop",    NULL,    3,  1,  1, 12,  JOF_CONST|JOF_PROP)
+< OPDEF(JSOP_GETXELEM,      197,"getxelem",    NULL,    1,  2,  1, 12,  JOF_BYTE |JOF_ELEM|JOF_LEFTASSOC)
+---
+> OPDEF(JSOP_GETXPROP,      196,"getxprop",    NULL,    3,  1,  1, 17,  JOF_CONST|JOF_PROP)
+> OPDEF(JSOP_GETXELEM,      197,"getxelem",    NULL,    1,  2,  1, 17,  JOF_BYTE |JOF_ELEM|JOF_LEFTASSOC)
+413c437
+< OPDEF(JSOP_TYPEOFEXPR,    198,js_typeof_str, NULL,    1,  1,  1, 10,  JOF_BYTE|JOF_DETECTING)
+---
+> OPDEF(JSOP_TYPEOFEXPR,    198,js_typeof_str, NULL,    1,  1,  1, 15,  JOF_BYTE|JOF_DETECTING)
+420,425c444,449
+< OPDEF(JSOP_GETLOCAL,      201,"getlocal",    NULL,    3,  0,  1, 13,  JOF_LOCAL|JOF_NAME)
+< OPDEF(JSOP_SETLOCAL,      202,"setlocal",    NULL,    3,  1,  1,  1,  JOF_LOCAL|JOF_NAME|JOF_SET)
+< OPDEF(JSOP_INCLOCAL,      203,"inclocal",    NULL,    3,  0,  1, 10,  JOF_LOCAL|JOF_NAME|JOF_INC)
+< OPDEF(JSOP_DECLOCAL,      204,"declocal",    NULL,    3,  0,  1, 10,  JOF_LOCAL|JOF_NAME|JOF_DEC)
+< OPDEF(JSOP_LOCALINC,      205,"localinc",    NULL,    3,  0,  1, 10,  JOF_LOCAL|JOF_NAME|JOF_INC|JOF_POST)
+< OPDEF(JSOP_LOCALDEC,      206,"localdec",    NULL,    3,  0,  1, 10,  JOF_LOCAL|JOF_NAME|JOF_DEC|JOF_POST)
+---
+> OPDEF(JSOP_GETLOCAL,      201,"getlocal",    NULL,    3,  0,  1, 18,  JOF_LOCAL|JOF_NAME)
+> OPDEF(JSOP_SETLOCAL,      202,"setlocal",    NULL,    3,  1,  1,  3,  JOF_LOCAL|JOF_NAME|JOF_SET)
+> OPDEF(JSOP_INCLOCAL,      203,"inclocal",    NULL,    3,  0,  1, 15,  JOF_LOCAL|JOF_NAME|JOF_INC)
+> OPDEF(JSOP_DECLOCAL,      204,"declocal",    NULL,    3,  0,  1, 15,  JOF_LOCAL|JOF_NAME|JOF_DEC)
+> OPDEF(JSOP_LOCALINC,      205,"localinc",    NULL,    3,  0,  1, 15,  JOF_LOCAL|JOF_NAME|JOF_INC|JOF_POST)
+> OPDEF(JSOP_LOCALDEC,      206,"localdec",    NULL,    3,  0,  1, 15,  JOF_LOCAL|JOF_NAME|JOF_DEC|JOF_POST)
+442c466
+< OPDEF(JSOP_ENUMCONSTELEM, 214,"enumconstelem",NULL,   1,  3,  0,  1,  JOF_BYTE|JOF_SET|JOF_ASSIGNING)
+---
+> OPDEF(JSOP_ENUMCONSTELEM, 214,"enumconstelem",NULL,   1,  3,  0,  3,  JOF_BYTE|JOF_SET|JOF_ASSIGNING)
+445,446c469,470
+<  * LEAVEBLOCKEXPR's precedence is 1 to help the decompiler with new let (...)
+<  * expressions. See bug 349499.
+---
+>  * Variant of JSOP_LEAVEBLOCK has a result on the stack above the locals,
+>  * which must be moved down when the block pops.
+diff -r 1022/src/jsparse.c 1023/src/jsparse.c
+2737a2738
+>                     tt = TOK_LEXICALSCOPE;

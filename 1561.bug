@@ -1,0 +1,31 @@
+diff -r 1560/src/config/CVS/Tag 1561/src/config/CVS/Tag
+1c1
+< D2007.01.17.20.27.47
+---
+> D2007.01.18.07.56.12
+diff -r 1560/src/CVS/Entries 1561/src/CVS/Entries
+67a68
+> /jsdbgapi.c/3.86/Mon Nov 17 07:12:41 2014//D2007.01.18.07.56.12
+117d117
+< /jsdbgapi.c/3.85/Mon Nov 17 07:12:51 2014//D2007.01.17.20.27.47
+diff -r 1560/src/CVS/Tag 1561/src/CVS/Tag
+1c1
+< D2007.01.17.20.27.47
+---
+> D2007.01.18.07.56.12
+diff -r 1560/src/editline/CVS/Tag 1561/src/editline/CVS/Tag
+1c1
+< D2007.01.17.20.27.47
+---
+> D2007.01.18.07.56.12
+diff -r 1560/src/fdlibm/CVS/Tag 1561/src/fdlibm/CVS/Tag
+1c1
+< D2007.01.17.20.27.47
+---
+> D2007.01.18.07.56.12
+diff -r 1560/src/jsdbgapi.c 1561/src/jsdbgapi.c
+565,566c565
+<     JS_ASSERT(0);       /* XXX can't happen */
+<     return JS_FALSE;
+---
+>     return JS_TRUE;

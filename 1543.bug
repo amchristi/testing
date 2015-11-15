@@ -1,0 +1,169 @@
+diff -r 1542/src/config/CVS/Tag 1543/src/config/CVS/Tag
+1c1
+< D2007.01.12.20.10.36
+---
+> D2007.01.13.04.41.11
+diff -r 1542/src/CVS/Entries 1543/src/CVS/Entries
+60a61
+> /jsapi.c/3.306/Thu Nov  6 23:13:51 2014//D2007.01.13.04.41.11
+66a68,69
+> /jscntxt.c/3.99/Thu Nov  6 23:13:51 2014//D2007.01.13.04.41.11
+> /jscntxt.h/3.138/Thu Nov  6 23:13:51 2014//D2007.01.13.04.41.11
+76a80
+> /jsexn.c/3.81/Thu Nov  6 23:13:52 2014//D2007.01.13.04.41.11
+114,117d117
+< /jsapi.c/3.305/Thu Nov  6 23:13:54 2014//D2007.01.12.20.10.36
+< /jscntxt.c/3.98/Thu Nov  6 23:13:54 2014//D2007.01.12.20.10.36
+< /jscntxt.h/3.137/Thu Nov  6 23:13:54 2014//D2007.01.12.20.10.36
+< /jsexn.c/3.80/Thu Nov  6 23:13:54 2014//D2007.01.12.20.10.36
+diff -r 1542/src/CVS/Tag 1543/src/CVS/Tag
+1c1
+< D2007.01.12.20.10.36
+---
+> D2007.01.13.04.41.11
+diff -r 1542/src/editline/CVS/Tag 1543/src/editline/CVS/Tag
+1c1
+< D2007.01.12.20.10.36
+---
+> D2007.01.13.04.41.11
+diff -r 1542/src/fdlibm/CVS/Tag 1543/src/fdlibm/CVS/Tag
+1c1
+< D2007.01.12.20.10.36
+---
+> D2007.01.13.04.41.11
+diff -r 1542/src/jsapi.c 1543/src/jsapi.c
+4867c4867
+<      * Set cx->creatingException to suppress the standard error-to-exception
+---
+>      * Set cx->generatingError to suppress the standard error-to-exception
+4869c4869
+<      * cx->creatingException flag was added to suppress recursive divergence
+---
+>      * cx->generatingError flag was added to suppress recursive divergence
+4872,4873c4872,4873
+<     save = cx->creatingException;
+<     cx->creatingException = JS_TRUE;
+---
+>     save = cx->generatingError;
+>     cx->generatingError = JS_TRUE;
+4875c4875
+<     cx->creatingException = save;
+---
+>     cx->generatingError = save;
+diff -r 1542/src/jscntxt.c 1543/src/jscntxt.c
+81,82c81,86
+<     while (!JS_CLIST_IS_EMPTY(&thread->contextList))
+<         JS_REMOVE_AND_INIT_LINK(thread->contextList.next);
+---
+>     while (!JS_CLIST_IS_EMPTY(&thread->contextList)) {
+>         /* NB: must use a temporary, as the macro evaluates its actual twice. */
+>         JSCList *link = thread->contextList.next;
+> 
+>         JS_REMOVE_AND_INIT_LINK(link);
+>     }
+diff -r 1542/src/jscntxt.h 1543/src/jscntxt.h
+746,747c746,747
+<      * True if creating an exception object, to prevent runaway recursion.
+<      * NB: creatingException packs with rval2set, #if JS_HAS_LVALUE_RETURN;
+---
+>      * True if generating an error, to prevent runaway recursion.
+>      * NB: generatingError packs with rval2set, #if JS_HAS_LVALUE_RETURN;
+750c750
+<     JSPackedBool        creatingException;
+---
+>     JSPackedBool        generatingError;
+754c754
+<      * NB: throwing packs with creatingException and rval2set, above.
+---
+>      * NB: throwing packs with generatingError and rval2set, above.
+diff -r 1542/src/jsexn.c 1543/src/jsexn.c
+731d730
+<     JSBool ok;
+736,739d734
+<     if (cx->creatingException)
+<         return JS_FALSE;
+<     cx->creatingException = JS_TRUE;
+< 
+748c743
+<         ok = OBJ_GET_PROPERTY(cx, JSVAL_TO_OBJECT(argv[-2]),
+---
+>         if (!OBJ_GET_PROPERTY(cx, JSVAL_TO_OBJECT(argv[-2]),
+751,753c746,747
+<                               rval);
+<         if (!ok)
+<             goto out;
+---
+>                               rval))
+>             return JS_FALSE;
+755,758c749,750
+<         if (!obj) {
+<             ok = JS_FALSE;
+<             goto out;
+<         }
+---
+>         if (!obj)
+>             return JS_FALSE;
+772,775c764,765
+<         if (!message) {
+<             ok = JS_FALSE;
+<             goto out;
+<         }
+---
+>         if (!message)
+>             return JS_FALSE;
+784,787c774,775
+<         if (!filename) {
+<             ok = JS_FALSE;
+<             goto out;
+<         }
+---
+>         if (!filename)
+>             return JS_FALSE;
+794,797c782,783
+<             if (!filename) {
+<                 ok = JS_FALSE;
+<                 goto out;
+<             }
+---
+>             if (!filename)
+>                 return JS_FALSE;
+805,807c791,792
+<         ok = js_ValueToECMAUint32(cx, argv[2], &lineno);
+<         if (!ok)
+<             goto out;
+---
+>         if (!js_ValueToECMAUint32(cx, argv[2], &lineno))
+>             return JS_FALSE;
+814,819c799,800
+<     ok = (OBJ_GET_CLASS(cx, obj) != &js_ErrorClass) ||
+<          InitExnPrivate(cx, obj, message, filename, lineno, NULL);
+< 
+<   out:
+<     cx->creatingException = JS_FALSE;
+<     return ok;
+---
+>     return (OBJ_GET_CLASS(cx, obj) != &js_ErrorClass) ||
+>             InitExnPrivate(cx, obj, message, filename, lineno, NULL);
+1189,1193c1170,1173
+<      * Prevent runaway recursion, just as the Exception native constructor
+<      * must do, via cx->creatingException.  If an out-of-memory error occurs,
+<      * no exception object will be created, but we don't assume that OOM is
+<      * the only kind of error that subroutines of this function called below
+<      * might raise.
+---
+>      * Prevent runaway recursion, via cx->generatingError.  If an out-of-memory
+>      * error occurs, no exception object will be created, but we don't assume
+>      * that OOM is the only kind of error that subroutines of this function
+>      * called below might raise.
+1195c1175
+<     if (cx->creatingException)
+---
+>     if (cx->generatingError)
+1199c1179
+<     cx->creatingException = JS_TRUE;
+---
+>     cx->generatingError = JS_TRUE;
+1249c1229
+<     cx->creatingException = JS_FALSE;
+---
+>     cx->generatingError = JS_FALSE;

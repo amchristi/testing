@@ -1,0 +1,4158 @@
+diff -r 490/src/config/CVS/Tag 491/src/config/CVS/Tag
+1c1
+< D2006.05.19.17.25.36
+---
+> D2006.05.21.05.27.28
+diff -r 490/src/CVS/Entries 491/src/CVS/Entries
+36a37,38
+> /Makefile.in/3.106/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+> /Makefile.ref/3.40/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+38a41
+> /js.c/3.115/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+39a43,45
+> /js.msg/3.56/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+> /jsapi.c/3.264/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+> /jsapi.h/3.122/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+43a50,51
+> /jsatom.c/3.75/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+> /jsatom.h/3.46/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+45a54,55
+> /jscntxt.c/3.84/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+> /jscntxt.h/3.100/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+46a57
+> /jsconfig.h/3.41/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+47a59
+> /jsdbgapi.c/3.64/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+50a63,64
+> /jsemit.c/3.155/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+> /jsemit.h/3.44/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+53a68,70
+> /jsfun.c/3.157/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+> /jsfun.h/3.27/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+> /jsgc.c/3.138/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+56a74,78
+> /jsinterp.c/3.242/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+> /jsinterp.h/3.50/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+> /jsiter.c/3.2/Sat May 20 22:27:28 2006//D2006.05.21.05.27.28
+> /jsiter.h/3.2/Sat May 20 22:27:28 2006//D2006.05.21.05.27.28
+> /jskeyword.tbl/3.6/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+62a85,92
+> /jsobj.c/3.259/Result of merge//D2006.05.21.05.27.28
+> /jsobj.h/3.46/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+> /jsopcode.c/3.122/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+> /jsopcode.h/3.30/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+> /jsopcode.tbl/3.52/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+> /jsosdep.h/3.21/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+> /jsparse.c/3.171/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+> /jsparse.h/3.28/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+64a95
+> /jsproto.tbl/3.3/Sat May 20 22:27:28 2006//D2006.05.21.05.27.28
+65a97,98
+> /jspubtd.h/3.58/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+> /jsregexp.c/3.119/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+66a100,101
+> /jsscan.c/3.101/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+> /jsscan.h/3.45/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+68a104
+> /jsscript.c/3.99/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+69a106,107
+> /jsstr.c/3.129/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+> /jsstr.h/3.31/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+74a113
+> /jsxml.c/3.107/Mon Nov 17 04:55:40 2014//D2006.05.21.05.27.28
+78,116d116
+< /Makefile.in/3.105/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /Makefile.ref/3.39/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /js.c/3.114/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /js.msg/3.55/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsapi.c/3.263/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsapi.h/3.121/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsatom.c/3.74/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsatom.h/3.45/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jscntxt.c/3.83/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jscntxt.h/3.99/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsconfig.h/3.40/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsdbgapi.c/3.63/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsemit.c/3.154/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsemit.h/3.43/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsfun.c/3.156/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsfun.h/3.26/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsgc.c/3.137/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsinterp.c/3.241/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsinterp.h/3.49/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsiter.c/3.1/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsiter.h/3.1/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jskeyword.tbl/3.5/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsobj.c/3.258/Result of merge//D2006.05.19.17.25.36
+< /jsobj.h/3.45/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsopcode.c/3.121/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsopcode.h/3.29/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsopcode.tbl/3.51/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsosdep.h/3.20/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsparse.c/3.170/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsparse.h/3.27/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsproto.tbl/3.2/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jspubtd.h/3.57/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsregexp.c/3.118/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsscan.c/3.100/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsscan.h/3.44/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsscript.c/3.98/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsstr.c/3.128/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsstr.h/3.30/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+< /jsxml.c/3.106/Mon Nov 17 04:55:44 2014//D2006.05.19.17.25.36
+diff -r 490/src/CVS/Tag 491/src/CVS/Tag
+1c1
+< D2006.05.19.17.25.36
+---
+> D2006.05.21.05.27.28
+diff -r 490/src/editline/CVS/Tag 491/src/editline/CVS/Tag
+1c1
+< D2006.05.19.17.25.36
+---
+> D2006.05.21.05.27.28
+diff -r 490/src/fdlibm/CVS/Tag 491/src/fdlibm/CVS/Tag
+1c1
+< D2006.05.19.17.25.36
+---
+> D2006.05.21.05.27.28
+diff -r 490/src/jsapi.c 491/src/jsapi.c
+88a89,92
+> #if JS_HAS_GENERATORS
+> #include "jsiter.h"
+> #endif
+> 
+1087,1105d1090
+< static JSBool
+< AlreadyHasOwnProperty(JSContext *cx, JSObject *obj, JSAtom *atom, jsval *vp)
+< {
+<     JSScopeProperty *sprop;
+<     JSScope *scope;
+< 
+<     JS_ASSERT(OBJ_IS_NATIVE(obj));
+<     JS_LOCK_OBJ(cx, obj);
+<     scope = OBJ_SCOPE(obj);
+<     sprop = SCOPE_GET_PROPERTY(scope, ATOM_TO_JSID(atom));
+<     if (vp) {
+<         *vp = (sprop && SPROP_HAS_VALID_SLOT(sprop, scope))
+<               ? LOCKED_OBJ_GET_SLOT(obj, sprop->slot)
+<               : JSVAL_VOID;
+<     }
+<     JS_UNLOCK_SCOPE(cx, scope);
+<     return sprop != NULL;
+< }
+< 
+1109,1147d1093
+<     JSContext *ocx;
+<     JSAtom **classAtoms;
+<     JSProtoKey key;
+<     jsval v;
+< 
+<     if (!obj) {
+<         /* Clearing cx->globalObject: clear cached class object refs too. */
+<         memset(cx->classObjects, 0, sizeof cx->classObjects);
+<     } else {
+<         /*
+<          * In case someone initialized obj's standard classes on another
+<          * context, then handed obj off to cx, try to find that other context
+<          * and copy its class objects into cx's.
+<          */
+<         ocx = js_FindContextForGlobal(cx, obj);
+<         if (ocx) {
+<             memcpy(cx->classObjects, ocx->classObjects,
+<                    sizeof cx->classObjects);
+<         } else {
+<             /*
+<              * Darn, can't find another context in which obj's standard classes,
+<              * or at least some of them, were initialized.  Try to make obj and
+<              * cx agree on the state of the standard classes.
+<              */
+<             memset(cx->classObjects, 0, sizeof cx->classObjects);
+<             classAtoms = cx->runtime->atomState.classAtoms;
+<             for (key = JSProto_Null; key < JSProto_LIMIT; key++) {
+<                 if (AlreadyHasOwnProperty(cx, obj, classAtoms[key], &v) &&
+<                     !JSVAL_IS_PRIMITIVE(v)) {
+<                     cx->classObjects[key] = JSVAL_TO_OBJECT(v);
+<                 }
+<             }
+<         }
+<     }
+< 
+<     /*
+<      * Do this after js_FindContextForGlobal, so it can assert that obj is not
+<      * yet cx->globalObject.
+<      */
+1272a1219,1221
+> #if JS_HAS_GENERATORS
+>            js_InitIteratorClasses(cx, obj) &&
+> #endif
+1309a1259,1261
+> #if JS_HAS_GENERATORS
+>     {js_InitIteratorClasses,            CLASS_ATOM_OFFSET(StopIteration)},
+> #endif
+1386a1339,1342
+> #if JS_HAS_GENERATORS
+>     {js_InitIteratorClasses,    EAGERLY_PINNED_CLASS_ATOM(Iterator)},
+> #endif
+> 
+1494a1451,1464
+> static JSBool
+> AlreadyHasOwnProperty(JSContext *cx, JSObject *obj, JSAtom *atom)
+> {
+>     JSScopeProperty *sprop;
+>     JSScope *scope;
+> 
+>     JS_ASSERT(OBJ_IS_NATIVE(obj));
+>     JS_LOCK_OBJ(cx, obj);
+>     scope = OBJ_SCOPE(obj);
+>     sprop = SCOPE_GET_PROPERTY(scope, ATOM_TO_JSID(atom));
+>     JS_UNLOCK_SCOPE(cx, scope);
+>     return sprop != NULL;
+> }
+> 
+1507c1477
+<     if (!AlreadyHasOwnProperty(cx, obj, atom, NULL) &&
+---
+>     if (!AlreadyHasOwnProperty(cx, obj, atom) &&
+1516c1486
+<         if (!AlreadyHasOwnProperty(cx, obj, atom, NULL) &&
+---
+>         if (!AlreadyHasOwnProperty(cx, obj, atom) &&
+1547c1517
+<     *foundp = AlreadyHasOwnProperty(cx, obj, atom, NULL);
+---
+>     *foundp = AlreadyHasOwnProperty(cx, obj, atom);
+1628c1598,1605
+<     return cx->fp ? cx->fp->scopeChain : NULL;
+---
+>     JSStackFrame *fp;
+> 
+>     fp = cx->fp;
+>     if (!fp) {
+>         JS_ReportErrorNumber(cx, js_GetErrorMessage, NULL, JSMSG_INACTIVE);
+>         return NULL;
+>     }
+>     return js_GetScopeChain(cx, fp);
+2174c2151
+<     JS_PUSH_SINGLE_TEMP_ROOT(cx, OBJECT_TO_JSVAL(proto), &tvr);
+---
+>     JS_PUSH_SINGLE_TEMP_ROOT(cx, proto, &tvr);
+2179c2156,2158
+<          * class is anonymous, i.e. for internal use only.
+---
+>          * class (a) is anonymous, i.e. for internal use only; (b) the class
+>          * of obj (the global object) is has a reserved slot indexed by key;
+>          * and (c) key is not the null key.
+2181c2160,2162
+<         if (clasp->flags & JSCLASS_IS_ANONYMOUS) {
+---
+>         if ((clasp->flags & JSCLASS_IS_ANONYMOUS) &&
+>             (OBJ_GET_CLASS(cx, obj)->flags & JSCLASS_IS_GLOBAL) &&
+>             key != JSProto_Null) {
+2186c2167,2171
+<                                         NULL, NULL, 0, NULL);
+---
+>                                         NULL, NULL,
+>                                         (clasp->flags & JSCLASS_IS_ANONYMOUS)
+>                                         ? JSPROP_READONLY | JSPROP_PERMANENT
+>                                         : 0,
+>                                         NULL);
+2189a2175
+> 
+2242,2243c2228,2229
+<     if (key != JSProto_Null)
+<         js_SetClassObject(cx, obj, key, ctor);
+---
+>     if (key != JSProto_Null && !js_SetClassObject(cx, obj, key, ctor))
+>         goto bad;
+3213,3214d3198
+<     if (cx->globalObject == obj)
+<         memset(cx->classObjects, 0, sizeof cx->classObjects);
+4374c4358
+<     cx->rval2set = JS_TRUE;
+---
+>     cx->rval2set = JS_RVAL2_VALUE;
+diff -r 490/src/jsapi.h 491/src/jsapi.h
+965a966,982
+> #define JSCLASS_IS_GLOBAL               (1<<(JSCLASS_HIGH_FLAGS_SHIFT+2))
+> 
+> /*
+>  * ECMA-262 requires that most constructors used internally create objects
+>  * with "the original Foo.prototype value" as their [[Prototype]] (__proto__)
+>  * member initial value.  The "original ... value" verbiage is there because
+>  * in ECMA-262, global properties naming class objects are read/write and
+>  * deleteable, for the most part.
+>  *
+>  * Implementing this efficiently requires that global objects have classes
+>  * with the following flags.  Failure to use JSCLASS_GLOBAL_FLAGS won't break
+>  * anything except the ECMA-262 "original prototype value" behavior, which was
+>  * broken for years in SpiderMonkey.  In other words, without these flags you
+>  * get backward compatibility.
+>  */
+> #define JSCLASS_GLOBAL_FLAGS \
+>     (JSCLASS_IS_GLOBAL | JSCLASS_HAS_RESERVED_SLOTS(JSProto_LIMIT))
+diff -r 490/src/jsatom.c 491/src/jsatom.c
+89c89
+< #define JS_PROTO(name,init) const char js_##name##_str[] = #name;
+---
+> #define JS_PROTO(name,code,init) const char js_##name##_str[] = #name;
+94c94
+< #define JS_PROTO(name,init) js_##name##_str,
+---
+> #define JS_PROTO(name,code,init) js_##name##_str,
+112a113
+> const char js_iterator_str[]        = "__iterator__";
+114a116
+> const char js_next_str[]            = "next";
+312a315
+>     FROB(iteratorAtom,            js_iterator_str);
+314a318
+>     FROB(nextAtom,                js_next_str);
+diff -r 490/src/jsatom.h 491/src/jsatom.h
+181a182
+>     JSAtom              *iteratorAtom;
+184a186
+>     JSAtom              *nextAtom;
+253c255
+< #define JS_PROTO(name,init) extern const char js_##name##_str[];
+---
+> #define JS_PROTO(name,code,init) extern const char js_##name##_str[];
+257,272d258
+< extern const char   js_Arguments_str[];
+< extern const char   js_Array_str[];
+< extern const char   js_Boolean_str[];
+< extern const char   js_Call_str[];
+< extern const char   js_Date_str[];
+< extern const char   js_Function_str[];
+< extern const char   js_Math_str[];
+< extern const char   js_Namespace_str[];
+< extern const char   js_Number_str[];
+< extern const char   js_Object_str[];
+< extern const char   js_QName_str[];
+< extern const char   js_RegExp_str[];
+< extern const char   js_Script_str[];
+< extern const char   js_String_str[];
+< extern const char   js_XML_str[];
+< extern const char   js_File_str[];
+287a274
+> extern const char   js_iterator_str[];
+290a278
+> extern const char   js_next_str[];
+diff -r 490/src/js.c 491/src/js.c
+2302c2302
+<     "global", JSCLASS_NEW_RESOLVE,
+---
+>     "global", JSCLASS_NEW_RESOLVE | JSCLASS_GLOBAL_FLAGS,
+diff -r 490/src/jscntxt.c 491/src/jscntxt.c
+770,892d769
+< JS_STATIC_DLL_CALLBACK(JSObject *)
+< js_InitNullClass(JSContext *cx, JSObject *obj)
+< {
+<     JS_ASSERT(0);
+<     return NULL;
+< }
+< 
+< #define JS_PROTO(name,init) extern JSObject *init(JSContext *, JSObject *);
+< #include "jsproto.tbl"
+< #undef JS_PROTO
+< 
+< static JSObjectOp lazy_prototype_init[JSProto_LIMIT] = {
+< #define JS_PROTO(name,init) init,
+< #include "jsproto.tbl"
+< #undef JS_PROTO
+< };
+< 
+< /*
+<  * We optimize prototype caching by storing strong references to standard
+<  * object prototypes in each cx whose globalObject is populated (eagerly or
+<  * lazily) with the standard class constructors and global functions.
+<  *
+<  * But since in anything like a browser embedding, an object statically
+<  * scoped by one global object may be accessed by script running on another
+<  * global object's context, we must not dynamically scope cached prototypes.
+<  * This may require searching all contexts for a given thread, in the event
+<  * that a given execution context does not have a global object equal to the
+<  * global of a given target object.
+<  */
+< JSContext *
+< js_FindContextForGlobal(JSContext *cx, JSObject *obj)
+< {
+<     JSCList *head, *link;
+<     JSContext *ocx;
+< 
+<     JS_ASSERT(cx->globalObject != obj);
+< #ifdef JS_THREADSAFE
+<     head = &cx->thread->contextList;
+< #else
+<     head = &cx->runtime->contextList;
+< #endif
+<     for (link = head->next; link != head; link = link->next) {
+< #ifdef JS_THREADSAFE
+<         ocx = CX_FROM_THREAD_LINKS(link);
+<         JS_ASSERT(ocx->thread == cx->thread);
+< #else
+<         ocx = (JSContext *) link;
+< #endif
+<         if (ocx != cx && ocx->globalObject == obj)
+<             return ocx;
+<     }
+<     return NULL;
+< }
+< 
+< JSBool
+< js_GetClassObject(JSContext *cx, JSObject *obj, JSProtoKey key,
+<                   JSObject **objp)
+< {
+<     JSBool ok;
+<     JSResolvingKey rkey;
+<     JSResolvingEntry *rentry;
+<     uint32 generation;
+<     JSObject *tmp, *cobj;
+<     JSContext *ocx;
+<     JSObjectOp init;
+< 
+<     rkey.obj = obj;
+<     rkey.id = ATOM_TO_JSID(cx->runtime->atomState.classAtoms[key]);
+<     ok = js_StartResolving(cx, &rkey, JSRESFLAG_LOOKUP, &rentry);
+<     if (!ok)
+<         return JS_FALSE;
+<     if (!rentry) {
+<         /* Already caching key in obj -- suppress recursion. */
+<         *objp = NULL;
+<         return JS_TRUE;
+<     }
+<     generation = cx->resolvingTable->generation;
+< 
+<     while ((tmp = OBJ_GET_PARENT(cx, obj)) != NULL)
+<         obj = tmp;
+<     if (obj == cx->globalObject) {
+<         ocx = cx;
+<     } else {
+<         ocx = js_FindContextForGlobal(cx, obj);
+<         if (!ocx) {
+<             cobj = NULL;
+<             goto out;
+<         }
+<     }
+< 
+<     cobj = ocx->classObjects[key];
+<     if (!cobj) {
+<         init = lazy_prototype_init[key];
+<         if (init) {
+<             if (!init(cx, obj))
+<                 ok = JS_FALSE;
+<             cobj = ocx->classObjects[key];
+<         }
+<     }
+< 
+< out:
+<     *objp = cobj;
+<     js_StopResolving(cx, &rkey, JSRESFLAG_LOOKUP, rentry, generation);
+<     return ok;
+< }
+< 
+< void
+< js_SetClassObject(JSContext *cx, JSObject *obj, JSProtoKey key,
+<                   JSObject *value)
+< {
+<     JSContext *ocx;
+< 
+<     JS_ASSERT(!OBJ_GET_PARENT(cx, obj));
+<     if (obj == cx->globalObject) {
+<         ocx = cx;
+<     } else {
+<         ocx = js_FindContextForGlobal(cx, obj);
+<         if (!ocx)
+<             return;
+<     }
+<     ocx->classObjects[key] = value;
+< }
+< 
+diff -r 490/src/jscntxt.h 491/src/jscntxt.h
+353a354,367
+> #if JS_HAS_LVALUE_RETURN
+> /*
+>  * Values for the cx->rval2set flag byte.  This flag tells whether cx->rval2
+>  * is unset (CLEAR), set to a jsval (VALUE) naming a property in the object
+>  * referenced by cx->fp->rval, or set to a jsid (ITERKEY) result of a native
+>  * iterator's it.next() call (where the return value of it.next() is the next
+>  * value in the iteration).
+>  * 
+>  * The ITERKEY case is just an optimization for native iterators, as general
+>  * iterators can return an array of length 2 to return a [key, value] pair. 
+>  */
+> enum { JS_RVAL2_CLEAR, JS_RVAL2_VALUE, JS_RVAL2_ITERKEY };
+> #endif
+> 
+417a432,433
+>  * Context-linked stack of temporary GC roots.
+>  *
+422a439,447
+>  * To root a single GC-thing pointer, which need not be tagged and stored as a
+>  * jsval, use JS_PUSH_SINGLE_TEMP_ROOT.  The (jsval)(val) cast works because a
+>  * GC-thing is aligned on a 0 mod 8 boundary, and object has the 0 jsval tag.
+>  * So any GC-thing may be tagged as if it were an object and untagged, if it's
+>  * then used only as an opaque pointer until discriminated by other means than
+>  * tag bits (this is how the GC mark function uses its |thing| parameter -- it
+>  * consults GC-thing flags stored separately from the thing to decide the type
+>  * of thing).
+>  *
+447c472
+<         (tvr)->u.value = (val);                                               \
+---
+>         (tvr)->u.value = (jsval)(val);                                        \
+552c577
+<     JSPackedBool        rval2set;
+---
+>     uint8               rval2set;
+604,605c629,630
+<     /* Roots for the standard class objects (Object, Function, etc.) */
+<     JSObject            *classObjects[JSProto_LIMIT];
+---
+>     /* Iterator cache to speed up native default for-in loop case. */
+>     JSObject            *cachedIterObj;
+610c635
+<  #endif
+---
+> #endif
+740,753d764
+<  * Fast access to immutable standard objects (constructors and prototypes).
+<  */
+< extern JSContext *
+< js_FindContextForGlobal(JSContext *cx, JSObject *obj);
+< 
+< extern JSBool
+< js_GetClassObject(JSContext *cx, JSObject *obj, JSProtoKey key,
+<                   JSObject **objp);
+< 
+< extern void
+< js_SetClassObject(JSContext *cx, JSObject *obj, JSProtoKey key,
+<                   JSObject *value);
+< 
+< /*
+diff -r 490/src/jsconfig.h 491/src/jsconfig.h
+44c44
+< #define JS_VERSION 160
+---
+> #define JS_VERSION 170
+106a107,108
+> #define JS_HAS_GENERATORS       0       /* has yield in generator function */
+> #define JS_HAS_BLOCK_SCOPE      0       /* has block scope via let/arraycomp */
+135a138,139
+> #define JS_HAS_GENERATORS       0       /* has yield in generator function */
+> #define JS_HAS_BLOCK_SCOPE      0       /* has block scope via let/arraycomp */
+160a165,193
+> #define JS_HAS_GENERATORS       0       /* has yield in generator function */
+> #define JS_HAS_BLOCK_SCOPE      0       /* has block scope via let/arraycomp */
+> 
+> #elif JS_VERSION == 170
+> 
+> #define JS_HAS_STR_HTML_HELPERS 1       /* has str.anchor, str.bold, etc. */
+> #define JS_HAS_PERL_SUBSTR      1       /* has str.substr */
+> #define JS_HAS_OBJ_PROTO_PROP   1       /* has o.__proto__ etc. */
+> #define JS_HAS_OBJ_WATCHPOINT   1       /* has o.watch and o.unwatch */
+> #define JS_HAS_EXPORT_IMPORT    1       /* has export fun; import obj.fun */
+> #define JS_HAS_EVAL_THIS_SCOPE  1       /* Math.eval is same as with (Math) */
+> #define JS_HAS_SHARP_VARS       1       /* has #n=, #n# for object literals */
+> #define JS_HAS_SCRIPT_OBJECT    1       /* has (new Script("x++")).exec() */
+> #define JS_HAS_XDR              1       /* has XDR API and internal support */
+> #define JS_HAS_XDR_FREEZE_THAW  0       /* has XDR freeze/thaw script methods */
+> #define JS_HAS_TOSOURCE         1       /* has Object/Array toSource method */
+> #define JS_HAS_DEBUGGER_KEYWORD 1       /* has hook for debugger keyword */
+> #define JS_HAS_CATCH_GUARD      1       /* has exception handling catch guard */
+> #define JS_HAS_SPARSE_ARRAYS    0       /* array methods preserve empty elems */
+> #define JS_HAS_GETTER_SETTER    1       /* has JS2 getter/setter functions */
+> #define JS_HAS_UNEVAL           1       /* has uneval() top-level function */
+> #define JS_HAS_CONST            1       /* has JS2 const as alternative var */
+> #define JS_HAS_FUN_EXPR_STMT    1       /* has function expression statement */
+> #define JS_HAS_LVALUE_RETURN    1       /* has o.item(i) = j; for native item */
+> #define JS_HAS_NO_SUCH_METHOD   1       /* has o.__noSuchMethod__ handler */
+> #define JS_HAS_XML_SUPPORT      1       /* has ECMAScript for XML support */
+> #define JS_HAS_ARRAY_EXTRAS     1       /* has indexOf and Lispy extras */
+> #define JS_HAS_GENERATORS       1       /* has yield in generator function */
+> #define JS_HAS_BLOCK_SCOPE      1       /* has block scope via let/arraycomp */
+diff -r 490/src/jsdbgapi.c 491/src/jsdbgapi.c
+785c785
+<     return fp->scopeChain;
+---
+>     return js_GetScopeChain(cx, fp);
+903a904
+>     JSObject *scobj;
+907a909,912
+>     scobj = js_GetScopeChain(cx, fp);
+>     if (!scobj)
+>         return JS_FALSE;
+> 
+916c921
+<     script = JS_CompileUCScriptForPrincipals(cx, fp->scopeChain,
+---
+>     script = JS_CompileUCScriptForPrincipals(cx, scobj,
+924,925c929,930
+<     ok = js_Execute(cx, fp->scopeChain, script, fp,
+<                     JSFRAME_DEBUGGER | JSFRAME_EVAL, rval);
+---
+>     ok = js_Execute(cx, scobj, script, fp, JSFRAME_DEBUGGER | JSFRAME_EVAL,
+>                     rval);
+diff -r 490/src/jsemit.c 491/src/jsemit.c
+235a236
+> const char js_finally_block_str[]  = "finally block";
+245c246
+<     "try statement",         /* TRY */
+---
+>     "block scope",           /* BLOCK_SCOPE */
+247c248,250
+<     "finally statement",     /* FINALLY */
+---
+>     "try block",             /* TRY */
+>     js_finally_block_str,    /* FINALLY */
+>     js_finally_block_str,    /* SUBROUTINE */
+1228a1232,1247
+>     if (STMT_TYPE_IS_SCOPE(type)) {
+>         stmt->downScope = tc->topScopeStmt;
+>         tc->topScopeStmt = stmt;
+>     } else {
+>         stmt->downScope = NULL;
+>     }
+>     stmt->blockObj = NULL;
+> }
+> 
+> void
+> js_PushBlockScope(JSTreeContext *tc, JSStmtInfo *stmt, JSObject *blockObj,
+>                   ptrdiff_t top)
+> {
+>     js_PushStatement(tc, stmt, STMT_BLOCK_SCOPE, top);
+>     blockObj->slots[JSSLOT_PARENT] = OBJECT_TO_JSVAL(tc->blockChain);
+>     tc->blockChain = stmt->blockObj = blockObj;
+1246a1266,1277
+> /*
+>  * Macro to emit a bytecode followed by a uint16 immediate operand stored in
+>  * big-endian order, used for arg and var numbers as well as for atomIndexes.
+>  * NB: We use cx and cg from our caller's lexical environment, and return
+>  * false on error.
+>  */
+> #define EMIT_UINT16_IMM_OP(op, i)                                             \
+>     JS_BEGIN_MACRO                                                            \
+>         if (js_Emit3(cx, cg, op, UINT16_HI(i), UINT16_LO(i)) < 0)             \
+>             return JS_FALSE;                                                  \
+>     JS_END_MACRO
+> 
+1321d1351
+<              * JSOP_POP2 isn't decompiled, so it doesn't need to be HIDDEN.
+1323c1353,1355
+<             if (js_Emit1(cx, cg, JSOP_POP2) < 0)
+---
+>             if (js_NewSrcNote(cx, cg, SRC_HIDDEN) < 0)
+>                 return JS_FALSE;
+>             if (js_Emit1(cx, cg, JSOP_ENDITER) < 0)
+1334a1367,1380
+> #if JS_HAS_BLOCK_SCOPE
+>           case STMT_BLOCK_SCOPE:
+>           {
+>             uintN i;
+> 
+>             /* There is a Block object with locals on the stack to pop. */
+>             if (js_NewSrcNote(cx, cg, SRC_HIDDEN) < 0)
+>                 return JS_FALSE;
+>             i = OBJ_BLOCK_COUNT(cx, stmt->blockObj);
+>             EMIT_UINT16_IMM_OP(JSOP_LEAVEBLOCK, i);
+>             break;
+>           }
+> #endif
+> 
+1396c1442,1454
+<     tc->topStmt = tc->topStmt->down;
+---
+>     JSStmtInfo *stmt;
+>     JSStmtType type;
+> 
+>     stmt = tc->topStmt;
+>     tc->topStmt = stmt->down;
+>     type = stmt->type;
+>     if (STMT_TYPE_IS_SCOPE(type)) {
+>         tc->topScopeStmt = stmt->downScope;
+>         if (type == STMT_BLOCK_SCOPE) {
+>             tc->blockChain =
+>                 JSVAL_TO_OBJECT(stmt->blockObj->slots[JSSLOT_PARENT]);
+>         }
+>     }
+1438a1497,1541
+> /*
+>  * Find a lexically scoped variable (one declared by let, catch, or an array
+>  * comprehension) named by atom, looking in tc's compile-time scopes.
+>  *
+>  * Return null on error.  If atom is found, return the statement info record
+>  * in which it was found directly, and set *slotp to its stack slot (if any).
+>  * If atom is not found, return &LL_NOT_FOUND.
+>  */
+> static JSStmtInfo LL_NOT_FOUND;
+> 
+> static JSStmtInfo *
+> LexicalLookup(JSContext *cx, JSTreeContext *tc, JSAtom *atom, jsint *slotp)
+> {
+>     JSStmtInfo *stmt;
+>     JSObject *obj, *pobj;
+>     JSProperty *prop;
+>     JSScopeProperty *sprop;
+> 
+>     *slotp = -1;
+>     for (stmt = tc->topScopeStmt; stmt; stmt = stmt->downScope) {
+>         if (stmt->type == STMT_WITH)
+>             return stmt;
+>         if (stmt->type == STMT_CATCH && stmt->label == atom)
+>             return stmt;
+> 
+>         JS_ASSERT(stmt->type == STMT_BLOCK_SCOPE);
+>         obj = stmt->blockObj;
+>         if (!js_LookupProperty(cx, obj, ATOM_TO_JSID(atom), &pobj, &prop))
+>             return NULL;
+>         if (prop) {
+>             if (pobj != obj) {
+>                 stmt = &LL_NOT_FOUND;
+>             } else {
+>                 sprop = (JSScopeProperty *) prop;
+>                 JS_ASSERT(sprop->flags & SPROP_HAS_SHORTID);
+>                 *slotp = OBJ_BLOCK_DEPTH(cx, obj) + sprop->shortid;
+>             }
+>             OBJ_DROP_PROPERTY(cx, pobj, prop);
+>             return stmt;
+>         }
+>     }
+> 
+>     return &LL_NOT_FOUND;
+> }
+> 
+1444a1548,1549
+>     JSStmtInfo *stmt;
+>     jsint slot;
+1464,1466c1569,1578
+<         if (obj == fp->scopeChain &&
+<             !js_InWithStatement(&cg->treeContext) &&
+<             !js_InCatchBlock(&cg->treeContext, atom)) {
+---
+>         if (obj == fp->scopeChain) {
+>             /* XXX this will need revising when 'let const' is added. */
+>             stmt = LexicalLookup(cx, &cg->treeContext, atom, &slot);
+>             if (!stmt)
+>                 return JS_FALSE;
+>             if (stmt != &LL_NOT_FOUND) {
+>                 fp = fp->down;
+>                 continue;
+>             }
+> 
+1610,1621d1721
+<  * Macro to emit a bytecode followed by a uint16 immediate operand stored in
+<  * big-endian order, used for arg and var numbers as well as for atomIndexes.
+<  * NB: We use cx and cg from our caller's lexical environment, and return
+<  * false on error.
+<  */
+< #define EMIT_UINT16_IMM_OP(op, i)                                             \
+<     JS_BEGIN_MACRO                                                            \
+<         if (js_Emit3(cx, cg, op, ATOM_INDEX_HI(i), ATOM_INDEX_LO(i)) < 0)     \
+<             return JS_FALSE;                                                  \
+<     JS_END_MACRO
+< 
+< /*
+1724c1824
+<  * whether optimization occurred, in which case LookupArgOrVar also updated
+---
+>  * whether optimization occurred, in which case BindNameToSlot also updated
+1732c1832
+< LookupArgOrVar(JSContext *cx, JSTreeContext *tc, JSParseNode *pn)
+---
+> BindNameToSlot(JSContext *cx, JSTreeContext *tc, JSParseNode *pn)
+1733a1834,1837
+>     JSAtom *atom;
+>     JSStmtInfo *stmt;
+>     jsint slot;
+>     JSOp op;
+1738,1741d1841
+<     JSAtom *atom;
+<     JSProperty *prop;
+<     JSScopeProperty *sprop;
+<     JSOp op;
+1744d1843
+<     jsint slot;
+1745a1845,1846
+>     JSProperty *prop;
+>     JSScopeProperty *sprop;
+1755a1857,1896
+>      * We can't optimize if we are compiling a with statement and its body,
+>      * or we're in a catch block whose exception variable has the same name
+>      * as this node.  FIXME: we should be able to optimize catch vars to be
+>      * block-locals.
+>      */
+>     atom = pn->pn_atom;
+>     stmt = LexicalLookup(cx, tc, atom, &slot);
+>     if (!stmt)
+>         return JS_FALSE;
+> 
+>     if (stmt != &LL_NOT_FOUND) {
+>         if (stmt->type == STMT_WITH)
+>             return JS_TRUE;
+>         if (stmt->type == STMT_CATCH) {
+>             JS_ASSERT(stmt->label == atom);
+>             return JS_TRUE;
+>         }
+> 
+>         JS_ASSERT(stmt->type == STMT_BLOCK_SCOPE);
+>         JS_ASSERT(slot >= 0);
+>         op = pn->pn_op;
+>         switch (op) {
+>           case JSOP_NAME:     op = JSOP_GETLOCAL; break;
+>           case JSOP_SETNAME:  op = JSOP_SETLOCAL; break;
+>           case JSOP_INCNAME:  op = JSOP_INCLOCAL; break;
+>           case JSOP_NAMEINC:  op = JSOP_LOCALINC; break;
+>           case JSOP_DECNAME:  op = JSOP_DECLOCAL; break;
+>           case JSOP_NAMEDEC:  op = JSOP_LOCALDEC; break;
+>           case JSOP_FORNAME:  op = JSOP_FORLOCAL; break;
+>           case JSOP_DELNAME:  op = JSOP_FALSE; break;
+>           default: JS_ASSERT(0);
+>         }
+>         if (op != pn->pn_op) {
+>             pn->pn_op = op;
+>             pn->pn_slot = slot;
+>         }
+>         return JS_TRUE;
+>     }
+> 
+>     /*
+1763c1904,1905
+<     if (cx->fp->flags & JSFRAME_SCRIPT_OBJECT)
+---
+>     fp = cx->fp;
+>     if (fp->flags & JSFRAME_SCRIPT_OBJECT)
+1778d1919
+<     fp = cx->fp;
+1801,1803c1942
+<      * We can't optimize if we're in an eval called inside a with statement,
+<      * or we're compiling a with statement and its body, or we're in a catch
+<      * block whose exception variable has the same name as pn.
+---
+>      * We can't optimize if we are in an eval called inside a with statement.
+1805,1808c1944
+<     atom = pn->pn_atom;
+<     if (fp->scopeChain != obj ||
+<         js_InWithStatement(tc) ||
+<         js_InCatchBlock(tc, atom)) {
+---
+>     if (fp->scopeChain != obj)
+1810d1945
+<     }
+2014c2149
+<                 if (pn2->pn_type == TOK_NAME && !LookupArgOrVar(cx, tc, pn2))
+---
+>                 if (pn2->pn_type == TOK_NAME && !BindNameToSlot(cx, tc, pn2))
+2044c2179
+<             if (!LookupArgOrVar(cx, tc, pn))
+---
+>             if (!BindNameToSlot(cx, tc, pn))
+2056c2191
+<             if (pn2->pn_type == TOK_NAME && !LookupArgOrVar(cx, tc, pn2))
+---
+>             if (pn2->pn_type == TOK_NAME && !BindNameToSlot(cx, tc, pn2))
+2108c2243
+<         if (!LookupArgOrVar(cx, &cg->treeContext, pn2))
+---
+>         if (!BindNameToSlot(cx, &cg->treeContext, pn2))
+2196c2331
+<             if (!LookupArgOrVar(cx, &cg->treeContext, left))
+---
+>             if (!BindNameToSlot(cx, &cg->treeContext, left))
+2251c2386
+<             if (!LookupArgOrVar(cx, &cg->treeContext, left))
+---
+>             if (!BindNameToSlot(cx, &cg->treeContext, left))
+2789c2924,2927
+<     ok = js_EmitTree(cx, cg, body) && js_Emit1(cx, cg, JSOP_STOP) >= 0;
+---
+>     ok = (!(cg->treeContext.flags & TCF_FUN_IS_GENERATOR) ||
+>           js_Emit1(cx, cg, JSOP_GENERATOR) >= 0) &&
+>          js_EmitTree(cx, cg, body) &&
+>          js_Emit1(cx, cg, JSOP_STOP) >= 0;
+3200c3338
+<             if (js_Emit1(cx, cg, JSOP_PUSH) < 0)
+---
+>             if (js_Emit1(cx, cg, JSOP_STARTITER) < 0)
+3231,3237c3369,3377
+<                       case JSOP_GETARG:  /* FALL THROUGH */
+<                       case JSOP_SETARG:  op = JSOP_FORARG; break;
+<                       case JSOP_GETVAR:  /* FALL THROUGH */
+<                       case JSOP_SETVAR:  op = JSOP_FORVAR; break;
+<                       case JSOP_GETGVAR:
+<                       case JSOP_SETGVAR: op = JSOP_FORNAME; break;
+<                       default:           JS_ASSERT(0);
+---
+>                       case JSOP_GETARG:   /* FALL THROUGH */
+>                       case JSOP_SETARG:   op = JSOP_FORARG; break;
+>                       case JSOP_GETVAR:   /* FALL THROUGH */
+>                       case JSOP_SETVAR:   op = JSOP_FORVAR; break;
+>                       case JSOP_GETGVAR:  /* FALL THROUGH */
+>                       case JSOP_SETGVAR:  op = JSOP_FORNAME; break;
+>                       case JSOP_GETLOCAL: /* FALL THROUGH */
+>                       case JSOP_SETLOCAL: op = JSOP_FORLOCAL; break;
+>                       default:            JS_ASSERT(0);
+3241c3381
+<                     if (!LookupArgOrVar(cx, &cg->treeContext, pn3))
+---
+>                     if (!BindNameToSlot(cx, &cg->treeContext, pn3))
+3246c3386,3387
+<                     if (pn3->pn_attrs & JSPROP_READONLY)
+---
+>                     if (pn3->pn_attrs & JSPROP_READONLY) {
+>                         JS_ASSERT(op == JSOP_FORVAR);
+3247a3389
+>                     }
+3432c3574
+<         /* Now fixup all breaks and continues (before for/in's final POP2). */
+---
+>         /* Now fixup all breaks and continues (before for/in's JSOP_ENDITER). */
+3437c3579
+<             if (js_Emit1(cx, cg, JSOP_POP2) < 0)
+---
+>             if (js_Emit1(cx, cg, JSOP_ENDITER) < 0)
+3807c3949
+<             if (!LookupArgOrVar(cx, &cg->treeContext, pn2))
+---
+>             if (!BindNameToSlot(cx, &cg->treeContext, pn2))
+3940a4083,4091
+> #if JS_HAS_GENERATORS
+>       case TOK_YIELD:
+>         if (!js_EmitTree(cx, cg, pn->pn_kid))
+>             return JS_FALSE;
+>         if (js_Emit1(cx, cg, JSOP_YIELD) < 0)
+>             return JS_FALSE;
+>         break;
+> #endif
+> 
+4067c4218
+<             if (!LookupArgOrVar(cx, &cg->treeContext, pn2))
+---
+>             if (!BindNameToSlot(cx, &cg->treeContext, pn2))
+4372c4523
+<             if (!LookupArgOrVar(cx, &cg->treeContext, pn2))
+---
+>             if (!BindNameToSlot(cx, &cg->treeContext, pn2))
+4447c4598
+<             if (!LookupArgOrVar(cx, &cg->treeContext, pn2))
+---
+>             if (!BindNameToSlot(cx, &cg->treeContext, pn2))
+4575a4727,4772
+> #if JS_HAS_BLOCK_SCOPE
+>       case TOK_LEXICALSCOPE:
+>       {
+>         JSObject *obj;
+>         jsint count;
+> 
+>         atom = pn->pn_atom;
+>         obj = ATOM_TO_OBJECT(atom);
+>         js_PushBlockScope(&cg->treeContext, &stmtInfo, obj, CG_OFFSET(cg));
+> 
+>         OBJ_SET_BLOCK_DEPTH(cx, obj, cg->stackDepth);
+>         count = OBJ_BLOCK_COUNT(cx, obj);
+>         cg->stackDepth += count;
+>         if ((uintN)cg->stackDepth > cg->maxStackDepth)
+>             cg->maxStackDepth = cg->stackDepth;
+> 
+>         ale = js_IndexAtom(cx, atom, &cg->atomList);
+>         if (!ale)
+>             return JS_FALSE;
+>         EMIT_ATOM_INDEX_OP(JSOP_ENTERBLOCK, ALE_INDEX(ale));
+> 
+>         if (!js_EmitTree(cx, cg, pn->pn_expr))
+>             return JS_FALSE;
+> 
+>         EMIT_UINT16_IMM_OP(JSOP_LEAVEBLOCK, count);
+>         cg->stackDepth -= count;
+> 
+>         if (!js_PopStatementCG(cx, cg))
+>             return JS_FALSE;
+>         break;
+>       }
+> #endif
+> 
+> #if JS_HAS_GENERATORS
+>        case TOK_ARRAYPUSH:
+>         /*
+>          * Pick up the array's stack index from pn->pn_array, which points up
+>          * the tree to our TOK_ARRAYCOMP ancestor.  See below under the array
+>          * initialiser code generator for array comprehension special casing.
+>          */
+>         if (!js_EmitTree(cx, cg, pn->pn_kid))
+>             return JS_FALSE;
+>         EMIT_UINT16_IMM_OP(pn->pn_op, pn->pn_array->pn_extra);
+>         break;
+> #endif
+> 
+4576a4774,4776
+> #if JS_HAS_GENERATORS
+>       case TOK_ARRAYCOMP:
+> #endif
+4599a4800,4818
+> #if JS_HAS_GENERATORS
+>         if (pn->pn_type == TOK_ARRAYCOMP) {
+>             /*
+>              * Pass the new array's stack index to the TOK_ARRAYPUSH case by
+>              * storing it in pn->pn_extra, then simply traverse the TOK_FOR
+>              * node and its kids under pn2 to generate this comprehension.
+>              */
+>             JS_ASSERT(cg->stackDepth > 0);
+>             pn->pn_extra = (uint32) (cg->stackDepth - 1);
+>             if (!js_EmitTree(cx, cg, pn2))
+>                 return JS_FALSE;
+> 
+>             /* Emit the usual op needed for decompilation. */
+>             if (js_Emit1(cx, cg, JSOP_ENDINIT) < 0)
+>                 return JS_FALSE;
+>             break;
+>         }
+> #endif /* JS_HAS_GENERATORS */
+> 
+4723c4942
+<         if (!LookupArgOrVar(cx, &cg->treeContext, pn))
+---
+>         if (!BindNameToSlot(cx, &cg->treeContext, pn))
+5205c5424
+< #ifdef DEBUG_brendan
+---
+> #ifdef DEBUG_notme
+5294c5513
+< #ifdef DEBUG_brendan
+---
+> #ifdef DEBUG_notme
+diff -r 490/src/jsemit.h 491/src/jsemit.h
+56,57c56,61
+<  * NB: If you add non-loop STMT_* enumerators, do so before STMT_DO_LOOP or
+<  * you will break the STMT_IS_LOOP macro, just below this enum.
+---
+>  * NB: If you add enumerators for scope statements, add them between STMT_WITH
+>  * and STMT_CATCH, or you will break the STMT_TYPE_IS_SCOPE macro.  If you add
+>  * non-looping statement enumerators, add them before STMT_DO_LOOP or you will
+>  * break the STMT_TYPE_IS_LOOP macro.
+>  *
+>  * Also remember to keep the statementName array in jsemit.c in sync.
+66c70
+<     STMT_TRY          = 6,      /* try statement */
+---
+>     STMT_BLOCK_SCOPE  = 6,      /* let block/expr or array comprehension */ 
+68,73c72,78
+<     STMT_FINALLY      = 8,      /* finally statement */
+<     STMT_SUBROUTINE   = 9,      /* gosub-target subroutine body */
+<     STMT_DO_LOOP      = 10,     /* do/while loop statement */
+<     STMT_FOR_LOOP     = 11,     /* for loop statement */
+<     STMT_FOR_IN_LOOP  = 12,     /* for/in loop statement */
+<     STMT_WHILE_LOOP   = 13      /* while loop statement */
+---
+>     STMT_TRY          = 8,      /* try block */
+>     STMT_FINALLY      = 9,      /* finally block */
+>     STMT_SUBROUTINE   = 10,     /* gosub-target subroutine body */
+>     STMT_DO_LOOP      = 11,     /* do/while loop statement */
+>     STMT_FOR_LOOP     = 12,     /* for loop statement */
+>     STMT_FOR_IN_LOOP  = 13,     /* for/in loop statement */
+>     STMT_WHILE_LOOP   = 14      /* while loop statement */
+76c81,86
+< #define STMT_IS_LOOP(stmt)      ((stmt)->type >= STMT_DO_LOOP)
+---
+> #define STMT_TYPE_IS_SCOPE(type) \
+>     ((uintN)((type) - STMT_WITH) < (uintN)(STMT_CATCH - STMT_WITH))
+> #define STMT_TYPE_IS_LOOP(type) ((type) >= STMT_DO_LOOP)
+> 
+> #define STMT_IS_SCOPE(stmt)     STMT_TYPE_IS_SCOPE((stmt)->type)
+> #define STMT_IS_LOOP(stmt)      STMT_TYPE_IS_LOOP((stmt)->type)
+88a99,100
+>     JSStmtInfo      *downScope;     /* next enclosing lexical scope */
+>     JSObject        *blockObj;      /* block object if BLOCK_SCOPE */
+101a114,115
+>     JSStmtInfo      *topScopeStmt;  /* top lexical scope statement */
+>     JSObject        *blockChain;    /* compile time block scope chain */
+114,115c128,130
+< #define TCF_FUN_FLAGS          0xE0 /* flags to propagate from FunctionBody */
+< #define TCF_HAS_DEFXMLNS      0x100 /* default xml namespace = ...; parsed */
+---
+> #define TCF_FUN_IS_GENERATOR  0x100 /* parsed yield statement in function */
+> #define TCF_FUN_FLAGS         0x1E0 /* flags to propagate from FunctionBody */
+> #define TCF_HAS_DEFXMLNS      0x200 /* default xml namespace = ...; parsed */
+120c135,137
+<      (tc)->topStmt = NULL, ATOM_LIST_INIT(&(tc)->decls),                      \
+---
+>      (tc)->topStmt = (tc)->topScopeStmt = NULL,                               \
+>      (tc)->blockChain = NULL,                                                 \
+>      ATOM_LIST_INIT(&(tc)->decls),                                            \
+335a353,361
+>  * Push a block scope statement and link blockObj into tc->blockChain.  To pop
+>  * this statement info record, use js_PopStatement as usual, or if appropriate
+>  * (if generating code), js_PopStatementCG.
+>  */
+> extern void
+> js_PushBlockScope(JSTreeContext *tc, JSStmtInfo *stmt, JSObject *blockObj,
+>                   ptrdiff_t top);
+> 
+> /*
+diff -r 490/src/jsfun.c 491/src/jsfun.c
+581a582,583
+>     JSObject *obj;
+>     JSScopeProperty *sprop;
+594a597,607
+>      * Walk the scope chain looking for block scopes whose locals need to be
+>      * copied from stack slots into object slots before fp goes away.
+>      */
+>     for (obj = fp->scopeChain; obj; obj = OBJ_GET_PARENT(cx, obj)) {
+>         if (OBJ_GET_CLASS(cx, obj) == &js_BlockClass) {
+>             for (sprop = OBJ_SCOPE(obj)->lastProp; sprop; sprop = sprop->parent)
+>                 ok &= OBJ_GET_PROPERTY(cx, obj, sprop->id, &aval);
+>         }
+>     }
+> 
+>     /*
+1214c1227
+<     JS_PUSH_SINGLE_TEMP_ROOT(cx, OBJECT_TO_JSVAL(fun->object), &tvr);
+---
+>     JS_PUSH_SINGLE_TEMP_ROOT(cx, fun->object, &tvr);
+2232a2246,2247
+>     JSTempValueRooter tvr;
+>     const char *bytes;
+2251,2255c2266,2280
+<         JS_ReportErrorNumber(cx, js_GetErrorMessage, NULL,
+<                              (uintN)((flags & JSV2F_CONSTRUCT)
+<                                      ? JSMSG_NOT_CONSTRUCTOR
+<                                      : JSMSG_NOT_FUNCTION),
+<                              JS_GetStringBytes(str));
+---
+>         JS_PUSH_SINGLE_TEMP_ROOT(cx, str, &tvr);
+>         bytes = JS_GetStringBytes(str);
+>         if (flags & JSV2F_ITERATOR) {
+>             JS_ReportErrorNumber(cx, js_GetErrorMessage, NULL,
+>                                  JSMSG_BAD_ITERATOR,
+>                                  bytes, js_iterator_str,
+>                                  js_ValueToPrintableSource(cx, *vp));
+>         } else {
+>             JS_ReportErrorNumber(cx, js_GetErrorMessage, NULL,
+>                                  (uintN)((flags & JSV2F_CONSTRUCT)
+>                                          ? JSMSG_NOT_CONSTRUCTOR
+>                                          : JSMSG_NOT_FUNCTION),
+>                                  bytes);
+>         }
+>         JS_POP_TEMP_ROOT(cx, &tvr);
+diff -r 490/src/jsfun.h 491/src/jsfun.h
+125c125,126
+< #define JSV2F_SEARCH_STACK      2
+---
+> #define JSV2F_ITERATOR          JSINVOKE_ITERATOR
+> #define JSV2F_SEARCH_STACK      0x10000
+diff -r 490/src/jsgc.c 491/src/jsgc.c
+2181c2181
+<         if (acx->rval2set && JSVAL_IS_GCTHING(acx->rval2))
+---
+>         if (acx->rval2set == JS_RVAL2_VALUE && JSVAL_IS_GCTHING(acx->rval2))
+2205,2206c2205
+<         for (i = 0; i < JSProto_LIMIT; i++)
+<             GC_MARK(cx, acx->classObjects[i], "classObjects[i]");
+---
+>         acx->cachedIterObj = NULL;
+diff -r 490/src/jsinterp.c 491/src/jsinterp.c
+61a62
+> #include "jsiter.h"
+124,152d124
+<  * Class for for/in loop property iterator objects.
+<  */
+< #define JSSLOT_ITER_STATE   JSSLOT_PRIVATE
+< 
+< static void
+< prop_iterator_finalize(JSContext *cx, JSObject *obj)
+< {
+<     jsval iter_state;
+<     jsval iteratee;
+< 
+<     /* Protect against stillborn iterators. */
+<     iter_state = obj->slots[JSSLOT_ITER_STATE];
+<     iteratee = obj->slots[JSSLOT_PARENT];
+<     if (!JSVAL_IS_NULL(iter_state) && !JSVAL_IS_PRIMITIVE(iteratee)) {
+<         OBJ_ENUMERATE(cx, JSVAL_TO_OBJECT(iteratee), JSENUMERATE_DESTROY,
+<                       &iter_state, NULL);
+<     }
+<     js_RemoveRoot(cx->runtime, &obj->slots[JSSLOT_PARENT]);
+< }
+< 
+< static JSClass prop_iterator_class = {
+<     "PropertyIterator",
+<     0,
+<     JS_PropertyStub,  JS_PropertyStub,  JS_PropertyStub,  JS_PropertyStub,
+<     JS_EnumerateStub, JS_ResolveStub,   JS_ConvertStub,   prop_iterator_finalize,
+<     JSCLASS_NO_OPTIONAL_MEMBERS
+< };
+< 
+< /*
+170,171c142,145
+<  * Commit deferred stores of interpreter registers to their homes in fp, when
+<  * calling out of the interpreter loop or threaded code.
+---
+>  * SAVE_SP_AND_PC commits deferred stores of interpreter registers to their
+>  * homes in fp, when calling out of the interpreter loop or threaded code.
+>  * RESTORE_SP_AND_PC copies the other way, to update registers after a call
+>  * to a subroutine that interprets a piece of the current script.
+173c147,148
+< #define SAVE_SP_AND_PC(fp) (SAVE_SP(fp), (fp)->pc = pc)
+---
+> #define SAVE_SP_AND_PC(fp)      (SAVE_SP(fp), (fp)->pc = pc)
+> #define RESTORE_SP_AND_PC(fp)   (RESTORE_SP(fp), pc = (fp)->pc)
+489a465,505
+> /*
+>  * Recursive helper to convert a compile-time block chain to a runtime block
+>  * scope chain prefix.  Each cloned block object is safe from GC by virtue of
+>  * the object newborn root.  This root cannot be displaced by arbitrary code
+>  * called from within js_NewObject, because we pass non-null proto and parent
+>  * arguments (so js_NewObject won't call js_GetClassPrototype).
+>  */
+> static JSObject *
+> CloneBlockChain(JSContext *cx, JSStackFrame *fp, JSObject *obj)
+> {
+>     JSObject *parent;
+> 
+>     parent = OBJ_GET_PARENT(cx, obj);
+>     if (!parent) {
+>         parent = fp->scopeChain;
+>     } else {
+>         parent = CloneBlockChain(cx, fp, parent);
+>         if (!parent)
+>             return NULL;
+>     }
+>     return js_CloneBlockObject(cx, obj, parent, fp);
+> }
+> 
+> JSObject *
+> js_GetScopeChain(JSContext *cx, JSStackFrame *fp)
+> {
+>     JSObject *obj;
+> 
+>     obj = fp->blockChain;
+>     if (obj) {
+>         obj = CloneBlockChain(cx, fp, obj);
+>         if (!obj)
+>             return NULL;
+>         fp->scopeChain = obj;
+>         fp->blockChain = NULL;
+>         return obj;
+>     }
+>     JS_ASSERT(fp->scopeChain);
+>     return fp->scopeChain;
+> }
+> 
+659c675
+<     js_ReportIsNotFunction(cx, vp, flags & JSINVOKE_CONSTRUCT);
+---
+>     js_ReportIsNotFunction(cx, vp, flags & JSINVOKE_FUNFLAGS);
+1211a1228
+>     frame.blockChain = NULL;
+1305c1322
+<         cx->rval2set = JS_FALSE;
+---
+>         cx->rval2set = JS_RVAL2_CLEAR;
+1373c1390
+<     js_ReportIsNotFunction(cx, vp, flags & JSINVOKE_CONSTRUCT);
+---
+>     js_ReportIsNotFunction(cx, vp, flags & JSINVOKE_FUNFLAGS);
+1526a1544
+>     frame.blockChain = NULL;
+1967c1985
+<     uintN argc, slot, attrs;
+---
+>     uintN argc, attrs, flags, slot;
+1970,1971c1988
+<     JSObject *withobj, *origobj, *propobj;
+<     jsval iter_state;
+---
+>     JSObject *withobj, *origobj, *iterobj;
+1991,1993d2007
+< #if JS_HAS_XML_SUPPORT
+<     JSBool foreach = JS_FALSE;
+< #endif
+2052a2067,2071
+> #ifdef __GNUC__
+>     flags = 0;  /* suppress gcc warnings */
+>     id = 0;
+> #endif
+> 
+2220a2240,2245
+>             /*
+>              * Clear for-in loop flags in case we are pushing an old-style
+>              * iterator slot.  XXX remove this if we can prevent old XDR'd
+>              * bytecode from being deserialized and executed
+>              */
+>             flags = 0;
+2250c2275
+<             if (!obj) {
+---
+>             if (!obj || !(obj2 = js_GetScopeChain(cx, fp))) {
+2254c2279
+<             withobj = js_NewObject(cx, &js_WithClass, obj, fp->scopeChain);
+---
+>             withobj = js_NewWithObject(cx, obj, obj2, sp - fp->spbase);
+2259,2260d2283
+<             rval = INT_TO_JSVAL(sp - fp->spbase);
+<             OBJ_SET_SLOT(cx, withobj, JSSLOT_PRIVATE, rval);
+2270,2273c2293
+< 
+<             rval = OBJ_GET_SLOT(cx, withobj, JSSLOT_PARENT);
+<             JS_ASSERT(JSVAL_IS_OBJECT(rval));
+<             fp->scopeChain = JSVAL_TO_OBJECT(rval);
+---
+>             fp->scopeChain = OBJ_GET_PARENT(cx, withobj);
+2457c2477,2479
+<             STORE_OPND(-1, OBJECT_TO_JSVAL(obj));
+---
+> 
+>             /* Don't use STORE_OPND -- we want our input's generating pc. */
+>             sp[-1] = OBJECT_TO_JSVAL(obj);
+2503a2526,2529
+>           BEGIN_CASE(JSOP_FOREACH)
+>             flags = JSITER_FOREACH;
+>           END_CASE(JSOP_FOREACH)
+> 
+2537a2564,2566
+> #if JS_HAS_BLOCK_SCOPE
+>           BEGIN_CASE(JSOP_FORLOCAL)
+> #endif
+2541c2570,2571
+<              * fp->vars, respectively).
+---
+>              * fp->vars, respectively).  Same applies to JSOP_FORLOCAL, which
+>              * addresses fp->spbase.
+2590c2620
+<             if (JSVAL_IS_VOID(rval)) {
+---
+>             if (JSVAL_IS_NULL(rval)) {
+2592,2595c2622,2623
+<                  * Yes, create a new JSObject to hold the iterator state.
+<                  * Use NULL as the nominal parent in js_NewObject to ensure
+<                  * that we use the correct scope chain lookup to try to find the
+<                  * PropertyIterator constructor.
+---
+>                  * Yes, and because rval is null we know JSOP_STARTITER stored
+>                  * that slot, and we must use the new iteration protocol.
+2597,2598c2625,2628
+<                 propobj = js_NewObject(cx, &prop_iterator_class, NULL, NULL);
+<                 if (!propobj) {
+---
+>                 fp->pc = (jsbytecode *) sp[i-depth];
+>                 iterobj = js_ValueToIterator(cx, OBJECT_TO_JSVAL(obj), flags);
+>                 fp->pc = pc;
+>                 if (!iterobj) {
+2601a2632,2633
+>                 *vp = OBJECT_TO_JSVAL(iterobj);
+>                 flags |= js_GetNativeIteratorFlags(cx, iterobj);
+2604,2605c2636,2641
+<                  * Now that we've resolved the object, use the PARENT slot to
+<                  * store the object that we're iterating over.
+---
+>                  * Store the current object below the iterator for generality:
+>                  * with the iteration protocol, we cannot assume that a native
+>                  * iterator was found or created by js_ValueToIterator, so we
+>                  * can't use its parent slot to track the current object being
+>                  * iterated along origobj's prototype chain.  We need another
+>                  * stack slot, which JSOP_STARTITER allocated for us.
+2607,2616c2643,2647
+<                 propobj->slots[JSSLOT_PARENT] = OBJECT_TO_JSVAL(obj);
+<                 propobj->slots[JSSLOT_ITER_STATE] = JSVAL_NULL;
+< 
+<                 /*
+<                  * Root the parent slot so we can get it even in our finalizer
+<                  * (otherwise, it would live as long as we do, but it might be
+<                  * finalized first).
+<                  */
+<                 ok = js_AddRoot(cx, &propobj->slots[JSSLOT_PARENT],
+<                                 "propobj->parent");
+---
+>                 vp[-1] = OBJECT_TO_JSVAL(obj);
+>             } else if (JSVAL_IS_VOID(rval)) {
+>                 /* Bytecode compatible old way: don't use iteration protocol. */
+>                 flags |= JSITER_COMPAT | JSITER_HIDDEN;
+>                 ok = js_NewNativeIterator(cx, obj, flags, vp);
+2619,2647c2650
+< 
+<                 /*
+<                  * Rewrite the iterator so we know to do the next case.
+<                  * Do this before calling the enumerator, which could
+<                  * displace cx->newborn and cause GC.
+<                  */
+<                 *vp = OBJECT_TO_JSVAL(propobj);
+< 
+<                 ok =
+< #if JS_HAS_XML_SUPPORT
+<                      (foreach && OBJECT_IS_XML(cx, obj))
+<                      ? ((JSXMLObjectOps *) obj->map->ops)->enumerateValues
+<                                     (cx, obj, JSENUMERATE_INIT, &iter_state,
+<                                      NULL, NULL)
+<                      :
+< #endif
+<                        OBJ_ENUMERATE(cx, obj, JSENUMERATE_INIT, &iter_state,
+<                                      NULL);
+<                 if (!ok)
+<                     goto out;
+< 
+<                 /*
+<                  * Stash private iteration state into property iterator object.
+<                  * NB: This code knows that the first slots are pre-allocated.
+<                  */
+< #if JS_INITIAL_NSLOTS < 5
+< #error JS_INITIAL_NSLOTS must be greater than or equal to 5.
+< #endif
+<                 propobj->slots[JSSLOT_ITER_STATE] = iter_state;
+---
+>                 iterobj = JSVAL_TO_OBJECT(*vp);
+2650,2653c2653,2658
+<                 propobj = JSVAL_TO_OBJECT(rval);
+<                 JS_ASSERT(OBJ_GET_CLASS(cx, propobj) == &prop_iterator_class);
+<                 obj = JSVAL_TO_OBJECT(propobj->slots[JSSLOT_PARENT]);
+<                 iter_state = propobj->slots[JSSLOT_ITER_STATE];
+---
+>                 JS_ASSERT(!JSVAL_IS_PRIMITIVE(rval));
+>                 iterobj = JSVAL_TO_OBJECT(rval);
+>                 flags |= js_GetNativeIteratorFlags(cx, iterobj);
+>                 obj = (flags & JSITER_COMPAT)
+>                       ? JSVAL_TO_OBJECT(iterobj->slots[JSSLOT_PARENT])
+>                       : JSVAL_TO_OBJECT(vp[-1]);
+2660,2680c2665,2670
+<             /* Get the next jsid to be enumerated and store it in fid. */
+<             ok =
+< #if JS_HAS_XML_SUPPORT
+<                  (foreach && OBJECT_IS_XML(cx, obj))
+<                  ? ((JSXMLObjectOps *) obj->map->ops)->enumerateValues
+<                                 (cx, obj, JSENUMERATE_NEXT, &iter_state,
+<                                  &fid, &rval)
+<                  :
+< #endif
+<                    OBJ_ENUMERATE(cx, obj, JSENUMERATE_NEXT, &iter_state, &fid);
+<             propobj->slots[JSSLOT_ITER_STATE] = iter_state;
+< 
+<             /* No more jsids to iterate in obj? */
+<             if (iter_state == JSVAL_NULL) {
+<                 /* Enumerate the properties on obj's prototype chain. */
+<                 obj = OBJ_GET_PROTO(cx, obj);
+<                 if (!obj) {
+<                     /* End of property list -- terminate loop. */
+<                     rval = JSVAL_FALSE;
+< #if JS_HAS_XML_SUPPORT
+<                     foreach = JS_FALSE;
+---
+>             /*
+>              * If enumerating, get the next jsid to be enumerated and store it
+>              * in fid.  If iterating, just get rval.
+>              */
+> #ifdef DEBUG
+>             fid = JSVAL_NULL;
+2682c2672,2680
+<                     goto end_forinloop;
+---
+>             ok = js_CallIteratorNext(cx, iterobj, flags,
+>                                      (iterobj == obj) ? NULL : &fid,
+>                                      &rval);
+>             if (!ok) {
+>                 /* Nothing more to iterate in obj, or some other exception? */
+>                 if (!cx->throwing ||
+>                     !VALUE_IS_STOP_ITERATION(cx, cx->exception)) {
+>                     /* Some other exception or error, bail out. */
+>                     goto out;
+2685,2694c2683,2685
+<                 ok =
+< #if JS_HAS_XML_SUPPORT
+<                      (foreach && OBJECT_IS_XML(cx, obj))
+<                      ? ((JSXMLObjectOps *) obj->map->ops)->enumerateValues
+<                                     (cx, obj, JSENUMERATE_INIT, &iter_state,
+<                                      NULL, NULL)
+<                      :
+< #endif
+<                        OBJ_ENUMERATE(cx, obj, JSENUMERATE_INIT, &iter_state,
+<                                      NULL);
+---
+>                 /* Inline JS_ClearPendingException(cx). */
+>                 cx->throwing = JS_FALSE;
+>                 cx->exception = JSVAL_VOID;
+2697,2700c2688,2692
+<                  * Stash private iteration state into property iterator object.
+<                  * We do this before checking 'ok' to ensure that propobj is
+<                  * in a valid state even if OBJ_ENUMERATE returned JS_FALSE.
+<                  * NB: This code knows that the first slots are pre-allocated.
+---
+>                  * Enumerate the properties on obj's prototype chain, unless
+>                  * the iterator is the iterable -- in this case, do not merge
+>                  * ECMA precedent and the Pythonic iteration protocol.  Loop
+>                  * over only the keys, or [key, value] pairs, returned by the
+>                  * iterator for the directly referenced object.
+2702,2704c2694,2700
+<                 propobj->slots[JSSLOT_ITER_STATE] = iter_state;
+<                 if (!ok)
+<                     goto out;
+---
+>                 if (iterobj == obj || !(obj = OBJ_GET_PROTO(cx, obj))) {
+>                     /* End of property list -- terminate loop. */
+>                     ok = JS_TRUE;
+>                     flags = 0;
+>                     rval = JSVAL_FALSE;
+>                     goto end_forinloop;
+>                 }
+2706,2711c2702,2720
+<                 /*
+<                  * Update the iterator JSObject's parent link to refer to the
+<                  * current object. This is used in the iterator JSObject's
+<                  * finalizer.
+<                  */
+<                 propobj->slots[JSSLOT_PARENT] = OBJECT_TO_JSVAL(obj);
+---
+>                 if (flags & JSITER_COMPAT) {
+>                     ok = js_NewNativeIterator(cx, obj, flags, vp);
+>                     if (!ok)
+>                         goto out;
+>                     iterobj = JSVAL_TO_OBJECT(*vp);
+>                 } else {
+>                     iterobj = js_ValueToIterator(cx, OBJECT_TO_JSVAL(obj),
+>                                                  flags);
+>                     if (!iterobj) {
+>                         JS_ASSERT(!ok);
+>                         goto out;
+>                     }
+> 
+>                     /* Reset ok and store the current iterable in vp[-1]. */
+>                     ok = JS_TRUE;
+>                     vp[-1] = OBJECT_TO_JSVAL(obj);
+>                 }
+> 
+>                 *vp = OBJECT_TO_JSVAL(iterobj);
+2715,2721d2723
+<             /* Skip properties not owned by obj when looking from origobj. */
+<             ok = OBJ_LOOKUP_PROPERTY(cx, origobj, fid, &obj2, &prop);
+<             if (!ok)
+<                 goto out;
+<             if (prop)
+<                 OBJ_DROP_PROPERTY(cx, obj2, prop);
+< 
+2723,2727c2725,2729
+<              * If the id was deleted, or found in a prototype or an unrelated
+<              * object (specifically, not in an inner object for obj), skip it.
+<              * This means that OBJ_LOOKUP_PROPERTY implementations must return
+<              * an object either further on the prototype chain, or related by
+<              * the JSExtendedClass.outerObject optional hook.
+---
+>              * If the iterator is the iterable, do not expect to lookup fid
+>              * and find anything.  The iteration protocol does not require any
+>              * such thing, which would make a name collision on 'next' hazard.
+>              * But if the iterable is a different object, we must do the usual
+>              * deleted-property and shadowed-proto-property tests.
+2729,2741c2731,2747
+<             if (!prop)
+<                 goto enum_next_property;
+<             if (obj != obj2) {
+<                 cond = JS_FALSE;
+<                 clasp = OBJ_GET_CLASS(cx, obj2);
+<                 if (clasp->flags & JSCLASS_IS_EXTENDED) {
+<                     JSExtendedClass *xclasp;
+< 
+<                     xclasp = (JSExtendedClass *) clasp;
+<                     cond = xclasp->outerObject &&
+<                            xclasp->outerObject(cx, obj2) == obj;
+<                 }
+<                 if (!cond)
+---
+>             if (iterobj != obj) {
+>                 /* Skip properties not in obj when looking from origobj. */
+>                 ok = OBJ_LOOKUP_PROPERTY(cx, origobj, fid, &obj2, &prop);
+>                 if (!ok)
+>                     goto out;
+>                 if (prop)
+>                     OBJ_DROP_PROPERTY(cx, obj2, prop);
+> 
+>                 /*
+>                  * If the id was deleted, or found in a prototype object or an
+>                  * unrelated object (specifically, not in an inner object for
+>                  * obj), skip it.  This step means that all OBJ_LOOKUP_PROPERTY
+>                  * implementations must return an object further along on the
+>                  * prototype chain, or else possibly an object returned by the
+>                  * JSExtendedClass.outerObject optional hook.
+>                  */
+>                 if (!prop)
+2742a2749,2761
+>                 if (obj != obj2) {
+>                     cond = JS_FALSE;
+>                     clasp = OBJ_GET_CLASS(cx, obj2);
+>                     if (clasp->flags & JSCLASS_IS_EXTENDED) {
+>                         JSExtendedClass *xclasp;
+> 
+>                         xclasp = (JSExtendedClass *) clasp;
+>                         cond = xclasp->outerObject &&
+>                                xclasp->outerObject(cx, obj2) == obj;
+>                     }
+>                     if (!cond)
+>                         goto enum_next_property;
+>                 }
+2745,2746c2764
+< #if JS_HAS_XML_SUPPORT
+<             if (foreach) {
+---
+>             if (flags & JSITER_FOREACH) {
+2748,2758c2766,2770
+<                 foreach = JS_FALSE;
+< 
+<                 /* If obj is not XML, we must get rval given its fid. */
+<                 if (!OBJECT_IS_XML(cx, obj)) {
+<                     ok = OBJ_GET_PROPERTY(cx, origobj, fid, &rval);
+<                     if (!ok)
+<                         goto out;
+<                 }
+<             } else
+< #endif
+<             {
+---
+>                 flags = 0;
+>             } else if (iterobj == obj) {
+>                 /* Iterators return arbitrary values, not string ids. */
+>                 JS_ASSERT(fid == JSVAL_NULL);
+>             } else if (JSID_IS_ATOM(fid)) {
+2760,2762c2772,2773
+<                 if (JSID_IS_ATOM(fid)) {
+<                     rval = ATOM_KEY(JSID_TO_ATOM(fid));
+<                 }
+---
+>                 rval = ATOM_KEY(JSID_TO_ATOM(fid));
+>             }
+2764,2771c2775,2779
+<                 else if (JSID_IS_OBJECT(fid)) {
+<                     str = js_ValueToString(cx, OBJECT_JSID_TO_JSVAL(fid));
+<                     if (!str) {
+<                         ok = JS_FALSE;
+<                         goto out;
+<                     }
+< 
+<                     rval = STRING_TO_JSVAL(str);
+---
+>             else if (JSID_IS_OBJECT(fid)) {
+>                 str = js_ValueToString(cx, OBJECT_JSID_TO_JSVAL(fid));
+>                 if (!str) {
+>                     ok = JS_FALSE;
+>                     goto out;
+2773,2779d2780
+< #endif
+<                 else {
+<                     str = js_NumberToString(cx, (jsdouble) JSID_TO_INT(fid));
+<                     if (!str) {
+<                         ok = JS_FALSE;
+<                         goto out;
+<                     }
+2781c2782,2789
+<                     rval = STRING_TO_JSVAL(str);
+---
+>                 rval = STRING_TO_JSVAL(str);
+>             }
+> #endif
+>             else {
+>                 str = js_NumberToString(cx, (jsdouble) JSID_TO_INT(fid));
+>                 if (!str) {
+>                     ok = JS_FALSE;
+>                     goto out;
+2782a2791,2792
+> 
+>                 rval = STRING_TO_JSVAL(str);
+2797a2808,2817
+> #if JS_HAS_BLOCK_SCOPE
+>               case JSOP_FORLOCAL:
+>                 slot = GET_UINT16(pc);
+>                 JS_ASSERT(slot < (uintN)depth);
+>                 vp = &fp->spbase[slot];
+>                 GC_POKE(cx, *vp);
+>                 *vp = rval;
+>                 break;
+> #endif
+> 
+2935a2956
+>             pc2 = pc;                                                         \
+3587,3592c3608,3609
+< /*
+<  * NB: This macro can't use JS_BEGIN_MACRO/JS_END_MACRO around its body because
+<  * it must break from the switch case that calls it, not from the do...while(0)
+<  * loop created by the JS_BEGIN/END_MACRO brackets.
+<  */
+< #define FAST_INCREMENT_OP(SLOT,COUNT,BASE,PRE,OP,MINMAX)                      \
+---
+> /* NB: This macro doesn't use JS_BEGIN_MACRO/JS_END_MACRO around its body. */
+> #define FAST_INCREMENT_OP(SLOT,COUNT,BASE,PRE,OPEQ,MINMAX)                    \
+3597,3605c3614,3620
+<     if (JSVAL_IS_INT(rval) &&                                                 \
+<         rval != INT_TO_JSVAL(JSVAL_INT_##MINMAX)) {                           \
+<         PRE = rval;                                                           \
+<         rval OP 2;                                                            \
+<         *vp = rval;                                                           \
+<         PUSH_OPND(PRE);                                                       \
+<         goto end_nonint_fast_incop;                                           \
+<     }                                                                         \
+<     goto do_nonint_fast_incop;
+---
+>     if (!JSVAL_IS_INT(rval) || rval == INT_TO_JSVAL(JSVAL_INT_##MINMAX))      \
+>         goto do_nonint_fast_incop;                                            \
+>     PRE = rval;                                                               \
+>     rval OPEQ 2;                                                              \
+>     *vp = rval;                                                               \
+>     PUSH_OPND(PRE);                                                           \
+>     goto end_nonint_fast_incop
+3626c3641
+<             len = JSOP_INCARG_LENGTH;   /* all arg/var incops are same length */
+---
+>             len = JSOP_INCARG_LENGTH;   /* all fast incops are same length */
+3642c3657,3658
+< #define FAST_GLOBAL_INCREMENT_OP(SLOWOP,PRE,OP,MINMAX)                        \
+---
+> /* NB: This macro doesn't use JS_BEGIN_MACRO/JS_END_MACRO around its body. */
+> #define FAST_GLOBAL_INCREMENT_OP(SLOWOP,PRE,OPEQ,MINMAX)                      \
+3653,3661c3669,3675
+<     if (JSVAL_IS_INT(rval) &&                                                 \
+<         rval != INT_TO_JSVAL(JSVAL_INT_##MINMAX)) {                           \
+<         PRE = rval;                                                           \
+<         rval OP 2;                                                            \
+<         OBJ_SET_SLOT(cx, obj, slot, rval);                                    \
+<         PUSH_OPND(PRE);                                                       \
+<         goto end_nonint_fast_global_incop;                                    \
+<     }                                                                         \
+<     goto do_nonint_fast_global_incop;
+---
+>     if (!JSVAL_IS_INT(rval) || rval == INT_TO_JSVAL(JSVAL_INT_##MINMAX))      \
+>         goto do_nonint_fast_global_incop;                                     \
+>     PRE = rval;                                                               \
+>     rval OPEQ 2;                                                              \
+>     OBJ_SET_SLOT(cx, obj, slot, rval);                                        \
+>     PUSH_OPND(PRE);                                                           \
+>     goto end_nonint_fast_global_incop
+3673a3688
+>             JS_ASSERT(len == js_CodeSpec[op].length);
+3887a3903
+>                 newifp->frame.blockChain = NULL;
+3974,3991c3990,4031
+<             if (cx->rval2set) {
+<                 /*
+<                  * Sneaky: use the stack depth we didn't claim in our budget,
+<                  * but that we know is there on account of [fun, this] already
+<                  * having been pushed, at a minimum (if no args).  Those two
+<                  * slots have been popped and [rval] has been pushed, which
+<                  * leaves one more slot for rval2 before we might overflow.
+<                  *
+<                  * NB: rval2 must be the property identifier, and rval the
+<                  * object from which to get the property.  The pair form an
+<                  * ECMA "reference type", which can be used on the right- or
+<                  * left-hand side of assignment ops.  Only native methods can
+<                  * return reference types.  See JSOP_SETCALL just below for
+<                  * the left-hand-side case.
+<                  */
+<                 PUSH_OPND(cx->rval2);
+<                 cx->rval2set = JS_FALSE;
+<                 ELEMENT_OP(-1, ok = OBJ_GET_PROPERTY(cx, obj, id, &rval));
+---
+>             if (cx->rval2set != JS_RVAL2_CLEAR) {
+>                 if (cx->rval2set == JS_RVAL2_VALUE) {
+>                     /*
+>                      * Use the stack depth we didn't claim in our budget, but
+>                      * that we know is there on account of [fun, this] already
+>                      * having been pushed, at a minimum (if no args).  Those
+>                      * two slots have been popped and [rval] has been pushed,
+>                      * which leaves one more slot for rval2 before we might
+>                      * overflow.
+>                      *
+>                      * NB: rval2 must be the property identifier, and rval the
+>                      * object from which to get the property.  The pair form an
+>                      * ECMA "reference type", which can be used on the right-
+>                      * or left-hand side of assignment ops.  Note: only native
+>                      * methods can return reference types.  See JSOP_SETCALL
+>                      * just below for the left-hand-side case.
+>                      */
+>                     PUSH_OPND(cx->rval2);
+>                     ELEMENT_OP(-1, ok = OBJ_GET_PROPERTY(cx, obj, id, &rval));
+>                 }
+> #if JS_HAS_GENERATORS
+>                 else {
+>                     /*
+>                      * A native iterator has returned an [id, value] pair with
+>                      * id in cx->rval2 and value on top of stack.  Push value,
+>                      * store id as a value under it, and create a new array.
+>                      */
+>                     JS_ASSERT(cx->rval2set == JS_RVAL2_ITERKEY);
+>                     lval = ID_TO_VALUE((jsid)cx->rval2);
+>                     rval = sp[-1];
+>                     PUSH_OPND(rval);
+>                     sp[-2] = lval;
+>                     SAVE_SP_AND_PC(fp);
+>                     obj = js_NewArrayObject(cx, 2, sp - 2);
+>                     if (!obj) {
+>                         ok = JS_FALSE;
+>                         goto out;
+>                     }
+>                     rval = OBJECT_TO_JSVAL(obj);
+>                 }
+> #endif /* JS_HAS_GENERATORS */
+> 
+3993a4034
+>                 cx->rval2set = JS_RVAL2_CLEAR;
+3995c4036
+< #endif
+---
+> #endif /* JS_HAS_LVALUE_RETURN */
+4009c4050
+<             if (!cx->rval2set) {
+---
+>             if (cx->rval2set != JS_RVAL2_VALUE) {
+4016c4057
+<             cx->rval2set = JS_FALSE;
+---
+>             cx->rval2set = JS_RVAL2_CLEAR;
+4106a4148,4159
+>             /*
+>              * Load atomIndex, which is used by code at each do_JSOP_* label.
+>              *
+>              * Also set pc2 to point at the bytecode extended by this prefix
+>              * to have a leading 24 bit atomIndex, instead of the unextended
+>              * 16-bit atomIndex that normally comes after op.  This enables
+>              * JOF_INDEXCONST format ops (which have multiple immediates) to
+>              * collect their other immediate via GET_VARNO(pc2) or similar.
+>              *
+>              * Finally, load op and, if threading, adjust pc so that it will
+>              * be advanced properly at the end of op's case by DO_NEXT_OP.
+>              */
+4108,4110c4161,4165
+<             op = pc[1 + LITERAL_INDEX_LEN];
+< #ifdef JS_THREADED_INTERP
+<             pc += JSOP_LITOPX_LENGTH - js_CodeSpec[op].length;
+---
+>             pc2 = pc + 1 + LITERAL_INDEX_LEN;
+>             op = *pc2;
+>             pc += JSOP_LITOPX_LENGTH - (1 + ATOM_INDEX_LEN);
+> #ifndef JS_THREADED_INTERP
+>             len = js_CodeSpec[op].length;
+4143a4199,4201
+> #if JS_HAS_BLOCK_SCOPE
+>               case JSOP_ENTERBLOCK:   goto do_JSOP_ENTERBLOCK;
+> #endif
+4255c4313
+<                  * parent turns up everywhere (see jsobj.c's FindConstructor,
+---
+>                  * parent turns up everywhere (see jsobj.c's FindClassObject,
+4751,4753d4808
+<           {
+<             uintN flags;
+< 
+4789a4845
+>             JS_ASSERT(!fp->blockChain);
+4790a4847
+>             JS_ASSERT(OBJ_GET_CLASS(cx, obj2) != &js_BlockClass);
+4866d4922
+<           }
+4877,4878c4933
+<             slot = GET_VARNO(pc);
+<             atom = js_GetAtom(cx, &script->atomMap, atomIndex);
+---
+>             slot = GET_VARNO(pc2);
+4880d4934
+<             fun = (JSFunction *) JS_GetPrivate(cx, obj);
+4881a4936,4937
+>             /* If re-parenting, store a clone of the function object. */
+>             JS_ASSERT(!fp->blockChain);
+4882a4939
+>             JS_ASSERT(OBJ_GET_CLASS(cx, parent) != &js_BlockClass);
+4899c4956,4960
+<             parent = fp->scopeChain;
+---
+>             parent = js_GetScopeChain(cx, fp);
+>             if (!parent) {
+>                 ok = JS_FALSE;
+>                 goto out;
+>             }
+4926c4987,4991
+<             obj2 = fp->scopeChain;
+---
+>             obj2 = js_GetScopeChain(cx, fp);
+>             if (!obj2) {
+>                 ok = JS_FALSE;
+>                 goto out;
+>             }
+5021c5086,5090
+<             obj2 = fp->scopeChain;
+---
+>             obj2 = js_GetScopeChain(cx, fp);
+>             if (!obj2) {
+>                 ok = JS_FALSE;
+>                 goto out;
+>             }
+5293,5296c5362,5374
+<             obj = fp->scopeChain;
+<             while (OBJ_GET_CLASS(cx, obj) == &js_WithClass &&
+<                    JSVAL_TO_INT(OBJ_GET_SLOT(cx, obj, JSSLOT_PRIVATE)) > i) {
+<                 obj = OBJ_GET_PARENT(cx, obj);
+---
+>             for (obj = fp->blockChain; obj; obj = OBJ_GET_PARENT(cx, obj)) {
+>                 JS_ASSERT(OBJ_GET_CLASS(cx, obj) == &js_BlockClass);
+>                 if (OBJ_BLOCK_DEPTH(cx, obj) <= i)
+>                     break;
+>             }
+>             fp->blockChain = obj;
+> 
+>             for (obj = fp->scopeChain;
+>                  (clasp = OBJ_GET_CLASS(cx, obj)) == &js_WithClass ||
+>                  clasp == &js_BlockClass;
+>                  obj = OBJ_GET_PARENT(cx, obj)) {
+>                 if (OBJ_BLOCK_DEPTH(cx, obj) <= i)
+>                     break;
+5742,5745d5819
+< 
+<           BEGIN_CASE(JSOP_FOREACH)
+<             foreach = JS_TRUE;
+<           END_CASE(JSOP_FOREACH)
+5747a5822,5981
+> #if JS_HAS_BLOCK_SCOPE
+>           BEGIN_LITOPX_CASE(JSOP_ENTERBLOCK, 0)
+>             obj = ATOM_TO_OBJECT(atom);
+>             JS_ASSERT(fp->spbase + OBJ_BLOCK_DEPTH(cx, obj) == sp);
+>             i = OBJ_BLOCK_COUNT(cx, obj);
+>             sp += i;
+>             JS_ASSERT(sp <= fp->spbase + depth);
+>             JS_ASSERT(OBJ_GET_PARENT(cx, obj) == fp->blockChain);
+>             fp->blockChain = obj;
+>           END_LITOPX_CASE(JSOP_ENTERBLOCK)
+> 
+>           BEGIN_CASE(JSOP_LEAVEBLOCK)
+>           {
+>             JSObject **chainp;
+> 
+>             i = GET_UINT16(pc);
+>             sp -= i;
+>             JS_ASSERT(sp <= fp->spbase + depth);
+>             chainp = &fp->blockChain;
+>             obj = *chainp;
+>             if (!obj) {
+>                 chainp = &fp->scopeChain;
+>                 obj = *chainp;
+>             }
+>             JS_ASSERT(OBJ_GET_CLASS(cx, obj) == &js_BlockClass);
+>             JS_ASSERT(fp->spbase + OBJ_BLOCK_DEPTH(cx, obj) == sp);
+>             *chainp = OBJ_GET_PARENT(cx, obj);
+>           }
+>           END_CASE(JSOP_LEAVEBLOCK)
+> 
+>           BEGIN_CASE(JSOP_GETLOCAL)
+>             slot = GET_UINT16(pc);
+>             JS_ASSERT(slot < (uintN)depth);
+>             PUSH_OPND(fp->spbase[slot]);
+>             obj = NULL;
+>           END_CASE(JSOP_GETLOCAL)
+> 
+>           BEGIN_CASE(JSOP_SETLOCAL)
+>             slot = GET_UINT16(pc);
+>             JS_ASSERT(slot < (uintN)depth);
+>             vp = &fp->spbase[slot];
+>             GC_POKE(cx, *vp);
+>             *vp = FETCH_OPND(-1);
+>             obj = NULL;
+>           END_CASE(JSOP_SETLOCAL)
+> 
+> /* NB: This macro doesn't use JS_BEGIN_MACRO/JS_END_MACRO around its body. */
+> #define FAST_LOCAL_INCREMENT_OP(PRE,OPEQ,MINMAX)                              \
+>     slot = GET_UINT16(pc);                                                    \
+>     JS_ASSERT(slot < (uintN)depth);                                           \
+>     vp = fp->spbase + slot;                                                   \
+>     rval = *vp;                                                               \
+>     if (!JSVAL_IS_INT(rval) || rval == INT_TO_JSVAL(JSVAL_INT_##MINMAX))      \
+>         goto do_nonint_fast_incop;                                            \
+>     PRE = rval;                                                               \
+>     rval OPEQ 2;                                                              \
+>     *vp = rval;                                                               \
+>     PUSH_OPND(PRE)
+> 
+>           BEGIN_CASE(JSOP_INCLOCAL)
+>             FAST_LOCAL_INCREMENT_OP(rval, +=, MAX);
+>           END_CASE(JSOP_INCLOCAL)
+> 
+>           BEGIN_CASE(JSOP_DECLOCAL)
+>             FAST_LOCAL_INCREMENT_OP(rval, -=, MIN);
+>           END_CASE(JSOP_DECLOCAL)
+> 
+>           BEGIN_CASE(JSOP_LOCALINC)
+>             FAST_LOCAL_INCREMENT_OP(rtmp, +=, MAX);
+>           END_CASE(JSOP_LOCALINC)
+> 
+>           BEGIN_CASE(JSOP_LOCALDEC)
+>             FAST_LOCAL_INCREMENT_OP(rtmp, -=, MIN);
+>           END_CASE(JSOP_LOCALDEC)
+> 
+> #undef FAST_LOCAL_INCREMENT_OP
+> 
+> #endif /* JS_HAS_BLOCK_SCOPE */
+> 
+> #if JS_HAS_GENERATORS
+>           BEGIN_CASE(JSOP_STARTITER)
+>             /*
+>              * Start of a for-in or for-each-in loop: clear flags and push two
+>              * nulls.  If this is a for-each-in loop, JSOP_FOREACH will follow
+>              * and set flags = JSITER_FOREACH.  Push null instead of undefined
+>              * so that code at do_forinloop: can tell that this opcode pushed
+>              * the iterator slot, rather than a backward compatible JSOP_PUSH
+>              * that was emitted prior to the introduction of the new iteration
+>              * protocol.
+>              */
+>             flags = 0;
+>             sp[0] = sp[1] = JSVAL_NULL;
+>             sp += 2;
+>           END_CASE(JSOP_STARTITER)
+> 
+>           BEGIN_CASE(JSOP_ENDITER)
+>             /*
+>              * For backward bytecode compatibility, the object currently being
+>              * iterated is at sp[-3], and the iterator is at sp[-2].
+>              */
+>             rval = sp[-2];
+>             if (!JSVAL_IS_NULL(rval)) {
+>                 /*
+>                  * Finalize a native iterator only if it's not the same object
+>                  * as the iterable.  Otherwise an iterator was explicitly used
+>                  * on the right of 'in' in a for-in loop, and there could be
+>                  * other live refs still.
+>                  *
+>                  * js_FinishNativeIterator checks whether the iterator is not
+>                  * native, and also detects the case of a native iterator that
+>                  * has already escaped, even though a for-in loop caused it to
+>                  * be created.  See jsiter.c.
+>                  */
+>                 if (rval != sp[-3]) {
+>                     SAVE_SP_AND_PC(fp);
+>                     js_FinishNativeIterator(cx, JSVAL_TO_OBJECT(rval));
+>                 }
+>                 sp[-2] = JSVAL_NULL;
+>             }
+>             sp -= 3;
+>           END_CASE(JSOP_ENDITER)
+> 
+>           BEGIN_CASE(JSOP_GENERATOR)
+>             pc += JSOP_GENERATOR_LENGTH;
+>             SAVE_SP_AND_PC(fp);
+>             obj = js_NewGenerator(cx, fp);
+>             if (obj)
+>                 fp->rval = OBJECT_TO_JSVAL(obj);
+>             else
+>                 ok = JS_FALSE;
+>             goto out;
+> 
+>           BEGIN_CASE(JSOP_YIELD)
+>             ASSERT_NOT_THROWING(cx);
+>             fp->rval = POP_OPND();
+>             fp->flags |= JSFRAME_YIELDING;
+>             pc += JSOP_YIELD_LENGTH;
+>             SAVE_SP_AND_PC(fp);
+>             goto out;
+> 
+>           BEGIN_CASE(JSOP_ARRAYPUSH)
+>             slot = GET_UINT16(pc);
+>             JS_ASSERT(slot < (uintN)depth);
+>             lval = fp->spbase[slot];
+>             obj  = JSVAL_TO_OBJECT(lval);
+>             JS_ASSERT(OBJ_GET_CLASS(cx, obj) == &js_ArrayClass);
+>             rval = FETCH_OPND(-1);
+> 
+>             /* We know that the array is created with only a 'length' slot. */
+>             i = obj->map->freeslot - (JSSLOT_FREE(&js_ArrayClass) + 1);
+>             id = INT_TO_JSID(i);
+> 
+>             SAVE_SP_AND_PC(fp);
+>             ok = OBJ_SET_PROPERTY(cx, obj, id, &rval);
+>             if (!ok)
+>                 goto out;
+>             --sp;
+>           END_CASE(JSOP_ARRAYPUSH)
+> #endif /* JS_HAS_GENERATORS */
+> 
+5807,5810c6041,6044
+<          * Has an exception been raised?  Also insist that we are in the
+<          * interpreter activation that pushed fp's operand stack, to avoid
+<          * catching exceptions within XML filtering predicate expressions,
+<          * such as the one from tests/e4x/Regress/regress-301596.js:
+---
+>          * Has an exception been raised?  Also insist that we are not in an
+>          * XML filtering predicate expression, to avoid catching exceptions
+>          * within the filtering predicate, such as this example taken from
+>          * tests/e4x/Regress/regress-301596.js:
+5828,5829d6061
+<          * XXX This assumes the null mark case implies XML filtering predicate
+<          * expression execution!
+5832c6064
+<         if (cx->throwing && JS_LIKELY(mark != NULL)) {
+---
+>         if (cx->throwing && !(fp->flags & JSFRAME_FILTERING)) {
+5864,5866c6096
+< #if JS_HAS_XML_SUPPORT
+<                 foreach = JS_FALSE;
+< #endif
+---
+>                 flags = 0;
+5879,5881c6109
+< #if JS_HAS_XML_SUPPORT
+<         foreach = JS_FALSE;
+< #endif
+---
+>         flags = 0;
+diff -r 490/src/jsinterp.h 491/src/jsinterp.h
+53a54,58
+>  *
+>  * NB: This struct is manually initialized in jsinterp.c and jsiter.c.  If you
+>  * add new members, update both files.  But first, try to remove members.  The
+>  * sharp* and xml* members should be moved onto the stack as local variables
+>  * with well-known slots, if possible.
+77a83
+>     JSObject        *blockChain;    /* active compile-time block scopes */
+101a108,110
+> #define JSFRAME_YIELDING      0x200 /* js_Interpret dispatched JSOP_YIELD */
+> #define JSFRAME_FILTERING     0x400 /* XML filtering predicate expression */
+> #define JSFRAME_ITERATOR      0x800 /* trying to get an iterator for for-in */
+262a272,281
+>  * Refresh and return fp->scopeChain.  It may be stale if block scopes are
+>  * active but not yet reflected by objects in the scope chain.  If a block
+>  * scope contains a with, eval, XML filtering predicate, or similar such
+>  * dynamically scoped construct, then compile-time block scope at fp->blocks
+>  * must reflect at runtime.
+>  */
+> extern JSObject *
+> js_GetScopeChain(JSContext *cx, JSStackFrame *fp);
+> 
+> /*
+281c300,310
+<  * Consolidated js_Invoke flags simply rename the low JSFRAME_* flags.
+---
+>  * Consolidated js_Invoke flags simply rename certain JSFRAME_* flags, so that
+>  * we can share bits stored in JSStackFrame.flags and passed to:
+>  *
+>  *   js_Invoke
+>  *   js_InternalInvoke
+>  *   js_ValueToFunction
+>  *   js_ValueToFunctionObject
+>  *   js_ValueToCallableObject
+>  *   js_ReportIsNotFunction
+>  *
+>  * See jsfun.h for the latter four and flag renaming macros.
+285a315,320
+> #define JSINVOKE_ITERATOR       JSFRAME_ITERATOR
+> 
+> /*
+>  * Mask to isolate construct and iterator flags for use with jsfun.h functions.
+>  */
+> #define JSINVOKE_FUNFLAGS       (JSINVOKE_CONSTRUCT | JSINVOKE_ITERATOR)
+diff -r 490/src/jsiter.c 491/src/jsiter.c
+59a60
+> #include "jslock.h"
+99c100
+<         OBJ_ENUMERATE(cx, iterable, JSENUMERATE_DESTROY, &state, NULL);
+---
+>             OBJ_ENUMERATE(cx, iterable, JSENUMERATE_DESTROY, &state, NULL);
+334a336,343
+>     /*
+>      * Clear the cached iterator object member of cx.  Normally the GC clears
+>      * all contexts' cachedIterObj members, but JSOP_ENDITER calls us eagerly
+>      * to finalize iterobj.
+>      */
+>     if (iterobj == cx->cachedIterObj)
+>         cx->cachedIterObj = NULL;
+> 
+344c353
+<     JSBool foreach;
+---
+>     JSBool keyonly;
+351,352c360,361
+<     foreach = JS_FALSE;
+<     if (argc != 0 && !js_ValueToBoolean(cx, argv[0], &foreach))
+---
+>     keyonly = JS_FALSE;
+>     if (argc != 0 && !js_ValueToBoolean(cx, argv[0], &keyonly))
+354c363
+<     return js_NewNativeIterator(cx, obj, foreach ? JSITER_FOREACH : 0, rval);
+---
+>     return js_NewNativeIterator(cx, obj, keyonly ? 0 : JSITER_FOREACH, rval);
+379c388
+<     arg = BOOLEAN_TO_JSVAL((flags & JSITER_FOREACH) != 0);
+---
+>     arg = BOOLEAN_TO_JSVAL((flags & JSITER_FOREACH) == 0);
+403c412
+<     if (JS_InstanceOf(cx, iterobj, &js_IteratorClass, NULL) &&
+---
+>     if (OBJ_GET_CLASS(cx, iterobj) == &js_IteratorClass &&
+419c428,429
+< js_CallIteratorNext(JSContext *cx, JSObject *iterobj, jsid *idp, jsval *rval)
+---
+> js_CallIteratorNext(JSContext *cx, JSObject *iterobj, uintN flags,
+>                     jsid *idp, jsval *rval)
+420a431,434
+>     JSBool unlock;
+>     JSObject *obj;
+>     JSScope *scope;
+>     JSScopeProperty *sprop;
+421a436
+>     JSFunction *fun;
+423a439,495
+>     /* Fastest path for repeated call from for-in loop bytecode. */
+>     if (iterobj == cx->cachedIterObj) {
+>         JS_ASSERT(OBJ_GET_CLASS(cx, iterobj) == &js_IteratorClass);
+>         JS_ASSERT(flags & JSITER_HIDDEN);
+>         if (!iterator_next(cx, iterobj, 0, NULL, rval) ||
+>             !CheckKeyValueReturn(cx, idp, rval)) {
+>             cx->cachedIterObj = NULL;
+>             return JS_FALSE;
+>         }
+>         return JS_TRUE;
+>     }
+> 
+>     /* Fast path for native iterator with unoverridden .next() method. */
+>     unlock = JS_TRUE;
+>     obj = iterobj;
+>     JS_LOCK_OBJ(cx, obj);
+>     scope = OBJ_SCOPE(obj);
+>     sprop = NULL;
+> 
+>     while (LOCKED_OBJ_GET_CLASS(obj) == &js_IteratorClass) {
+>         obj = scope->object;
+>         sprop = SCOPE_GET_PROPERTY(scope, id);
+>         if (sprop)
+>             break;
+>         obj = LOCKED_OBJ_GET_PROTO(obj);
+>         if (!obj)
+>             break;
+>         JS_UNLOCK_SCOPE(cx, scope);
+>         scope = OBJ_SCOPE(obj);
+>         JS_LOCK_SCOPE(cx, scope);
+>     }
+> 
+>     if (sprop && SPROP_HAS_VALID_SLOT(sprop, scope)) {
+>         /*
+>          * Unlock scope as soon as we fetch fval, and clear the unlock flag in
+>          * case we do not return early after setting cx->cachedIterObj.
+>          */
+>         fval = LOCKED_OBJ_GET_SLOT(obj, sprop->slot);
+>         JS_UNLOCK_SCOPE(cx, scope);
+>         unlock = JS_FALSE;
+>         if (VALUE_IS_FUNCTION(cx, fval)) {
+>             fun = (JSFunction *) JS_GetPrivate(cx, JSVAL_TO_OBJECT(fval));
+>             if (!FUN_INTERPRETED(fun) && fun->u.n.native == iterator_next) {
+>                 if (!iterator_next(cx, iterobj, 0, NULL, rval) ||
+>                     !CheckKeyValueReturn(cx, idp, rval)) {
+>                     return JS_FALSE;
+>                 }
+>                 if (flags & JSITER_HIDDEN)
+>                     cx->cachedIterObj = iterobj;
+>                 return JS_TRUE;
+>             }
+>         }
+>     }
+> 
+>     if (unlock)
+>         JS_UNLOCK_SCOPE(cx, scope);
+> 
+445c517,518
+<     *bp = !JSVAL_IS_PRIMITIVE(v) && JSVAL_TO_OBJECT(v) == obj;
+---
+>     *bp = !JSVAL_IS_PRIMITIVE(v) &&
+>           OBJ_GET_CLASS(cx, JSVAL_TO_OBJECT(v)) == &js_StopIterationClass;
+465c538
+<     JSObject *stop;
+---
+>     jsval v;
+468,469c541,542
+<     if (js_GetClassObject(cx, obj, JSProto_StopIteration, &stop))
+<         JS_SetPendingException(cx, OBJECT_TO_JSVAL(stop));
+---
+>     if (js_FindClassObject(cx, obj, INT_TO_JSID(JSProto_StopIteration), &v))
+>         JS_SetPendingException(cx, v);
+637c710
+<     JSObject *stop, *proto;
+---
+>     JSObject *proto, *stop;
+diff -r 490/src/jsiter.h 491/src/jsiter.h
+84c84,85
+< js_CallIteratorNext(JSContext *cx, JSObject *iterobj, jsid *idp, jsval *rval);
+---
+> js_CallIteratorNext(JSContext *cx, JSObject *iterobj, uintN flags,
+>                     jsid *idp, jsval *rval);
+diff -r 490/src/jskeyword.tbl 491/src/jskeyword.tbl
+116a117,120
+> 
+> #if JS_HAS_GENERATORS
+> JS_KEYWORD(yield,       TOK_YIELD,      JSOP_NOP,       JSVERSION_DEFAULT)
+> #endif
+diff -r 490/src/js.msg 491/src/js.msg
+84c84
+< MSG_DEF(JSMSG_NO_REG_EXPS,              2, 1, JSEXN_INTERNALERR, "sorry, regular expression are not supported")
+---
+> MSG_DEF(JSMSG_INACTIVE,                 2, 0, JSEXN_INTERNALERR, "nothing active on context")
+103c103
+< MSG_DEF(JSMSG_SAME_FORMAL,             21, 1, JSEXN_SYNTAXERR, "duplicate formal argument {0}")
+---
+> MSG_DEF(JSMSG_BAD_ITERATOR,            21, 3, JSEXN_TYPEERR, "{0} has invalid {1} value {2}")
+116c116
+< MSG_DEF(JSMSG_NAN,                     34, 1, JSEXN_ERR, "{0} is not a number")
+---
+> MSG_DEF(JSMSG_UNUSED34,                34, 0, JSEXN_NONE, "")
+132,135c132,135
+< MSG_DEF(JSMSG_ZERO_QUANTIFIER,         50, 1, JSEXN_SYNTAXERR, "zero quantifier {0}")
+< MSG_DEF(JSMSG_UNTERM_QUANTIFIER,       51, 1, JSEXN_SYNTAXERR, "unterminated quantifier {0}")
+< MSG_DEF(JSMSG_EMPTY_BEFORE_STAR,       52, 0, JSEXN_SYNTAXERR, "regular expression before * could be empty")
+< MSG_DEF(JSMSG_EMPTY_BEFORE_PLUS,       53, 0, JSEXN_SYNTAXERR, "regular expression before + could be empty")
+---
+> MSG_DEF(JSMSG_UNUSED50,                50, 0, JSEXN_NONE, "")
+> MSG_DEF(JSMSG_UNUSED51,                51, 0, JSEXN_NONE, "")
+> MSG_DEF(JSMSG_UNUSED52,                52, 0, JSEXN_NONE, "")
+> MSG_DEF(JSMSG_UNUSED53,                53, 0, JSEXN_NONE, "")
+206c206
+< MSG_DEF(JSMSG_BAD_RETURN,             124, 0, JSEXN_SYNTAXERR, "invalid return")
+---
+> MSG_DEF(JSMSG_BAD_RETURN_OR_YIELD,    124, 1, JSEXN_SYNTAXERR, "{0} not in function")
+251c251
+< MSG_DEF(JSMSG_CANT_UNSEAL_OBJECT,     169, 1, JSEXN_ERR, "can't unseal {0} objects")
+---
+> MSG_DEF(JSMSG_UNUSED169,              169, 0, JSEXN_NONE, "")
+257c257
+< MSG_DEF(JSMSG_NAME_AFTER_DBLDOT,      175, 0, JSEXN_SYNTAXERR, "missing name after .. operator")
+---
+> MSG_DEF(JSMSG_UNUSED175,              175, 0, JSEXN_NONE, "")
+264c264
+< MSG_DEF(JSMSG_IS_NOT_XML_OBJECT,      182, 1, JSEXN_TYPEERR, "{0} is not an XML object")
+---
+> MSG_DEF(JSMSG_UNUSED182,              182, 0, JSEXN_NONE, "")
+289c289,295
+< MSG_DEF(JSMSG_WRONG_CONSTRUCTOR,      207, 1, JSEXN_TYPEERR, "wrong construtor called for {0}")
+---
+> MSG_DEF(JSMSG_WRONG_CONSTRUCTOR,      207, 1, JSEXN_TYPEERR, "wrong constructor called for {0}")
+> MSG_DEF(JSMSG_BAD_GENERATOR_RETURN,   208, 1, JSEXN_TYPEERR, "generator function {0} returns a value")
+> MSG_DEF(JSMSG_BAD_ANON_GENERATOR_RETURN, 209, 1, JSEXN_TYPEERR, "anonymous generator function returns a value")
+> MSG_DEF(JSMSG_NAME_AFTER_FOR_PAREN,   210, 0, JSEXN_SYNTAXERR, "missing name after for (")
+> MSG_DEF(JSMSG_IN_AFTER_FOR_NAME,      211, 0, JSEXN_SYNTAXERR, "missing in after for")
+> MSG_DEF(JSMSG_BAD_ITERATOR_RETURN,    212, 2, JSEXN_TYPEERR, "{0}.{1} returned a primitive value")
+> MSG_DEF(JSMSG_KEYWORD_NOT_NS,         213, 0, JSEXN_SYNTAXERR, "keyword is used as namespace")
+diff -r 490/src/jsobj.c 491/src/jsobj.c
+71a72,75
+> #if JS_HAS_GENERATORS
+> #include "jsiter.h"
+> #endif
+> 
+1184c1188,1190
+<             callerScopeChain = caller->scopeChain;
+---
+>             callerScopeChain = js_GetScopeChain(cx, caller);
+>             if (!callerScopeChain)
+>                 return JS_FALSE;
+1196,1197c1202
+<                 scopeobj = js_NewObject(cx, &js_WithClass, obj,
+<                                         callerScopeChain);
+---
+>                 scopeobj = js_NewWithObject(cx, obj, callerScopeChain, -1);
+1217,1218c1222,1228
+<         if (caller)
+<             scopeobj = caller->scopeChain;
+---
+>         if (caller) {
+>             scopeobj = js_GetScopeChain(cx, caller);
+>             if (!scopeobj) {
+>                 ok = JS_FALSE;
+>                 goto out;
+>             }
+>         }
+1630a1641,1643
+> #if JS_HAS_GENERATORS
+>     {js_iterator_str,             js_DefaultIterator, 0,0,0},
+> #endif
+1778c1791
+<     JSCLASS_HAS_PRIVATE,
+---
+>     JSCLASS_HAS_PRIVATE | JSCLASS_HAS_RESERVED_SLOTS(1) | JSCLASS_IS_ANONYMOUS,
+1785a1799,1890
+> js_NewWithObject(JSContext *cx, JSObject *proto, JSObject *parent, jsint depth)
+> {
+>     JSObject *obj;
+> 
+>     obj = js_NewObject(cx, &js_WithClass, proto, parent);
+>     if (!obj)
+>         return NULL;
+>     OBJ_SET_BLOCK_DEPTH(cx, obj, depth);
+>     return obj;
+> }
+> 
+> JSObject *
+> js_NewBlockObject(JSContext *cx)
+> {
+>     JSObject *obj;
+> 
+>     /*
+>      * Null obj's proto slot so that Object.prototype.* does not pollute block
+>      * scopes.  Make sure obj has its own scope too, since clearing proto does
+>      * not affect OBJ_SCOPE(obj).
+>      */
+>     obj = js_NewObject(cx, &js_BlockClass, NULL, NULL);
+>     if (!obj || !js_GetMutableScope(cx, obj))
+>         return NULL;
+>     OBJ_SET_PROTO(cx, obj, NULL);
+>     return obj;
+> }
+>     
+> JSObject *
+> js_CloneBlockObject(JSContext *cx, JSObject *proto, JSObject *parent,
+>                     JSStackFrame *fp)
+> {
+>     JSObject *clone;
+>     
+>     clone = js_NewObject(cx, &js_BlockClass, proto, parent);
+>     if (!clone)
+>         return NULL;
+>     clone->slots[JSSLOT_PRIVATE] = PRIVATE_TO_JSVAL(fp);
+>     clone->slots[JSSLOT_BLOCK_DEPTH] =
+>         OBJ_GET_SLOT(cx, proto, JSSLOT_BLOCK_DEPTH);
+>     return clone;
+> }
+> 
+> static JSBool
+> block_getProperty(JSContext *cx, JSObject *obj, jsval id, jsval *vp)
+> {
+>     JSStackFrame *fp;
+>     jsint slot;
+> 
+>     JS_ASSERT(JS_InstanceOf(cx, obj, &js_BlockClass, NULL));
+>     if (!JSVAL_IS_INT(id))
+>         return JS_TRUE;
+> 
+>     fp = (JSStackFrame *) JS_GetPrivate(cx, obj);
+>     if (!fp)
+>         return JS_TRUE;
+> 
+>     slot = OBJ_BLOCK_DEPTH(cx, obj) + (uint16) JSVAL_TO_INT(id);
+>     JS_ASSERT((uintN)slot < fp->script->depth);
+>     *vp = fp->spbase[slot];
+>     return JS_TRUE;
+> }
+> 
+> static JSBool
+> block_setProperty(JSContext *cx, JSObject *obj, jsval id, jsval *vp)
+> {
+>     JSStackFrame *fp;
+>     jsint slot;
+> 
+>     JS_ASSERT(JS_InstanceOf(cx, obj, &js_BlockClass, NULL));
+>     if (!JSVAL_IS_INT(id))
+>         return JS_TRUE;
+> 
+>     fp = (JSStackFrame *) JS_GetPrivate(cx, obj);
+>     if (!fp)
+>         return JS_TRUE;
+> 
+>     slot = OBJ_BLOCK_DEPTH(cx, obj) + (uint16) JSVAL_TO_INT(id);
+>     JS_ASSERT((uintN)slot < fp->script->depth);
+>     fp->spbase[slot] = *vp;
+>     return JS_TRUE;
+> }
+> 
+> JSClass js_BlockClass = {
+>     "Block",
+>     JSCLASS_HAS_PRIVATE | JSCLASS_HAS_RESERVED_SLOTS(1) | JSCLASS_IS_ANONYMOUS,
+>     JS_PropertyStub,  JS_PropertyStub,  block_getProperty, block_setProperty,
+>     JS_EnumerateStub, JS_ResolveStub,   JS_ConvertStub,    JS_FinalizeStub,
+>     JSCLASS_NO_OPTIONAL_MEMBERS
+> };
+> 
+> JSObject *
+1928a2034,2035
+>     } else if (clasp->flags & JSCLASS_IS_ANONYMOUS) {
+>         *idp = INT_TO_JSID(JSProto_Object);
+1983c2090
+<     JS_PUSH_SINGLE_TEMP_ROOT(cx, OBJECT_TO_JSVAL(obj), &tvr);
+---
+>     JS_PUSH_SINGLE_TEMP_ROOT(cx, obj, &tvr);
+2059a2167,2248
+> JS_STATIC_DLL_CALLBACK(JSObject *)
+> js_InitNullClass(JSContext *cx, JSObject *obj)
+> {
+>     JS_ASSERT(0);
+>     return NULL;
+> }
+> 
+> #define JS_PROTO(name,code,init) extern JSObject *init(JSContext *, JSObject *);
+> #include "jsproto.tbl"
+> #undef JS_PROTO
+> 
+> static JSObjectOp lazy_prototype_init[JSProto_LIMIT] = {
+> #define JS_PROTO(name,code,init) init,
+> #include "jsproto.tbl"
+> #undef JS_PROTO
+> };
+> 
+> JSBool
+> js_GetClassObject(JSContext *cx, JSObject *obj, JSProtoKey key,
+>                   JSObject **objp)
+> {
+>     JSBool ok;
+>     JSObject *tmp, *cobj;
+>     JSResolvingKey rkey;
+>     JSResolvingEntry *rentry;
+>     uint32 generation;
+>     JSObjectOp init;
+>     jsval v;
+> 
+>     while ((tmp = OBJ_GET_PARENT(cx, obj)) != NULL)
+>         obj = tmp;
+>     if (!(OBJ_GET_CLASS(cx, obj)->flags & JSCLASS_IS_GLOBAL)) {
+>         *objp = NULL;
+>         return JS_TRUE;
+>     }
+> 
+>     ok = JS_GetReservedSlot(cx, obj, key, &v);
+>     if (!ok)
+>         return JS_FALSE;
+>     if (!JSVAL_IS_PRIMITIVE(v)) {
+>         *objp = JSVAL_TO_OBJECT(v);
+>         return JS_TRUE;
+>     }
+> 
+>     rkey.obj = obj;
+>     rkey.id = ATOM_TO_JSID(cx->runtime->atomState.classAtoms[key]);
+>     if (!js_StartResolving(cx, &rkey, JSRESFLAG_LOOKUP, &rentry))
+>         return JS_FALSE;
+>     if (!rentry) {
+>         /* Already caching key in obj -- suppress recursion. */
+>         *objp = NULL;
+>         return JS_TRUE;
+>     }
+>     generation = cx->resolvingTable->generation;
+> 
+>     cobj = NULL;
+>     init = lazy_prototype_init[key];
+>     if (init) {
+>         if (!init(cx, obj)) {
+>             ok = JS_FALSE;
+>         } else {
+>             ok = JS_GetReservedSlot(cx, obj, key, &v);
+>             if (ok && !JSVAL_IS_PRIMITIVE(v))
+>                 cobj = JSVAL_TO_OBJECT(v);
+>         }
+>     }
+> 
+>     js_StopResolving(cx, &rkey, JSRESFLAG_LOOKUP, rentry, generation);
+>     *objp = cobj;
+>     return ok;
+> }
+> 
+> JSBool
+> js_SetClassObject(JSContext *cx, JSObject *obj, JSProtoKey key, JSObject *cobj)
+> {
+>     JS_ASSERT(!OBJ_GET_PARENT(cx, obj));
+>     if (!(OBJ_GET_CLASS(cx, obj)->flags & JSCLASS_IS_GLOBAL))
+>         return JS_TRUE;
+> 
+>     return JS_SetReservedSlot(cx, obj, key, OBJECT_TO_JSVAL(cobj));
+> }
+> 
+2172,2175c2361,2365
+<      * If the given class has both the JSCLASS_HAS_PRIVATE and the
+<      * JSCLASS_CONSTRUCT_PROTOTYPE flags, then the class should have its private
+<      * data set. If it doesn't, then it means the constructor was replaced, and
+<      * we should throw a typerr.
+---
+>      * If the instance's class differs from what was requested, throw a type
+>      * error.  If the given class has both the JSCLASS_HAS_PRIVATE and the
+>      * JSCLASS_CONSTRUCT_PROTOTYPE flags, and the instance does not have its
+>      * private data set at this point, then the constructor was replaced and
+>      * we should throw a type error.
+2474d2663
+<     JSProperty *prop;
+2490a2680
+>         JSProperty *prop;
+3742c3932
+<         ReportIsNotFunction(cx, &argv[-2], 0);
+---
+>         ReportIsNotFunction(cx, &argv[-2], cx->fp->flags & JSFRAME_ITERATOR);
+Only in 490/src: .#jsobj.c.3.259
+diff -r 490/src/jsobj.h 491/src/jsobj.h
+238a239,283
+> extern JSClass  js_BlockClass;
+> 
+> /*
+>  * Block scope object macros.  The slots reserved by js_BlockClass are:
+>  *
+>  *   JSSLOT_PRIVATE       JSStackFrame *    active frame pointer or null
+>  *   JSSLOT_BLOCK_DEPTH   int               depth of block slots in frame
+>  *
+>  * After JSSLOT_BLOCK_DEPTH come one or more slots for the block locals.
+>  * OBJ_BLOCK_COUNT depends on this arrangement.
+>  *
+>  * A With object is like a Block object, in that both have one reserved slot
+>  * telling the stack depth of the relevant slots (the slot whose value is the
+>  * object named in the with statement; the slots containing the block's local
+>  * variables).
+>  */
+> #define JSSLOT_BLOCK_DEPTH      (JSSLOT_PRIVATE + 1)
+> 
+> #define OBJ_BLOCK_COUNT(cx,obj) \
+>     ((obj)->map->freeslot - (JSSLOT_BLOCK_DEPTH + 1))
+> #define OBJ_BLOCK_DEPTH(cx,obj) \
+>     JSVAL_TO_INT(OBJ_GET_SLOT(cx, obj, JSSLOT_BLOCK_DEPTH))
+> #define OBJ_SET_BLOCK_DEPTH(cx,obj,depth) \
+>     OBJ_SET_SLOT(cx, obj, JSSLOT_BLOCK_DEPTH, INT_TO_JSVAL(depth))
+> 
+> /*
+>  * To make sure this slot is well-defined, always call js_NewWithObject to
+>  * create a With object, don't call js_NewObject directly.  When creating a
+>  * With object that does not correspond to a stack slot, pass -1 for depth.
+>  */
+> extern JSObject *
+> js_NewWithObject(JSContext *cx, JSObject *proto, JSObject *parent, jsint depth);
+> 
+> /*
+>  * Create a new block scope object not linked to any proto or parent object.
+>  * Blocks are created by the compiler to reify let blocks and comprehensions.
+>  * Only when dynamic scope is captured do they need to be cloned and spliced
+>  * into an active scope chain.
+>  */
+> extern JSObject *
+> js_NewBlockObject(JSContext *cx);
+> 
+> extern JSObject *
+> js_CloneBlockObject(JSContext *cx, JSObject *proto, JSObject *parent,
+>                     JSStackFrame *fp);
+310a356,365
+> /*
+>  * Fast access to immutable standard objects (constructors and prototypes).
+>  */
+> extern JSBool
+> js_GetClassObject(JSContext *cx, JSObject *obj, JSProtoKey key,
+>                   JSObject **objp);
+> 
+> extern JSBool
+> js_SetClassObject(JSContext *cx, JSObject *obj, JSProtoKey key, JSObject *cobj);
+> 
+diff -r 490/src/jsopcode.c 491/src/jsopcode.c
+130a131,165
+> const char *
+> ToDisassemblySource(JSContext *cx, jsval v)
+> {
+>     JSObject *obj;
+>     JSScopeProperty *sprop;
+>     char *source;
+>     const char *bytes;
+>     JSString *str;
+> 
+>     if (!JSVAL_IS_PRIMITIVE(v)) {
+>         obj = JSVAL_TO_OBJECT(v);
+>         if (OBJ_GET_CLASS(cx, obj) == &js_BlockClass) {
+>             source = JS_sprintf_append(NULL, "depth %d {",
+>                                        OBJ_BLOCK_DEPTH(cx, obj));
+>             for (sprop = OBJ_SCOPE(obj)->lastProp; sprop;
+>                  sprop = sprop->parent) {
+>                 bytes = js_AtomToPrintableString(cx, JSID_TO_ATOM(sprop->id));
+>                 if (!bytes)
+>                     return NULL;
+>                 source = JS_sprintf_append(source, "%s: %d%s",
+>                                            bytes, sprop->shortid,
+>                                            sprop->parent ? ", " : "");
+>             }
+>             source = JS_sprintf_append(source, "}");
+>             if (!source)
+>                 return NULL;
+>             str = JS_NewString(cx, source, strlen(source));
+>             if (!str)
+>                 return NULL;
+>             return JS_GetStringBytes(str);
+>         }
+>     }
+>     return js_ValueToPrintableSource(cx, v);
+> }
+> 
+140c175
+<     JSString *str;
+---
+>     const char *bytes;
+176,177c211,212
+<         str = js_ValueToSource(cx, ATOM_KEY(atom));
+<         if (!str)
+---
+>         bytes = ToDisassemblySource(cx, ATOM_KEY(atom));
+>         if (!bytes)
+179c214
+<         fprintf(fp, " %s", JS_GetStringBytes(str));
+---
+>         fprintf(fp, " %s", bytes);
+183c218,221
+<         fprintf(fp, " %u", GET_ARGC(pc));
+---
+> #if JS_HAS_BLOCK_SCOPE
+>       case JOF_LOCAL:
+> #endif
+>         fprintf(fp, " %u", GET_UINT16(pc));
+231,232c269,270
+<             str = js_ValueToSource(cx, ATOM_KEY(atom));
+<             if (!str)
+---
+>             bytes = ToDisassemblySource(cx, ATOM_KEY(atom));
+>             if (!bytes)
+234c272
+<             fprintf(fp, "\n\t%s: %d", JS_GetStringBytes(str), off);
+---
+>             fprintf(fp, "\n\t%s: %d", bytes, off);
+253,254c291,292
+<         str = js_ValueToSource(cx, ATOM_KEY(atom));
+<         if (!str)
+---
+>         bytes = ToDisassemblySource(cx, ATOM_KEY(atom));
+>         if (!bytes)
+256c294
+<         fprintf(fp, " %s", JS_GetStringBytes(str));
+---
+>         fprintf(fp, " %s", bytes);
+263,264c301,302
+<             str = js_ValueToSource(cx, ATOM_KEY(atom));
+<             if (!str)
+---
+>             bytes = ToDisassemblySource(cx, ATOM_KEY(atom));
+>             if (!bytes)
+266c304
+<             fprintf(fp, " %s", JS_GetStringBytes(str));
+---
+>             fprintf(fp, " %s", bytes);
+276,277c314,315
+<         str = js_ValueToSource(cx, ATOM_KEY(atom));
+<         if (!str)
+---
+>         bytes = ToDisassemblySource(cx, ATOM_KEY(atom));
+>         if (!bytes)
+287c325
+<         fprintf(fp, " %s op %s", JS_GetStringBytes(str), cs->name);
+---
+>         fprintf(fp, " %s op %s", bytes, cs->name);
+370a409,414
+> SprintCString(Sprinter *sp, const char *s)
+> {
+>     return SprintPut(sp, s, strlen(s));
+> }
+> 
+> static ptrdiff_t
+384c428
+<     offset = SprintPut(sp, bp, strlen(bp));
+---
+>     offset = SprintCString(sp, bp);
+616c660
+<     return SprintPut(&jp->sprinter, s, strlen(s)) >= 0;
+---
+>     return SprintCString(&jp->sprinter, s) >= 0;
+625a670
+>     uintN       inArrayInit;    /* array initialiser/comprehension level */
+873c918
+<     jsbytecode *endpc, *done, *forelem_tail, *forelem_done;
+---
+>     jsbytecode *endpc, *pc2, *done, *forelem_tail, *forelem_done;
+894a940,941
+>     static const char finally_cookie[]   = "/*FINALLY*/";
+>     static const char iter_cookie[]      = "/*ITER*/";
+909c956,959
+< #define LOCAL_ASSERT(expr)      JS_ASSERT(expr); if (!(expr)) return JS_FALSE
+---
+> #define LOCAL_ASSERT(expr)      JS_BEGIN_MACRO                                \
+>                                     JS_ASSERT(expr);                          \
+>                                     if (!(expr)) return JS_FALSE;             \
+>                                 JS_END_MACRO
+985c1035
+<                     todo = SprintPut(&ss->sprinter, rval, strlen(rval));
+---
+>                     todo = SprintCString(&ss->sprinter, rval);
+1002c1052
+<                 todo = SprintPut(&ss->sprinter, cs->token, strlen(cs->token));
+---
+>                 todo = SprintCString(&ss->sprinter, cs->token);
+1199a1250,1261
+>               case JSOP_STARTITER:
+>                 if (ss->inArrayInit) {
+>                     ss->offsets[ss->top++] = ss->sprinter.offset;
+>                     ss->offsets[ss->top++] = ss->sprinter.offset;
+>                     ss->opcodes[ss->top-1] = ss->opcodes[ss->top-2] = op;
+>                     break;
+>                 }
+>                 todo = Sprint(&ss->sprinter, iter_cookie);
+>                 if (todo < 0 || !PushOff(ss, todo, op))
+>                     return JS_FALSE;
+>                 /* FALL THROUGH */
+> 
+1213,1215d1274
+<             {
+<               static const char finally_cookie[] = "/*FINALLY*/";
+< 
+1234d1292
+<             }
+1325a1384,1388
+>               case JSOP_ENDITER:
+>                 sn = js_GetSrcNote(jp->script, pc);
+>                 todo = -2;
+>                 if (sn && SN_TYPE(sn) == SRC_HIDDEN)
+>                     break;
+1326a1390,1393
+>                 if (ss->inArrayInit) {
+>                     ss->top -= 2;
+>                     break;
+>                 }
+1328c1395,1398
+<                 todo = -2;
+---
+>                 if (op == JSOP_ENDITER) {
+>                     rval = POP_STR();
+>                     JS_ASSERT(!strcmp(rval, iter_cookie));
+>                 }
+1354a1425,1512
+> #if JS_HAS_BLOCK_SCOPE
+>               case JSOP_ENTERBLOCK:
+>               {
+>                 JSAtom **atomv, *smallv[5];
+>                 JSScopeProperty *sprop;
+> 
+>                 atom = GET_ATOM(cx, jp->script, pc);
+>                 obj = ATOM_TO_OBJECT(atom);
+>                 argc = OBJ_BLOCK_COUNT(cx, obj);
+>                 if ((size_t)argc <= sizeof smallv / sizeof smallv[0]) {
+>                     atomv = smallv;
+>                 } else {
+>                     atomv = (JSAtom **) JS_malloc(cx, argc * sizeof(JSAtom *));
+>                     if (!atomv)
+>                         return JS_FALSE;
+>                 }
+> 
+>                 for (i = argc, sprop = OBJ_SCOPE(obj)->lastProp; --i >= 0;
+>                      sprop = sprop->parent) {
+>                     atomv[i] = JSID_TO_ATOM(sprop->id);
+>                 }
+>                 ok = JS_TRUE;
+>                 for (i = 0; i < argc; i++) {
+>                     atom = atomv[i];
+>                     rval = QuoteString(&ss->sprinter, ATOM_TO_STRING(atom), 0);
+>                     if (!rval ||
+>                         !PushOff(ss, STR2OFF(&ss->sprinter, rval), op)) {
+>                         ok = JS_FALSE;
+>                         break;
+>                     }
+>                 }
+> 
+>                 if (atomv != smallv)
+>                     JS_free(cx, atomv);
+>                 if (!ok)
+>                     return JS_FALSE;
+>                 todo = -2;
+>                 break;
+>               }
+> 
+>               case JSOP_LEAVEBLOCK:
+>               {
+>                 uintN top, depth;
+>                 
+>                 sn = js_GetSrcNote(jp->script, pc);
+>                 todo = -2;
+>                 if (sn && SN_TYPE(sn) == SRC_HIDDEN)
+>                     break;
+>                 top = ss->top;
+>                 depth = GET_UINT16(pc);
+>                 JS_ASSERT(top >= depth);
+>                 top -= depth;
+>                 ss->top = top;
+>                 ss->sprinter.offset = ss->offsets[top];
+>                 break;
+>               }
+> 
+>               case JSOP_GETLOCAL:
+>                 i = GET_UINT16(pc);
+>                 rval = OFF2STR(&ss->sprinter, ss->offsets[i]);
+>                 todo = SprintCString(&ss->sprinter, rval);
+>                 break;
+> 
+>               case JSOP_SETLOCAL:
+>                 i = GET_UINT16(pc);
+>                 lval = OFF2STR(&ss->sprinter, ss->offsets[i]);
+>                 rval = POP_STR();
+>                 goto do_setlval;
+> 
+>               case JSOP_INCLOCAL:
+>               case JSOP_DECLOCAL:
+>                 i = GET_UINT16(pc);
+>                 lval = OFF2STR(&ss->sprinter, ss->offsets[i]);
+>                 goto do_inclval;
+> 
+>               case JSOP_LOCALINC:
+>               case JSOP_LOCALDEC:
+>                 i = GET_UINT16(pc);
+>                 lval = OFF2STR(&ss->sprinter, ss->offsets[i]);
+>                 goto do_lvalinc;
+> 
+>               case JSOP_FORLOCAL:
+>                 i = GET_UINT16(pc);
+>                 lval = OFF2STR(&ss->sprinter, ss->offsets[i]);
+>                 atom = NULL;
+>                 goto do_forlvalinloop;
+> #endif
+> 
+1355a1514,1515
+>                 op = JSOP_RETURN;
+>                 /* FALL THROUGH */
+1357c1517,1520
+<                 lval = js_CodeSpec[JSOP_RETURN].name;
+---
+> #if JS_HAS_GENERATORS
+>               case JSOP_YIELD:
+> #endif
+>                 lval = js_CodeSpec[op].name;
+1365a1529,1565
+> #if JS_HAS_GENERATORS
+>               case JSOP_ARRAYPUSH:
+>               {
+>                 uintN pos, blockpos, startpos;
+>                 ptrdiff_t start;
+> 
+>                 rval = POP_STR();
+>                 pos = ss->top;
+>                 while (ss->opcodes[--pos] != JSOP_ENTERBLOCK)
+>                     LOCAL_ASSERT(pos != 0);
+>                 blockpos = pos;
+>                 while (ss->opcodes[--pos] == JSOP_ENTERBLOCK) {
+>                     if (pos == 0)
+>                         break;
+>                 }
+>                 LOCAL_ASSERT(ss->opcodes[pos] == JSOP_NEWINIT);
+>                 startpos = pos;
+>                 start = ss->offsets[pos];
+>                 LOCAL_ASSERT(ss->sprinter.base[start] == '[' ||
+>                              ss->sprinter.base[start] == '#');
+>                 pos = blockpos;
+>                 while (ss->opcodes[++pos] == JSOP_STARTITER)
+>                     LOCAL_ASSERT(pos < ss->top);
+>                 LOCAL_ASSERT(pos < ss->top);
+>                 xval = OFF2STR(&ss->sprinter, ss->offsets[pos]);
+>                 lval = OFF2STR(&ss->sprinter, start);
+>                 RETRACT(&ss->sprinter, xval);
+>                 todo = Sprint(&ss->sprinter, "%s%s%.*s",
+>                               lval, rval, rval - xval, xval);
+>                 if (todo < 0)
+>                     return JS_FALSE;
+>                 ss->offsets[startpos] = todo;
+>                 todo = -2;
+>                 break;
+>               }
+> #endif
+> 
+1418,1419c1618,1626
+<                     js_printf(jp, "\tif (%s) {\n", rval);
+<                     jp->indent += 4;
+---
+>                     if (ss->inArrayInit) {
+>                         LOCAL_ASSERT(SN_TYPE(sn) == SRC_IF);
+>                         if (Sprint(&ss->sprinter, " if (%s)", rval) < 0)
+>                             return JS_FALSE;
+>                     } else {
+>                         js_printf(jp, "\tif (%s) {\n", rval);
+>                         jp->indent += 4;
+>                     }
+> 
+1422a1630
+>                         LOCAL_ASSERT(!ss->inArrayInit);
+1434,1435c1642,1646
+<                     jp->indent -= 4;
+<                     js_printf(jp, "\t}\n");
+---
+> 
+>                     if (!ss->inArrayInit) {
+>                         jp->indent -= 4;
+>                         js_printf(jp, "\t}\n");
+>                     }
+1537a1749,1750
+>                 lval = "";
+>               do_forlvalinloop:
+1540d1752
+<                 lval = "";
+1564c1776
+<               do_forinbody:
+---
+>               do_forinhead:
+1568,1569c1780,1781
+<                     js_printf(jp, "\tfor %s (%s%s",
+<                               js_each_str, VarPrefix(sn), lval);
+---
+>                     todo = Sprint(&ss->sprinter, "for %s (%s%s",
+>                                   js_each_str, VarPrefix(sn), lval);
+1572c1784,1787
+<                     js_printf(jp, "\tfor (%s%s", VarPrefix(sn), lval);
+---
+>                 {
+>                     todo = Sprint(&ss->sprinter, "for (%s%s",
+>                                   VarPrefix(sn), lval);
+>                 }
+1573a1789,1790
+>                     if (*lval && SprintPut(&ss->sprinter, ".", 1) < 0)
+>                         return JS_FALSE;
+1577,1578d1793
+<                     RETRACT(&ss->sprinter, xval);
+<                     js_printf(jp, *lval ? ".%s" : "%s", xval);
+1580,1584c1795,1799
+<                     js_printf(jp,
+<                               (js_CodeSpec[lastop].format & JOF_XMLNAME)
+<                               ? ".%s"
+<                               : "[%s]",
+<                               xval);
+---
+>                     Sprint(&ss->sprinter,
+>                            (js_CodeSpec[lastop].format & JOF_XMLNAME)
+>                            ? ".%s"
+>                            : "[%s]",
+>                            xval);
+1585a1801
+>                 lval = OFF2STR(&ss->sprinter, todo);
+1587,1591c1803,1816
+<                 js_printf(jp, " in %s) {\n", rval);
+<                 jp->indent += 4;
+<                 DECOMPILE_CODE(pc + oplen, tail - oplen);
+<                 jp->indent -= 4;
+<                 js_printf(jp, "\t}\n");
+---
+>                 RETRACT(&ss->sprinter, rval);
+>                 if (ss->inArrayInit) {
+>                     todo = Sprint(&ss->sprinter, " %s in %s)", lval, rval);
+>                     if (todo < 0)
+>                         return JS_FALSE;
+>                     ss->offsets[ss->top-1] = todo;
+>                     DECOMPILE_CODE(pc + oplen, tail - oplen);
+>                 } else {
+>                     js_printf(jp, "\t%s in %s) {\n", lval, rval);
+>                     jp->indent += 4;
+>                     DECOMPILE_CODE(pc + oplen, tail - oplen);
+>                     jp->indent -= 4;
+>                     js_printf(jp, "\t}\n");
+>                 }
+1602c1827
+<                  * do_forinbody: code that uses on it to find the loop-closing
+---
+>                  * do_forinhead: code that uses on it to find the loop-closing
+1620c1845
+<                  * to label do_forinbody.
+---
+>                  * to label do_forinhead.
+1644c1869
+<                 goto do_forinbody;
+---
+>                 goto do_forinhead;
+1655c1880
+<                 todo = SprintPut(&ss->sprinter, rval, strlen(rval));
+---
+>                 todo = SprintCString(&ss->sprinter, rval);
+1663c1888
+<                 todo = SprintPut(&ss->sprinter, rval, strlen(rval));
+---
+>                 todo = SprintCString(&ss->sprinter, rval);
+1837a2063
+>               do_inclval:
+1895a2122
+>               do_lvalinc:
+2092c2319,2323
+<                 op = pc[1 + LITERAL_INDEX_LEN];
+---
+>                 pc2 = pc + 1 + LITERAL_INDEX_LEN;
+>                 op = *pc2;
+>                 pc += len - (1 + ATOM_INDEX_LEN);
+>                 cs = &js_CodeSpec[op];
+>                 len = cs->length;
+2188d2418
+<                 jsbytecode *pc2;
+2250d2479
+<                 jsbytecode *pc2;
+2299d2527
+<                 jsbytecode *pc2;
+2453a2682
+>                 todo = ss->sprinter.offset;
+2461,2464c2690,2692
+<                     todo = Sprint(&ss->sprinter, "#%u=%c",
+<                                   (unsigned) i,
+<                                   (*lval == 'O') ? '{' : '[');
+<                 } else
+---
+>                     if (Sprint(&ss->sprinter, "#%u=", (unsigned) i) < 0)
+>                         return JS_FALSE;
+>                 }
+2466,2467c2694,2700
+<                 {
+<                     todo = Sprint(&ss->sprinter, (*lval == 'O') ? "{" : "[");
+---
+>                 if (*lval == 'A') {
+>                     ++ss->inArrayInit;
+>                     if (SprintCString(&ss->sprinter, "[") < 0)
+>                         return JS_FALSE;
+>                 } else {
+>                     if (SprintCString(&ss->sprinter, "{") < 0)
+>                         return JS_FALSE;
+2468a2702
+>                 op = JSOP_NEWINIT;      /* mark the stack with this op */
+2473a2708,2709
+>                 if (*rval == '[')
+>                     --ss->inArrayInit;
+2477c2713
+<                               (*rval == '{') ? '}' : ']');
+---
+>                               (*rval == '[') ? ']' : '}');
+2697c2933
+<                      SprintPut(&ss->sprinter, rval, strlen(rval));
+---
+>                      SprintCString(&ss->sprinter, rval);
+2771c3007
+<     ss.top = 0;
+---
+>     ss.top = ss.inArrayInit = 0;
+3124,3126c3360,3362
+<        if (fp->fun && fp->fun->object) {
+<            JS_ASSERT(OBJ_IS_NATIVE(fp->fun->object));
+<            jp->scope = OBJ_SCOPE(fp->fun->object);
+---
+>         if (fp->fun && fp->fun->object) {
+>             JS_ASSERT(OBJ_IS_NATIVE(fp->fun->object));
+>             jp->scope = OBJ_SCOPE(fp->fun->object);
+3137c3373
+<     return fallback ? fallback : js_ValueToString(cx, v);
+---
+>     return fallback ? fallback : js_ValueToSource(cx, v);
+diff -r 490/src/jsopcode.h 491/src/jsopcode.h
+75c75
+< #define JOF_INDEXCONST    8       /* arg or var index + constant pool index */
+---
+> #define JOF_INDEXCONST    8       /* uint16 slot index + constant pool index */
+82a83
+> #define JOF_LOCAL         14      /* block-local operand stack variable */
+189a191,197
+> /* Common uint16 immediate format helpers. */
+> #define UINT16_HI(i)            ((jsbytecode)((i) >> 8))
+> #define UINT16_LO(i)            ((jsbytecode)(i))
+> #define GET_UINT16(pc)          ((uintN)(((pc)[1] << 8) | (pc)[2]))
+> #define SET_UINT16(pc,i)        ((pc)[1] = UINT16_HI(i), (pc)[2] = UINT16_LO(i))
+> #define UINT16_LIMIT            ((uintN)1 << 16)
+> 
+191,194c199,202
+< #define ARGC_HI(argc)           ((jsbytecode)((argc) >> 8))
+< #define ARGC_LO(argc)           ((jsbytecode)(argc))
+< #define GET_ARGC(pc)            ((uintN)(((pc)[1] << 8) | (pc)[2]))
+< #define ARGC_LIMIT              ((uint32)1 << 16)
+---
+> #define ARGC_HI(argc)           UINT16_HI(argc)
+> #define ARGC_LO(argc)           UINT16_LO(argc)
+> #define GET_ARGC(pc)            GET_UINT16(pc)
+> #define ARGC_LIMIT              UINT16_LIMIT
+197,202c205,213
+< #define GET_ARGNO(pc)           GET_ARGC(pc)
+< #define SET_ARGNO(pc,argno)     SET_JUMP_OFFSET(pc,argno)
+< #define ARGNO_LEN               JUMP_OFFSET_LEN
+< #define GET_VARNO(pc)           GET_ARGC(pc)
+< #define SET_VARNO(pc,varno)     SET_JUMP_OFFSET(pc,varno)
+< #define VARNO_LEN               JUMP_OFFSET_LEN
+---
+> #define GET_ARGNO(pc)           GET_UINT16(pc)
+> #define SET_ARGNO(pc,argno)     SET_UINT16(pc,argno)
+> #define ARGNO_LEN               2
+> #define ARGNO_LIMIT             UINT16_LIMIT
+> 
+> #define GET_VARNO(pc)           GET_UINT16(pc)
+> #define SET_VARNO(pc,varno)     SET_UINT16(pc,varno)
+> #define VARNO_LEN               2
+> #define VARNO_LIMIT             UINT16_LIMIT
+diff -r 490/src/jsopcode.tbl 491/src/jsopcode.tbl
+1a2
+>  * vim: set ts=8 sw=4 et tw=128 ft=C:
+296,298c297
+<  * N.B. JSOP_SWAP doesn't swap the corresponding pc stack generating pcs, as
+<  * they're not needed for the current use of preserving the top-of-stack return
+<  * value when popping scopes while returning from catch blocks.
+---
+>  * XXX JSOP_SWAP doesn't swap the corresponding pc stack generating pcs.
+408c407,433
+< OPDEF(JSOP_TYPEOFEXPR,    198, js_typeof_str,NULL,    1,  1,  1, 10,  JOF_BYTE|JOF_DETECTING)
+---
+> 
+> /*
+>  * Specialized JSOP_TYPEOF to avoid reporting undefined for typeof(0, undef).
+>  */
+> OPDEF(JSOP_TYPEOFEXPR,    198,js_typeof_str, NULL,    1,  1,  1, 10,  JOF_BYTE|JOF_DETECTING)
+> 
+> /*
+>  * Block-local scope support.
+>  */
+> OPDEF(JSOP_ENTERBLOCK,    199,"enterblock",  NULL,    3,  0,  0,  0,  JOF_CONST)
+> OPDEF(JSOP_LEAVEBLOCK,    200,"leaveblock",  NULL,    3,  0,  0,  0,  JOF_UINT16)
+> OPDEF(JSOP_GETLOCAL,      201,"getlocal",    NULL,    3,  0,  1, 13,  JOF_LOCAL)
+> OPDEF(JSOP_SETLOCAL,      202,"setlocal",    NULL,    3,  1,  1,  1,  JOF_LOCAL|JOF_SET|JOF_ASSIGNING|JOF_DETECTING)
+> OPDEF(JSOP_INCLOCAL,      203,"inclocal",    NULL,    3,  0,  1, 10,  JOF_LOCAL|JOF_INC)
+> OPDEF(JSOP_DECLOCAL,      204,"declocal",    NULL,    3,  0,  1, 10,  JOF_LOCAL|JOF_DEC)
+> OPDEF(JSOP_LOCALINC,      205,"localinc",    NULL,    3,  0,  1, 10,  JOF_LOCAL|JOF_INC|JOF_POST)
+> OPDEF(JSOP_LOCALDEC,      206,"localdec",    NULL,    3,  0,  1, 10,  JOF_LOCAL|JOF_DEC|JOF_POST)
+> OPDEF(JSOP_FORLOCAL,      207,"forlocal",    NULL,    3,  0,  1,  0,  JOF_LOCAL|JOF_NAME|JOF_FOR)
+> 
+> /*
+>  * Iterator, generator, and array comprehension support.
+>  */
+> OPDEF(JSOP_STARTITER,     208,"startiter",   NULL,    1,  0,  2,  0,  JOF_BYTE)
+> OPDEF(JSOP_ENDITER,       209,"enditer",     NULL,    1,  3,  0,  0,  JOF_BYTE)
+> OPDEF(JSOP_GENERATOR,     210,"generator",   NULL,    1,  0,  0,  0,  JOF_BYTE)
+> OPDEF(JSOP_YIELD,         211,"yield",       NULL,    1,  1,  0,  0,  JOF_BYTE)
+> OPDEF(JSOP_ARRAYPUSH,     212,"arraypush",   NULL,    3,  1,  0,  0,  JOF_LOCAL)
+diff -r 490/src/jsosdep.h 491/src/jsosdep.h
+65c65,68
+< #if defined(AIXV3) || defined(AIX)
+---
+> #if defined(XP_MACOSX) || defined(DARWIN)
+> #define JS_HAVE_LONG_LONG
+> 
+> #elif defined(AIXV3) || defined(AIX)
+diff -r 490/src/jsparse.c 491/src/jsparse.c
+95a96,99
+> typedef JSParseNode *
+> JSPrimaryParser(JSContext *cx, JSTokenStream *ts, JSTreeContext *tc,
+>                 JSTokenType tt, JSBool afterDot);
+> 
+116c120
+< static JSParser PrimaryExpr;
+---
+> static JSPrimaryParser PrimaryExpr;
+538,540c542,545
+<  * Insist on a final return before control flows out of pn, but don't be too
+<  * smart about loops (do {...; return e2;} while(0) at the end of a function
+<  * that contains an early return e1 will get a strict-option-only warning).
+---
+>  * Insist on a final return before control flows out of pn.  Try to be a bit
+>  * smart about loops: do {...; return e2;} while(0) at the end of a function
+>  * that contains an early return e1 will get a strict warning.  Similarly for
+>  * iloops: while (true){...} is treated as though ... returns.
+562a568,596
+>       case TOK_WHILE:
+>         pn2 = pn->pn_left;
+>         if (pn2->pn_type == TOK_PRIMARY && pn2->pn_op == JSOP_TRUE)
+>             return ENDS_IN_RETURN;
+>         if (pn2->pn_type == TOK_NUMBER && pn2->pn_dval)
+>             return ENDS_IN_RETURN;
+>         return ENDS_IN_OTHER;
+> 
+>       case TOK_DO:
+>         pn2 = pn->pn_right;
+>         if (pn2->pn_type == TOK_PRIMARY) {
+>             if (pn2->pn_op == JSOP_FALSE)
+>                 return HasFinalReturn(pn->pn_left);
+>             if (pn2->pn_op == JSOP_TRUE)
+>                 return ENDS_IN_RETURN;
+>         }
+>         if (pn2->pn_type == TOK_NUMBER) {
+>             if (pn2->pn_dval == 0)
+>                 return HasFinalReturn(pn->pn_left);
+>             return ENDS_IN_RETURN;
+>         }
+>         return ENDS_IN_OTHER;
+> 
+>       case TOK_FOR:
+>         pn2 = pn->pn_left;
+>         if (pn2->pn_arity == PN_TERNARY && !pn2->pn_kid2)
+>             return ENDS_IN_RETURN;
+>         return ENDS_IN_OTHER;
+> 
+625c659,660
+< ReportNoReturnValue(JSContext *cx, JSTokenStream *ts)
+---
+> ReportBadReturn(JSContext *cx, JSTokenStream *ts, uintN flags, uintN errnum,
+>                 uintN anonerrnum)
+628c663
+<     JSBool ok;
+---
+>     const char *name;
+632,637c667
+<         char *name = js_GetStringBytes(cx->runtime, ATOM_TO_STRING(fun->atom));
+<         ok = js_ReportCompileErrorNumber(cx, ts,
+<                                          JSREPORT_TS |
+<                                          JSREPORT_WARNING |
+<                                          JSREPORT_STRICT,
+<                                          JSMSG_NO_RETURN_VALUE, name);
+---
+>         name = js_AtomToPrintableString(cx, fun->atom);
+639,643c669,670
+<         ok = js_ReportCompileErrorNumber(cx, ts,
+<                                          JSREPORT_TS |
+<                                          JSREPORT_WARNING |
+<                                          JSREPORT_STRICT,
+<                                          JSMSG_ANON_NO_RETURN_VALUE);
+---
+>         errnum = anonerrnum;
+>         name = NULL;
+645c672,673
+<     return ok;
+---
+>     return js_ReportCompileErrorNumber(cx, ts, JSREPORT_TS | flags, errnum,
+>                                        name);
+651c679,681
+<     return HasFinalReturn(pn) == ENDS_IN_RETURN || ReportNoReturnValue(cx, ts);
+---
+>     return HasFinalReturn(pn) == ENDS_IN_RETURN ||
+>            ReportBadReturn(cx, ts, JSREPORT_WARNING | JSREPORT_STRICT,
+>                            JSMSG_NO_RETURN_VALUE, JSMSG_ANON_NO_RETURN_VALUE);
+1222a1253
+>             ts->flags |= TSF_KEYWORD_IS_NAME;
+1232a1264
+>             ts->flags &= ~TSF_KEYWORD_IS_NAME;
+1276a1309,1353
+> ContainsStmt(JSParseNode *pn, JSTokenType tt)
+> {
+>     JSParseNode *pn2, *pnt;
+> 
+>     if (!pn)
+>         return NULL;
+>     if (pn->pn_type == tt)
+>         return pn;
+>     switch (pn->pn_arity) {
+>       case PN_LIST:
+>         for (pn2 = pn->pn_head; pn2; pn2 = pn2->pn_next) {
+>             pnt = ContainsStmt(pn2, tt);
+>             if (pnt)
+>                 return pnt;
+>         }
+>         break;
+>       case PN_TERNARY:
+>         pnt = ContainsStmt(pn->pn_kid1, tt);
+>         if (pnt)
+>             return pnt;
+>         pnt = ContainsStmt(pn->pn_kid2, tt);
+>         if (pnt)
+>             return pnt;
+>         return ContainsStmt(pn->pn_kid3, tt);
+>       case PN_BINARY:
+>         /*
+>          * Limit recursion if pn is a binary expression, which can't contain a
+>          * var statement.
+>          */
+>         if (pn->pn_op != JSOP_NOP)
+>             return NULL;
+>         pnt = ContainsStmt(pn->pn_left, tt);
+>         if (pnt)
+>             return pnt;
+>         return ContainsStmt(pn->pn_right, tt);
+>       case PN_UNARY:
+>         if (pn->pn_op != JSOP_NOP)
+>             return NULL;
+>         return ContainsStmt(pn->pn_kid, tt);
+>       default:;
+>     }
+>     return NULL;
+> }
+> 
+> static JSParseNode *
+1800a1878,1887
+> #if JS_HAS_GENERATORS
+>             /* As in Python (see PEP-255), disallow yield from try-finally. */
+>             pn1 = ContainsStmt(pn->pn_kid1, TOK_YIELD);
+>             if (pn1) {
+>                 js_ReportCompileErrorNumber(cx, pn1,
+>                                             JSREPORT_PN | JSREPORT_ERROR,
+>                                             JSMSG_BAD_RETURN_OR_YIELD,
+>                                             js_yield_str);
+>             }
+> #endif
+1970a2058,2060
+> #if JS_HAS_GENERATORS
+>       case TOK_YIELD:
+> #endif
+1973c2063,2067
+<                                         JSMSG_BAD_RETURN);
+---
+>                                         JSMSG_BAD_RETURN_OR_YIELD,
+> #if JS_HAS_GENERATORS
+>                                         (tt == TOK_YIELD) ? js_yield_str :
+> #endif
+>                                         js_return_str);
+1980,1985c2074,2086
+<         /* This is ugly, but we don't want to require a semicolon. */
+<         ts->flags |= TSF_OPERAND;
+<         tt = js_PeekTokenSameLine(cx, ts);
+<         ts->flags &= ~TSF_OPERAND;
+<         if (tt == TOK_ERROR)
+<             return NULL;
+---
+> #if JS_HAS_GENERATORS
+>         if (tt == TOK_YIELD) {
+>             tc->flags |= TCF_FUN_IS_GENERATOR;
+>         } else
+> #endif
+>         {
+>             /* This is ugly, but we don't want to require a semicolon. */
+>             ts->flags |= TSF_OPERAND;
+>             tt = js_PeekTokenSameLine(cx, ts);
+>             ts->flags &= ~TSF_OPERAND;
+>             if (tt == TOK_ERROR)
+>                 return NULL;
+>         }
+1991c2092,2095
+<             tc->flags |= TCF_RETURN_EXPR;
+---
+> #if JS_HAS_GENERATORS
+>             if (pn->pn_type == TOK_RETURN)
+> #endif
+>                 tc->flags |= TCF_RETURN_EXPR;
+1998a2103,2110
+>         if ((~tc->flags & (TCF_RETURN_EXPR | TCF_FUN_IS_GENERATOR)) == 0) {
+>             /* As in Python (see PEP-255), disallow return v; in generators. */
+>             ReportBadReturn(cx, ts, JSREPORT_ERROR,
+>                             JSMSG_BAD_GENERATOR_RETURN,
+>                             JSMSG_BAD_ANON_GENERATOR_RETURN);
+>             return NULL;
+>         }
+> 
+2000,2006c2112,2116
+<             (~tc->flags & (TCF_RETURN_EXPR | TCF_RETURN_VOID)) == 0) {
+<             /*
+<              * We must be in a frame with a non-native function, because
+<              * we're compiling one.
+<              */
+<             if (!ReportNoReturnValue(cx, ts))
+<                 return NULL;
+---
+>             (~tc->flags & (TCF_RETURN_EXPR | TCF_RETURN_VOID)) == 0 &&
+>             !ReportBadReturn(cx, ts, JSREPORT_WARNING | JSREPORT_STRICT,
+>                              JSMSG_NO_RETURN_VALUE,
+>                              JSMSG_ANON_NO_RETURN_VALUE)) {
+>             return NULL;
+2680c2790
+< static const char *incop_name_str[] = {"increment", "decrement"};
+---
+> static const char incop_name_str[][10] = {"increment", "decrement"};
+2857c2967
+<     tt = js_PeekToken(cx, ts);
+---
+>     tt = js_GetToken(cx, ts);
+2860,2861d2969
+<         (void) js_GetToken(cx, ts);
+< 
+2881c2989
+<         pn = PrimaryExpr(cx, ts, tc);
+---
+>         pn = PrimaryExpr(cx, ts, tc, tt, JS_FALSE);
+2907c3015,3018
+<             pn3 = PrimaryExpr(cx, ts, tc);
+---
+>             ts->flags |= TSF_OPERAND | TSF_KEYWORD_IS_NAME;
+>             tt = js_GetToken(cx, ts);
+>             ts->flags &= ~(TSF_OPERAND | TSF_KEYWORD_IS_NAME);
+>             pn3 = PrimaryExpr(cx, ts, tc, tt, JS_TRUE);
+2942a3054
+>             ts->flags |= TSF_KEYWORD_IS_NAME;
+2943a3056
+>             ts->flags &= ~TSF_KEYWORD_IS_NAME;
+2955c3068,3071
+<             pn3 = PrimaryExpr(cx, ts, tc);
+---
+>             ts->flags |= TSF_OPERAND | TSF_KEYWORD_IS_NAME;
+>             tt = js_GetToken(cx, ts);
+>             ts->flags &= ~(TSF_OPERAND | TSF_KEYWORD_IS_NAME);
+>             pn3 = PrimaryExpr(cx, ts, tc, tt, JS_TRUE);
+3158a3275
+>     ts->flags |= TSF_KEYWORD_IS_NAME;
+3159a3277
+>     ts->flags &= ~TSF_KEYWORD_IS_NAME;
+3712c3830,3831
+< PrimaryExpr(JSContext *cx, JSTokenStream *ts, JSTreeContext *tc)
+---
+> PrimaryExpr(JSContext *cx, JSTokenStream *ts, JSTreeContext *tc,
+>             JSTokenType tt, JSBool afterDot)
+3714d3832
+<     JSTokenType tt;
+3716,3719c3834,3835
+< #if JS_HAS_GETTER_SETTER
+<     JSAtom *atom;
+<     JSRuntime *rt;
+< #endif
+---
+>     JSBool afterComma;
+>     JSOp op;
+3737,3740d3852
+<     ts->flags |= TSF_OPERAND;
+<     tt = js_GetToken(cx, ts);
+<     ts->flags &= ~TSF_OPERAND;
+< 
+3750a3863
+> #if JS_HAS_XML_SUPPORT
+3760a3874
+> #endif
+3821a3936,4126
+> #if JS_HAS_GENERATORS
+>             /*
+>              * At this point, atomIndex == 0 and pn->pn_count != 0 implies
+>              * one element initialiser was parsed (possibly with a defsharp
+>              * before the left bracket).
+>              *
+>              * An array comprehension of the form:
+>              *
+>              *   [i * j for (i in o) for (j in p) if (i != j)]
+>              *
+>              * translates to roughly the following let expression:
+>              *
+>              *   let (array = new Array, i, j) {
+>              *     for (i in o) let {
+>              *       for (j in p)
+>              *         if (i != j)
+>              *           array.push(i * j)
+>              *     }
+>              *     array
+>              *   }
+>              *
+>              * where array is a nameless block-local variable.  The "roughly"
+>              * means that an implementation may optimize away the array.push.
+>              * An array comprehension opens exactly one block scope, no matter
+>              * how many for heads it contains.
+>              *
+>              * Each let () {...} or for (let ...) ... compiles to:
+>              *
+>              *   JSOP_ENTERBLOCK <o> ... JSOP_LEAVEBLOCK <n>
+>              *
+>              * where <o> is a literal object representing the block scope,
+>              * with <n> properties, naming each var declared in the block.
+>              *
+>              * Each var declaration in a let-block binds a name in <o> at
+>              * compile time, and allocates a slot on the operand stack at
+>              * runtime via JSOP_ENTERBLOCK.  A block-local var is accessed
+>              * by the JSOP_GETLOCAL and JSOP_SETLOCAL ops, and iterated with
+>              * JSOP_FORLOCAL.  These ops all have an immediate operand, the
+>              * local slot's stack index from fp->spbase.
+>              *
+>              * The array comprehension iteration step, array.push(i * j) in
+>              * the example above, is done by <i * j>; JSOP_ARRAYCOMP <array>,
+>              * where <array> is the index of array's stack slot.
+>              */
+>             if (atomIndex == 0 &&
+>                 pn->pn_count != 0 &&
+>                 js_MatchToken(cx, ts, TOK_FOR)) {
+>                 JSParseNode **pnp, *pnexp, *pntop, *pnlet;
+>                 JSObject *obj;
+>                 JSScope *scope;
+>                 JSStmtInfo stmtInfo;
+>                 JSAtom *atom;
+>                 JSScopeProperty *sprop;
+> 
+> 
+>                 /* Relabel pn as an array comprehension node. */
+>                 pn->pn_type = TOK_ARRAYCOMP;
+> 
+>                 /*
+>                  * Remove the comprehension expression from pn's linked list
+>                  * and save it via pnexp.  We'll re-install it underneath the
+>                  * ARRAYPUSH nodeafter we parse the rest of the comprehension.
+>                  */
+>                 pnexp = PN_LAST(pn);
+>                 JS_ASSERT(pn->pn_count == 1 || pn->pn_count == 2);
+>                 pn->pn_tail = (--pn->pn_count == 1)
+>                               ? &pn->pn_head->pn_next
+>                               : &pn->pn_head;
+>                 *pn->pn_tail = NULL;
+> 
+>                 /*
+>                  * Make a parse-node and literal object representing the array
+>                  * comprehension's block scope.
+>                  */
+>                 pntop = NewParseNode(cx, ts, PN_NAME, tc);
+>                 if (!pntop)
+>                     return NULL;
+> 
+>                 obj = js_NewBlockObject(cx);
+>                 if (!obj)
+>                     return NULL;
+>                 scope = OBJ_SCOPE(obj);
+>                 js_PushBlockScope(tc, &stmtInfo, obj, -1);
+> 
+>                 atom = js_AtomizeObject(cx, obj, 0);
+>                 if (!atom)
+>                     return NULL;
+>                 pntop->pn_type = TOK_LEXICALSCOPE;
+>                 pntop->pn_atom = atom;
+>                 pntop->pn_expr = NULL;
+>                 pnp = &pntop->pn_expr;
+> 
+>                 do {
+>                     /*
+>                      * FOR node is binary, left is control and right is body.
+>                      * Use atomIndex to count each block-local let-variable on
+>                      * the left-hand side of IN.
+>                      */
+>                     pn2 = NewParseNode(cx, ts, PN_BINARY, tc);
+>                     if (!pn2)
+>                         return NULL;
+> 
+>                     MUST_MATCH_TOKEN(TOK_LP, JSMSG_PAREN_AFTER_FOR);
+>                     MUST_MATCH_TOKEN(TOK_NAME, JSMSG_NAME_AFTER_FOR_PAREN);
+>                     atom = CURRENT_TOKEN(ts).t_atom;
+> 
+>                     /*
+>                      * Look for the loop variable in case it was defined by an
+>                      * outer 'for' in this comprehension.
+>                      */
+>                     sprop = SCOPE_GET_PROPERTY(scope, ATOM_TO_JSID(atom));
+>                     if (sprop) {
+>                         JS_ASSERT(sprop->flags & SPROP_HAS_SHORTID);
+>                         JS_ASSERT((uint16)sprop->shortid < atomIndex);
+>                         OBJ_DROP_PROPERTY(cx, obj, (JSProperty *) sprop);
+>                     } else {
+>                         if (atomIndex == JS_BIT(16)) {
+>                             js_ReportCompileErrorNumber(cx, ts,
+>                                                 JSREPORT_TS | JSREPORT_ERROR,
+>                                                 JSMSG_ARRAY_INIT_TOO_BIG);
+>                             return NULL;
+>                         }
+> 
+>                         /* Use JSPROP_ENUMERATE to aid the disassembler. */
+>                         if (!js_DefineNativeProperty(cx, obj,
+>                                                      ATOM_TO_JSID(atom),
+>                                                      JSVAL_VOID, NULL, NULL,
+>                                                      JSPROP_ENUMERATE |
+>                                                      JSPROP_PERMANENT,
+>                                                      SPROP_HAS_SHORTID,
+>                                                      (intN)atomIndex++,
+>                                                      NULL)) {
+>                             return NULL;
+>                         }
+>                     }
+> 
+>                     /*
+>                      * Create a name node with op JSOP_NAME.  We can't set op
+>                      * JSOP_GETLOCAL here, because we don't yet know the block 
+>                      * depth in the operand stack frame.  The code generator
+>                      * computes that, and it tries to bind all names to slots,
+>                      * so we must let it do this optimization.
+>                      */
+>                     pnlet = NewParseNode(cx, ts, PN_NAME, tc);
+>                     if (!pnlet)
+>                         return NULL;
+>                     pnlet->pn_op = JSOP_NAME;
+>                     pnlet->pn_atom = atom;
+>                     pnlet->pn_expr = NULL;
+>                     pnlet->pn_slot = -1;
+>                     pnlet->pn_attrs = 0;
+> 
+>                     MUST_MATCH_TOKEN(TOK_IN, JSMSG_IN_AFTER_FOR_NAME);
+>                     pn3 = NewBinary(cx, TOK_IN, JSOP_NOP, pnlet,
+>                                     Expr(cx, ts, tc), tc);
+>                     if (!pn3)
+>                         return NULL;
+> 
+>                     MUST_MATCH_TOKEN(TOK_RP, JSMSG_PAREN_AFTER_FOR_CTRL);
+>                     pn2->pn_left = pn3;
+>                     *pnp = pn2;
+>                     pnp = &pn2->pn_right;
+>                 } while (js_MatchToken(cx, ts, TOK_FOR));
+> 
+>                 if (js_MatchToken(cx, ts, TOK_IF)) {
+>                     pn2 = NewParseNode(cx, ts, PN_TERNARY, tc);
+>                     if (!pn2)
+>                         return NULL;
+>                     pn2->pn_kid1 = Condition(cx, ts, tc);
+>                     if (!pn2->pn_kid1)
+>                         return NULL;
+>                     pn2->pn_kid2 = NULL;
+>                     pn2->pn_kid3 = NULL;
+>                     *pnp = pn2;
+>                     pnp = &pn2->pn_kid2;
+>                 }
+> 
+>                 pn2 = NewParseNode(cx, ts, PN_UNARY, tc);
+>                 if (!pn2)
+>                     return NULL;
+>                 pn2->pn_type = TOK_ARRAYPUSH;
+>                 pn2->pn_op = JSOP_ARRAYPUSH;
+>                 pn2->pn_kid = pnexp;
+>                 pn2->pn_array = pn;
+>                 *pnp = pn2;
+>                 PN_APPEND(pn, pntop);
+> 
+>                 js_PopStatement(tc);
+>             }
+> #endif /* JS_HAS_GENERATORS */
+> 
+3842,3853c4147,4158
+<         if (!js_MatchToken(cx, ts, TOK_RC)) {
+<             do {
+<                 JSOp op;
+< 
+<                 tt = js_GetToken(cx, ts);
+<                 switch (tt) {
+<                   case TOK_NUMBER:
+<                     pn3 = NewParseNode(cx, ts, PN_NULLARY, tc);
+<                     if (pn3)
+<                         pn3->pn_dval = CURRENT_TOKEN(ts).t_dval;
+<                     break;
+<                   case TOK_NAME:
+---
+>         afterComma = JS_FALSE;
+>         for (;;) {
+>             ts->flags |= TSF_KEYWORD_IS_NAME;
+>             tt = js_GetToken(cx, ts);
+>             ts->flags &= ~TSF_KEYWORD_IS_NAME;
+>             switch (tt) {
+>               case TOK_NUMBER:
+>                 pn3 = NewParseNode(cx, ts, PN_NULLARY, tc);
+>                 if (pn3)
+>                     pn3->pn_dval = CURRENT_TOKEN(ts).t_dval;
+>                 break;
+>               case TOK_NAME:
+3854a4160,4163
+>                 {
+>                     JSAtom *atom;
+>                     JSRuntime *rt;
+> 
+3860,3861c4169,4170
+<                              ? JSOP_GETTER
+<                              : JSOP_SETTER;
+---
+>                             ? JSOP_GETTER
+>                             : JSOP_SETTER;
+3868c4177
+< 
+---
+>                             
+3877a4187
+>                 }
+3879,3889c4189,4200
+<                   case TOK_STRING:
+<                     pn3 = NewParseNode(cx, ts, PN_NULLARY, tc);
+<                     if (pn3)
+<                         pn3->pn_atom = CURRENT_TOKEN(ts).t_atom;
+<                     break;
+<                   case TOK_RC:
+<                     if (!js_ReportCompileErrorNumber(cx, ts,
+<                                                      JSREPORT_TS |
+<                                                      JSREPORT_WARNING |
+<                                                      JSREPORT_STRICT,
+<                                                      JSMSG_TRAILING_COMMA)) {
+---
+>               case TOK_STRING:
+>                 pn3 = NewParseNode(cx, ts, PN_NULLARY, tc);
+>                 if (pn3)
+>                     pn3->pn_atom = CURRENT_TOKEN(ts).t_atom;
+>                 break;
+>               case TOK_RC:
+>                 if (afterComma &&
+>                     !js_ReportCompileErrorNumber(cx, ts,
+>                                                  JSREPORT_TS |
+>                                                  JSREPORT_WARNING |
+>                                                  JSREPORT_STRICT,
+>                                                  JSMSG_TRAILING_COMMA)) {
+3891,3897d4201
+<                     }
+<                     goto end_obj_init;
+<                   default:
+<                     js_ReportCompileErrorNumber(cx, ts,
+<                                                 JSREPORT_TS | JSREPORT_ERROR,
+<                                                 JSMSG_BAD_PROP_ID);
+<                     return NULL;
+3898a4203,4209
+>                 goto end_obj_init;
+>               default:
+>                 js_ReportCompileErrorNumber(cx, ts,
+>                                             JSREPORT_TS | JSREPORT_ERROR,
+>                                             JSMSG_BAD_PROP_ID);
+>                 return NULL;
+>             }
+3900c4211
+<                 tt = js_GetToken(cx, ts);
+---
+>             tt = js_GetToken(cx, ts);
+3902,3911c4213,4215
+<                 if (tt == TOK_NAME) {
+<                     tt = CheckGetterOrSetter(cx, ts, TOK_COLON);
+<                     if (tt == TOK_ERROR)
+<                         return NULL;
+<                 }
+< #endif
+<                 if (tt != TOK_COLON) {
+<                     js_ReportCompileErrorNumber(cx, ts,
+<                                                 JSREPORT_TS | JSREPORT_ERROR,
+<                                                 JSMSG_COLON_AFTER_ID);
+---
+>             if (tt == TOK_NAME) {
+>                 tt = CheckGetterOrSetter(cx, ts, TOK_COLON);
+>                 if (tt == TOK_ERROR)
+3913,3916c4217,4227
+<                 }
+<                 op = CURRENT_TOKEN(ts).t_op;
+<                 pn2 = NewBinary(cx, TOK_COLON, op, pn3, AssignExpr(cx, ts, tc),
+<                                 tc);
+---
+>             }
+> #endif
+>             if (tt != TOK_COLON) {
+>                 js_ReportCompileErrorNumber(cx, ts,
+>                                             JSREPORT_TS | JSREPORT_ERROR,
+>                                             JSMSG_COLON_AFTER_ID);
+>                 return NULL;
+>             }
+>             op = CURRENT_TOKEN(ts).t_op;
+>             pn2 = NewBinary(cx, TOK_COLON, op, pn3, AssignExpr(cx, ts, tc),
+>                             tc);
+3918c4229
+<               skip:
+---
+>           skip:
+3920,3923c4231,4233
+<                 if (!pn2)
+<                     return NULL;
+<                 PN_APPEND(pn, pn2);
+<             } while (js_MatchToken(cx, ts, TOK_COMMA));
+---
+>             if (!pn2)
+>                 return NULL;
+>             PN_APPEND(pn, pn2);
+3925c4235,4244
+<             MUST_MATCH_TOKEN(TOK_RC, JSMSG_CURLY_AFTER_LIST);
+---
+>             tt = js_GetToken(cx, ts);
+>             if (tt == TOK_RC)
+>                 goto end_obj_init;
+>             if (tt != TOK_COMMA) {
+>                 js_ReportCompileErrorNumber(cx, ts,
+>                                             JSREPORT_TS | JSREPORT_ERROR,
+>                                             JSMSG_CURLY_AFTER_LIST);
+>                 return NULL;
+>             }
+>             afterComma = JS_TRUE;
+3927c4246
+<       end_obj_init:
+---
+>      end_obj_init:
+3939a4259,4261
+>         ts->flags |= TSF_OPERAND;
+>         tt = js_GetToken(cx, ts);
+>         ts->flags &= ~TSF_OPERAND;
+4019a4342,4363
+>                 if (afterDot) {
+>                     JSString *str;
+> 
+>                     /*
+>                      * Here PrimaryExpr is called after '.' or '..' and we
+>                      * just scanned .name:: or ..name:: . This is the only
+>                      * case where a keyword after '.' or '..' is not
+>                      * treated as a property name.
+>                      */
+>                     str = ATOM_TO_STRING(pn->pn_atom);
+>                     tt = js_CheckKeyword(JSSTRING_CHARS(str),
+>                                          JSSTRING_LENGTH(str));
+>                     if (tt == TOK_FUNCTION) {
+>                         pn->pn_arity = PN_NULLARY;
+>                         pn->pn_type = TOK_FUNCTION;
+>                     } else if (tt != TOK_EOF) {
+>                         js_ReportCompileErrorNumber(
+>                             cx, ts, JSREPORT_TS | JSREPORT_ERROR,
+>                             JSMSG_KEYWORD_NOT_NS);
+>                         return NULL;
+>                     }
+>                 }
+4104,4140d4447
+< static JSBool
+< ContainsVarStmt(JSParseNode *pn)
+< {
+<     JSParseNode *pn2;
+< 
+<     if (!pn)
+<         return JS_FALSE;
+<     switch (pn->pn_arity) {
+<       case PN_LIST:
+<         if (pn->pn_type == TOK_VAR)
+<             return JS_TRUE;
+<         for (pn2 = pn->pn_head; pn2; pn2 = pn2->pn_next) {
+<             if (ContainsVarStmt(pn2))
+<                 return JS_TRUE;
+<         }
+<         break;
+<       case PN_TERNARY:
+<         return ContainsVarStmt(pn->pn_kid1) ||
+<                ContainsVarStmt(pn->pn_kid2) ||
+<                ContainsVarStmt(pn->pn_kid3);
+<       case PN_BINARY:
+<         /*
+<          * Limit recursion if pn is a binary expression, which can't contain a
+<          * var statement.
+<          */
+<         if (pn->pn_op != JSOP_NOP)
+<             return JS_FALSE;
+<         return ContainsVarStmt(pn->pn_left) || ContainsVarStmt(pn->pn_right);
+<       case PN_UNARY:
+<         if (pn->pn_op != JSOP_NOP)
+<             return JS_FALSE;
+<         return ContainsVarStmt(pn->pn_kid);
+<       default:;
+<     }
+<     return JS_FALSE;
+< }
+< 
+4547c4854
+<         if (ContainsVarStmt(pn2) || ContainsVarStmt(pn3))
+---
+>         if (ContainsStmt(pn2, TOK_VAR) || ContainsStmt(pn3, TOK_VAR))
+diff -r 490/src/jsparse.h 491/src/jsparse.h
+185a186,187
+>  *
+>  * <E4X node descriptions>
+237a240,254
+>  *
+>  * <Non-E4X node descriptions, continued>
+>  *
+>  * Label              Variant   Members
+>  * -----              -------   -------
+>  * TOK_LEXICALSCOPE   name      pn_atom: block object
+>  *                              pn_expr: block body
+>  * TOK_ARRAYCOMP      list      pn_head: list of pn_count (1 or 2) elements
+>  *                              if pn_count is 2, first element is #n=[...]
+>  *                                last element is block enclosing for loop(s)
+>  *                                and optionally if-guarded TOK_ARRAYPUSH
+>  *                              pn_extra: stack slot, used during code gen
+>  * TOK_ARRAYPUSH      unary     pn_op: JSOP_ARRAYCOMP
+>  *                              pn_kid: array comprehension expression
+>  *                              pn_array: link to TOK_ARRAYCOMP
+280a298
+>             JSParseNode *array;         /* cyclic link to array comprehension */
+315a334
+> #define pn_array        pn_u.unary.array
+diff -r 490/src/jsproto.tbl 491/src/jsproto.tbl
+39,63c39,78
+< JS_PROTO(Null,                  js_InitNullClass)
+< JS_PROTO(Object,                js_InitFunctionAndObjectClasses)
+< JS_PROTO(Function,              js_InitFunctionAndObjectClasses)
+< JS_PROTO(Array,                 js_InitArrayClass)
+< JS_PROTO(Boolean,               js_InitBooleanClass)
+< JS_PROTO(Call,                  js_InitCallClass)
+< JS_PROTO(Date,                  js_InitDateClass)
+< JS_PROTO(Math,                  js_InitMathClass)
+< JS_PROTO(Number,                js_InitNumberClass)
+< JS_PROTO(String,                js_InitStringClass)
+< JS_PROTO(RegExp,                js_InitRegExpClass)
+< JS_PROTO(Script,                js_InitScriptClass)
+< JS_PROTO(XML,                   js_InitXMLClass)
+< JS_PROTO(Namespace,             js_InitNamespaceClass)
+< JS_PROTO(QName,                 js_InitQNameClass)
+< JS_PROTO(AnyName,               js_InitAnyNameClass)
+< JS_PROTO(AttributeName,         js_InitAttributeNameClass)
+< JS_PROTO(Error,                 js_InitExceptionClasses)
+< JS_PROTO(InternalError,         js_InitExceptionClasses)
+< JS_PROTO(EvalError,             js_InitExceptionClasses)
+< JS_PROTO(RangeError,            js_InitExceptionClasses)
+< JS_PROTO(ReferenceError,        js_InitExceptionClasses)
+< JS_PROTO(SyntaxError,           js_InitExceptionClasses)
+< JS_PROTO(TypeError,             js_InitExceptionClasses)
+< JS_PROTO(URIError,              js_InitExceptionClasses)
+---
+> #include "jsconfig.h"
+> 
+> /*
+>  * Enumerator codes in the second column must not change -- they are part of
+>  * the JS XDR API.
+>  */
+> JS_PROTO(Null,                   0,     js_InitNullClass)
+> JS_PROTO(Object,                 1,     js_InitFunctionAndObjectClasses)
+> JS_PROTO(Function,               2,     js_InitFunctionAndObjectClasses)
+> JS_PROTO(Array,                  3,     js_InitArrayClass)
+> JS_PROTO(Boolean,                4,     js_InitBooleanClass)
+> JS_PROTO(Call,                   5,     js_InitCallClass)
+> JS_PROTO(Date,                   6,     js_InitDateClass)
+> JS_PROTO(Math,                   7,     js_InitMathClass)
+> JS_PROTO(Number,                 8,     js_InitNumberClass)
+> JS_PROTO(String,                 9,     js_InitStringClass)
+> JS_PROTO(RegExp,                10,     js_InitRegExpClass)
+> #if JS_HAS_SCRIPT_OBJECT
+> JS_PROTO(Script,                11,     js_InitScriptClass)
+> #endif
+> #if JS_HAS_XML_SUPPORT
+> JS_PROTO(XML,                   12,     js_InitXMLClass)
+> JS_PROTO(Namespace,             13,     js_InitNamespaceClass)
+> JS_PROTO(QName,                 14,     js_InitQNameClass)
+> JS_PROTO(AnyName,               15,     js_InitAnyNameClass)
+> JS_PROTO(AttributeName,         16,     js_InitAttributeNameClass)
+> #endif
+> JS_PROTO(Error,                 17,     js_InitExceptionClasses)
+> JS_PROTO(InternalError,         18,     js_InitExceptionClasses)
+> JS_PROTO(EvalError,             19,     js_InitExceptionClasses)
+> JS_PROTO(RangeError,            20,     js_InitExceptionClasses)
+> JS_PROTO(ReferenceError,        21,     js_InitExceptionClasses)
+> JS_PROTO(SyntaxError,           22,     js_InitExceptionClasses)
+> JS_PROTO(TypeError,             23,     js_InitExceptionClasses)
+> JS_PROTO(URIError,              24,     js_InitExceptionClasses)
+> #if JS_HAS_GENERATORS
+> JS_PROTO(Generator,             25,     js_InitIteratorClasses)
+> #endif
+> JS_PROTO(Iterator,              26,     js_InitIteratorClasses)
+> JS_PROTO(StopIteration,         27,     js_InitIteratorClasses)
+diff -r 490/src/jspubtd.h 491/src/jspubtd.h
+95c95
+< #define JS_PROTO(name,init) JSProto_##name,
+---
+> #define JS_PROTO(name,code,init) JSProto_##name = code,
+diff -r 490/src/jsregexp.c 491/src/jsregexp.c
+4112c4112
+<     JS_PUSH_SINGLE_TEMP_ROOT(cx, STRING_TO_JSVAL(str), &tvr);
+---
+>     JS_PUSH_SINGLE_TEMP_ROOT(cx, str, &tvr);
+diff -r 490/src/jsscan.c 491/src/jsscan.c
+77,78d76
+< #define MAX_KEYWORD_LENGTH      12
+< 
+137,138c135,136
+< JSBool
+< js_IsKeyword(const jschar *str, size_t length)
+---
+> JSTokenType
+> js_CheckKeyword(const jschar *str, size_t length)
+139a138,139
+>     const struct keyword *kw;
+> 
+141c141,142
+<     return FindKeyword(str, length) != NULL;
+---
+>     kw = FindKeyword(str, length);
+>     return kw ? kw->tokentype : TOK_EOF;
+586,587c587,588
+<                                  ? JS_GetStringBytes(linestr)
+<                                  : NULL;
+---
+>                                   ? JS_GetStringBytes(linestr)
+>                                   : NULL;
+1284a1286,1289
+>         /*
+>          * Check for keywords unless we saw Unicode escape or parser asks
+>          * to ignore keywords.
+>          */
+1285a1291
+>             !(ts->flags & TSF_KEYWORD_IS_NAME) &&
+1288,1296d1293
+<                 char buf[MAX_KEYWORD_LENGTH + 1];
+<                 size_t buflen = sizeof(buf) - 1;
+<                 if (!js_DeflateStringToBuffer(cx,
+<                                               TOKENBUF_BASE(),
+<                                               TOKENBUF_LENGTH(),
+<                                               buf, &buflen)) {
+<                     goto error;
+<                 }
+<                 buf [buflen] = 0;
+1301c1298,1299
+<                                                  JSMSG_RESERVED_ID, buf)) {
+---
+>                                                  JSMSG_RESERVED_ID,
+>                                                  kw->chars)) {
+diff -r 490/src/jsscan.h 491/src/jsscan.h
+52a53,57
+> #define JS_KEYWORD(keyword, type, op, version) \
+>     extern const char js_##keyword##_str[];
+> #include "jskeyword.tbl"
+> #undef JS_KEYWORD
+> 
+127a133,136
+>     TOK_YIELD = 79,                     /* yield from generator function */
+>     TOK_ARRAYCOMP = 80,                 /* array comprehension initialiser */
+>     TOK_ARRAYPUSH = 81,                 /* array push within comprehension */
+>     TOK_LEXICALSCOPE = 82,              /* block scope AST node label */
+274a284,286
+> /* Ignore keywords and return TOK_NAME instead to the parser. */
+> #define TSF_KEYWORD_IS_NAME 0x4000
+> 
+304c316,317
+<  * Return true if the given char array forms JavaScript keyword.
+---
+>  * If the given char array forms JavaScript keyword, return corresponding
+>  * token. Otherwise return TOK_EOF.
+306,307c319,323
+< extern JSBool
+< js_IsKeyword(const jschar *str, size_t length);
+---
+> extern JSTokenType
+> js_CheckKeyword(const jschar *chars, size_t length);
+> 
+> #define js_IsKeyword(chars, length) \
+>     (js_CheckKeyword(chars, length) != TOK_EOF)
+diff -r 490/src/jsscript.c 491/src/jsscript.c
+197,198c197,202
+<         if (!scopeobj)
+<             scopeobj = caller->scopeChain;
+---
+>         if (!scopeobj) {
+>             scopeobj = js_GetScopeChain(cx, caller);
+>             if (!scopeobj)
+>                 return JS_FALSE;
+>             fp->scopeChain = scopeobj;  /* for the compiler's benefit */
+>         }
+298c302,304
+<             scopeobj = caller->scopeChain;
+---
+>             scopeobj = js_GetScopeChain(cx, caller);
+>             if (!scopeobj)
+>                 return JS_FALSE;
+849a856,861
+> #if !JS_HAS_SCRIPT_OBJECT
+> const char js_Script_str[] = "Script";
+> 
+> #define JSProto_Script  JSProto_Object
+> #endif
+> 
+diff -r 490/src/jsstr.c 491/src/jsstr.c
+2649c2649
+< js_ValueToPrintableString(JSContext *cx, jsval v)
+---
+> js_ValueToPrintable(JSContext *cx, jsval v, JSValueToStringFun v2sfun)
+2654c2654
+<     str = js_ValueToString(cx, v);
+---
+>     str = v2sfun(cx, v);
+2666c2666
+< JSString *
+---
+> JS_FRIEND_API(JSString *)
+2693c2693
+< JSString *
+---
+> JS_FRIEND_API(JSString *)
+diff -r 490/src/jsstr.h 491/src/jsstr.h
+347a348,349
+> typedef JSString *(*JSValueToStringFun)(JSContext *cx, jsval v);
+> 
+349c351,357
+< js_ValueToPrintableString(JSContext *cx, jsval v);
+---
+> js_ValueToPrintable(JSContext *cx, jsval v, JSValueToStringFun v2sfun);
+> 
+> #define js_ValueToPrintableString(cx,v) \
+>     js_ValueToPrintable(cx, v, js_ValueToString)
+> 
+> #define js_ValueToPrintableSource(cx,v) \
+>     js_ValueToPrintable(cx, v, js_ValueToSource)
+355c363
+< extern JSString *
+---
+> extern JS_FRIEND_API(JSString *)
+362c370
+< extern JSString *
+---
+> extern JS_FRIEND_API(JSString *)
+diff -r 490/src/jsxml.c 491/src/jsxml.c
+3015,3020c3015
+<     /*
+<      * Temp and local root scope APIs take GC-thing pointers tagged as jsvals
+<      * and blindly untag.  Since qn is a GC-thing pointer, we can treat it as
+<      * an object pointer.
+<      */
+<     JS_PUSH_SINGLE_TEMP_ROOT(cx, OBJECT_TO_JSVAL(qn), &tvr);
+---
+>     JS_PUSH_SINGLE_TEMP_ROOT(cx, qn, &tvr);
+7344c7339
+<     JS_PUSH_SINGLE_TEMP_ROOT(cx, OBJECT_TO_JSVAL(xml), &tvr);
+---
+>     JS_PUSH_SINGLE_TEMP_ROOT(cx, xml, &tvr);
+7943c7938,7941
+<     scobj = fp->scopeChain;
+---
+>     fp->flags |= JSFRAME_FILTERING;
+>     scobj = js_GetScopeChain(cx, fp);
+>     if (!scobj)
+>         goto bad;
+7966c7964
+<     withobj = js_NewObject(cx, &js_WithClass, NULL, scobj);
+---
+>     withobj = js_NewWithObject(cx, NULL, scobj, -1);
+7989a7988
+>     fp->flags &= ~JSFRAME_FILTERING;
+diff -r 490/src/Makefile.in 491/src/Makefile.in
+84a85
+> 		jsiter.c \
+126a128
+> 		jsiter.h \
+diff -r 490/src/Makefile.ref 491/src/Makefile.ref
+160a161
+> 	jsiter.h	\
+200a202
+> 	jsproto.tbl     \
+229a232
+> 	jsiter.c	\

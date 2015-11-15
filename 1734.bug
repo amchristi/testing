@@ -1,0 +1,88 @@
+diff -r 1733/src/config/CVS/Tag 1734/src/config/CVS/Tag
+1c1
+< D2007.04.05.17.52.35
+---
+> D2007.04.07.03.32.27
+diff -r 1733/src/CVS/Entries 1734/src/CVS/Entries
+70a71
+> /js.c/3.135/Mon Nov 17 07:14:06 2014//D2007.04.07.03.32.27
+72a74
+> /jsapi.h/3.141/Mon Nov 17 07:14:06 2014//D2007.04.07.03.32.27
+97a100
+> /jsparse.c/3.276/Mon Nov 17 07:14:06 2014//D2007.04.07.03.32.27
+116,118d118
+< /js.c/3.134/Mon Nov 17 07:14:24 2014//D2007.04.05.17.52.35
+< /jsapi.h/3.140/Mon Nov 17 07:14:24 2014//D2007.04.05.17.52.35
+< /jsparse.c/3.275/Mon Nov 17 07:14:24 2014//D2007.04.05.17.52.35
+diff -r 1733/src/CVS/Tag 1734/src/CVS/Tag
+1c1
+< D2007.04.05.17.52.35
+---
+> D2007.04.07.03.32.27
+diff -r 1733/src/editline/CVS/Tag 1734/src/editline/CVS/Tag
+1c1
+< D2007.04.05.17.52.35
+---
+> D2007.04.07.03.32.27
+diff -r 1733/src/fdlibm/CVS/Tag 1734/src/fdlibm/CVS/Tag
+1c1
+< D2007.04.05.17.52.35
+---
+> D2007.04.07.03.32.27
+diff -r 1733/src/jsapi.h 1734/src/jsapi.h
+575a576,578
+> #define JSOPTION_ANONFUNFIX     JS_BIT(10)      /* Disallow function () {} in
+>                                                    statement context per
+>                                                    ECMA-262 Edition 3. */
+diff -r 1733/src/js.c 1734/src/js.c
+288c288
+<     fprintf(gErrFile, "usage: js [-PswWxCi] [-b branchlimit] [-c stackchunksize] [-v version] [-f scriptfile] [-e script] [-S maxstacksize] [scriptfile] [scriptarg...]\n");
+---
+>     fprintf(gErrFile, "usage: js [-PswWxCi] [-b branchlimit] [-c stackchunksize] [-o option] [-v version] [-f scriptfile] [-e script] [-S maxstacksize] [scriptfile] [scriptarg...]\n");
+315a316,328
+> static struct {
+>     const char  *name;
+>     uint32      flag;
+> } js_options[] = {
+>     {"strict",          JSOPTION_STRICT},
+>     {"werror",          JSOPTION_WERROR},
+>     {"atline",          JSOPTION_ATLINE},
+>     {"xml",             JSOPTION_XML},
+>     {"relimit",         JSOPTION_RELIMIT},
+>     {"anonfunfix",      JSOPTION_ANONFUNFIX},
+>     {NULL,              0}
+> };
+> 
+408a422,433
+>         case 'o':
+>             if (++i == argc)
+>                 return usage();
+> 
+>             for (j = 0; js_options[j].name; ++j) {
+>                 if (strcmp(js_options[j].name, argv[i]) == 0) {
+>                     JS_ToggleOptions(cx, js_options[j].flag);
+>                     break;
+>                 }
+>             }
+>             break;
+> 
+508,519d532
+< static struct {
+<     const char  *name;
+<     uint32      flag;
+< } js_options[] = {
+<     {"strict",          JSOPTION_STRICT},
+<     {"werror",          JSOPTION_WERROR},
+<     {"atline",          JSOPTION_ATLINE},
+<     {"xml",             JSOPTION_XML},
+<     {"relimit",         JSOPTION_RELIMIT },
+<     {0,                 0}
+< };
+< 
+diff -r 1733/src/jsparse.c 1734/src/jsparse.c
+1076a1077,1081
+>         if (!lambda && (cx->options & JSOPTION_ANONFUNFIX)) {
+>             js_ReportCompileErrorNumber(cx, ts, JSREPORT_TS | JSREPORT_ERROR,
+>                                         JSMSG_SYNTAX_ERROR);
+>             return NULL;
+>         }

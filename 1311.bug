@@ -1,0 +1,54 @@
+diff -r 1310/src/config/CVS/Tag 1311/src/config/CVS/Tag
+1c1
+< D2006.10.13.11.01.50
+---
+> D2006.10.14.11.39.26
+diff -r 1310/src/CVS/Entries 1311/src/CVS/Entries
+110a111
+> /jsdbgapi.c/3.69/Mon Nov 17 03:25:59 2014//D2006.10.14.11.39.26
+111a113
+> /jsinterp.c/3.299/Mon Nov 17 03:25:59 2014//D2006.10.14.11.39.26
+113a116
+> /jsparse.c/3.258/Mon Nov 17 03:25:59 2014//D2006.10.14.11.39.26
+115,117d117
+< /jsdbgapi.c/3.68/Mon Nov 17 03:26:02 2014//D2006.10.13.11.01.50
+< /jsinterp.c/3.298/Mon Nov 17 03:26:02 2014//D2006.10.13.11.01.50
+< /jsparse.c/3.257/Mon Nov 17 03:26:02 2014//D2006.10.13.11.01.50
+diff -r 1310/src/CVS/Tag 1311/src/CVS/Tag
+1c1
+< D2006.10.13.11.01.50
+---
+> D2006.10.14.11.39.26
+diff -r 1310/src/editline/CVS/Tag 1311/src/editline/CVS/Tag
+1c1
+< D2006.10.13.11.01.50
+---
+> D2006.10.14.11.39.26
+diff -r 1310/src/fdlibm/CVS/Tag 1311/src/fdlibm/CVS/Tag
+1c1
+< D2006.10.13.11.01.50
+---
+> D2006.10.14.11.39.26
+diff -r 1310/src/jsdbgapi.c 1311/src/jsdbgapi.c
+909c909
+<     scobj = js_GetScopeChain(cx, fp);
+---
+>     scobj = JS_GetFrameScopeChain(cx, fp);
+diff -r 1310/src/jsinterp.c 1311/src/jsinterp.c
+491c491,492
+<         JS_ASSERT(OBJ_GET_CLASS(cx, fp->scopeChain) != &js_BlockClass);
+---
+>         JS_ASSERT(OBJ_GET_CLASS(cx, fp->scopeChain) != &js_BlockClass ||
+>                   JS_GetPrivate(cx, fp->scopeChain) != fp);
+1565d1565
+<     frame.callobj = frame.argsobj = NULL;
+1568a1569,1570
+>         frame.callobj = down->callobj;
+>         frame.argsobj = down->argsobj;
+1578a1581
+>         frame.callobj = frame.argsobj = NULL;
+diff -r 1310/src/jsparse.c 1311/src/jsparse.c
+4329a4330,4332
+> 
+>                     /* A filtering predicate is like a with statement. */
+>                     tc->flags |= TCF_FUN_HEAVYWEIGHT;

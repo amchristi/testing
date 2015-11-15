@@ -1,0 +1,111 @@
+diff -r 94/src/config/CVS/Tag 95/src/config/CVS/Tag
+1c1
+< D2006.01.31.19.54.51
+---
+> D2006.01.31.23.11.00
+diff -r 94/src/CVS/Entries 95/src/CVS/Entries
+56a57
+> /jsemit.c/3.146/Mon Nov 17 04:54:11 2014//D2006.01.31.23.11.00
+67a69
+> /jsinterp.c/3.222/Mon Nov 17 04:54:11 2014//D2006.01.31.23.11.00
+78a81
+> /jsobj.c/3.238/Result of merge//D2006.01.31.23.11.00
+79a83
+> /jsopcode.c/3.109/Mon Nov 17 04:54:12 2014//D2006.01.31.23.11.00
+80a85
+> /jsopcode.tbl/3.49/Mon Nov 17 04:54:12 2014//D2006.01.31.23.11.00
+109,113d113
+< /jsemit.c/3.145/Mon Nov 17 04:54:13 2014//D2006.01.31.19.54.51
+< /jsinterp.c/3.221/Mon Nov 17 04:54:13 2014//D2006.01.31.19.54.51
+< /jsobj.c/3.237/Result of merge//D2006.01.31.19.54.51
+< /jsopcode.c/3.108/Mon Nov 17 04:54:14 2014//D2006.01.31.19.54.51
+< /jsopcode.tbl/3.48/Mon Nov 17 04:54:14 2014//D2006.01.31.19.54.51
+diff -r 94/src/CVS/Tag 95/src/CVS/Tag
+1c1
+< D2006.01.31.19.54.51
+---
+> D2006.01.31.23.11.00
+diff -r 94/src/editline/CVS/Tag 95/src/editline/CVS/Tag
+1c1
+< D2006.01.31.19.54.51
+---
+> D2006.01.31.23.11.00
+diff -r 94/src/fdlibm/CVS/Tag 95/src/fdlibm/CVS/Tag
+1c1
+< D2006.01.31.19.54.51
+---
+> D2006.01.31.23.11.00
+diff -r 94/src/jsemit.c 95/src/jsemit.c
+1671a1672
+>           case JSOP_GETXPROP:   op = JSOP_GETXELEM; break;
+4142c4143,4146
+<                 EMIT_ATOM_INDEX_OP(JSOP_GETPROP, atomIndex);
+---
+>                 EMIT_ATOM_INDEX_OP((pn2->pn_type == TOK_NAME)
+>                                    ? JSOP_GETXPROP
+>                                    : JSOP_GETPROP,
+>                                    atomIndex);
+diff -r 94/src/jsinterp.c 95/src/jsinterp.c
+3595a3596
+>           BEGIN_CASE(JSOP_GETXPROP)
+3616a3618
+>           BEGIN_CASE(JSOP_GETXELEM)
+diff -r 94/src/jsobj.c 95/src/jsobj.c
+2907a2908
+>         jsbytecode *pc;
+2926,2931c2927,2929
+<         if (JS_HAS_STRICT_OPTION(cx) &&
+<             *vp == default_val &&
+<             cx->fp && cx->fp->pc &&
+<             (*cx->fp->pc == JSOP_GETPROP || *cx->fp->pc == JSOP_GETELEM))
+<         {
+<             jsbytecode *pc;
+---
+>         if (*vp == default_val && cx->fp && (pc = cx->fp->pc)) {
+>             JSOp op;
+>             uintN flags;
+2934,2939c2932,2948
+<             /* Kludge to allow (typeof foo == "undefined") tests. */
+<             JS_ASSERT(cx->fp->script);
+<             pc = cx->fp->pc;
+<             pc += js_CodeSpec[*pc].length;
+<             if (Detecting(cx, pc))
+<                 return JS_TRUE;
+---
+>             op = *pc;
+>             if (op == JSOP_GETXPROP || op == JSOP_GETXELEM) {
+>                 flags = JSREPORT_ERROR;
+>             } else {
+>                 if (!JS_HAS_STRICT_OPTION(cx) ||
+>                     (op != JSOP_GETPROP && op != JSOP_GETELEM)) {
+>                     return JS_TRUE;
+>                 }
+> 
+>                 /* Kludge to allow (typeof foo == "undefined") tests. */
+>                 JS_ASSERT(cx->fp->script);
+>                 pc += js_CodeSpec[op].length;
+>                 if (Detecting(cx, pc))
+>                     return JS_TRUE;
+> 
+>                 flags = JSREPORT_WARNING | JSREPORT_STRICT;
+>             }
+2945,2946c2954
+<                 !JS_ReportErrorFlagsAndNumber(cx,
+<                                               JSREPORT_WARNING|JSREPORT_STRICT,
+---
+>                 !JS_ReportErrorFlagsAndNumber(cx, flags,
+Only in 94/src: .#jsobj.c.3.238
+diff -r 94/src/jsopcode.c 95/src/jsopcode.c
+1919a1920
+>               case JSOP_GETXPROP:
+1970a1972
+>               case JSOP_GETXELEM:
+diff -r 94/src/jsopcode.tbl 95/src/jsopcode.tbl
+400a401,407
+> 
+> /*
+>  * Get an extant property or element value, throwing ReferenceError if the
+>  * identified property does not exist.
+>  */
+> OPDEF(JSOP_GETXPROP,      196,"getxprop",    NULL,    3,  1,  1, 11,  JOF_CONST|JOF_PROP)
+> OPDEF(JSOP_GETXELEM,      197,"getxelem",    NULL,    1,  2,  1, 11,  JOF_BYTE |JOF_ELEM|JOF_LEFTASSOC)

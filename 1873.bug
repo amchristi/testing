@@ -1,0 +1,56 @@
+diff -r 1872/src/config/CVS/Tag 1873/src/config/CVS/Tag
+1c1
+< D2007.06.12.15.26.26
+---
+> D2007.06.13.02.30.57
+diff -r 1872/src/CVS/Entries 1873/src/CVS/Entries
+114,118c114,118
+< /jsatom.c/3.95/Wed Nov  5 23:46:50 2014//D2007.06.12.15.26.26
+< /jsatom.h/3.60/Wed Nov  5 23:46:50 2014//D2007.06.12.15.26.26
+< /jsobj.c/3.353/Result of merge//D2007.06.12.15.26.26
+< /jsopcode.c/3.249/Wed Nov  5 23:46:51 2014//D2007.06.12.15.26.26
+< /jsstr.c/3.143/Wed Nov  5 23:46:51 2014//D2007.06.12.15.26.26
+---
+> /jsatom.c/3.96/Wed Nov  5 23:46:49 2014//D2007.06.13.02.30.57
+> /jsatom.h/3.61/Wed Nov  5 23:46:49 2014//D2007.06.13.02.30.57
+> /jsobj.c/3.354/Result of merge//D2007.06.13.02.30.57
+> /jsopcode.c/3.250/Wed Nov  5 23:46:49 2014//D2007.06.13.02.30.57
+> /jsstr.c/3.144/Wed Nov  5 23:46:49 2014//D2007.06.13.02.30.57
+diff -r 1872/src/CVS/Tag 1873/src/CVS/Tag
+1c1
+< D2007.06.12.15.26.26
+---
+> D2007.06.13.02.30.57
+diff -r 1872/src/editline/CVS/Tag 1873/src/editline/CVS/Tag
+1c1
+< D2007.06.12.15.26.26
+---
+> D2007.06.13.02.30.57
+diff -r 1872/src/fdlibm/CVS/Tag 1873/src/fdlibm/CVS/Tag
+1c1
+< D2007.06.12.15.26.26
+---
+> D2007.06.13.02.30.57
+diff -r 1872/src/jsatom.c 1873/src/jsatom.c
+340a341
+>     FROB(void0Atom,               "(void 0)");
+diff -r 1872/src/jsatom.h 1873/src/jsatom.h
+205a206
+>     JSAtom              *void0Atom;
+diff -r 1872/src/jsobj.c 1873/src/jsobj.c
+1010c1010,1012
+<                     vchars = js_strchr_limit(vchars, ' ', end) + 1;
+---
+>                     const jschar *tmp = js_strchr_limit(vchars, ' ', end);
+>                     if (tmp)
+>                         vchars = tmp + 1;
+diff -r 1872/src/jsopcode.c 1873/src/jsopcode.c
+510c510,511
+<         while (JS_ISPRINT(c) && c != qc && c != '\\' && !(c >> 8)) {
+---
+>         while (JS_ISPRINT(c) && c != qc && c != '\\' && c != '\t' &&
+>                !(c >> 8)) {
+diff -r 1872/src/jsstr.c 1873/src/jsstr.c
+2690a2691,2692
+>     if (JSVAL_IS_VOID(v))
+>         return ATOM_TO_STRING(cx->runtime->atomState.void0Atom);

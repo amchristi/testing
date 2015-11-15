@@ -1,0 +1,2359 @@
+diff -r 2097/src/config/CVS/Tag 2098/src/config/CVS/Tag
+1c1
+< D2007.11.19.08.58.46
+---
+> D2007.11.19.18.57.04
+diff -r 2097/src/CVS/Entries 2098/src/CVS/Entries
+32a33
+> /js.c/3.176/Mon Nov 17 04:52:22 2014//D2007.11.19.18.57.04
+34a36,37
+> /jsapi.c/3.374/Mon Nov 17 04:52:22 2014//D2007.11.19.18.57.04
+> /jsapi.h/3.165/Mon Nov 17 04:52:22 2014//D2007.11.19.18.57.04
+44a48
+> /jscntxt.h/3.170/Mon Nov 17 04:52:22 2014//D2007.11.19.18.57.04
+49a54
+> /jsdbgapi.c/3.116/Mon Nov 17 04:52:22 2014//D2007.11.19.18.57.04
+55a61
+> /jsemit.c/3.284/Mon Nov 17 04:52:23 2014//D2007.11.19.18.57.04
+60a67,69
+> /jsfun.c/3.232/Mon Nov 17 04:52:23 2014//D2007.11.19.18.57.04
+> /jsfun.h/3.48/Mon Nov 17 04:52:23 2014//D2007.11.19.18.57.04
+> /jsgc.c/3.256/Mon Nov 17 04:52:23 2014//D2007.11.19.18.57.04
+63a73,74
+> /jsinterp.c/3.384/Mon Nov 17 04:52:23 2014//D2007.11.19.18.57.04
+> /jsinterp.h/3.65/Mon Nov 17 04:52:23 2014//D2007.11.19.18.57.04
+75a87,90
+> /jsobj.c/3.396/Result of merge//D2007.11.19.18.57.04
+> /jsobj.h/3.76/Mon Nov 17 04:52:23 2014//D2007.11.19.18.57.04
+> /jsopcode.c/3.271/Mon Nov 17 04:52:23 2014//D2007.11.19.18.57.04
+> /jsopcode.h/3.56/Mon Nov 17 04:52:23 2014//D2007.11.19.18.57.04
+77a93,94
+> /jsparse.c/3.310/Mon Nov 17 04:52:23 2014//D2007.11.19.18.57.04
+> /jsparse.h/3.53/Mon Nov 17 04:52:23 2014//D2007.11.19.18.57.04
+80a98,99
+> /jsprvtd.h/3.34/Mon Nov 17 04:52:23 2014//D2007.11.19.18.57.04
+> /jspubtd.h/3.92/Mon Nov 17 04:52:23 2014//D2007.11.19.18.57.04
+85a105,107
+> /jsscope.c/3.74/Mon Nov 17 04:52:23 2014//D2007.11.19.18.57.04
+> /jsscope.h/3.53/Mon Nov 17 04:52:23 2014//D2007.11.19.18.57.04
+> /jsscript.c/3.163/Mon Nov 17 04:52:23 2014//D2007.11.19.18.57.04
+92a115,116
+> /jsxdrapi.h/1.39/Mon Nov 17 04:52:23 2014//D2007.11.19.18.57.04
+> /jsxml.c/3.176/Mon Nov 17 04:52:23 2014//D2007.11.19.18.57.04
+98,121d121
+< /js.c/3.175/Mon Nov 17 04:52:24 2014//D2007.11.19.08.58.46
+< /jsapi.c/3.372/Mon Nov 17 04:52:24 2014//D2007.11.19.08.58.46
+< /jsapi.h/3.164/Mon Nov 17 04:52:24 2014//D2007.11.19.08.58.46
+< /jscntxt.h/3.169/Mon Nov 17 04:52:24 2014//D2007.11.19.08.58.46
+< /jsdbgapi.c/3.115/Mon Nov 17 04:52:25 2014//D2007.11.19.08.58.46
+< /jsemit.c/3.283/Mon Nov 17 04:52:25 2014//D2007.11.19.08.58.46
+< /jsfun.c/3.231/Mon Nov 17 04:52:25 2014//D2007.11.19.08.58.46
+< /jsfun.h/3.46/Mon Nov 17 04:52:25 2014//D2007.11.19.08.58.46
+< /jsgc.c/3.255/Mon Nov 17 04:52:25 2014//D2007.11.19.08.58.46
+< /jsinterp.c/3.383/Mon Nov 17 04:52:25 2014//D2007.11.19.08.58.46
+< /jsinterp.h/3.64/Mon Nov 17 04:52:25 2014//D2007.11.19.08.58.46
+< /jsobj.c/3.395/Result of merge//D2007.11.19.08.58.46
+< /jsobj.h/3.75/Mon Nov 17 04:52:25 2014//D2007.11.19.08.58.46
+< /jsopcode.c/3.270/Mon Nov 17 04:52:25 2014//D2007.11.19.08.58.46
+< /jsopcode.h/3.55/Mon Nov 17 04:52:25 2014//D2007.11.19.08.58.46
+< /jsparse.c/3.309/Mon Nov 17 04:52:25 2014//D2007.11.19.08.58.46
+< /jsparse.h/3.52/Mon Nov 17 04:52:25 2014//D2007.11.19.08.58.46
+< /jsprvtd.h/3.33/Mon Nov 17 04:52:25 2014//D2007.11.19.08.58.46
+< /jspubtd.h/3.91/Mon Nov 17 04:52:25 2014//D2007.11.19.08.58.46
+< /jsscope.c/3.73/Mon Nov 17 04:52:25 2014//D2007.11.19.08.58.46
+< /jsscope.h/3.52/Mon Nov 17 04:52:25 2014//D2007.11.19.08.58.46
+< /jsscript.c/3.162/Mon Nov 17 04:52:25 2014//D2007.11.19.08.58.46
+< /jsxdrapi.h/1.38/Mon Nov 17 04:52:25 2014//D2007.11.19.08.58.46
+< /jsxml.c/3.175/Mon Nov 17 04:52:25 2014//D2007.11.19.08.58.46
+diff -r 2097/src/CVS/Tag 2098/src/CVS/Tag
+1c1
+< D2007.11.19.08.58.46
+---
+> D2007.11.19.18.57.04
+diff -r 2097/src/editline/CVS/Tag 2098/src/editline/CVS/Tag
+1c1
+< D2007.11.19.08.58.46
+---
+> D2007.11.19.18.57.04
+diff -r 2097/src/fdlibm/CVS/Tag 2098/src/fdlibm/CVS/Tag
+1c1
+< D2007.11.19.08.58.46
+---
+> D2007.11.19.18.57.04
+diff -r 2097/src/jsapi.c 2098/src/jsapi.c
+2473,2479d2472
+< JS_PUBLIC_API(void)
+< JS_SetGCThingCallback(JSContext *cx, JSGCThingCallback cb, void *closure)
+< {
+<     cx->runtime->gcThingCallback = cb;
+<     cx->runtime->gcThingCallbackClosure = closure;
+< }
+< 
+4664c4657
+<     fun = js_NewFunction(cx, NULL, NULL, nargs, 0, obj, funAtom);
+---
+>     fun = js_NewFunction(cx, NULL, NULL, 0, JSFUN_INTERPRETED, obj, funAtom);
+4667,4681c4660,4668
+<     if (nargs) {
+<         for (i = 0; i < nargs; i++) {
+<             argAtom = js_Atomize(cx, argnames[i], strlen(argnames[i]), 0);
+<             if (!argAtom) {
+<                 fun = NULL;
+<                 goto out;
+<             }
+<             if (!js_AddHiddenProperty(cx, fun->object, ATOM_TO_JSID(argAtom),
+<                                       js_GetArgument, js_SetArgument,
+<                                       SPROP_INVALID_SLOT,
+<                                       JSPROP_PERMANENT | JSPROP_SHARED,
+<                                       SPROP_HAS_SHORTID, i)) {
+<                 fun = NULL;
+<                 goto out;
+<             }
+---
+>     for (i = 0; i < nargs; i++) {
+>         argAtom = js_Atomize(cx, argnames[i], strlen(argnames[i]), 0);
+>         if (!argAtom) {
+>             fun = NULL;
+>             goto out;
+>         }
+>         if (!js_AddLocal(cx, fun, argAtom, JSLOCAL_ARG)) {
+>             fun = NULL;
+>             goto out;
+4717c4704
+<     jp = JS_NEW_PRINTER(cx, name,
+---
+>     jp = JS_NEW_PRINTER(cx, name, NULL,
+4737c4724
+<     jp = JS_NEW_PRINTER(cx, "JS_DecompileFunction",
+---
+>     jp = JS_NEW_PRINTER(cx, "JS_DecompileFunction", fun,
+4742c4729
+<     if (js_DecompileFunction(jp, fun))
+---
+>     if (js_DecompileFunction(jp))
+4757c4744
+<     jp = JS_NEW_PRINTER(cx, "JS_DecompileFunctionBody",
+---
+>     jp = JS_NEW_PRINTER(cx, "JS_DecompileFunctionBody", fun,
+4762c4749
+<     if (js_DecompileFunctionBody(jp, fun))
+---
+>     if (js_DecompileFunctionBody(jp))
+diff -r 2097/src/jsapi.h 2098/src/jsapi.h
+1097,1099d1096
+< extern JS_PUBLIC_API(void)
+< JS_SetGCThingCallback(JSContext *cx, JSGCThingCallback cb, void *closure);
+< 
+diff -r 2097/src/js.c 2098/src/js.c
+1242c1242
+<             fun = (JSFunction *) OBJ_GET_PRIVATE(cx, obj);
+---
+>             fun = (JSFunction *) JS_GetPrivate(cx, obj);
+diff -r 2097/src/jscntxt.h 2098/src/jscntxt.h
+201,202d200
+<     JSGCThingCallback   gcThingCallback;
+<     void                *gcThingCallbackClosure;
+diff -r 2097/src/jsdbgapi.c 2098/src/jsdbgapi.c
+566c566
+<                     fun = (JSFunction *) OBJ_GET_PRIVATE(cx, closure);
+---
+>                     fun = GET_FUNCTION_PRIVATE(cx, closure);
+656c656
+<     wrapper = (JSFunction *) OBJ_GET_PRIVATE(cx, funobj);
+---
+>     wrapper = GET_FUNCTION_PRIVATE(cx, funobj);
+1329,1331c1329,1334
+<               | ((getter == js_GetCallVariable)    ? JSPD_VARIABLE  : 0)
+<               | ((getter == js_GetArgument)        ? JSPD_ARGUMENT  : 0)
+<               | ((getter == js_GetLocalVariable)   ? JSPD_VARIABLE  : 0);
+---
+>               | ((getter == js_GetCallVariable)    ? JSPD_VARIABLE  : 0);
+>     if (JSID_IS_HIDDEN(sprop->id)) {
+>         pd->flags |= (getter == JS_HIDDEN_ARG_GETTER)
+>                      ? JSPD_ARGUMENT
+>                      : JSPD_VARIABLE;
+>     }
+diff -r 2097/src/jsemit.c 2098/src/jsemit.c
+1238,1239c1238
+<             JS_ASSERT(LOCKED_OBJ_GET_CLASS(stmt->u.blockObj) ==
+<                       &js_BlockClass);
+---
+>             JS_ASSERT(STOBJ_GET_CLASS(stmt->u.blockObj) == &js_BlockClass);
+1651d1649
+<             prop = NULL;
+1653,1655c1651,1652
+<                 ok = js_LookupHiddenProperty(cx, obj, ATOM_TO_JSID(atom),
+<                                              &pobj, &prop);
+<                 if (!ok)
+---
+>                 JS_ASSERT(fp->fun == GET_FUNCTION_PRIVATE(cx, obj));
+>                 if (js_LookupLocal(cx, fp->fun, atom, NULL) != JSLOCAL_NONE)
+1657,1670d1653
+<                 if (prop) {
+< #ifdef DEBUG
+<                     JSScopeProperty *sprop = (JSScopeProperty *)prop;
+< 
+<                     /*
+<                      * Any hidden property must be a formal arg or local var,
+<                      * which will shadow a global const of the same name.
+<                      */
+<                     JS_ASSERT(sprop->getter == js_GetArgument ||
+<                               sprop->getter == js_GetLocalVariable);
+< #endif
+<                     OBJ_DROP_PROPERTY(cx, pobj, prop);
+<                     break;
+<                 }
+1840c1823
+<  * variable name, pn->pn_attrs will contain the property's attributes after a
+---
+>  * variable name, pn->pn_const will be true for const properties after a
+1856d1838
+<     JSObject *obj, *pobj;
+1858,1860c1840,1841
+<     JSBool optimizeGlobals;
+<     JSPropertyOp getter;
+<     uintN attrs;
+---
+>     JSLocalKind localKind;
+>     uintN index;
+1862,1863d1842
+<     JSProperty *prop;
+<     JSScopeProperty *sprop;
+1927,1928c1906
+<      * We can't optimize if we're not compiling a function body, whether via
+<      * eval, or directly when compiling a function statement or expression.
+---
+>      * We can't optimize if we are in an eval called inside a with statement.
+1930,1931c1908,1911
+<     obj = fp->varobj;
+<     clasp = OBJ_GET_CLASS(cx, obj);
+---
+>     if (fp->scopeChain != fp->varobj)
+>         return JS_TRUE;
+> 
+>     clasp = OBJ_GET_CLASS(cx, fp->varobj);
+1933c1913,1916
+<         /* Check for an eval or debugger frame. */
+---
+>         /*
+>          * We cannot optimize the name access when compiling with an eval or
+>          * debugger frame.
+>          */
+1938,1945c1921,1928
+<          * Optimize global variable accesses if there are at least 100 uses
+<          * in unambiguous contexts, or failing that, if least half of all the
+<          * uses of global vars/consts/functions are in loops.
+<          */
+<         optimizeGlobals = (tc->globalUses >= 100 ||
+<                            (tc->loopyGlobalUses &&
+<                             tc->loopyGlobalUses >= tc->globalUses / 2));
+<         if (!optimizeGlobals)
+---
+>          * We are compiling a top-level script. Optimize global variable
+>          * accesses if there are at least 100 uses in unambiguous contexts,
+>          * or failing that, if least half of all the uses of global
+>          * vars/consts/functions are in loops.
+>          */
+>         if (!(tc->globalUses >= 100 ||
+>               (tc->loopyGlobalUses &&
+>                tc->loopyGlobalUses >= tc->globalUses / 2))) {
+1947,1955c1930
+<     } else {
+<         optimizeGlobals = JS_FALSE;
+<     }
+< 
+<     /*
+<      * We can't optimize if we are in an eval called inside a with statement.
+<      */
+<     if (fp->scopeChain != obj)
+<         return JS_TRUE;
+---
+>         }
+1957,1962d1931
+<     op = PN_OP(pn);
+<     getter = NULL;
+< #ifdef __GNUC__
+<     attrs = slot = 0;   /* quell GCC overwarning */
+< #endif
+<     if (optimizeGlobals) {
+1974,1977d1942
+<         attrs = (ALE_JSOP(ale) == JSOP_DEFCONST)
+<                 ? JSPROP_ENUMERATE | JSPROP_READONLY | JSPROP_PERMANENT
+<                 : JSPROP_ENUMERATE | JSPROP_PERMANENT;
+< 
+1991,2010d1955
+<     } else {
+<         /*
+<          * We may be able to optimize name to stack slot. Look for an argument
+<          * or variable property in the function, or its call object, not found
+<          * in any prototype object.  Rewrite pn_op and update pn accordingly.
+<          * NB: We know that JSOP_DELNAME on an argument or variable evaluates
+<          * to false, due to JSPROP_PERMANENT.
+<          */
+<         if (!js_LookupHiddenProperty(cx, obj, ATOM_TO_JSID(atom), &pobj, &prop))
+<             return JS_FALSE;
+<         sprop = (JSScopeProperty *) prop;
+<         if (sprop) {
+<             if (pobj == obj) {
+<                 getter = sprop->getter;
+<                 attrs = sprop->attrs;
+<                 slot = (sprop->flags & SPROP_HAS_SHORTID) ? sprop->shortid : -1;
+<             }
+<             OBJ_DROP_PROPERTY(cx, pobj, prop);
+<         }
+<     }
+2012,2053c1957,1968
+<     if (optimizeGlobals || getter) {
+<         if (optimizeGlobals) {
+<             switch (op) {
+<               case JSOP_NAME:     op = JSOP_GETGVAR; break;
+<               case JSOP_SETNAME:  op = JSOP_SETGVAR; break;
+<               case JSOP_SETCONST: /* NB: no change */ break;
+<               case JSOP_INCNAME:  op = JSOP_INCGVAR; break;
+<               case JSOP_NAMEINC:  op = JSOP_GVARINC; break;
+<               case JSOP_DECNAME:  op = JSOP_DECGVAR; break;
+<               case JSOP_NAMEDEC:  op = JSOP_GVARDEC; break;
+<               case JSOP_FORNAME:  /* NB: no change */ break;
+<               case JSOP_DELNAME:  /* NB: no change */ break;
+<               default: JS_ASSERT(0);
+<             }
+<         } else if (getter == js_GetLocalVariable ||
+<                    getter == js_GetCallVariable) {
+<             switch (op) {
+<               case JSOP_NAME:     op = JSOP_GETVAR; break;
+<               case JSOP_SETNAME:  op = JSOP_SETVAR; break;
+<               case JSOP_SETCONST: op = JSOP_SETVAR; break;
+<               case JSOP_INCNAME:  op = JSOP_INCVAR; break;
+<               case JSOP_NAMEINC:  op = JSOP_VARINC; break;
+<               case JSOP_DECNAME:  op = JSOP_DECVAR; break;
+<               case JSOP_NAMEDEC:  op = JSOP_VARDEC; break;
+<               case JSOP_FORNAME:  op = JSOP_FORVAR; break;
+<               case JSOP_DELNAME:  op = JSOP_FALSE; break;
+<               default: JS_ASSERT(0);
+<             }
+<         } else if (getter == js_GetArgument ||
+<                    (getter == js_CallClass.getProperty &&
+<                     fp->fun && (uintN) slot < fp->fun->nargs)) {
+<             switch (op) {
+<               case JSOP_NAME:     op = JSOP_GETARG; break;
+<               case JSOP_SETNAME:  op = JSOP_SETARG; break;
+<               case JSOP_INCNAME:  op = JSOP_INCARG; break;
+<               case JSOP_NAMEINC:  op = JSOP_ARGINC; break;
+<               case JSOP_DECNAME:  op = JSOP_DECARG; break;
+<               case JSOP_NAMEDEC:  op = JSOP_ARGDEC; break;
+<               case JSOP_FORNAME:  op = JSOP_FORARG; break;
+<               case JSOP_DELNAME:  op = JSOP_FALSE; break;
+<               default: JS_ASSERT(0);
+<             }
+---
+>         op = PN_OP(pn);
+>         switch (op) {
+>           case JSOP_NAME:     op = JSOP_GETGVAR; break;
+>           case JSOP_SETNAME:  op = JSOP_SETGVAR; break;
+>           case JSOP_SETCONST: /* NB: no change */ break;
+>           case JSOP_INCNAME:  op = JSOP_INCGVAR; break;
+>           case JSOP_NAMEINC:  op = JSOP_GVARINC; break;
+>           case JSOP_DECNAME:  op = JSOP_DECGVAR; break;
+>           case JSOP_NAMEDEC:  op = JSOP_GVARDEC; break;
+>           case JSOP_FORNAME:  /* NB: no change */ break;
+>           case JSOP_DELNAME:  /* NB: no change */ break;
+>           default: JS_ASSERT(0);
+2054a1970
+>         pn->pn_const = (ALE_JSOP(ale) == JSOP_DEFCONST);
+2059c1975
+<         pn->pn_attrs = attrs;
+---
+>         return JS_TRUE;
+2062c1978
+<     if (pn->pn_slot < 0) {
+---
+>     if (clasp == &js_FunctionClass) {
+2064,2072c1980,2019
+<          * We couldn't optimize pn, so it's not a global or local slot name.
+<          * Now we must check for the predefined arguments variable.  It may be
+<          * overridden by assignment, in which case the function is heavyweight
+<          * and the interpreter will look up 'arguments' in the function's call
+<          * object.
+<          */
+<         if (pn->pn_op == JSOP_NAME &&
+<             atom == cx->runtime->atomState.argumentsAtom) {
+<             pn->pn_op = JSOP_ARGUMENTS;
+---
+>          * We are compiling a function body and may be able to optimize name
+>          * to stack slot. Look for an argument or variable in the function and
+>          * rewrite pn_op and update pn accordingly.
+>          */
+>         JS_ASSERT(fp->fun == GET_FUNCTION_PRIVATE(cx, fp->varobj));
+>         localKind = js_LookupLocal(cx, fp->fun, atom, &index);
+>         if (localKind != JSLOCAL_NONE) {
+>             op = PN_OP(pn);
+>             if (localKind == JSLOCAL_ARG) {
+>                 switch (op) {
+>                   case JSOP_NAME:     op = JSOP_GETARG; break;
+>                   case JSOP_SETNAME:  op = JSOP_SETARG; break;
+>                   case JSOP_INCNAME:  op = JSOP_INCARG; break;
+>                   case JSOP_NAMEINC:  op = JSOP_ARGINC; break;
+>                   case JSOP_DECNAME:  op = JSOP_DECARG; break;
+>                   case JSOP_NAMEDEC:  op = JSOP_ARGDEC; break;
+>                   case JSOP_FORNAME:  op = JSOP_FORARG; break;
+>                   case JSOP_DELNAME:  op = JSOP_FALSE; break;
+>                   default: JS_ASSERT(0);
+>                 }
+>                 pn->pn_const = JS_FALSE;
+>             } else {
+>                 JS_ASSERT(localKind == JSLOCAL_VAR ||
+>                           localKind == JSLOCAL_CONST);
+>                 switch (op) {
+>                   case JSOP_NAME:     op = JSOP_GETVAR; break;
+>                   case JSOP_SETNAME:  op = JSOP_SETVAR; break;
+>                   case JSOP_SETCONST: op = JSOP_SETVAR; break;
+>                   case JSOP_INCNAME:  op = JSOP_INCVAR; break;
+>                   case JSOP_NAMEINC:  op = JSOP_VARINC; break;
+>                   case JSOP_DECNAME:  op = JSOP_DECVAR; break;
+>                   case JSOP_NAMEDEC:  op = JSOP_VARDEC; break;
+>                   case JSOP_FORNAME:  op = JSOP_FORVAR; break;
+>                   case JSOP_DELNAME:  op = JSOP_FALSE; break;
+>                   default: JS_ASSERT(0);
+>                 }
+>                 pn->pn_const = (localKind == JSLOCAL_CONST);
+>             }
+>             pn->pn_op = op;
+>             pn->pn_slot = index;
+2074a2022
+>     }
+2076c2024,2037
+<         tc->flags |= TCF_FUN_USES_NONLOCALS;
+---
+>     /*
+>      * Here we either compiling a function body or an eval script inside a
+>      * function and couldn't optimize pn, so it's not a global or local slot
+>      * name.
+>      *
+>      * Now we must check for the predefined arguments variable.  It may be
+>      * overridden by assignment, in which case the function is heavyweight
+>      * and the interpreter will look up 'arguments' in the function's call
+>      * object.
+>      */
+>     if (pn->pn_op == JSOP_NAME &&
+>         atom == cx->runtime->atomState.argumentsAtom) {
+>         pn->pn_op = JSOP_ARGUMENTS;
+>         return JS_TRUE;
+2077a2039
+>     tc->flags |= TCF_FUN_USES_NONLOCALS;
+2114c2076
+<         fun = (JSFunction *) OBJ_GET_PRIVATE(cx, pn->pn_funpob->object);
+---
+>         fun = GET_FUNCTION_PRIVATE(cx, pn->pn_funpob->object);
+2175c2137
+<                      !(pn2->pn_attrs & JSPROP_READONLY))) {
+---
+>                      !pn2->pn_const)) {
+4038c4000
+<         fun = (JSFunction *) OBJ_GET_PRIVATE(cx, pn->pn_funpob->object);
+---
+>         fun = GET_FUNCTION_PRIVATE(cx, pn->pn_funpob->object);
+4091,4101c4053,4054
+<             JSObject *obj, *pobj;
+<             JSProperty *prop;
+<             JSScopeProperty *sprop;
+< 
+<             obj = (cg->treeContext.flags & TCF_IN_FUNCTION)
+<                   ? OBJ_GET_PARENT(cx, fun->object)
+<                   : cx->fp->fun->object;
+<             if (!js_LookupHiddenProperty(cx, obj, ATOM_TO_JSID(fun->atom),
+<                                          &pobj, &prop)) {
+<                 return JS_FALSE;
+<             }
+---
+>             JSFunction *parentFun;
+>             JSLocalKind localKind;
+4103,4111c4056,4062
+<             if (prop) {
+<                 if (pobj == obj) {
+<                     sprop = (JSScopeProperty *) prop;
+<                     if (sprop->getter == js_GetLocalVariable) {
+<                         slot = sprop->shortid;
+<                         op = JSOP_DEFLOCALFUN;
+<                     }
+<                 }
+<                 OBJ_DROP_PROPERTY(cx, pobj, prop);
+---
+>             if (cg->treeContext.flags & TCF_IN_FUNCTION) {
+>                 JS_ASSERT(OBJ_GET_CLASS(cx, OBJ_GET_PARENT(cx, fun->object)) ==
+>                           &js_FunctionClass);
+>                 parentFun =
+>                     GET_FUNCTION_PRIVATE(cx, OBJ_GET_PARENT(cx, fun->object));
+>             } else {
+>                 parentFun = cx->fp->fun;
+4113,4115c4064,4068
+< 
+<             JS_ASSERT(op == JSOP_DEFLOCALFUN ||
+<                       !(cg->treeContext.flags & TCF_IN_FUNCTION));
+---
+>             localKind = js_LookupLocal(cx, parentFun, fun->atom, &slot);
+>             if (localKind == JSLOCAL_VAR || localKind == JSLOCAL_CONST)
+>                 op = JSOP_DEFLOCALFUN;
+>             else
+>                 JS_ASSERT(!(cg->treeContext.flags & TCF_IN_FUNCTION));
+4127,4129c4080,4082
+<                 obj = stmt->down->u.blockObj;
+<                 JS_ASSERT(LOCKED_OBJ_GET_CLASS(obj) == &js_BlockClass);
+<                 OBJ_SET_PARENT(cx, fun->object, obj);
+---
+>                 JS_ASSERT(STOBJ_GET_CLASS(stmt->down->u.blockObj) ==
+>                           &js_BlockClass);
+>                 OBJ_SET_PARENT(cx, fun->object, stmt->down->u.blockObj);
+4487c4440
+<                     if (pn3->pn_attrs & JSPROP_READONLY) {
+---
+>                     if (pn3->pn_const) {
+5489,5490c5442,5443
+<              * and JSPROP_READONLY in pn_attrs), as in this case (just a bit
+<              * further below) we will avoid emitting the assignment op.
+---
+>              * and when pn_const is true), as in this case (just a bit further
+>              * below) we will avoid emitting the assignment op.
+5494c5447
+<                 !(pn2->pn_attrs & JSPROP_READONLY)) {
+---
+>                 !pn2->pn_const) {
+5515c5468
+<             if (pn2->pn_slot < 0 || !(pn2->pn_attrs & JSPROP_READONLY)) {
+---
+>             if (pn2->pn_slot < 0 || !pn2->pn_const) {
+5760c5713
+<                 if (pn2->pn_attrs & JSPROP_READONLY) {
+---
+>                 if (pn2->pn_const) {
+diff -r 2097/src/jsfun.c 2098/src/jsfun.c
+725,727c725,726
+<         /* XXX no jsint slot commoning here to avoid MSVC1.52 crashes */
+<         if ((uintN)JSVAL_TO_INT(id) < fp->nvars)
+<             *vp = fp->vars[JSVAL_TO_INT(id)];
+---
+>         JS_ASSERT((uintN) JSVAL_TO_INT(id) < fp->nvars);
+>         *vp = fp->vars[JSVAL_TO_INT(id)];
+740,743c739,740
+<         /* XXX jsint slot is block-local here to avoid MSVC1.52 crashes */
+<         jsint slot = JSVAL_TO_INT(id);
+<         if ((uintN)slot < fp->nvars)
+<             fp->vars[slot] = *vp;
+---
+>         JS_ASSERT((uintN) JSVAL_TO_INT(id) < fp->nvars);
+>         fp->vars[JSVAL_TO_INT(id)] = *vp;
+755d751
+<     JSPropertyOp getter;
+787,792c783
+<         getter = sprop->getter;
+<         if (getter == js_GetArgument)
+<             vec = fp->argv;
+<         else if (getter == js_GetLocalVariable)
+<             vec = fp->vars;
+<         else
+---
+>         if (!JSID_IS_HIDDEN(sprop->id))
+793a785
+>         vec = (sprop->getter == JS_HIDDEN_ARG_GETTER) ? fp->argv : fp->vars;
+824d815
+<     JSObject *funobj;
+827,829c818
+<     JSObject *obj2;
+<     JSProperty *prop;
+<     JSScopeProperty *sprop;
+---
+>     JSLocalKind localKind;
+831,833c820,821
+<     uintN attrs, slot, nslots, spflags;
+<     jsval *vp, value;
+<     intN shortid;
+---
+>     uintN slot, attrs;
+>     jsval *vp;
+843,844c831
+<     funobj = fp->callee;
+<     if (!funobj)
+---
+>     if (!fp->callee)
+846c833
+<     JS_ASSERT((JSFunction *) OBJ_GET_PRIVATE(cx, funobj) == fp->fun);
+---
+>     JS_ASSERT(GET_FUNCTION_PRIVATE(cx, fp->callee) == fp->fun);
+852,859d838
+<     if (!js_LookupHiddenProperty(cx, funobj, ATOM_TO_JSID(atom), &obj2, &prop))
+<         return JS_FALSE;
+< 
+<     if (prop) {
+<         if (!OBJ_IS_NATIVE(obj2)) {
+<             OBJ_DROP_PROPERTY(cx, obj2, prop);
+<             return JS_TRUE;
+<         }
+861,896c840,861
+<         sprop = (JSScopeProperty *) prop;
+<         getter = sprop->getter;
+<         attrs = sprop->attrs & ~JSPROP_SHARED;
+<         slot = (uintN) sprop->shortid;
+<         OBJ_DROP_PROPERTY(cx, obj2, prop);
+< 
+<         /* Ensure we found an arg or var property for the same function. */
+<         if ((sprop->flags & SPROP_IS_HIDDEN) &&
+<             (obj2 == funobj ||
+<              (JSFunction *) OBJ_GET_PRIVATE(cx, obj2) == fp->fun)) {
+<             if (getter == js_GetArgument) {
+<                 vp = fp->argv;
+<                 nslots = JS_MAX(fp->argc, fp->fun->nargs);
+<                 getter = setter = NULL;
+<             } else {
+<                 JS_ASSERT(getter == js_GetLocalVariable);
+<                 vp = fp->vars;
+<                 nslots = fp->nvars;
+<                 getter = js_GetCallVariable;
+<                 setter = js_SetCallVariable;
+<             }
+<             if (slot < nslots) {
+<                 value = vp[slot];
+<                 spflags = SPROP_HAS_SHORTID;
+<                 shortid = (intN) slot;
+<             } else {
+<                 value = JSVAL_VOID;
+<                 spflags = 0;
+<                 shortid = 0;
+<             }
+<             if (!js_DefineNativeProperty(cx, obj, ATOM_TO_JSID(atom), value,
+<                                          getter, setter, attrs,
+<                                          spflags, shortid, NULL)) {
+<                 return JS_FALSE;
+<             }
+<             *objp = obj;
+---
+>     localKind = js_LookupLocal(cx, fp->fun, atom, &slot);
+>     if (localKind != JSLOCAL_NONE) {
+>         if (localKind == JSLOCAL_ARG) {
+>             JS_ASSERT(slot < fp->fun->nargs);
+>             vp = fp->argv;
+>             getter = setter = NULL;
+>             attrs = JSPROP_PERMANENT;
+>         } else {
+>             JS_ASSERT(localKind == JSLOCAL_VAR || localKind == JSLOCAL_CONST);
+>             JS_ASSERT(fp->fun->u.i.nvars == fp->nvars);
+>             JS_ASSERT(slot < fp->nvars);
+>             vp = fp->vars;
+>             getter = js_GetCallVariable;
+>             setter = js_SetCallVariable;
+>             attrs = (localKind == JSLOCAL_CONST)
+>                     ? JSPROP_PERMANENT | JSPROP_READONLY
+>                     : JSPROP_PERMANENT;
+>         }
+>         if (!js_DefineNativeProperty(cx, obj, ATOM_TO_JSID(atom), vp[slot],
+>                                      getter, setter, attrs,
+>                                      SPROP_HAS_SHORTID, (int) slot, NULL)) {
+>             return JS_FALSE;
+897a863
+>         *objp = obj;
+1109,1136c1075,1076
+<     /* No valid function object should lack private data. */
+<     fun = (JSFunction *)JS_GetInstancePrivate(cx, obj, &js_FunctionClass, NULL);
+<     JS_ASSERT(fun && fun->object);
+< 
+<     /*
+<      * Check for a hidden formal parameter or local variable binding in the
+<      * clone-parent of obj, which would be a different, non-null fun->object.
+<      */
+<     if (flags & JSRESOLVE_HIDDEN) {
+<         if (fun->object != obj) {
+<             JSObject *pobj;
+<             JSProperty *prop;
+< 
+<             atom = js_AtomizeString(cx, JSVAL_TO_STRING(id), 0);
+<             if (!atom)
+<                 return JS_FALSE;
+<             if (!js_LookupHiddenProperty(cx, fun->object, ATOM_TO_JSID(atom),
+<                                          &pobj, &prop)) {
+<                 return JS_FALSE;
+<             }
+<             if (prop) {
+<                 JS_ASSERT(pobj == fun->object);
+<                 *objp = pobj;
+<                 OBJ_DROP_PROPERTY(cx, pobj, prop);
+<             }
+<         }
+<         return JS_TRUE;
+<     }
+---
+>     fun = GET_FUNCTION_PRIVATE(cx, obj);
+>     JS_ASSERT(fun->object);
+1139,1141c1079,1088
+<      * No need to reflect fun.prototype in 'fun.prototype = ...'. This test
+<      * must come after the JSRESOLVE_HIDDEN test, since call_resolve may look
+<      * for a hidden function object property from an assignment bytecode.
+---
+>      * No need to reflect fun.prototype in 'fun.prototype = ... '.
+>      *
+>      * This is not just an optimization, because we must not resolve when
+>      * defining hidden properties during compilation. The setup code for the
+>      * prototype and the lazy properties below eventually calls the property
+>      * hooks for the function object. That in turn calls fun_reserveSlots to
+>      * get the number of the reserved slots which is just the number of
+>      * regular expressions literals in the function. When compiling, that
+>      * number is not yet ready so we must make sure that fun_resolve does
+>      * nothing until the code for the function is generated.
+1248,1253d1194
+< enum {
+<     JSXDR_FUNARG = 1,
+<     JSXDR_FUNVAR = 2,
+<     JSXDR_FUNCONST = 3
+< };
+< 
+1261c1202,1203
+<     JSTempValueRooter tvr;
+---
+>     uintN nargs, nvars, n;
+>     uint32 localsword;          /* word to xdr argument and variable counts */
+1263,1268c1205
+<     uint16 extraUnused;         /* variable for no longer used field */
+<     JSAtom *propAtom;
+<     JSScopeProperty *sprop;
+<     uint32 userid;              /* NB: holds a signed int-tagged jsval */
+<     uintN i, n, dupflag;
+<     uint32 type;
+---
+>     JSTempValueRooter tvr;
+1270,1272d1206
+< #ifdef DEBUG
+<     uintN nvars = 0, nargs = 0;
+< #endif
+1276,1283c1210
+<         /*
+<          * No valid function object should lack private data, but fail soft
+<          * (return true, no error report) in case one does due to API pilot
+<          * or internal error.
+<          */
+<         fun = (JSFunction *) OBJ_GET_PRIVATE(cx, *objp);
+<         if (!fun)
+<             return JS_TRUE;
+---
+>         fun = GET_FUNCTION_PRIVATE(cx, *objp);
+1290a1218,1220
+>         nargs = fun->nargs;
+>         nvars = fun->u.i.nvars;
+>         localsword = (nargs << 16) | nvars;
+1292d1221
+<         extraUnused = 0;
+1294c1223
+<         fun = js_NewFunction(cx, NULL, NULL, 0, 0, NULL, NULL);
+---
+>         fun = js_NewFunction(cx, NULL, NULL, 0, JSFUN_INTERPRETED, NULL, NULL);
+1296a1226,1228
+> #ifdef __GNUC__
+>         nvars = nargs = 0;   /* quell GCC uninitialized warning */
+> #endif
+1307,1310c1239
+< 
+<     if (!JS_XDRUint16(xdr, &fun->nargs) ||
+<         !JS_XDRUint16(xdr, &extraUnused) ||
+<         !JS_XDRUint16(xdr, &fun->u.i.nvars) ||
+---
+>     if (!JS_XDRUint32(xdr, &localsword) ||
+1315,1316c1244,1249
+<     /* Assert that all previous writes of extraUnused were writes of 0. */
+<     JS_ASSERT(extraUnused == 0);
+---
+>     if (xdr->mode == JSXDR_DECODE) {
+>         nargs = localsword >> 16;
+>         nvars = localsword & JS_BITMASK(16);
+>         JS_ASSERT(flagsword | JSFUN_INTERPRETED);
+>         fun->flags = (uint16) flagsword;
+>     }
+1319,1357c1252,1258
+<     if (fun->object) {
+<         n = fun->nargs + fun->u.i.nvars;
+<         if (xdr->mode == JSXDR_ENCODE) {
+<             JSScope *scope;
+<             JSScopeProperty **spvec, *auto_spvec[8];
+<             void *mark;
+< 
+<             if (n <= sizeof auto_spvec / sizeof auto_spvec[0]) {
+<                 spvec = auto_spvec;
+<                 mark = NULL;
+<             } else {
+<                 mark = JS_ARENA_MARK(&cx->tempPool);
+<                 JS_ARENA_ALLOCATE_CAST(spvec, JSScopeProperty **, &cx->tempPool,
+<                                        n * sizeof(JSScopeProperty *));
+<                 if (!spvec) {
+<                     JS_ReportOutOfMemory(cx);
+<                     goto bad;
+<                 }
+<             }
+<             scope = OBJ_SCOPE(fun->object);
+<             for (sprop = SCOPE_LAST_PROP(scope); sprop;
+<                  sprop = sprop->parent) {
+<                 if (sprop->getter == js_GetArgument) {
+<                     JS_ASSERT(nargs++ <= fun->nargs);
+<                     spvec[sprop->shortid] = sprop;
+<                 } else if (sprop->getter == js_GetLocalVariable) {
+<                     JS_ASSERT(nvars++ <= fun->u.i.nvars);
+<                     spvec[fun->nargs + sprop->shortid] = sprop;
+<                 }
+<             }
+<             for (i = 0; i < n; i++) {
+<                 sprop = spvec[i];
+<                 JS_ASSERT(sprop->flags & SPROP_HAS_SHORTID);
+<                 type = (i < fun->nargs)
+<                        ? JSXDR_FUNARG
+<                        : (sprop->attrs & JSPROP_READONLY)
+<                        ? JSXDR_FUNCONST
+<                        : JSXDR_FUNVAR;
+<                 userid = INT_TO_JSVAL(sprop->shortid);
+---
+>     if (fun->object && (n = nargs + nvars) != 0) {
+>         void *mark;
+>         uintN i;
+>         uintN bitmapLength;
+>         uint32 *bitmap;
+>         JSAtom **names, *name;
+>         uint32 localKind;
+1359,1372c1260,1268
+<                 /*
+<                  * sprop->id here represents hidden names so we unhide it and
+<                  * encode as an atom. During decoding we read the atom and use
+<                  * js_AddHiddenProperty to reconstruct sprop with the hidden
+<                  * id.
+<                  */
+<                 propAtom = JSID_TO_ATOM(JSID_UNHIDE_NAME(sprop->id));
+<                 if (!JS_XDRUint32(xdr, &type) ||
+<                     !JS_XDRUint32(xdr, &userid) ||
+<                     !js_XDRStringAtom(xdr, &propAtom)) {
+<                     if (mark)
+<                         JS_ARENA_RELEASE(&cx->tempPool, mark);
+<                     goto bad;
+<                 }
+---
+>         mark = JS_ARENA_MARK(&xdr->cx->tempPool);
+> 
+>         /* From this point the control must flow through label release_mark. */
+>         bitmapLength = JS_HOWMANY(n, JS_BITS_PER_UINT32);
+>         if (xdr->mode == JSXDR_ENCODE) {
+>             names = js_GetLocalNames(xdr->cx, fun, &xdr->cx->tempPool, &bitmap);
+>             if (!names) {
+>                 ok = JS_FALSE;
+>                 goto release_mark;
+1374,1375d1269
+<             if (mark)
+<                 JS_ARENA_RELEASE(&cx->tempPool, mark);
+1377,1398c1271,1294
+<             JSPropertyOp getter, setter;
+< 
+<             for (i = n; i != 0; i--) {
+<                 uintN attrs = JSPROP_PERMANENT;
+< 
+<                 if (!JS_XDRUint32(xdr, &type) ||
+<                     !JS_XDRUint32(xdr, &userid) ||
+<                     !js_XDRStringAtom(xdr, &propAtom)) {
+<                     goto bad;
+<                 }
+<                 JS_ASSERT(type == JSXDR_FUNARG || type == JSXDR_FUNVAR ||
+<                           type == JSXDR_FUNCONST);
+<                 if (type == JSXDR_FUNARG) {
+<                     getter = js_GetArgument;
+<                     setter = js_SetArgument;
+<                     JS_ASSERT(nargs++ <= fun->nargs);
+<                 } else if (type == JSXDR_FUNVAR || type == JSXDR_FUNCONST) {
+<                     getter = js_GetLocalVariable;
+<                     setter = js_SetLocalVariable;
+<                     if (type == JSXDR_FUNCONST)
+<                         attrs |= JSPROP_READONLY;
+<                     JS_ASSERT(nvars++ <= fun->u.i.nvars);
+---
+> #ifdef __GNUC__
+>             names = NULL;   /* quell GCC uninitialized warning */
+> #endif
+>             JS_ARENA_ALLOCATE_CAST(bitmap, uint32 *, &xdr->cx->tempPool,
+>                                    bitmapLength * sizeof *bitmap);
+>             if (!bitmap) {
+>                 JS_ReportOutOfMemory(xdr->cx);
+>                 ok = JS_FALSE;
+>                 goto release_mark;
+>             }
+>         }
+>         for (i = 0; i != bitmapLength; ++i) {
+>             ok = JS_XDRUint32(xdr, &bitmap[i]);
+>             if (!ok)
+>                 goto release_mark;
+>         }
+>         for (i = 0; i != n; ++i) {
+>             if (i < nargs &&
+>                 !(bitmap[i / JS_BITS_PER_UINT32] &
+>                   JS_BIT(i & (JS_BITS_PER_UINT32 - 1)))) {
+>                 if (xdr->mode == JSXDR_DECODE) {
+>                     ok = js_AddLocal(xdr->cx, fun, NULL, JSLOCAL_ARG);
+>                     if (!ok)
+>                         goto release_mark;
+1400,1417c1296
+<                     getter = NULL;
+<                     setter = NULL;
+<                 }
+< 
+<                 /* Flag duplicate argument if atom is bound in fun->object. */
+<                 dupflag = SCOPE_GET_PROPERTY(OBJ_SCOPE(fun->object),
+<                                              JSID_HIDE_NAME(
+<                                                  ATOM_TO_JSID(propAtom)))
+<                           ? SPROP_IS_DUPLICATE
+<                           : 0;
+< 
+<                 if (!js_AddHiddenProperty(cx, fun->object,
+<                                           ATOM_TO_JSID(propAtom),
+<                                           getter, setter, SPROP_INVALID_SLOT,
+<                                           attrs | JSPROP_SHARED,
+<                                           dupflag | SPROP_HAS_SHORTID,
+<                                           JSVAL_TO_INT(userid))) {
+<                     goto bad;
+---
+>                     JS_ASSERT(!names[i]);
+1418a1298,1314
+>                 continue;
+>             }
+>             if (xdr->mode == JSXDR_ENCODE)
+>                 name = names[i];
+>             ok = js_XDRStringAtom(xdr, &name);
+>             if (!ok)
+>                 goto release_mark;
+>             if (xdr->mode == JSXDR_DECODE) {
+>                 localKind = (i < nargs)
+>                             ? JSLOCAL_ARG
+>                             : bitmap[i / JS_BITS_PER_UINT32] &
+>                               JS_BIT(i & (JS_BITS_PER_UINT32 - 1))
+>                             ? JSLOCAL_CONST
+>                             : JSLOCAL_VAR;
+>                 ok = js_AddLocal(xdr->cx, fun, name, localKind);
+>                 if (!ok)
+>                     goto release_mark;
+1420a1317,1322
+>         ok = JS_TRUE;
+> 
+>       release_mark:
+>         JS_ARENA_RELEASE(&xdr->cx->tempPool, mark);
+>         if (!ok)
+>             goto out;
+1427,1428d1328
+<         fun->flags = (uint16) flagsword | JSFUN_INTERPRETED;
+< 
+1482a1383
+>     /* A newborn function object may have a not yet initialized private slot. */
+1492a1394,1398
+>     /*
+>      * We use JS_GetPrivate and not GET_FUNCTION_PRIVATE because during
+>      * js_InitFunctionClass invocation the function is called before the
+>      * private slot of the function object is set.
+>      */
+1555c1461
+<     fun = (JSFunction *) OBJ_GET_PRIVATE(cx, obj);
+---
+>     fun = GET_FUNCTION_PRIVATE(cx, obj);
+1795c1701
+<     uintN i, n, lineno, dupflag;
+---
+>     uintN i, n, lineno;
+1798,1800c1704
+<     JSObject *obj2;
+<     JSProperty *prop;
+<     JSScopeProperty *sprop;
+---
+>     JSBool ok;
+1808d1711
+<     JSBool ok;
+1816a1720,1724
+> 
+>     /*
+>      * The constructor is called before the private slot is initialized so we
+>      * must use JS_GetPrivate, not GET_FUNCTION_PRIVATE here.
+>      */
+1833,1834c1741,1742
+<     fun = js_NewFunction(cx, obj, NULL, 0, JSFUN_LAMBDA, parent,
+<                          cx->runtime->atomState.anonymousAtom);
+---
+>     fun = js_NewFunction(cx, obj, NULL, 0, JSFUN_LAMBDA | JSFUN_INTERPRETED,
+>                          parent, cx->runtime->atomState.anonymousAtom);
+1958,1986c1866,1877
+<                 if (!js_LookupHiddenProperty(cx, obj, ATOM_TO_JSID(atom),
+<                                              &obj2, &prop)) {
+<                     goto after_args;
+<                 }
+<                 sprop = (JSScopeProperty *) prop;
+<                 dupflag = 0;
+<                 if (sprop) {
+<                     ok = JS_TRUE;
+<                     if (obj2 == obj) {
+<                         const char *name = js_AtomToPrintableString(cx, atom);
+< 
+<                         /*
+<                          * A duplicate parameter name. We force a duplicate
+<                          * node on the SCOPE_LAST_PROP(scope) list with the
+<                          * same id, distinguished by the SPROP_IS_DUPLICATE
+<                          * flag, and not mapped by an entry in scope.
+<                          */
+<                         JS_ASSERT(sprop->getter == js_GetArgument);
+<                         ok = name &&
+<                              js_ReportCompileErrorNumber(cx, &pc.tokenStream,
+<                                                          NULL,
+<                                                          JSREPORT_WARNING |
+<                                                          JSREPORT_STRICT,
+<                                                          JSMSG_DUPLICATE_FORMAL,
+<                                                          name);
+< 
+<                         dupflag = SPROP_IS_DUPLICATE;
+<                     }
+<                     OBJ_DROP_PROPERTY(cx, obj2, prop);
+---
+> 
+>                 /* Check for a duplicate parameter name. */
+>                 if (js_LookupLocal(cx, fun, atom, NULL) != JSLOCAL_NONE) {
+>                     const char *name;
+> 
+>                     name = js_AtomToPrintableString(cx, atom);
+>                     ok = name &&
+>                          js_ReportCompileErrorNumber(cx, &pc.tokenStream, NULL,
+>                                                      JSREPORT_WARNING |
+>                                                      JSREPORT_STRICT,
+>                                                      JSMSG_DUPLICATE_FORMAL,
+>                                                      name);
+1989d1879
+<                     sprop = NULL;
+1991,1996c1881
+<                 if (!js_AddHiddenProperty(cx, fun->object, ATOM_TO_JSID(atom),
+<                                           js_GetArgument, js_SetArgument,
+<                                           SPROP_INVALID_SLOT,
+<                                           JSPROP_PERMANENT | JSPROP_SHARED,
+<                                           dupflag | SPROP_HAS_SHORTID,
+<                                           fun->nargs)) {
+---
+>                 if (!js_AddLocal(cx, fun, atom, JSLOCAL_ARG))
+1998,2005d1882
+<                 }
+<                 if (fun->nargs == JS_BITMASK(16)) {
+<                     JS_ReportErrorNumber(cx, js_GetErrorMessage, NULL,
+<                                          JSMSG_TOO_MANY_FUN_ARGS);
+<                     state = BAD;
+<                     goto after_args;
+<                 }
+<                 fun->nargs++;
+2070c1947
+<     fun = js_NewFunction(cx, proto, NULL, 0, 0, obj, NULL);
+---
+>     fun = js_NewFunction(cx, proto, NULL, 0, JSFUN_INTERPRETED, obj, NULL);
+2077d1953
+<     fun->flags |= JSFUN_INTERPRETED;
+2133,2136c2009,2020
+<     fun->flags = flags & JSFUN_FLAGS_MASK;
+<     fun->u.n.native = native;
+<     fun->u.n.extra = 0;
+<     fun->u.n.minargs = 0;
+---
+>     fun->flags = flags & (JSFUN_FLAGS_MASK | JSFUN_INTERPRETED);
+>     if (flags & JSFUN_INTERPRETED) {
+>         JS_ASSERT(!native);
+>         JS_ASSERT(nargs == 0);
+>         fun->u.i.nvars = 0;
+>         fun->u.i.spare = 0;
+>         fun->u.i.script = NULL;
+>     } else {
+>         fun->u.n.native = native;
+>         fun->u.n.extra = 0;
+>         fun->u.n.minargs = 0;
+>     }
+2183c2067
+<     fun = (JSFunction *) JS_GetPrivate(cx, funobj);
+---
+>     fun = GET_FUNCTION_PRIVATE(cx, funobj);
+2241c2125
+<     return (JSFunction *) JS_GetPrivate(cx, obj);
+---
+>     return GET_FUNCTION_PRIVATE(cx, obj);
+2326a2211,2377
+> 
+> JSBool
+> js_AddLocal(JSContext *cx, JSFunction *fun, JSAtom *atom, JSLocalKind kind)
+> {
+>     uint16 *indexp;
+>     JSPropertyOp getter;
+>     uintN readonly;
+> 
+>     JS_ASSERT(FUN_INTERPRETED(fun));
+>     JS_ASSERT(OBJ_IS_NATIVE(fun->object));
+>     if (kind == JSLOCAL_ARG) {
+> #if JS_HAS_DESTRUCTURING
+>         /*
+>          * Destructuring parameter does not have name so we just update the
+>          * number of arguments for it without adding a property.
+>          */
+>         if (!atom) {
+>             ++fun->nargs;
+>             return JS_TRUE;
+>         }
+> #endif
+>         indexp = &fun->nargs;
+>         getter = JS_HIDDEN_ARG_GETTER;
+>         readonly = 0;
+>     } else {
+>         JS_ASSERT(kind == JSLOCAL_VAR || kind == JSLOCAL_CONST);
+>         indexp = &fun->u.i.nvars;
+>         getter = JS_HIDDEN_VAR_GETTER;
+>         readonly = (kind == JSLOCAL_CONST) ? JSPROP_READONLY : 0;
+>     }
+> 
+>     if (*indexp == JS_BITMASK(16)) {
+>         JS_ReportErrorNumber(cx, js_GetErrorMessage, NULL,
+>                              (kind == JSLOCAL_ARG)
+>                              ? JSMSG_TOO_MANY_FUN_ARGS
+>                              :JSMSG_TOO_MANY_FUN_VARS);
+>         return JS_FALSE;
+>     }
+> 
+>     /*
+>      * To support duplicate parameter names we force a duplicate node on the
+>      * SCOPE_LAST_PROP(scope) list with the same id, distinguished by the
+>      * SPROP_ALLOW_DUPLICATE flag, and not mapped by an entry in scope. The
+>      * flag is cleared when js_AddNativeProperty finds that the property is
+>      * unique.
+>      */
+>     if (!js_AddNativeProperty(cx, fun->object,
+>                               JSID_HIDE_NAME(ATOM_TO_JSID(atom)),
+>                               getter, NULL, SPROP_INVALID_SLOT,
+>                               JSPROP_PERMANENT | JSPROP_SHARED | readonly,
+>                               SPROP_HAS_SHORTID | SPROP_ALLOW_DUPLICATE,
+>                               *indexp)) {
+>         return JS_FALSE;
+>     }
+> 
+>     /* Update the argument of variable counter. */
+>     ++*indexp;
+>     return JS_TRUE;
+> }
+> 
+> JSLocalKind
+> js_LookupLocal(JSContext *cx, JSFunction *fun, JSAtom *atom, uintN *indexp)
+> {
+>     jsid id;
+>     JSScope *scope;
+>     JSScopeProperty *sprop;
+>     JSLocalKind kind;
+> 
+>     JS_ASSERT(FUN_INTERPRETED(fun));
+>     JS_ASSERT(OBJ_IS_NATIVE(fun->object));
+>     kind = JSLOCAL_NONE;
+>     if (fun->nargs + fun->u.i.nvars != 0) {
+>         id = JSID_HIDE_NAME(ATOM_TO_JSID(atom));
+> 
+>         /*
+>          * Inline js_LookupPropertyWithFlags to avoid prototype chain search
+>          * and the resolve hook invocation. The former is just an optimization
+>          * while the latter is necessary to avoid early creation of lazy slots
+>          * in fun->objects. See comments in fun_resolve for details.
+>          */
+>         JS_LOCK_OBJ(cx, fun->object);
+>         scope = OBJ_SCOPE(fun->object);
+>         JS_ASSERT(scope->object == fun->object);
+>         sprop = SCOPE_GET_PROPERTY(scope, id);
+>         if (sprop) {
+>             JS_ASSERT(sprop->setter == NULL);
+>             if (sprop->getter == JS_HIDDEN_ARG_GETTER) {
+>                 kind = JSLOCAL_ARG;
+>             } else {
+>                 JS_ASSERT(sprop->getter == JS_HIDDEN_VAR_GETTER);
+>                 kind = (sprop->attrs & JSPROP_READONLY)
+>                        ? JSLOCAL_CONST
+>                        : JSLOCAL_VAR;
+>             }
+>             if (indexp)
+>                 *indexp = (uint16) sprop->shortid;
+>         }
+>         JS_UNLOCK_OBJ(cx, fun->object);
+>     }
+>     return kind;
+> }
+> 
+> JSAtom **
+> js_GetLocalNames(JSContext *cx, JSFunction *fun, JSArenaPool *pool,
+>                  uint32 **bitmap)
+> {
+>     uintN n, index;
+>     size_t allocsize;
+>     JSAtom **names;
+>     JSScopeProperty *sprop;
+>     JSBool setbit;
+>     uint32 bit;
+> #ifdef DEBUG
+>     uintN nvars = 0, nargs = 0;
+> #endif
+> 
+>     JS_ASSERT(FUN_INTERPRETED(fun));
+>     JS_ASSERT(OBJ_IS_NATIVE(fun->object));
+>     n = fun->nargs + fun->u.i.nvars;
+>     JS_ASSERT(n != 0);
+>     allocsize = n * sizeof *names;
+>     if (bitmap)
+>         allocsize += JS_HOWMANY(n, JS_BITS_PER_UINT32) * sizeof(uint32);
+>     JS_ARENA_ALLOCATE_CAST(names, JSAtom **, pool, allocsize);
+>     if (!names) {
+>         JS_ReportOutOfMemory(cx);
+>         return NULL;
+>     }
+> 
+> #if JS_HAS_DESTRUCTURING
+>     /* Some parameter names can be NULL due to destructuring patterns. */
+>     memset(names, 0, fun->nargs * sizeof *names);
+> #endif
+>     if (bitmap) {
+>         *bitmap = (uint32 *) (names + n);
+>         memset(*bitmap, 0, JS_HOWMANY(n, JS_BITS_PER_UINT32) * sizeof(uint32));
+>     }
+>     for (sprop = SCOPE_LAST_PROP(OBJ_SCOPE(fun->object));
+>          sprop; sprop = sprop->parent) {
+>         if (!JSID_IS_HIDDEN(sprop->id))
+>             continue;
+>         index = (uint16) sprop->shortid;
+>         if (sprop->getter == JS_HIDDEN_ARG_GETTER) {
+>             JS_ASSERT(nargs++ < fun->nargs);
+>             JS_ASSERT(index < fun->nargs);
+>             setbit = JS_TRUE;
+>         } else {
+>             JS_ASSERT(sprop->getter == JS_HIDDEN_VAR_GETTER);
+>             JS_ASSERT(nvars++ < fun->u.i.nvars);
+>             JS_ASSERT(index < fun->u.i.nvars);
+>             index += fun->nargs;
+>             setbit = (sprop->attrs & JSPROP_READONLY);
+>         }
+>         names[index] = JSID_TO_ATOM(JSID_UNHIDE_NAME(sprop->id));
+>         if (bitmap && setbit) {
+>             bit = JS_BIT(index & (JS_BITS_PER_UINT32 - 1));
+>             JS_ASSERT(((*bitmap)[index / JS_BITS_PER_UINT32] & bit) == 0);
+>             (*bitmap)[index / JS_BITS_PER_UINT32] |= bit;
+>         }
+>     }
+> #if !JS_HAS_DESTRUCTURING
+>     JS_ASSERT(nargs == fun->nargs);
+> #endif
+>     JS_ASSERT(nvars == fun->u.i.nvars);
+>     return names;
+> }
+> 
+diff -r 2097/src/jsfun.h 2098/src/jsfun.h
+100a101,108
+> /*
+>  * Macro to access the private slot of the function object after the slot is
+>  * initialized.
+>  */
+> #define GET_FUNCTION_PRIVATE(cx, funobj)                                      \
+>     (JS_ASSERT(OBJ_GET_CLASS(cx, funobj) == &js_FunctionClass),               \
+>      (JSFunction *) OBJ_GET_PRIVATE(cx, funobj))
+> 
+114c122
+< extern JS_FRIEND_API(void)
+---
+> extern void
+177a186,228
+> typedef enum JSLocalKind {
+>     JSLOCAL_NONE,
+>     JSLOCAL_ARG,
+>     JSLOCAL_VAR,
+>     JSLOCAL_CONST
+> } JSLocalKind;
+> 
+> extern JSBool
+> js_AddLocal(JSContext *cx, JSFunction *fun, JSAtom *atom, JSLocalKind kind);
+> 
+> /*
+>  * Look up an argument or variable name returning its kind when found or
+>  * JSLOCAL_NONE when no such name exists. When indexp is not null and the name
+>  * exists, *indexp will receive the index of the corresponding argument or
+>  * variable.
+>  */
+> extern JSLocalKind
+> js_LookupLocal(JSContext *cx, JSFunction *fun, JSAtom *atom, uintN *indexp);
+> 
+> /*
+>  * Get names of arguments and variables for the interpreted function.
+>  *
+>  * The result is an array allocated from the given pool with
+>  *   fun->nargs + fun->u.i.nvars
+>  * elements with the names of the arguments coming first. The argument
+>  * name is null when it corresponds to a destructive pattern.
+>  *
+>  * When bitmap is not null, on successful return it will contain a bit array
+>  * where for each index below fun->nargs the bit is set when the corresponding
+>  * argument name is not null. For indexes greater or equal fun->nargs the bit
+>  * is set when the corresponding var is really a const.
+>  */
+> extern JSAtom **
+> js_GetLocalNames(JSContext *cx, JSFunction *fun, JSArenaPool *pool,
+>                  uint32 **bitmap);
+> 
+> /*
+>  * Pseudo-getter function pointers to distinguish the kind of the hidden
+>  * property.
+>  */
+> #define JS_HIDDEN_ARG_GETTER    ((JSPropertyOp) sizeof(jsuword))
+> #define JS_HIDDEN_VAR_GETTER    ((JSPropertyOp) (2 * sizeof(jsuword)))
+> 
+diff -r 2097/src/jsgc.c 2098/src/jsgc.c
+1916,1918d1915
+<     if (rt->gcThingCallback)
+<         rt->gcThingCallback(thing, kind, rt->gcThingCallbackClosure);
+< 
+1944,1945d1940
+<             if (rt->gcThingCallback)
+<                 rt->gcThingCallback(thing, kind, rt->gcThingCallbackClosure);
+2083,2084d2077
+<     JSRuntime *rt;
+<     uint32 n;
+2089,2110d2081
+< 
+<     /*
+<      * Bug 379455: we called the tracer once, but to communicate the value of
+<      * thing's lock count to the tracer, or to gcThingCallback when the tracer
+<      * is the GC marking phase, we need to call an extra lhe->count - 1 times.
+<      */
+<     n = lhe->count - 1;
+<     if (n != 0) {
+<         if (IS_GC_MARKING_TRACER(trc)) {
+<             rt = trc->context->runtime;
+<             if (rt->gcThingCallback) {
+<                 do {
+<                     rt->gcThingCallback(thing, traceKind,
+<                                         rt->gcThingCallbackClosure);
+<                 } while (--n != 0);
+<             }
+<         } else {
+<             do {
+<                 JS_CALL_TRACER(trc, thing, traceKind, "locked object");
+<             } while (--n != 0);
+<         }
+<     }
+diff -r 2097/src/jsinterp.c 2098/src/jsinterp.c
+391,414d390
+< JSBool
+< js_GetArgument(JSContext *cx, JSObject *obj, jsval id, jsval *vp)
+< {
+<     return JS_TRUE;
+< }
+< 
+< JSBool
+< js_SetArgument(JSContext *cx, JSObject *obj, jsval id, jsval *vp)
+< {
+<     return JS_TRUE;
+< }
+< 
+< JSBool
+< js_GetLocalVariable(JSContext *cx, JSObject *obj, jsval id, jsval *vp)
+< {
+<     return JS_TRUE;
+< }
+< 
+< JSBool
+< js_SetLocalVariable(JSContext *cx, JSObject *obj, jsval id, jsval *vp)
+< {
+<     return JS_TRUE;
+< }
+< 
+919c895
+<         fun = (JSFunction *) OBJ_GET_PRIVATE(cx, JSVAL_TO_OBJECT(callee));
+---
+>         fun = GET_FUNCTION_PRIVATE(cx, JSVAL_TO_OBJECT(callee));
+1009,1010c985,986
+<                 fun = (JSFunction *) OBJ_GET_PRIVATE(cx, JSVAL_TO_OBJECT(argval));
+<                 if (fun && fun->atom) {
+---
+>                 fun = GET_FUNCTION_PRIVATE(cx, JSVAL_TO_OBJECT(argval));
+>                 if (fun->atom) {
+1176c1152
+<         fun = (JSFunction *) OBJ_GET_PRIVATE(cx, funobj);
+---
+>         fun = GET_FUNCTION_PRIVATE(cx, funobj);
+1520,1521c1496
+<         FUN_INTERPRETED((JSFunction *)
+<                         JS_GetPrivate(cx, JSVAL_TO_OBJECT(fval))) &&
+---
+>         FUN_INTERPRETED(GET_FUNCTION_PRIVATE(cx, JSVAL_TO_OBJECT(fval))) &&
+1941c1916
+<             funclasp = ((JSFunction *) OBJ_GET_PRIVATE(cx, obj2))->clasp;
+---
+>             funclasp = GET_FUNCTION_PRIVATE(cx, obj2)->clasp;
+3915c3890
+<                 fun = (JSFunction *) OBJ_GET_PRIVATE(cx, obj);
+---
+>                 fun = GET_FUNCTION_PRIVATE(cx, obj);
+3917c3892
+<                 if (fun->flags & JSFUN_INTERPRETED) {
+---
+>                 if (FUN_INTERPRETED(fun)) {
+4879c4854
+<             fun = (JSFunction *) OBJ_GET_PRIVATE(cx, obj);
+---
+>             fun = GET_FUNCTION_PRIVATE(cx, obj);
+5120c5095
+<             fun = (JSFunction *) OBJ_GET_PRIVATE(cx, obj);
+---
+>             fun = GET_FUNCTION_PRIVATE(cx, obj);
+5194c5169
+<             fun = (JSFunction *) OBJ_GET_PRIVATE(cx, obj);
+---
+>             fun = GET_FUNCTION_PRIVATE(cx, obj);
+5873c5848
+<                      fun = (JSFunction *) OBJ_GET_PRIVATE(cx, obj),
+---
+>                      fun = GET_FUNCTION_PRIVATE(cx, obj),
+diff -r 2097/src/jsinterp.h 2098/src/jsinterp.h
+123,134d122
+< extern JSBool
+< js_GetArgument(JSContext *cx, JSObject *obj, jsval id, jsval *vp);
+< 
+< extern JSBool
+< js_SetArgument(JSContext *cx, JSObject *obj, jsval id, jsval *vp);
+< 
+< extern JSBool
+< js_GetLocalVariable(JSContext *cx, JSObject *obj, jsval id, jsval *vp);
+< 
+< extern JSBool
+< js_SetLocalVariable(JSContext *cx, JSObject *obj, jsval id, jsval *vp);
+< 
+diff -r 2097/src/jsobj.c 2098/src/jsobj.c
+2999,3018d2998
+< js_AddHiddenProperty(JSContext *cx, JSObject *obj, jsid id,
+<                      JSPropertyOp getter, JSPropertyOp setter, uint32 slot,
+<                      uintN attrs, uintN flags, intN shortid)
+< {
+<     id = JSID_HIDE_NAME(id);
+<     flags |= SPROP_IS_HIDDEN;
+<     return js_AddNativeProperty(cx, obj, id, getter, setter, slot, attrs,
+<                                 flags, shortid);
+< }
+< 
+< JSBool
+< js_LookupHiddenProperty(JSContext *cx, JSObject *obj, jsid id, JSObject **objp,
+<                         JSProperty **propp)
+< {
+<     id = JSID_HIDE_NAME(id);
+<     return js_LookupPropertyWithFlags(cx, obj, id, JSRESOLVE_HIDDEN,
+<                                       objp, propp);
+< }
+< 
+< JSScopeProperty *
+Only in 2097/src: .#jsobj.c.3.396
+diff -r 2097/src/jsobj.h 2098/src/jsobj.h
+177c177
+< #define STOBJ_GET_PRIVATE(obj)                                          \
+---
+> #define STOBJ_GET_PRIVATE(obj)                                                \
+447,461d446
+<  * Native property add and lookup variants that hide id in the hidden atom
+<  * subspace, so as to avoid collisions between internal properties such as
+<  * formal arguments and local variables in function objects, and externally
+<  * set properties with the same ids.
+<  */
+< extern JSScopeProperty *
+< js_AddHiddenProperty(JSContext *cx, JSObject *obj, jsid id,
+<                      JSPropertyOp getter, JSPropertyOp setter, uint32 slot,
+<                      uintN attrs, uintN flags, intN shortid);
+< 
+< extern JSBool
+< js_LookupHiddenProperty(JSContext *cx, JSObject *obj, jsid id, JSObject **objp,
+<                         JSProperty **propp);
+< 
+< /*
+510,511d494
+<  * JSRESOLVE_HIDDEN flags hidden function param/local name lookups, just for
+<  * internal use by fun_resolve and similar built-ins.
+517,518d499
+< #define JSRESOLVE_HIDDEN        0x8000
+< 
+646a628
+> 
+diff -r 2097/src/jsopcode.c 2098/src/jsopcode.c
+652c652,653
+<     JSObject        *object;        /* interpreted function object */
+---
+>     JSFunction      *fun;           /* interpreted function */
+>     JSAtom          **localNames;   /* argument and variable names */
+668c669,670
+< JS_NEW_PRINTER(JSContext *cx, const char *name, uintN indent, JSBool pretty)
+---
+> JS_NEW_PRINTER(JSContext *cx, const char *name,  JSFunction *fun,
+>                uintN indent, JSBool pretty)
+682d683
+<     jp->object = NULL;
+686a688,697
+>     jp->fun = fun;
+>     if (!fun || !FUN_INTERPRETED(fun) || fun->nargs + fun->u.i.nvars == 0) {
+>         jp->localNames = NULL;
+>     } else {
+>         jp->localNames = js_GetLocalNames(cx, fun, &jp->pool, NULL);
+>         if (!jp->localNames) {
+>             js_DestroyPrinter(jp);
+>             return NULL;
+>         }
+>     }
+1209,1246d1219
+< static JSAtom *
+< GetSlotAtom(JSPrinter *jp, JSPropertyOp getter, uintN slot)
+< {
+<     JSObject *obj;
+<     JSScopeProperty *sprop;
+< 
+<     obj = jp->object;
+<     while (obj) {
+<         for (sprop = SCOPE_LAST_PROP(OBJ_SCOPE(obj)); sprop;
+<              sprop = sprop->parent) {
+<             if (sprop->getter != getter)
+<                 continue;
+<             JS_ASSERT(sprop->flags & SPROP_HAS_SHORTID);
+<             JS_ASSERT(JSID_IS_HIDDEN(sprop->id));
+<             if ((uintN) sprop->shortid == slot)
+<                 return JSID_TO_ATOM(JSID_UNHIDE_NAME(sprop->id));
+<         }
+<         obj = OBJ_GET_PROTO(jp->sprinter.context, obj);
+<     }
+<     return NULL;
+< }
+< 
+< static JSBool
+< PushSlotAtom(SprintStack *ss, JSPropertyOp getter, uintN slot, JSOp op)
+< {
+<     JSAtom *atom;
+<     char *lval;
+< 
+<     atom = GetSlotAtom(ss->printer, getter, slot);
+<     if (!atom)
+<         return JS_FALSE;
+<     JS_ASSERT(ATOM_IS_STRING(atom));
+<     lval = QuoteString(&ss->sprinter, ATOM_TO_STRING(atom), 0);
+<     if (!lval)
+<         return JS_FALSE;
+<     return PushOff(ss, STR2OFF(&ss->sprinter, lval), op);
+< }
+< 
+1252a1226,1248
+> static JSAtom *
+> GetSlotAtom(JSPrinter *jp, JSBool argument, uintN slot)
+> {
+>     JSFunction *fun;
+>     JSAtom *name;
+> 
+>     fun = jp->fun;
+>     LOCAL_ASSERT_RV(jp->fun, NULL);
+>     LOCAL_ASSERT_RV(jp->localNames, NULL);
+>     if (argument) {
+>         LOCAL_ASSERT_RV(slot < fun->nargs, NULL);
+>         name = jp->localNames[slot];
+> #if !JS_HAS_DESTRUCTURING
+>         LOCAL_ASSERT_RV(name, NULL);
+> #endif
+>     } else {
+>         LOCAL_ASSERT_RV(slot < fun->u.i.nvars, NULL);
+>         name = jp->localNames[fun->nargs + slot];
+>         LOCAL_ASSERT_RV(name, NULL);
+>     }
+>     return name;
+> }
+> 
+1365,1369c1361,1364
+<         if (op == JSOP_SETARG)
+<             atom = GetSlotAtom(jp, js_GetArgument, i);
+<         else if (op == JSOP_SETVAR)
+<             atom = GetSlotAtom(jp, js_GetLocalVariable, i);
+<         else if (op == JSOP_SETGVAR)
+---
+>         if (op == JSOP_SETARG || op == JSOP_SETVAR) {
+>             atom = GetSlotAtom(jp, op == JSOP_SETARG, i);
+>             LOCAL_ASSERT(atom);
+>         } else if (op == JSOP_SETGVAR) {
+1371c1366
+<         else
+---
+>         } else {
+1372a1368
+>         }
+2088,2089c2084,2086
+<                     fun = (JSFunction *) OBJ_GET_PRIVATE(cx, obj);
+<                     jp2 = JS_NEW_PRINTER(cx, "nested_function",
+---
+>                     js_puts(jp, "\n");
+>                     fun = GET_FUNCTION_PRIVATE(cx, obj);
+>                     jp2 = JS_NEW_PRINTER(cx, "nested_function", fun,
+2093,2096c2090,2091
+<                     jp2->object = jp->object;
+<                     js_puts(jp2, "\n");
+<                     ok = js_DecompileFunction(jp2, fun);
+<                     if (ok && jp2->sprinter.base) {
+---
+>                     ok = js_DecompileFunction(jp2);
+>                     if (ok && jp2->sprinter.base)
+2098,2099d2092
+<                         js_puts(jp, "\n");
+<                     }
+2103c2096
+<                     js_puts(jp, "\n");
+---
+>                     js_puts(jp, "\n\n");
+2745,2747c2738,2739
+<                 obj = jp->object;
+<                 LOCAL_ASSERT(OBJ_GET_CLASS(cx, obj) == &js_FunctionClass);
+<                 fun = (JSFunction *) OBJ_GET_PRIVATE(cx, obj);
+---
+>                 LOCAL_ASSERT(jp->fun);
+>                 fun = jp->fun;
+3088c3080
+<                 atom = GetSlotAtom(jp, js_GetArgument, GET_ARGNO(pc));
+---
+>                 atom = GetSlotAtom(jp, JS_TRUE, GET_ARGNO(pc));
+3094c3086
+<                 atom = GetSlotAtom(jp, js_GetLocalVariable, GET_VARNO(pc));
+---
+>                 atom = GetSlotAtom(jp, JS_FALSE, GET_VARNO(pc));
+3324c3316
+<                 atom = GetSlotAtom(jp, js_GetArgument, GET_ARGNO(pc));
+---
+>                 atom = GetSlotAtom(jp, JS_TRUE, GET_ARGNO(pc));
+3329c3321
+<                 atom = GetSlotAtom(jp, js_GetLocalVariable, GET_VARNO(pc));
+---
+>                 atom = GetSlotAtom(jp, JS_FALSE, GET_VARNO(pc));
+3504c3496
+<                 atom = GetSlotAtom(jp, js_GetArgument, GET_ARGNO(pc));
+---
+>                 atom = GetSlotAtom(jp, JS_TRUE, GET_ARGNO(pc));
+3510c3502
+<                 atom = GetSlotAtom(jp, js_GetLocalVariable, GET_VARNO(pc));
+---
+>                 atom = GetSlotAtom(jp, JS_FALSE, GET_VARNO(pc));
+3566c3558
+<                 atom = GetSlotAtom(jp, js_GetArgument, GET_ARGNO(pc));
+---
+>                 atom = GetSlotAtom(jp, JS_TRUE, GET_ARGNO(pc));
+3572c3564
+<                 atom = GetSlotAtom(jp, js_GetLocalVariable, GET_VARNO(pc));
+---
+>                 atom = GetSlotAtom(jp, JS_FALSE, GET_VARNO(pc));
+3649,3652d3640
+<                 if (!PushSlotAtom(ss, js_GetArgument, GET_ARGNO(pc), op))
+<                     return NULL;
+<                 goto do_getprop;
+< 
+3654c3642,3647
+<                 if (!PushSlotAtom(ss, js_GetLocalVariable, GET_VARNO(pc), op))
+---
+>                 atom = GetSlotAtom(ss->printer, op == JSOP_GETARGPROP,
+>                                    GET_UINT16(pc));
+>                 LOCAL_ASSERT(atom);
+>                 JS_ASSERT(ATOM_IS_STRING(atom));
+>                 lval = QuoteString(&ss->sprinter, ATOM_TO_STRING(atom), 0);
+>                 if (!lval || !PushOff(ss, STR2OFF(&ss->sprinter, lval), op))
+3755c3748
+<                 atom = GetSlotAtom(jp, js_GetArgument, i);
+---
+>                 atom = GetSlotAtom(jp, JS_TRUE, i);
+3768c3761
+<                 atom = GetSlotAtom(jp, js_GetLocalVariable, GET_VARNO(pc));
+---
+>                 atom = GetSlotAtom(jp, JS_FALSE, GET_VARNO(pc));
+3831c3824
+<                     fun = (JSFunction *) OBJ_GET_PRIVATE(cx, obj);
+---
+>                     fun = GET_FUNCTION_PRIVATE(cx, obj);
+3947c3940
+<                     fun = (JSFunction *) OBJ_GET_PRIVATE(cx, obj);
+---
+>                     fun = GET_FUNCTION_PRIVATE(cx, obj);
+4694c4687
+< js_DecompileFunctionBody(JSPrinter *jp, JSFunction *fun)
+---
+> js_DecompileFunctionBody(JSPrinter *jp)
+4697,4698d4689
+<     JSObject *oldobject;
+<     JSBool ok;
+4700c4691,4693
+<     if (!FUN_INTERPRETED(fun)) {
+---
+>     JS_ASSERT(jp->fun);
+>     JS_ASSERT(!jp->script);
+>     if (!FUN_INTERPRETED(jp->fun)) {
+4704,4709c4697,4699
+<     script = fun->u.i.script;
+<     oldobject = jp->object;
+<     jp->object = fun->object;
+<     ok = js_DecompileCode(jp, script, script->code, (uintN)script->length, 0);
+<     jp->object = oldobject;
+<     return ok;
+---
+> 
+>     script = jp->fun->u.i.script;
+>     return js_DecompileCode(jp, script, script->code, (uintN)script->length, 0);
+4713c4703
+< js_DecompileFunction(JSPrinter *jp, JSFunction *fun)
+---
+> js_DecompileFunction(JSPrinter *jp)
+4715,4720c4705,4707
+<     JSContext *cx;
+<     uintN i, nargs, indent;
+<     void *mark;
+<     JSAtom **params;
+<     JSObject *oldobject;
+<     JSScopeProperty *sprop;
+---
+>     JSFunction *fun;
+>     uintN i;
+>     JSAtom *param;
+4724a4712,4715
+>     fun = jp->fun;
+>     JS_ASSERT(fun);
+>     JS_ASSERT(!jp->script);
+> 
+4746,4747c4737,4743
+<     if (FUN_INTERPRETED(fun) && fun->object) {
+<         size_t paramsize;
+---
+>     if (!FUN_INTERPRETED(fun)) {
+>         js_printf(jp, ") {\n");
+>         jp->indent += 4;
+>         js_printf(jp, native_code_str);
+>         jp->indent -= 4;
+>         js_printf(jp, "\t}");
+>     } else {
+4750c4746
+<         JSScript *oldscript;
+---
+>         void *mark;
+4753,4784c4749
+<         /*
+<          * Print the parameters.
+<          *
+<          * This code is complicated by the need to handle duplicate parameter
+<          * names, as required by ECMA (bah!).  A duplicate parameter is stored
+<          * as another node with the same id (the parameter name) but different
+<          * shortid (the argument index) along the property tree ancestor line
+<          * starting at SCOPE_LAST_PROP(scope).  Only the last duplicate param
+<          * is mapped by the scope's hash table.
+<          */
+<         cx = jp->sprinter.context;
+<         nargs = fun->nargs;
+<         mark = JS_ARENA_MARK(&cx->tempPool);
+<         paramsize = nargs * sizeof(JSAtom *);
+<         JS_ARENA_ALLOCATE_CAST(params, JSAtom **, &cx->tempPool, paramsize);
+<         if (!params) {
+<             JS_ReportOutOfMemory(cx);
+<             return JS_FALSE;
+<         }
+< 
+<         memset(params, 0, paramsize);
+<         for (sprop = SCOPE_LAST_PROP(OBJ_SCOPE(fun->object)); sprop;
+<              sprop = sprop->parent) {
+<             if (sprop->getter != js_GetArgument)
+<                 continue;
+<             JS_ASSERT(sprop->flags & SPROP_HAS_SHORTID);
+<             JS_ASSERT((uint16) sprop->shortid < nargs);
+<             JS_ASSERT(JSID_IS_HIDDEN(sprop->id));
+<             params[(uint16) sprop->shortid] =
+<                 JSID_TO_ATOM(JSID_UNHIDE_NAME(sprop->id));
+<         }
+< 
+---
+>         /* Print the parameters. */
+4795d4759
+<         oldscript = jp->script;
+4797,4798c4761
+<         oldobject = jp->object;
+<         jp->object = fun->object;
+---
+>         mark = JS_ARENA_MARK(&jp->sprinter.context->tempPool);
+4801c4764
+<         for (i = 0; i < nargs; i++) {
+---
+>         for (i = 0; i < fun->nargs; i++) {
+4804a4768,4769
+>             param = GetSlotAtom(jp, JS_TRUE, i);
+> 
+4808c4773
+<             if (!params[i]) {
+---
+>             if (!param) {
+4816c4781,4782
+<                     ok = InitSprintStack(cx, &ss, jp, fun->u.i.script->depth);
+---
+>                     ok = InitSprintStack(jp->sprinter.context, &ss, jp,
+>                                          fun->u.i.script->depth);
+4839c4805
+<             if (!QuoteString(&jp->sprinter, ATOM_TO_STRING(params[i]), 0)) {
+---
+>             if (!QuoteString(&jp->sprinter, ATOM_TO_STRING(param), 0)) {
+4846,4847c4812,4813
+<         jp->script = oldscript;
+<         jp->object = oldobject;
+---
+>         jp->script = NULL;
+>         JS_ARENA_RELEASE(&jp->sprinter.context->tempPool, mark);
+4849d4814
+<         JS_ARENA_RELEASE(&cx->tempPool, mark);
+4852,4864c4817,4822
+< #ifdef __GNUC__
+<     } else {
+<         pc = NULL;
+< #endif
+<     }
+< 
+<     indent = jp->indent;
+<     if (fun->flags & JSFUN_EXPR_CLOSURE) {
+<         js_printf(jp, ") ");
+<     } else {
+<         js_printf(jp, ") {\n");
+<         jp->indent += 4;
+<     }
+---
+>         if (fun->flags & JSFUN_EXPR_CLOSURE) {
+>             js_printf(jp, ") ");
+>         } else {
+>             js_printf(jp, ") {\n");
+>             jp->indent += 4;
+>         }
+4866,4868d4823
+<     if (FUN_INTERPRETED(fun) && fun->object) {
+<         oldobject = jp->object;
+<         jp->object = fun->object;
+4871,4873c4826
+<         jp->object = oldobject;
+<         if (!ok) {
+<             jp->indent = indent;
+---
+>         if (!ok)
+4874a4828,4831
+> 
+>         if (!(fun->flags & JSFUN_EXPR_CLOSURE)) {
+>             jp->indent -= 4;
+>             js_printf(jp, "\t}");
+4876,4877d4832
+<     } else {
+<         js_printf(jp, native_code_str);
+4880,4883c4835,4836
+<     if (!(fun->flags & JSFUN_EXPR_CLOSURE)) {
+<         jp->indent -= 4;
+<         js_printf(jp, "\t}");
+<     }
+---
+>     if (!jp->pretty && !jp->grouped && (fun->flags & JSFUN_LAMBDA))
+>         js_puts(jp, ")");
+4885,4888d4837
+<     if (!jp->pretty) {
+<         if (!jp->grouped && (fun->flags & JSFUN_LAMBDA))
+<             js_puts(jp, ")");
+<     }
+5216c5165
+<     jp = JS_NEW_PRINTER(cx, "js_DecompileValueGenerator", 0, JS_FALSE);
+---
+>     jp = JS_NEW_PRINTER(cx, "js_DecompileValueGenerator", fp->fun, 0, JS_FALSE);
+5218,5221d5166
+<         if (fp->fun && fp->fun->object) {
+<             JS_ASSERT(OBJ_IS_NATIVE(fp->fun->object));
+<             jp->object = fp->fun->object;
+<         }
+diff -r 2097/src/jsopcode.h 2098/src/jsopcode.h
+276,277c276,277
+< # define JS_NEW_PRINTER(cx, name, indent, pretty)                              \
+<     js_NewPrinter(cx, name, indent, pretty)
+---
+> # define JS_NEW_PRINTER(cx, name, fun, indent, pretty)                        \
+>     js_NewPrinter(cx, name, fun, indent, pretty)
+279,280c279,280
+< # define JS_NEW_PRINTER(cx, name, indent, pretty)                              \
+<     js_NewPrinter(cx, indent, pretty)
+---
+> # define JS_NEW_PRINTER(cx, name, fun, indent, pretty)                        \
+>     js_NewPrinter(cx, fun, indent, pretty)
+284c284,285
+< JS_NEW_PRINTER(JSContext *cx, const char *name, uintN indent, JSBool pretty);
+---
+> JS_NEW_PRINTER(JSContext *cx, const char *name, JSFunction *fun,
+>                uintN indent, JSBool pretty);
+358c359
+< js_DecompileFunctionBody(JSPrinter *jp, JSFunction *fun);
+---
+> js_DecompileFunctionBody(JSPrinter *jp);
+361c362
+< js_DecompileFunction(JSPrinter *jp, JSFunction *fun);
+---
+> js_DecompileFunction(JSPrinter *jp);
+diff -r 2097/src/jsparse.c 2098/src/jsparse.c
+809a810
+>     JS_ASSERT(FUN_INTERPRETED(fun));
+824,829d824
+<     /*
+<      * Set interpreted early so js_EmitTree can test it to decide whether to
+<      * eliminate useless expressions.
+<      */
+<     fun->flags |= JSFUN_INTERPRETED;
+< 
+990,992c985
+<             JSPropertyOp    getter;
+<             JSPropertyOp    setter;
+<             uintN           attrs;
+---
+>             JSLocalKind     kind;
+1002,1013d994
+< BumpFormalCount(JSContext *cx, JSFunction *fun)
+< {
+<     if (fun->nargs == JS_BITMASK(16)) {
+<         JS_ReportErrorNumber(cx, js_GetErrorMessage, NULL,
+<                              JSMSG_TOO_MANY_FUN_ARGS);
+<         return JS_FALSE;
+<     }
+<     fun->nargs++;
+<     return JS_TRUE;
+< }
+< 
+< static JSBool
+1016,1020d996
+<     JSObject *obj, *pobj;
+<     JSProperty *prop;
+<     JSBool ok;
+<     uintN dupflag;
+<     JSFunction *fun;
+1023,1030c999,1002
+<     obj = data->obj;
+<     ok = js_LookupHiddenProperty(cx, obj, ATOM_TO_JSID(atom), &pobj, &prop);
+<     if (!ok)
+<         return JS_FALSE;
+< 
+<     dupflag = 0;
+<     if (prop) {
+<         JS_ASSERT(pobj == obj);
+---
+>     /*
+>      * Check for a duplicate parameter name, a "feature" required by ECMA-262.
+>      */
+>     if (js_LookupLocal(cx, data->u.arg.fun, atom, NULL) != JSLOCAL_NONE) {
+1032,1040c1004,1005
+< 
+<         /*
+<          * A duplicate parameter name, a "feature" required by ECMA-262.
+<          * We force a duplicate node on the SCOPE_LAST_PROP(scope) list
+<          * with the same id, distinguished by the SPROP_IS_DUPLICATE flag,
+<          * and not mapped by an entry in scope.
+<          */
+<         ok = name &&
+<              js_ReportCompileErrorNumber(cx, TS(tc->parseContext), data->pn,
+---
+>         if (!name ||
+>             !js_ReportCompileErrorNumber(cx, TS(tc->parseContext), data->pn,
+1043,1046c1008
+<                                          name);
+< 
+<         OBJ_DROP_PROPERTY(cx, pobj, prop);
+<         if (!ok)
+---
+>                                          name)) {
+1048,1059c1010
+< 
+<         dupflag = SPROP_IS_DUPLICATE;
+<     }
+< 
+<     fun = data->u.arg.fun;
+<     if (!js_AddHiddenProperty(cx, data->obj, ATOM_TO_JSID(atom),
+<                               js_GetArgument, js_SetArgument,
+<                               SPROP_INVALID_SLOT,
+<                               JSPROP_PERMANENT | JSPROP_SHARED,
+<                               dupflag | SPROP_HAS_SHORTID,
+<                               fun->nargs)) {
+<         return JS_FALSE;
+---
+>         }
+1062c1013
+<     return BumpFormalCount(cx, fun);
+---
+>     return js_AddLocal(cx, data->u.arg.fun, atom, JSLOCAL_ARG);
+1068,1069d1018
+<     JSFunction *fun;
+< 
+1071,1072c1020
+<      * Can't increase fun->nvars in an active frame, so insist that getter is
+<      * js_GetLocalVariable, not js_GetCallVariable or anything else.
+---
+>      * Can't increase fun->nvars in an active frame when kind is JSFL_NONE.
+1074c1022
+<     if (data->u.var.getter != js_GetLocalVariable)
+---
+>     if (data->u.var.kind == JSLOCAL_NONE)
+1075a1024,1025
+>     JS_ASSERT(data->u.var.kind == JSLOCAL_VAR ||
+>               data->u.var.kind == JSLOCAL_CONST);
+1086,1100c1036
+<     fun = data->u.var.fun;
+<     if (!js_AddHiddenProperty(cx, data->obj, ATOM_TO_JSID(atom),
+<                               data->u.var.getter, data->u.var.setter,
+<                               SPROP_INVALID_SLOT,
+<                               data->u.var.attrs | JSPROP_SHARED,
+<                               SPROP_HAS_SHORTID, fun->u.i.nvars)) {
+<         return JS_FALSE;
+<     }
+<     if (fun->u.i.nvars == JS_BITMASK(16)) {
+<         JS_ReportErrorNumber(cx, js_GetErrorMessage, NULL,
+<                              JSMSG_TOO_MANY_FUN_VARS);
+<         return JS_FALSE;
+<     }
+<     fun->u.i.nvars++;
+<     return JS_TRUE;
+---
+>     return js_AddLocal(cx, data->u.var.fun, atom, data->u.var.kind);
+1116,1118d1051
+<     JSFunction *fun;
+<     JSObject *obj, *pobj;
+<     JSProperty *prop;
+1129,1135c1062
+<     fun = data->u.var.fun;
+<     obj = data->obj;
+<     if (!js_LookupHiddenProperty(cx, obj, ATOM_TO_JSID(atom), &pobj, &prop))
+<         return JS_FALSE;
+< 
+<     if (prop) {
+<         JS_ASSERT(pobj == obj && OBJ_IS_NATIVE(pobj));
+---
+>     if (js_LookupLocal(cx, data->u.var.fun, atom, NULL) != JSLOCAL_NONE) {
+1144d1070
+<         OBJ_DROP_PROPERTY(cx, pobj, prop);
+1163c1089
+<     JSObject *varobj, *pobj;
+---
+>     JSObject *varobj;
+1165d1090
+<     JSProperty *prop;
+1245c1170
+<             JSScopeProperty *sprop;
+---
+>             JSLocalKind localKind;
+1249c1174,1177
+<              * can properly optimize accesses.
+---
+>              * can properly optimize accesses. Note that we need a variable,
+>              * not an argument, for the function statement. Thus we add a
+>              * variable even if the parameter with the given name already
+>              * exists.
+1252,1278c1180,1183
+<             JS_ASSERT(fp->fun == (JSFunction *) OBJ_GET_PRIVATE(cx, varobj));
+<             if (!js_LookupHiddenProperty(cx, varobj, ATOM_TO_JSID(funAtom),
+<                                          &pobj, &prop)) {
+<                 return NULL;
+<             }
+<             if (prop)
+<                 OBJ_DROP_PROPERTY(cx, pobj, prop);
+<             sprop = NULL;
+<             if (!prop ||
+<                 pobj != varobj ||
+<                 (sprop = (JSScopeProperty *)prop,
+<                  sprop->getter != js_GetLocalVariable)) {
+<                 uintN sflags;
+< 
+<                 /*
+<                  * Use SPROP_IS_DUPLICATE if there is a formal argument of the
+<                  * same name, so the decompiler can find the parameter name.
+<                  */
+<                 sflags = (sprop && sprop->getter == js_GetArgument)
+<                          ? SPROP_IS_DUPLICATE | SPROP_HAS_SHORTID
+<                          : SPROP_HAS_SHORTID;
+<                 if (!js_AddHiddenProperty(cx, varobj, ATOM_TO_JSID(funAtom),
+<                                           js_GetLocalVariable,
+<                                           js_SetLocalVariable,
+<                                           SPROP_INVALID_SLOT,
+<                                           JSPROP_PERMANENT | JSPROP_SHARED,
+<                                           sflags, fp->fun->u.i.nvars)) {
+---
+>             JS_ASSERT(fp->fun == GET_FUNCTION_PRIVATE(cx, varobj));
+>             localKind = js_LookupLocal(cx, fp->fun, funAtom, NULL);
+>             if (localKind == JSLOCAL_NONE || localKind == JSLOCAL_ARG) {
+>                 if (!js_AddLocal(cx, fp->fun, funAtom, JSLOCAL_VAR))
+1280,1286d1184
+<                 }
+<                 if (fp->fun->u.i.nvars == JS_BITMASK(16)) {
+<                     JS_ReportErrorNumber(cx, js_GetErrorMessage, NULL,
+<                                          JSMSG_TOO_MANY_FUN_VARS);
+<                     return NULL;
+<                 }
+<                 fp->fun->u.i.nvars++;
+1291,1292c1189,1191
+<     fun = js_NewFunction(cx, NULL, NULL, 0, lambda ? JSFUN_LAMBDA : 0, varobj,
+<                          funAtom);
+---
+>     fun = js_NewFunction(cx, NULL, NULL, 0,
+>                          JSFUN_INTERPRETED | (lambda ? JSFUN_LAMBDA : 0),
+>                          varobj, funAtom);
+1294a1194
+> 
+1302c1202
+<      * last-ditch GC under js_LookupHiddenProperty.
+---
+>      * last-ditch GC.
+1341,1344c1241
+<                 data.u.var.getter = js_GetLocalVariable;
+<                 data.u.var.setter = js_SetLocalVariable;
+<                 data.u.var.attrs = JSPROP_PERMANENT;
+< 
+---
+>                 data.u.var.kind = JSLOCAL_VAR;
+1360c1257
+<                 if (!BumpFormalCount(cx, fun))
+---
+>                 if (!js_AddLocal(cx, fun, NULL, JSLOCAL_ARG))
+1811,1815c1708,1709
+<     JSObject *obj, *pobj;
+<     JSProperty *prop;
+<     JSBool ok;
+<     JSPropertyOp getter, setter;
+<     JSScopeProperty *sprop;
+---
+>     JSObject *obj;
+>     JSLocalKind localKind;
+1856,1864c1750,1755
+<     if (!fun) {
+<         /* Don't lookup global variables at compile time. */
+<         prop = NULL;
+<     } else {
+<         JS_ASSERT(OBJ_IS_NATIVE(obj));
+<         if (!js_LookupHiddenProperty(cx, obj, ATOM_TO_JSID(atom),
+<                                      &pobj, &prop)) {
+<             return JS_FALSE;
+<         }
+---
+>     if (!fun || OBJ_GET_CLASS(cx, obj) != &js_FunctionClass) {
+>         /*
+>          * Don't lookup global variables or variables in an active frame at
+>          * compile time.
+>          */
+>         return JS_TRUE;
+1867,1932c1758,1759
+<     ok = JS_TRUE;
+<     getter = data->u.var.getter;
+<     setter = data->u.var.setter;
+< 
+<     if (prop && pobj == obj && OBJ_IS_NATIVE(pobj)) {
+<         sprop = (JSScopeProperty *)prop;
+<         if (sprop->getter == js_GetArgument) {
+<             name  = js_AtomToPrintableString(cx, atom);
+<             if (!name) {
+<                 ok = JS_FALSE;
+<             } else if (op == JSOP_DEFCONST) {
+<                 js_ReportCompileErrorNumber(cx, TS(tc->parseContext), data->pn,
+<                                             JSREPORT_ERROR,
+<                                             JSMSG_REDECLARED_PARAM,
+<                                             name);
+<                 ok = JS_FALSE;
+<             } else {
+<                 getter = js_GetArgument;
+<                 setter = js_SetArgument;
+<                 ok = js_ReportCompileErrorNumber(cx, TS(tc->parseContext),
+<                                                  data->pn,
+<                                                  JSREPORT_WARNING |
+<                                                  JSREPORT_STRICT,
+<                                                  JSMSG_VAR_HIDES_ARG,
+<                                                  name);
+<             }
+<         } else {
+<             JS_ASSERT(getter == js_GetLocalVariable);
+< 
+<             if (fun) {
+<                 /* Not an argument, must be a redeclared local var. */
+<                 if (data->u.var.clasp == &js_FunctionClass) {
+<                     JS_ASSERT(sprop->getter == js_GetLocalVariable);
+<                     JS_ASSERT((sprop->flags & SPROP_HAS_SHORTID) &&
+<                               (uint16) sprop->shortid < fun->u.i.nvars);
+<                 } else if (data->u.var.clasp == &js_CallClass) {
+<                     if (sprop->getter == js_GetCallVariable) {
+<                         /*
+<                          * Referencing a name introduced by a var statement in
+<                          * the enclosing function.  Check that the slot number
+<                          * we have is in range.
+<                          */
+<                         JS_ASSERT((sprop->flags & SPROP_HAS_SHORTID) &&
+<                                   (uint16) sprop->shortid < fun->u.i.nvars);
+<                     } else {
+<                         /*
+<                          * A variable introduced through another eval: don't
+<                          * use the special getters and setters since we can't
+<                          * allocate a slot in the frame.
+<                          */
+<                         getter = sprop->getter;
+<                         setter = sprop->setter;
+<                     }
+<                 }
+< 
+<                 /* Override the old getter and setter, to handle eval. */
+<                 sprop = js_ChangeNativePropertyAttrs(cx, obj, sprop,
+<                                                      0, sprop->attrs,
+<                                                      getter, setter);
+<                 if (!sprop)
+<                     ok = JS_FALSE;
+<             }
+<         }
+<         if (prop)
+<             OBJ_DROP_PROPERTY(cx, pobj, prop);
+<     } else {
+---
+>     localKind = js_LookupLocal(cx, fun, atom, NULL);
+>     if (localKind == JSLOCAL_NONE) {
+1941,1946d1767
+<         sprop = NULL;
+<         if (prop) {
+<             OBJ_DROP_PROPERTY(cx, pobj, prop);
+<             prop = NULL;
+<         }
+< 
+1951a1773,1791
+>     } else if (localKind == JSLOCAL_ARG) {
+>         name = js_AtomToPrintableString(cx, atom);
+>         if (!name)
+>             return JS_FALSE;
+> 
+>         if (op == JSOP_DEFCONST) {
+>             js_ReportCompileErrorNumber(cx, TS(tc->parseContext), data->pn,
+>                                         JSREPORT_ERROR, JSMSG_REDECLARED_PARAM,
+>                                         name);
+>             return JS_FALSE;
+>         }
+>         if (!js_ReportCompileErrorNumber(cx, TS(tc->parseContext), data->pn,
+>                                          JSREPORT_WARNING | JSREPORT_STRICT,
+>                                          JSMSG_VAR_HIDES_ARG, name)) {
+>             return JS_FALSE;
+>         }
+>     } else {
+>         /* Not an argument, must be a redeclared local var. */
+>         JS_ASSERT(localKind == JSLOCAL_VAR || localKind == JSLOCAL_CONST);
+1953c1793
+<     return ok;
+---
+>     return JS_TRUE;
+1988c1828
+<     pn->pn_attrs = data->u.var.attrs;
+---
+>     pn->pn_const = (data->u.var.kind == JSLOCAL_CONST);
+3723,3728c3563,3565
+<             data.u.var.getter = js_GetLocalVariable;
+<             data.u.var.setter = js_SetLocalVariable;
+<         } else if (data.u.var.fun && data.u.var.clasp == &js_CallClass) {
+<             /* We are compiling code from an eval inside a function */
+<             data.u.var.getter = js_GetCallVariable;
+<             data.u.var.setter = js_SetCallVariable;
+---
+>             data.u.var.kind = (data.op == JSOP_DEFCONST)
+>                               ? JSLOCAL_CONST
+>                               : JSLOCAL_VAR;
+3730,3731c3567,3571
+<             data.u.var.getter = data.u.var.clasp->getProperty;
+<             data.u.var.setter = data.u.var.clasp->setProperty;
+---
+>             /*
+>              * We are compiling global code or code from an eval inside a
+>              * function
+>              */
+>             data.u.var.kind = JSLOCAL_NONE;
+3733,3736d3572
+< 
+<         data.u.var.attrs = (data.op == JSOP_DEFCONST)
+<                            ? JSPROP_PERMANENT | JSPROP_READONLY
+<                            : JSPROP_PERMANENT;
+3789c3625
+<             pn2->pn_attrs = data.u.var.attrs;
+---
+>             pn2->pn_const = (data.u.var.kind == JSLOCAL_CONST);
+4495,4496c4331,4332
+<     fun = js_NewFunction(cx, NULL, NULL, 0, JSFUN_LAMBDA, cx->fp->varobj,
+<                          NULL);
+---
+>     fun = js_NewFunction(cx, NULL, NULL, 0, JSFUN_LAMBDA | JSFUN_INTERPRETED,
+>                          cx->fp->varobj, NULL);
+4499d4334
+<     fun->flags |= JSFUN_INTERPRETED;
+diff -r 2097/src/jsparse.h 2098/src/jsparse.h
+189c189
+<  *                          with pn_slot >= 0 and pn_attrs telling const-ness
+---
+>  *                          with pn_slot >= 0 and pn_const telling const-ness
+309c309
+<             uintN       attrs;          /* attributes if local var or const */
+---
+>             JSBool      constslot;      /* true for const names */
+347c347
+< #define pn_attrs        pn_u.name.attrs
+---
+> #define pn_const        pn_u.name.constslot
+diff -r 2097/src/jsprvtd.h 2098/src/jsprvtd.h
+91a92,96
+> /*
+>  * Convenience constants.
+>  */
+> #define JS_BITS_PER_UINT32 (sizeof(uint32) * JS_BITS_PER_BYTE)
+> 
+diff -r 2097/src/jspubtd.h 2098/src/jspubtd.h
+639,642d638
+< typedef void
+< (* JS_DLL_CALLBACK JSGCThingCallback)(void *thing, uint32 traceKind,
+<                                       void *closure);
+< 
+diff -r 2097/src/jsscope.c 2098/src/jsscope.c
+391c391
+< #define SPROP_FLAGS_NOT_MATCHED (SPROP_MARK | SPROP_IS_DUPLICATE)
+---
+> #define SPROP_FLAGS_NOT_MATCHED (SPROP_MARK | SPROP_ALLOW_DUPLICATE)
+958c958
+<             JS_ASSERT(sparse || (sprop->flags & SPROP_IS_DUPLICATE));
+---
+>             JS_ASSERT(sparse || (sprop->flags & SPROP_ALLOW_DUPLICATE));
+1069,1071c1069,1071
+<          * descending from the old one.  The SPROP_IS_DUPLICATE flag helps us
+<          * cope with the consequent disparity between ancestor line height and
+<          * scope->entryCount.
+---
+>          * descending from the old one.  The SPROP_ALLOW_DUPLICATE flag helps
+>          * us cope with the consequent disparity between ancestor line height
+>          * and scope->entryCount.
+1073,1074c1073,1074
+<         if (flags & SPROP_IS_DUPLICATE) {
+<             sprop->flags |= SPROP_IS_DUPLICATE;
+---
+>         if (flags & SPROP_ALLOW_DUPLICATE) {
+>             sprop->flags |= SPROP_ALLOW_DUPLICATE;
+1134c1134
+<          * (unless flagged SPROP_IS_DUPLICATE).
+---
+>          * (unless flagged SPROP_ALLOW_DUPLICATE).
+1277c1277
+<         child.flags = flags;
+---
+>         child.flags = flags & ~SPROP_ALLOW_DUPLICATE;
+diff -r 2097/src/jsscope.h 2098/src/jsscope.h
+291c291
+< #define SPROP_IS_DUPLICATE              0x02
+---
+> #define SPROP_ALLOW_DUPLICATE           0x02
+294,295d293
+< #define SPROP_IS_HIDDEN                 0x10    /* a normally-hidden property,
+<                                                    e.g., function arg or var */
+diff -r 2097/src/jsscript.c 2098/src/jsscript.c
+1640c1640
+<         fun = (JSFunction *) OBJ_GET_PRIVATE(cx, obj);
+---
+>         fun = GET_FUNCTION_PRIVATE(cx, obj);
+diff -r 2097/src/jsxdrapi.h 2098/src/jsxdrapi.h
+205c205
+< #define JSXDR_BYTECODE_VERSION      (0xb973c0de - 15)
+---
+> #define JSXDR_BYTECODE_VERSION      (0xb973c0de - 16)
+diff -r 2097/src/jsxml.c 2098/src/jsxml.c
+5587a5588
+>     char numBuf[12];
+5607,5614c5608,5612
+<     fun = (JSFunction *) OBJ_GET_PRIVATE(cx, JSVAL_TO_OBJECT(*vp));
+<     if (fun) {
+<         char numBuf[12];
+<         JS_snprintf(numBuf, sizeof numBuf, "%u", xml->xml_kids.length);
+<         JS_ReportErrorNumber(cx, js_GetErrorMessage, NULL,
+<                              JSMSG_NON_LIST_XML_METHOD,
+<                              JS_GetFunctionName(fun), numBuf);
+<     }
+---
+>     fun = GET_FUNCTION_PRIVATE(cx, JSVAL_TO_OBJECT(*vp));
+>     JS_snprintf(numBuf, sizeof numBuf, "%u", xml->xml_kids.length);
+>     JS_ReportErrorNumber(cx, js_GetErrorMessage, NULL,
+>                          JSMSG_NON_LIST_XML_METHOD,
+>                          JS_GetFunctionName(fun), numBuf);
